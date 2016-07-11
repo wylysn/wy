@@ -16,6 +16,7 @@
 		88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A61D332B260050D9F3 /* LaunchScreen.storyboard */; };
 		88A893B31D332B270050D9F3 /* wyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893B21D332B270050D9F3 /* wyTests.m */; };
 		88A893BE1D332B270050D9F3 /* wyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893BD1D332B270050D9F3 /* wyUITests.m */; };
+		88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		88A893B91D332B270050D9F3 /* wyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A893BD1D332B270050D9F3 /* wyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wyUITests.m; sourceTree = "<group>"; };
 		88A893BF1D332B270050D9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88A893D41D33940D0050D9F3 /* FeaturesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesTableViewController.h; sourceTree = "<group>"; };
+		88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,9 @@
 		88A893941D332B260050D9F3 /* wy */ = {
 			isa = PBXGroup;
 			children = (
+				88A893CD1D3392CC0050D9F3 /* features */,
+				88A893CC1D3392BD0050D9F3 /* my */,
+				88A893CB1D3392B00050D9F3 /* task */,
 				88A893981D332B260050D9F3 /* AppDelegate.h */,
 				88A893991D332B260050D9F3 /* AppDelegate.m */,
 				88A8939B1D332B260050D9F3 /* FirstViewController.h */,
@@ -143,6 +149,77 @@
 				88A893BF1D332B270050D9F3 /* Info.plist */,
 			);
 			path = wyUITests;
+			sourceTree = "<group>";
+		};
+		88A893CB1D3392B00050D9F3 /* task */ = {
+			isa = PBXGroup;
+			children = (
+				88A893D31D3393790050D9F3 /* controller */,
+				88A893D21D3393530050D9F3 /* model */,
+				88A893D11D33934B0050D9F3 /* view */,
+			);
+			name = task;
+			sourceTree = "<group>";
+		};
+		88A893CC1D3392BD0050D9F3 /* my */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = my;
+			sourceTree = "<group>";
+		};
+		88A893CD1D3392CC0050D9F3 /* features */ = {
+			isa = PBXGroup;
+			children = (
+				88A893D01D3393340050D9F3 /* controller */,
+				88A893CF1D3393280050D9F3 /* model */,
+				88A893CE1D33931F0050D9F3 /* view */,
+			);
+			name = features;
+			sourceTree = "<group>";
+		};
+		88A893CE1D33931F0050D9F3 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		88A893CF1D3393280050D9F3 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		88A893D01D3393340050D9F3 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				88A893D41D33940D0050D9F3 /* FeaturesTableViewController.h */,
+				88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		88A893D11D33934B0050D9F3 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		88A893D21D3393530050D9F3 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		88A893D31D3393790050D9F3 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
+				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
@@ -504,6 +582,7 @@
 				88A893C41D332B270050D9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88A893C51D332B270050D9F3 /* Build configuration list for PBXNativeTarget "wyTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +591,7 @@
 				88A893C71D332B270050D9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88A893C81D332B270050D9F3 /* Build configuration list for PBXNativeTarget "wyUITests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +600,7 @@
 				88A893CA1D332B270050D9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
