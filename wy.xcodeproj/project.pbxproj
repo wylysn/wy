@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
+		88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6D1D5C4E7600C72DA3 /* home@2x.png */; };
+		88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6F1D5C4F6600C72DA3 /* features@2x.png */; };
+		88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E711D5C4FE700C72DA3 /* my@2x.png */; };
+		88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E741D5C52FC00C72DA3 /* plus@2x.png */; };
+		88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E791D5C5B9500C72DA3 /* scan@2x.png */; };
+		88821E7D1D5C661100C72DA3 /* TaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */; };
+		88821E801D5C67D700C72DA3 /* TaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E7F1D5C67D700C72DA3 /* TaskEntity.m */; };
+		88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E821D5C69B600C72DA3 /* TaskTableViewCell.m */; };
+		88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */; };
+		88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */; };
+		88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E8D1D5C704200C72DA3 /* TaskService.m */; };
 		88A893971D332B260050D9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893961D332B260050D9F3 /* main.m */; };
 		88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893991D332B260050D9F3 /* AppDelegate.m */; };
 		88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A8939C1D332B260050D9F3 /* FirstViewController.m */; };
@@ -17,6 +29,7 @@
 		88A893B31D332B270050D9F3 /* wyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893B21D332B270050D9F3 /* wyTests.m */; };
 		88A893BE1D332B270050D9F3 /* wyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893BD1D332B270050D9F3 /* wyUITests.m */; };
 		88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */; };
+		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +50,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.release.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.release.xcconfig"; sourceTree = "<group>"; };
+		88821E601D5C458300C72DA3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		88821E611D5C458300C72DA3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		88821E6D1D5C4E7600C72DA3 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		88821E6F1D5C4F6600C72DA3 /* features@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "features@2x.png"; sourceTree = "<group>"; };
+		88821E711D5C4FE700C72DA3 /* my@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my@2x.png"; sourceTree = "<group>"; };
+		88821E741D5C52FC00C72DA3 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
+		88821E791D5C5B9500C72DA3 /* scan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan@2x.png"; sourceTree = "<group>"; };
+		88821E7B1D5C661100C72DA3 /* TaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewController.h; sourceTree = "<group>"; };
+		88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewController.m; sourceTree = "<group>"; };
+		88821E7E1D5C67D700C72DA3 /* TaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskEntity.h; sourceTree = "<group>"; };
+		88821E7F1D5C67D700C72DA3 /* TaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskEntity.m; sourceTree = "<group>"; };
+		88821E811D5C69B600C72DA3 /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
+		88821E821D5C69B600C72DA3 /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
+		88821E851D5C6F1D00C72DA3 /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
+		88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
+		88821E871D5C6F1D00C72DA3 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		88821E8C1D5C704200C72DA3 /* TaskService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskService.h; sourceTree = "<group>"; };
+		88821E8D1D5C704200C72DA3 /* TaskService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskService.m; sourceTree = "<group>"; };
 		88A893921D332B260050D9F3 /* wy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A893961D332B260050D9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A893981D332B260050D9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,6 +90,8 @@
 		88A893BF1D332B270050D9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A893D41D33940D0050D9F3 /* FeaturesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesTableViewController.h; sourceTree = "<group>"; };
 		88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesTableViewController.m; sourceTree = "<group>"; };
+		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +120,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8189E1DA44F97A197A96AEEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */,
+				1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8574640E84AE4436000DBE81 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3319D88501D496DD566B807 /* libPods-wy.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88821E651D5C4BE800C72DA3 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				88821E731D5C52EC00C72DA3 /* icons */,
+				88821E6A1D5C4D9900C72DA3 /* tabbar */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		88821E6A1D5C4D9900C72DA3 /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				88821E6D1D5C4E7600C72DA3 /* home@2x.png */,
+				88821E6F1D5C4F6600C72DA3 /* features@2x.png */,
+				88821E711D5C4FE700C72DA3 /* my@2x.png */,
+			);
+			name = tabbar;
+			sourceTree = "<group>";
+		};
+		88821E731D5C52EC00C72DA3 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				88821E791D5C5B9500C72DA3 /* scan@2x.png */,
+				88821E741D5C52FC00C72DA3 /* plus@2x.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		88821E841D5C6EDC00C72DA3 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				88821E851D5C6F1D00C72DA3 /* NSString+Extensions.h */,
+				88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */,
+				88821E871D5C6F1D00C72DA3 /* NSString+MD5.h */,
+				88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */,
+			);
+			name = categories;
+			sourceTree = "<group>";
+		};
+		88821E8B1D5C701E00C72DA3 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				88821E8C1D5C704200C72DA3 /* TaskService.h */,
+				88821E8D1D5C704200C72DA3 /* TaskService.m */,
+			);
+			name = service;
+			sourceTree = "<group>";
+		};
 		88A893891D332B260050D9F3 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +192,8 @@
 				88A893B11D332B270050D9F3 /* wyTests */,
 				88A893BC1D332B270050D9F3 /* wyUITests */,
 				88A893931D332B260050D9F3 /* Products */,
+				8189E1DA44F97A197A96AEEF /* Pods */,
+				8574640E84AE4436000DBE81 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +210,8 @@
 		88A893941D332B260050D9F3 /* wy */ = {
 			isa = PBXGroup;
 			children = (
+				88821E841D5C6EDC00C72DA3 /* categories */,
+				88821E651D5C4BE800C72DA3 /* images */,
 				88A893CD1D3392CC0050D9F3 /* features */,
 				88A893CC1D3392BD0050D9F3 /* my */,
 				88A893CB1D3392B00050D9F3 /* task */,
@@ -121,6 +226,8 @@
 				88A893A61D332B260050D9F3 /* LaunchScreen.storyboard */,
 				88A893A91D332B260050D9F3 /* Info.plist */,
 				88A893951D332B260050D9F3 /* Supporting Files */,
+				88821E601D5C458300C72DA3 /* MainViewController.h */,
+				88821E611D5C458300C72DA3 /* MainViewController.m */,
 			);
 			path = wy;
 			sourceTree = "<group>";
@@ -154,6 +261,7 @@
 		88A893CB1D3392B00050D9F3 /* task */ = {
 			isa = PBXGroup;
 			children = (
+				88821E8B1D5C701E00C72DA3 /* service */,
 				88A893D31D3393790050D9F3 /* controller */,
 				88A893D21D3393530050D9F3 /* model */,
 				88A893D11D33934B0050D9F3 /* view */,
@@ -204,6 +312,8 @@
 		88A893D11D33934B0050D9F3 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				88821E811D5C69B600C72DA3 /* TaskTableViewCell.h */,
+				88821E821D5C69B600C72DA3 /* TaskTableViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -211,6 +321,8 @@
 		88A893D21D3393530050D9F3 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				88821E7E1D5C67D700C72DA3 /* TaskEntity.h */,
+				88821E7F1D5C67D700C72DA3 /* TaskEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -218,6 +330,8 @@
 		88A893D31D3393790050D9F3 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				88821E7B1D5C661100C72DA3 /* TaskTableViewController.h */,
+				88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -229,9 +343,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A893C21D332B270050D9F3 /* Build configuration list for PBXNativeTarget "wy" */;
 			buildPhases = (
+				3D554C774A47D2E2E5B27C5F /* [CP] Check Pods Manifest.lock */,
 				88A8938E1D332B260050D9F3 /* Sources */,
 				88A8938F1D332B260050D9F3 /* Frameworks */,
 				88A893901D332B260050D9F3 /* Resources */,
+				CFB7D523D1B6F694081C21F5 /* [CP] Embed Pods Frameworks */,
+				1D70DBC7077C643F30E67EC9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -325,7 +442,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
+				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
+				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
+				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
+				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
 			);
@@ -347,16 +469,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1D70DBC7077C643F30E67EC9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wy/Pods-wy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D554C774A47D2E2E5B27C5F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CFB7D523D1B6F694081C21F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wy/Pods-wy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		88A8938E1D332B260050D9F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
+				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
+				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
+				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
+				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
+				88821E7D1D5C661100C72DA3 /* TaskTableViewController.m in Sources */,
+				88821E801D5C67D700C72DA3 /* TaskEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,11 +670,23 @@
 		};
 		88A893C31D332B270050D9F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}\"",
+					"\"${PODS_ROOT}/AFNetworking\"",
+					"\"${PODS_ROOT}/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/MJRefresh\"",
+					"\"${PODS_ROOT}/Reachability\"",
+					"\"${PODS_ROOT}/SDWebImage\"",
+					"\"${PODS_ROOT}/UITableView+FDTemplateLayoutCell\"",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -505,11 +694,23 @@
 		};
 		88A893C41D332B270050D9F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}\"",
+					"\"${PODS_ROOT}/AFNetworking\"",
+					"\"${PODS_ROOT}/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/MJRefresh\"",
+					"\"${PODS_ROOT}/Reachability\"",
+					"\"${PODS_ROOT}/SDWebImage\"",
+					"\"${PODS_ROOT}/UITableView+FDTemplateLayoutCell\"",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
