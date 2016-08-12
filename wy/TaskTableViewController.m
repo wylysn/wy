@@ -10,6 +10,7 @@
 #import "TaskService.h"
 #import "TaskTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
+#import <MJRefresh.h>
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -29,8 +30,17 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.fd_debugLogEnabled = YES;
+    self.tableView.fd_debugLogEnabled = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.tableView.mj_header endRefreshing];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,9 +66,6 @@
     
     [self configureCell:cell atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    if (indexPath.row == taskService.taskEntitysList.count-1) {
-//        cell.splitView.hidden = TRUE;
-//    }
     return cell;
 }
 
@@ -68,6 +75,7 @@
     }
     cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
     cell.entity = taskService.taskEntitysList[indexPath.row];
+    cell.parentController = self;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -8,6 +8,7 @@
 
 #import "TaskTableViewCell.h"
 #import "NSString+Extensions.h"
+#import "TaskPaiGongViewController.h"
 
 @implementation TaskTableViewCell
 
@@ -33,17 +34,17 @@
         self.typeLabel.text = @"";
     }
     if ([@"1" isEqualToString:entity.type]) {
-        self.typeNextLabel.text = @"接单";
-        self.typeNextView.backgroundColor = [UIColor colorWithRed:252/255.0 green:103/255.0 blue:33/255.0 alpha:1.0];
+        [self.typeNextBtn setTitle:@"接单" forState:UIControlStateNormal];
+        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:252/255.0 green:103/255.0 blue:33/255.0 alpha:1.0];
     } else if ([@"2" isEqualToString:entity.type]) {
-        self.typeNextLabel.text = @"处理";
-        self.typeNextView.backgroundColor = [UIColor colorWithRed:252/255.0 green:41/255.0 blue:28/255.0 alpha:1.0];
+        [self.typeNextBtn setTitle:@"处理" forState:UIControlStateNormal];
+        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:252/255.0 green:41/255.0 blue:28/255.0 alpha:1.0];
     } else if ([@"3" isEqualToString:entity.type]) {
-        self.typeNextLabel.text = @"派工";
-        self.typeNextView.backgroundColor = [UIColor colorWithRed:78/255.0 green:192/255.0 blue:48/255.0 alpha:1.0];
+        [self.typeNextBtn setTitle:@"派工" forState:UIControlStateNormal];
+        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:78/255.0 green:192/255.0 blue:48/255.0 alpha:1.0];
     } else if ([@"4" isEqualToString:entity.type]) {
-        self.typeNextLabel.text = @"作废";
-        self.typeNextView.backgroundColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+        [self.typeNextBtn setTitle:@"作废" forState:UIControlStateNormal];
+        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
     }
     
     if (![entity.time isBlankString]) {
@@ -77,6 +78,23 @@
     return CGSizeMake(size.width, totalHeight);
 }
 
+- (IBAction)doTask:(id)sender {
+    if ([@"1" isEqualToString:_entity.type]) {
+        
+    } else if ([@"2" isEqualToString:_entity.type]) {
+        
+    } else if ([@"3" isEqualToString:_entity.type]) {
+        UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+        TaskPaiGongViewController *taskPGViewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
+        taskPGViewController.id = _entity.id;
+        
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.parentController.navigationItem.backBarButtonItem = backButton;
+        [self.parentController.navigationController pushViewController:taskPGViewController animated:YES];
+    } else if ([@"4" isEqualToString:_entity.type]) {
+        
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

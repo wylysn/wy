@@ -29,6 +29,14 @@
 		88A893B31D332B270050D9F3 /* wyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893B21D332B270050D9F3 /* wyTests.m */; };
 		88A893BE1D332B270050D9F3 /* wyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893BD1D332B270050D9F3 /* wyUITests.m */; };
 		88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */; };
+		88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E927E91D5D55A800152BBF /* Task.storyboard */; };
+		88E927ED1D5D588900152BBF /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EC1D5D588900152BBF /* PRButton.m */; };
+		88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */; };
+		88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927F41D5DBC8400152BBF /* PRActionSheetPickerView.m */; };
+		88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927F81D5DBCE600152BBF /* DateUtil.m */; };
+		88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FB1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m */; };
+		88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */; };
+		88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +98,23 @@
 		88A893BF1D332B270050D9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A893D41D33940D0050D9F3 /* FeaturesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesTableViewController.h; sourceTree = "<group>"; };
 		88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesTableViewController.m; sourceTree = "<group>"; };
+		88E927E91D5D55A800152BBF /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
+		88E927EB1D5D588900152BBF /* PRButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRButton.h; sourceTree = "<group>"; };
+		88E927EC1D5D588900152BBF /* PRButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRButton.m; sourceTree = "<group>"; };
+		88E927EE1D5D681600152BBF /* TaskPaiGongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskPaiGongViewController.h; sourceTree = "<group>"; };
+		88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskPaiGongViewController.m; sourceTree = "<group>"; };
+		88E927F31D5DBC8400152BBF /* PRActionSheetPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRActionSheetPickerView.h; sourceTree = "<group>"; };
+		88E927F41D5DBC8400152BBF /* PRActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRActionSheetPickerView.m; sourceTree = "<group>"; };
+		88E927F71D5DBCE600152BBF /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
+		88E927F81D5DBCE600152BBF /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		88E927FA1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+UIDeviceCategory.h"; sourceTree = "<group>"; };
+		88E927FB1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+UIDeviceCategory.m"; sourceTree = "<group>"; };
+		88E927FD1D5DBF1D00152BBF /* UIColor+HexCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexCode.h"; sourceTree = "<group>"; };
+		88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexCode.m"; sourceTree = "<group>"; };
+		88E928001D5DBF5400152BBF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHTTPSessionManager.h; sourceTree = "<group>"; };
+		88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHTTPSessionManager.m; sourceTree = "<group>"; };
+		88E928051D5DC14B00152BBF /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +193,12 @@
 		88821E841D5C6EDC00C72DA3 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				88E927FD1D5DBF1D00152BBF /* UIColor+HexCode.h */,
+				88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */,
+				88E927FA1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.h */,
+				88E927FB1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m */,
+				88E927EB1D5D588900152BBF /* PRButton.h */,
+				88E927EC1D5D588900152BBF /* PRButton.m */,
 				88821E851D5C6F1D00C72DA3 /* NSString+Extensions.h */,
 				88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */,
 				88821E871D5C6F1D00C72DA3 /* NSString+MD5.h */,
@@ -210,6 +241,7 @@
 		88A893941D332B260050D9F3 /* wy */ = {
 			isa = PBXGroup;
 			children = (
+				88E927F11D5DBC2A00152BBF /* Utilities */,
 				88821E841D5C6EDC00C72DA3 /* categories */,
 				88821E651D5C4BE800C72DA3 /* images */,
 				88A893CD1D3392CC0050D9F3 /* features */,
@@ -228,6 +260,7 @@
 				88A893951D332B260050D9F3 /* Supporting Files */,
 				88821E601D5C458300C72DA3 /* MainViewController.h */,
 				88821E611D5C458300C72DA3 /* MainViewController.m */,
+				88E928001D5DBF5400152BBF /* PrefixHeader.pch */,
 			);
 			path = wy;
 			sourceTree = "<group>";
@@ -265,6 +298,7 @@
 				88A893D31D3393790050D9F3 /* controller */,
 				88A893D21D3393530050D9F3 /* model */,
 				88A893D11D33934B0050D9F3 /* view */,
+				88E927E91D5D55A800152BBF /* Task.storyboard */,
 			);
 			name = task;
 			sourceTree = "<group>";
@@ -332,8 +366,48 @@
 			children = (
 				88821E7B1D5C661100C72DA3 /* TaskTableViewController.h */,
 				88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */,
+				88E927EE1D5D681600152BBF /* TaskPaiGongViewController.h */,
+				88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */,
 			);
 			name = controller;
+			sourceTree = "<group>";
+		};
+		88E927F11D5DBC2A00152BBF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				88E928011D5DC10E00152BBF /* connect */,
+				88E927F61D5DBCD300152BBF /* date */,
+				88E927F21D5DBC6000152BBF /* ActionSheetPickerView */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		88E927F21D5DBC6000152BBF /* ActionSheetPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				88E927F31D5DBC8400152BBF /* PRActionSheetPickerView.h */,
+				88E927F41D5DBC8400152BBF /* PRActionSheetPickerView.m */,
+			);
+			name = ActionSheetPickerView;
+			sourceTree = "<group>";
+		};
+		88E927F61D5DBCD300152BBF /* date */ = {
+			isa = PBXGroup;
+			children = (
+				88E927F71D5DBCE600152BBF /* DateUtil.h */,
+				88E927F81D5DBCE600152BBF /* DateUtil.m */,
+			);
+			name = date;
+			sourceTree = "<group>";
+		};
+		88E928011D5DC10E00152BBF /* connect */ = {
+			isa = PBXGroup;
+			children = (
+				88E928051D5DC14B00152BBF /* URL.h */,
+				88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */,
+				88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */,
+			);
+			name = connect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +523,7 @@
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
+				88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,15 +598,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */,
+				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
+				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
+				88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */,
+				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
+				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
+				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
+				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,
 				88821E7D1D5C661100C72DA3 /* TaskTableViewController.m in Sources */,
 				88821E801D5C67D700C72DA3 /* TaskEntity.m in Sources */,
 			);
@@ -673,6 +755,7 @@
 			baseConfigurationReference = C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -697,6 +780,7 @@
 			baseConfigurationReference = 1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
