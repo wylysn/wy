@@ -9,7 +9,7 @@
 #import "DateUtil.h"
 
 @implementation DateUtil
-+(NSDate *)addMonthDate:(NSDate *)now withMonths:(NSInteger)months {
++ (NSDate *)addMonthDate:(NSDate *)now withMonths:(NSInteger)months {
     NSDateComponents *monthBeforeDateComponents = [[NSDateComponents
                                                    alloc] init];
     monthBeforeDateComponents.month = months;
@@ -17,13 +17,29 @@
     return rsDate;
 }
 
-+(NSString *)formatDateString:(NSDate *)date withFormatter:(NSString *)formatter {
++ (NSString *)formatDateString:(NSDate *)date withFormatter:(NSString *)formatter {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.timeZone = [NSTimeZone systemTimeZone];//系统所在时区
     df.dateFormat = formatter;
     NSString *systemTimeZoneStr =  [df stringFromDate:date];
     
     return systemTimeZoneStr;
+}
+
++ (NSDate *)dateFromString:(NSString *)dateString withFormatter:(NSString *)formatterString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:formatterString];
+    NSDate *date=[formatter dateFromString:dateString];
+    return date;
+}
+
++ (NSInteger)intervalFromLastDate: (NSDate *) date1  toTheDate:(NSDate *) date2
+{
+    NSTimeInterval time=[date2 timeIntervalSinceDate:date1];
+    
+    int hours=(int)(time/3600+0.5);
+    
+    return hours;
 }
 
 @end

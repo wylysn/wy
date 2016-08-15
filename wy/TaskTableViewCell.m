@@ -88,8 +88,9 @@
         TaskPaiGongViewController *taskPGViewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
         taskPGViewController.id = _entity.id;
         
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.parentController.navigationItem.backBarButtonItem = backButton;
+        taskPGViewController.hidesBottomBarWhenPushed = YES;
         [self.parentController.navigationController pushViewController:taskPGViewController animated:YES];
     } else if ([@"4" isEqualToString:_entity.type]) {
         

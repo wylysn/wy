@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */; };
+		880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787C21D61AA7A00BA6F05 /* search@2x.png */; };
+		880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787C51D61B42300BA6F05 /* ChoosePersonService.m */; };
+		880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787C81D61B45200BA6F05 /* PersonEntity.m */; };
+		880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CA1D61C53800BA6F05 /* checked@2x.png */; };
+		880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CC1D61C55900BA6F05 /* checked_filled@2x.png */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
 		88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6D1D5C4E7600C72DA3 /* home@2x.png */; };
 		88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6F1D5C4F6600C72DA3 /* features@2x.png */; };
@@ -59,6 +65,15 @@
 
 /* Begin PBXFileReference section */
 		1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.release.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.release.xcconfig"; sourceTree = "<group>"; };
+		880787BD1D61A2BD00BA6F05 /* ChoosePersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePersonViewController.h; sourceTree = "<group>"; };
+		880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonViewController.m; sourceTree = "<group>"; };
+		880787C21D61AA7A00BA6F05 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
+		880787C41D61B42300BA6F05 /* ChoosePersonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePersonService.h; sourceTree = "<group>"; };
+		880787C51D61B42300BA6F05 /* ChoosePersonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonService.m; sourceTree = "<group>"; };
+		880787C71D61B45200BA6F05 /* PersonEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonEntity.h; sourceTree = "<group>"; };
+		880787C81D61B45200BA6F05 /* PersonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonEntity.m; sourceTree = "<group>"; };
+		880787CA1D61C53800BA6F05 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
+		880787CC1D61C55900BA6F05 /* checked_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked_filled@2x.png"; sourceTree = "<group>"; };
 		88821E601D5C458300C72DA3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		88821E611D5C458300C72DA3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		88821E6D1D5C4E7600C72DA3 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
@@ -185,6 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				88821E791D5C5B9500C72DA3 /* scan@2x.png */,
+				880787CA1D61C53800BA6F05 /* checked@2x.png */,
+				880787CC1D61C55900BA6F05 /* checked_filled@2x.png */,
+				880787C21D61AA7A00BA6F05 /* search@2x.png */,
 				88821E741D5C52FC00C72DA3 /* plus@2x.png */,
 			);
 			name = icons;
@@ -212,6 +230,8 @@
 			children = (
 				88821E8C1D5C704200C72DA3 /* TaskService.h */,
 				88821E8D1D5C704200C72DA3 /* TaskService.m */,
+				880787C41D61B42300BA6F05 /* ChoosePersonService.h */,
+				880787C51D61B42300BA6F05 /* ChoosePersonService.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -357,6 +377,8 @@
 			children = (
 				88821E7E1D5C67D700C72DA3 /* TaskEntity.h */,
 				88821E7F1D5C67D700C72DA3 /* TaskEntity.m */,
+				880787C71D61B45200BA6F05 /* PersonEntity.h */,
+				880787C81D61B45200BA6F05 /* PersonEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -368,6 +390,8 @@
 				88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */,
 				88E927EE1D5D681600152BBF /* TaskPaiGongViewController.h */,
 				88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */,
+				880787BD1D61A2BD00BA6F05 /* ChoosePersonViewController.h */,
+				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -521,10 +545,13 @@
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
+				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
 				88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
+				880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */,
+				880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +626,7 @@
 			files = (
 				88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
+				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
@@ -609,8 +637,10 @@
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
+				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
+				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,

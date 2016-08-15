@@ -85,11 +85,10 @@
 
 - (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum
 {
-    _idNum = idNum;
     [view addSubview:self];
-    if (_idNum == 1)
-    {
-        NSDate* date = [NSDate dateWithTimeIntervalSinceNow:15552000];
+    
+    if (self.defaultDate) {
+        NSDate* date = [DateUtil dateFromString:self.defaultDate withFormatter:@"yyyy-MM-dd HH:mm:00"];
         [datePicker setDate:date animated:NO];
     }
     

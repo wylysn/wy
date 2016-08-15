@@ -10,8 +10,12 @@
 
 @interface DateUtil : NSObject
 
-+(NSDate*)addMonthDate:(NSDate*) now withMonths:(NSInteger) months;
++ (NSDate*)addMonthDate:(NSDate*) now withMonths:(NSInteger) months;
 
-+(NSString *)formatDateString:(NSDate *)date withFormatter:(NSString *)formatter;
++ (NSString *)formatDateString:(NSDate *)date withFormatter:(NSString *)formatter;
+
++ (NSDate *)dateFromString:(NSString *)dateString withFormatter:(NSString *)formatterString;
+
++ (NSInteger)intervalFromLastDate: (NSDate *) date1  toTheDate:(NSDate *) date2;
 
 @end
