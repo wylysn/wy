@@ -43,6 +43,8 @@
 		88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FB1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m */; };
 		88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */; };
 		88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */; };
+		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
+		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,9 @@
 		88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHTTPSessionManager.h; sourceTree = "<group>"; };
 		88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHTTPSessionManager.m; sourceTree = "<group>"; };
 		88E928051D5DC14B00152BBF /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
+		88FCC1351D62A9F800ED8979 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		88FCC1371D62C0DE00ED8979 /* ChoosePersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePersonTableViewCell.h; sourceTree = "<group>"; };
+		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				88821E791D5C5B9500C72DA3 /* scan@2x.png */,
+				88FCC1351D62A9F800ED8979 /* delete@2x.png */,
 				880787CA1D61C53800BA6F05 /* checked@2x.png */,
 				880787CC1D61C55900BA6F05 /* checked_filled@2x.png */,
 				880787C21D61AA7A00BA6F05 /* search@2x.png */,
@@ -368,6 +374,8 @@
 			children = (
 				88821E811D5C69B600C72DA3 /* TaskTableViewCell.h */,
 				88821E821D5C69B600C72DA3 /* TaskTableViewCell.m */,
+				88FCC1371D62C0DE00ED8979 /* ChoosePersonTableViewCell.h */,
+				88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -541,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */,
+				88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
@@ -637,6 +646,7 @@
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
+				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,

@@ -39,6 +39,9 @@
                                                 <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="releaseTask:" destination="fgu-XE-pE1" eventType="touchUpInside" id="Y3D-ro-UWg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -405,7 +408,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <segue destination="2AE-bA-w9Y" kind="show" id="vNf-Bc-gDz"/>
+                                                            <action selector="addPersonInCharge:" destination="fgu-XE-pE1" eventType="touchUpInside" id="6NO-7R-pKz"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -664,6 +667,7 @@
                     <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="chargeViewHeightConstraint" destination="dMG-hi-4FR" id="GyA-Xs-Mhh"/>
+                        <outlet property="chargeViewTitleView" destination="ZTy-eW-FsI" id="bM1-pr-8Yq"/>
                         <outlet property="ct1" destination="LEJ-M2-SsK" id="Fho-Dm-6nh"/>
                         <outlet property="ct2" destination="vNw-kA-AYT" id="nhf-iW-xfi"/>
                         <outlet property="ct3" destination="RWs-R8-pYf" id="bSg-P7-sz4"/>
@@ -686,7 +690,7 @@
         <!--选择人员-->
         <scene sceneID="eRG-J9-g6r">
             <objects>
-                <viewController title="选择人员" id="2AE-bA-w9Y" customClass="ChoosePersonViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CHOOSEPERSON" title="选择人员" id="2AE-bA-w9Y" customClass="ChoosePersonViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oLb-p6-sGR"/>
                         <viewControllerLayoutGuide type="bottom" id="HST-zV-XXf"/>
@@ -705,9 +709,9 @@
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="61" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ac1-e8-4b6">
                                 <rect key="frame" x="0.0" y="70" width="375" height="530"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PERSONIDENTIFIER" rowHeight="61" id="f5M-cP-T24">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PERSONIDENTIFIER" rowHeight="61" id="f5M-cP-T24" customClass="ChoosePersonTableViewCell">
                                         <rect key="frame" x="0.0" y="50" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f5M-cP-T24" id="mcO-XV-M6e">
@@ -721,7 +725,7 @@
                                                         <constraint firstAttribute="width" constant="73" id="cFo-Mf-OlE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w62-xJ-GoL">
@@ -751,6 +755,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="6yL-zK-cGj" secondAttribute="trailing" constant="6" id="brG-jV-Iyv"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkImageView" destination="6yL-zK-cGj" id="6pH-Kr-cQl"/>
+                                            <outlet property="nameLabel" destination="nAE-d8-nrs" id="YOb-ff-eph"/>
+                                            <outlet property="phoneLabel" destination="w62-xJ-GoL" id="4cp-8D-Tgk"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

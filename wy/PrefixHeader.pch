@@ -14,6 +14,8 @@
 // 屏幕宽度
 #define SCREEN_WIDTH          [[UIScreen mainScreen] bounds].size.width
 
+#define SPLITLINE_COLOR @"aaaaaa"
+
 
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>

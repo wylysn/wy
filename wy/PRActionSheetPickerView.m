@@ -111,7 +111,9 @@
 {
     NSDate* date = datePicker.date;
     //    NSLog(@"%@",date);
-    [_delegate getDateWithDate:date andId:_idNum];
+    if (_delegate && [_delegate respondsToSelector:@selector(getDateWithDate:andId:)]) {
+        [_delegate getDateWithDate:date andId:_idNum];
+    }
     [self dismissFromSuperView];
 }
 

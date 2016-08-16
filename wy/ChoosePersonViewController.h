@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ChoosePersonViewDelegate <NSObject>
+
+- (void)getSelectedPersons:(NSArray *) persons;
+
+@end
+
 @interface ChoosePersonViewController : UIViewController
+
+@property(assign,nonatomic) id<ChoosePersonViewDelegate> delegate;
+
+@property(assign,nonatomic) NSMutableDictionary *selectedPersonsDic;
 
 @end

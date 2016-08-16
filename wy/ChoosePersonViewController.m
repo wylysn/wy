@@ -11,6 +11,7 @@
 #import "ChoosePersonViewController.h"
 #import "ChoosePersonService.h"
 #import "PersonEntity.h"
+#import "ChoosePersonTableViewCell.h"
 
 @interface ChoosePersonViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
@@ -35,6 +36,30 @@
     self.tableView.allowsMultipleSelection = TRUE;
     
     personService = [[ChoosePersonService alloc] init];
+    
+    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
+    confirmBtn.layer.cornerRadius = 3;
+    confirmBtn.titleLabel.font = [UIFont fontWithName:@"System" size:15];
+    confirmBtn.backgroundColor = [UIColor colorFromHexCode:@"7aff67"];
+    [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [confirmBtn addTarget:self action:@selector(confirmPerson) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *confirmItem = [[UIBarButtonItem alloc]
+                                   initWithCustomView:confirmBtn];
+    self.navigationItem.rightBarButtonItem = confirmItem;
+}
+
+- (void)confirmPerson {
+    NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
+    NSMutableArray *personArr = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
+        PersonEntity *person = personService.deptsList[indexPath.section][@"persons"][indexPath.row];
+        [personArr addObject:person];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(getSelectedPersons:)]) {
+        [_delegate getSelectedPersons:personArr];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -47,18 +72,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *CELLID = @"PERSONIDENTIFIER";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
+    ChoosePersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
+        cell = [[ChoosePersonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
-    UILabel *nameLabel = (UILabel *)[cell viewWithTag:1];
-    UILabel *phoneLabel = (UILabel *)[cell viewWithTag:2];
     NSArray *persons = personService.deptsList[indexPath.section][@"persons"];
     PersonEntity *person = persons[indexPath.row];
-    nameLabel.text = person.name;
-    phoneLabel.text = person.phone;
+    cell.nameLabel.text = person.name;
+    cell.phoneLabel.text = person.phone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //已选中样式设置
+    if (self.selectedPersonsDic[person.id]) {
+        UIImage *image = [UIImage imageNamed:@"checked_filled"];
+        [cell.checkImageView setImage:image];
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    }
+        
     return cell;
 }
 
@@ -75,17 +104,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
+    ChoosePersonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIImage *image = [UIImage imageNamed:@"checked_filled"];
-    [imageView setImage:image];
+    [cell.checkImageView setImage:image];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
+    ChoosePersonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIImage *image = [UIImage imageNamed:@"checked"];
-    [imageView setImage:image];
+    [cell.checkImageView setImage:image];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

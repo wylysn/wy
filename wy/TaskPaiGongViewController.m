@@ -10,8 +10,13 @@
 #import "AppDelegate.h"
 #import "PRActionSheetPickerView.h"
 #import "DateUtil.h"
+#import "ChoosePersonViewController.h"
+#import "PersonEntity.h"
 
-@interface TaskPaiGongViewController ()<PRActionSheetPickerViewDelegate>
+static NSString *startTimeBtnPlaceholder = @"请输入到场时间";
+static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
+
+@interface TaskPaiGongViewController ()<PRActionSheetPickerViewDelegate, ChoosePersonViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct2;
@@ -19,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct4;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct5;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct6;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct7;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct8;
 
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -28,6 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *personInChargeView;
 @property (weak, nonatomic) IBOutlet UIView *estimateTimeView;
+@property (weak, nonatomic) IBOutlet UIView *chargeViewTitleView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *chargeViewHeightConstraint;
 
 @end
@@ -36,6 +41,12 @@
     UIWindow *window;
     NSInteger btnTag;
     NSInteger addTimes;
+    NSMutableDictionary *personDics;
+    UIView *personsView;
+    float chargeTitleViewHeight;
+    float scrollViewContentHeight;
+    int personHeight;
+    NSMutableArray *chargePersons;
 }
 
 - (void)viewDidLoad {
@@ -50,18 +61,23 @@
     self.ct4.constant = ht;
     self.ct5.constant = ht;
     self.ct6.constant = ht;
-    self.ct7.constant = ht;
     self.ct8.constant = ht;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"派工" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
+    
+    personDics = [[NSMutableDictionary alloc] init];
+    chargePersons = [[NSMutableArray alloc] init];
+    
+    chargeTitleViewHeight = self.chargeViewTitleView.frame.size.height;
+    personHeight = 30;
+    scrollViewContentHeight = self.scrollView.contentSize.height;
+    personsView = [[UIView alloc] initWithFrame:CGRectMake(0, chargeTitleViewHeight, SCREEN_WIDTH, 0)];
+    [self.personInChargeView addSubview:personsView];
 }
 
 - (IBAction)dateBtnClick:(id)sender {
     window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    window.hidden = NO;
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    window.rootViewController = appDelegate.window.rootViewController;
     window.rootViewController = self;
     window.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     [window makeKeyAndVisible];
@@ -71,7 +87,7 @@
     
     PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
     pickerView.delegate = self;
-    if (![btn.titleLabel.text isEqualToString:@"请输入到场时间"] && ![btn.titleLabel.text isEqualToString:@"请输入结束时间"]) {
+    if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
         pickerView.defaultDate = btn.titleLabel.text;
     }
     [pickerView showDatePickerInView:window withId:2];
@@ -95,7 +111,7 @@
 }
 
 - (void)calculateTimeDiffrence:(NSString *)fromTime toTheTime:(NSString *)toTime {
-    if (![fromTime isEqualToString:@"请输入到场时间"] && ![toTime isEqualToString:@"请输入结束时间"]) {
+    if (![fromTime isEqualToString:startTimeBtnPlaceholder] && ![toTime isEqualToString:endTimeBtnPlaceholder]) {
         NSDate *startD = [DateUtil dateFromString:fromTime withFormatter:@"yyyy-MM-dd HH:mm:00"];
         NSDate *endD = [DateUtil dateFromString:toTime withFormatter:@"yyyy-MM-dd HH:mm:00"];
         NSInteger df = [DateUtil intervalFromLastDate:startD toTheDate:endD];
@@ -104,34 +120,122 @@
 }
 
 - (IBAction)addPersonInCharge:(id)sender {
-    int HEIGHT = 30;
-    addTimes += 1;
-//    UIView *splitView = [[UIView alloc] initWithFrame:CGRectMake(0, 41, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
-//    splitView.backgroundColor = [UIColor colorFromHexCode:@"aaaaaa"];
-//    [self.personInChargeView addSubview:splitView];
-    
-    UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, self.personInChargeView.frame.size.height, SCREEN_WIDTH, HEIGHT)];
-    personView.backgroundColor = [UIColor redColor];
-    
-    CGRect newFrame = self.personInChargeView.frame;
-    newFrame.size.height = newFrame.size.height+HEIGHT;
-    [self.personInChargeView setFrame:newFrame];
-    //修改约束,防止滚动条滚动将view的的frame重置为storyboard重的设置值
-    self.chargeViewHeightConstraint.constant = newFrame.size.height;
-    
-    CGRect newFrame2 = self.estimateTimeView.frame;
-    newFrame2.origin.y = newFrame2.origin.y+HEIGHT;
-    [self.estimateTimeView setFrame:newFrame2];
-    
-    [self.personInChargeView addSubview:personView];
-    
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.scrollView.contentSize.height+HEIGHT);
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+    ChoosePersonViewController *choosePersonViewController = [taskSB instantiateViewControllerWithIdentifier:@"CHOOSEPERSON"];
+    choosePersonViewController.delegate = self;
+    choosePersonViewController.selectedPersonsDic = personDics;
+    [self.navigationController pushViewController:choosePersonViewController animated:YES];
 }
 
 - (void)disMissBackView {
     window.hidden = YES;
     window.rootViewController = nil;
     window = nil;
+}
+
+- (void)getSelectedPersons:(NSArray *)persons {
+    UIView *splitView = [self.chargeViewTitleView viewWithTag:1];
+    if (personDics.count < 1 && !splitView) {
+        splitView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
+        splitView.tag = 1;
+        splitView.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
+        [self.chargeViewTitleView addSubview:splitView];
+    }
+    
+    [chargePersons removeAllObjects];
+    [chargePersons addObjectsFromArray:persons];
+    
+    [personDics removeAllObjects];
+    for (unsigned i = 0; i < persons.count; i++) {
+        PersonEntity *person = (PersonEntity*)persons[i];
+        [personDics setObject:person forKey:person.id];
+    }
+    
+    for(UIView *subView in [personsView subviews])
+    {
+        [subView removeFromSuperview];
+    }
+    
+    NSInteger ADDHEIGHT = persons.count*personHeight;
+    
+    CGRect newFrame2 = personsView.frame;
+    newFrame2.size.height = ADDHEIGHT;
+    [personsView setFrame:newFrame2];
+    
+    CGRect newFrame = self.personInChargeView.frame;
+    newFrame.size.height = chargeTitleViewHeight+ADDHEIGHT;
+    [self.personInChargeView setFrame:newFrame];
+    //修改约束,防止滚动条滚动将view的的frame重置为storyboard重的设置值
+    self.chargeViewHeightConstraint.constant = newFrame.size.height;
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, scrollViewContentHeight+ADDHEIGHT);
+    
+    int j = 100;
+    for (NSInteger i=0; i<persons.count; i++) {
+        PersonEntity *person = persons[i];
+        
+        UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, personHeight*i, SCREEN_WIDTH, personHeight)];
+        
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 50, personHeight)];
+        nameLabel.text = person.name;
+        nameLabel.font = [UIFont systemFontOfSize:14];
+        nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        [personView addSubview:nameLabel];
+        
+        UIImageView *deleteView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-30, 8, 14, 14)];
+        deleteView.image = [UIImage imageNamed:@"delete"];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deletePerson:)];
+        [deleteView addGestureRecognizer:gesture];
+        [deleteView setUserInteractionEnabled:YES];
+        deleteView.tag = j+i;
+        [personView addSubview:deleteView];
+        
+        if (i!=persons.count-1) {
+            UIView *splitView = [[UIView alloc] initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
+            splitView.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
+            [personView addSubview:splitView];
+        }
+        
+        [personsView addSubview:personView];
+        
+    }
+}
+
+- (void)deletePerson:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer.view isKindOfClass:[UIImageView class]]) {
+        UIImageView *imageView = (UIImageView *)recognizer.view;
+        [chargePersons removeObjectAtIndex:imageView.tag-100];
+        NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:chargePersons];
+        [self getSelectedPersons:newPersons];
+    }
+}
+
+- (IBAction)releaseTask:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    if (chargePersons.count<1) {
+        alertController.message = @"请至少添加一位执行人！";
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    if ([self.startTimeBtn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] || [self.endTimeBtn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
+        alertController.message = @"请预估工作时间！";
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    UIAlertController *alertController2 = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认派单？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction2 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //提交操作,在线
+        NSLog(@"发布工单。。。。。。。。");
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    UIAlertAction *cancelAction2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertController2 addAction:okAction2];
+    [alertController2 addAction:cancelAction2];
+    [self presentViewController:alertController2 animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
