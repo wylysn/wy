@@ -25,6 +25,37 @@
 		88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */; };
 		88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */; };
 		88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E8D1D5C704200C72DA3 /* TaskService.m */; };
+		889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */; };
+		889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA27F1D63FE7A00BC5413 /* PRPlaceHolderTextView.m */; };
+		889BA2821D64076300BC5413 /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2811D64076300BC5413 /* add_image.png */; };
+		889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2851D64124E00BC5413 /* AAPLCameraNavController.m */; };
+		889BA2961D64124E00BC5413 /* AAPLCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2871D64124E00BC5413 /* AAPLCameraViewController.m */; };
+		889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2891D64124E00BC5413 /* AAPLPreviewView.m */; };
+		889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 889BA28A1D64124E00BC5413 /* Camera.storyboard */; };
+		889BA2991D64124E00BC5413 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA28C1D64124E00BC5413 /* CameraViewController.m */; };
+		889BA29A1D64124E00BC5413 /* PhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA28E1D64124E00BC5413 /* PhotoPreviewController.m */; };
+		889BA29B1D64124E00BC5413 /* PhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2901D64124E00BC5413 /* PhotoViewCell.m */; };
+		889BA29C1D64124E00BC5413 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2921D64124E00BC5413 /* PhotoViewController.m */; };
+		889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2941D64124E00BC5413 /* SkimPhotoViewController.m */; };
+		889BA2A01D64141900BC5413 /* UIImage+Resolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA29F1D64141900BC5413 /* UIImage+Resolution.m */; };
+		889BA2BE1D64159600BC5413 /* AAPLGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2A41D64159600BC5413 /* AAPLGridViewCell.m */; };
+		889BA2BF1D64159600BC5413 /* AssetPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2A51D64159600BC5413 /* AssetPicker.storyboard */; };
+		889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2A71D64159600BC5413 /* ELCAlbumPickerController.m */; };
+		889BA2C11D64159600BC5413 /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2A81D64159600BC5413 /* ELCAlbumPickerController.xib */; };
+		889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2AA1D64159600BC5413 /* ELCAsset.m */; };
+		889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2AC1D64159600BC5413 /* ELCAssetCell.m */; };
+		889BA2C41D64159600BC5413 /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2AD1D64159600BC5413 /* ELCAssetPicker.xib */; };
+		889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2B11D64159600BC5413 /* ELCAssetTablePicker.m */; };
+		889BA2C61D64159600BC5413 /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2B21D64159600BC5413 /* ELCAssetTablePicker.xib */; };
+		889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2B41D64159600BC5413 /* ELCConsole.m */; };
+		889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2B61D64159600BC5413 /* ELCImagePickerController.m */; };
+		889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2B91D64159600BC5413 /* ELCOverlayImageView.m */; };
+		889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2BB1D64159600BC5413 /* NSIndexSet+Convenience.m */; };
+		889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA2BD1D64159600BC5413 /* UICollectionView+Convenience.m */; };
+		889BA2D01D64181300BC5413 /* camera-flash-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CC1D64181300BC5413 /* camera-flash-off.png */; };
+		889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CD1D64181300BC5413 /* camera-flash-off@2x.png */; };
+		889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CE1D64181300BC5413 /* camera-flash-on.png */; };
+		889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */; };
 		88A893971D332B260050D9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893961D332B260050D9F3 /* main.m */; };
 		88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893991D332B260050D9F3 /* AppDelegate.m */; };
 		88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A8939C1D332B260050D9F3 /* FirstViewController.m */; };
@@ -45,6 +76,7 @@
 		88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */; };
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
+		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +127,61 @@
 		88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		88821E8C1D5C704200C72DA3 /* TaskService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskService.h; sourceTree = "<group>"; };
 		88821E8D1D5C704200C72DA3 /* TaskService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskService.m; sourceTree = "<group>"; };
+		889BA27A1D63F5AB00BC5413 /* TaskChuli1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChuli1ViewController.h; sourceTree = "<group>"; };
+		889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChuli1ViewController.m; sourceTree = "<group>"; };
+		889BA27E1D63FE7A00BC5413 /* PRPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPlaceHolderTextView.h; sourceTree = "<group>"; };
+		889BA27F1D63FE7A00BC5413 /* PRPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPlaceHolderTextView.m; sourceTree = "<group>"; };
+		889BA2811D64076300BC5413 /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_image.png; sourceTree = "<group>"; };
+		889BA2841D64124E00BC5413 /* AAPLCameraNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCameraNavController.h; sourceTree = "<group>"; };
+		889BA2851D64124E00BC5413 /* AAPLCameraNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCameraNavController.m; sourceTree = "<group>"; };
+		889BA2861D64124E00BC5413 /* AAPLCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCameraViewController.h; sourceTree = "<group>"; };
+		889BA2871D64124E00BC5413 /* AAPLCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCameraViewController.m; sourceTree = "<group>"; };
+		889BA2881D64124E00BC5413 /* AAPLPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLPreviewView.h; sourceTree = "<group>"; };
+		889BA2891D64124E00BC5413 /* AAPLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLPreviewView.m; sourceTree = "<group>"; };
+		889BA28A1D64124E00BC5413 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
+		889BA28B1D64124E00BC5413 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		889BA28C1D64124E00BC5413 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		889BA28D1D64124E00BC5413 /* PhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPreviewController.h; sourceTree = "<group>"; };
+		889BA28E1D64124E00BC5413 /* PhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPreviewController.m; sourceTree = "<group>"; };
+		889BA28F1D64124E00BC5413 /* PhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewCell.h; sourceTree = "<group>"; };
+		889BA2901D64124E00BC5413 /* PhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewCell.m; sourceTree = "<group>"; };
+		889BA2911D64124E00BC5413 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		889BA2921D64124E00BC5413 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		889BA2931D64124E00BC5413 /* SkimPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkimPhotoViewController.h; sourceTree = "<group>"; };
+		889BA2941D64124E00BC5413 /* SkimPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkimPhotoViewController.m; sourceTree = "<group>"; };
+		889BA29E1D64141900BC5413 /* UIImage+Resolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resolution.h"; sourceTree = "<group>"; };
+		889BA29F1D64141900BC5413 /* UIImage+Resolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resolution.m"; sourceTree = "<group>"; };
+		889BA2A31D64159600BC5413 /* AAPLGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLGridViewCell.h; sourceTree = "<group>"; };
+		889BA2A41D64159600BC5413 /* AAPLGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLGridViewCell.m; sourceTree = "<group>"; };
+		889BA2A51D64159600BC5413 /* AssetPicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssetPicker.storyboard; sourceTree = "<group>"; };
+		889BA2A61D64159600BC5413 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		889BA2A71D64159600BC5413 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		889BA2A81D64159600BC5413 /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		889BA2A91D64159600BC5413 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
+		889BA2AA1D64159600BC5413 /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
+		889BA2AB1D64159600BC5413 /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
+		889BA2AC1D64159600BC5413 /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
+		889BA2AD1D64159600BC5413 /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
+		889BA2AE1D64159600BC5413 /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		889BA2AF1D64159600BC5413 /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		889BA2B01D64159600BC5413 /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		889BA2B11D64159600BC5413 /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		889BA2B21D64159600BC5413 /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		889BA2B31D64159600BC5413 /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
+		889BA2B41D64159600BC5413 /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
+		889BA2B51D64159600BC5413 /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
+		889BA2B61D64159600BC5413 /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
+		889BA2B71D64159600BC5413 /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
+		889BA2B81D64159600BC5413 /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
+		889BA2B91D64159600BC5413 /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
+		889BA2BA1D64159600BC5413 /* NSIndexSet+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexSet+Convenience.h"; sourceTree = "<group>"; };
+		889BA2BB1D64159600BC5413 /* NSIndexSet+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexSet+Convenience.m"; sourceTree = "<group>"; };
+		889BA2BC1D64159600BC5413 /* UICollectionView+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Convenience.h"; sourceTree = "<group>"; };
+		889BA2BD1D64159600BC5413 /* UICollectionView+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Convenience.m"; sourceTree = "<group>"; };
+		889BA2CC1D64181300BC5413 /* camera-flash-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-off.png"; sourceTree = "<group>"; };
+		889BA2CD1D64181300BC5413 /* camera-flash-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-off@2x.png"; sourceTree = "<group>"; };
+		889BA2CE1D64181300BC5413 /* camera-flash-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-on.png"; sourceTree = "<group>"; };
+		889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-on@2x.png"; sourceTree = "<group>"; };
 		88A893921D332B260050D9F3 /* wy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A893961D332B260050D9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A893981D332B260050D9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -135,6 +222,8 @@
 		88FCC1351D62A9F800ED8979 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		88FCC1371D62C0DE00ED8979 /* ChoosePersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePersonTableViewCell.h; sourceTree = "<group>"; };
 		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
+		88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskJiedanViewController.h; sourceTree = "<group>"; };
+		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,8 +293,13 @@
 		88821E731D5C52EC00C72DA3 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				889BA2CC1D64181300BC5413 /* camera-flash-off.png */,
+				889BA2CD1D64181300BC5413 /* camera-flash-off@2x.png */,
+				889BA2CE1D64181300BC5413 /* camera-flash-on.png */,
+				889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */,
 				88821E791D5C5B9500C72DA3 /* scan@2x.png */,
 				88FCC1351D62A9F800ED8979 /* delete@2x.png */,
+				889BA2811D64076300BC5413 /* add_image.png */,
 				880787CA1D61C53800BA6F05 /* checked@2x.png */,
 				880787CC1D61C55900BA6F05 /* checked_filled@2x.png */,
 				880787C21D61AA7A00BA6F05 /* search@2x.png */,
@@ -217,6 +311,8 @@
 		88821E841D5C6EDC00C72DA3 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				889BA29E1D64141900BC5413 /* UIImage+Resolution.h */,
+				889BA29F1D64141900BC5413 /* UIImage+Resolution.m */,
 				88E927FD1D5DBF1D00152BBF /* UIColor+HexCode.h */,
 				88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */,
 				88E927FA1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.h */,
@@ -240,6 +336,73 @@
 				880787C51D61B42300BA6F05 /* ChoosePersonService.m */,
 			);
 			name = service;
+			sourceTree = "<group>";
+		};
+		889BA27D1D63FE3600BC5413 /* PRTextView */ = {
+			isa = PBXGroup;
+			children = (
+				889BA27E1D63FE7A00BC5413 /* PRPlaceHolderTextView.h */,
+				889BA27F1D63FE7A00BC5413 /* PRPlaceHolderTextView.m */,
+			);
+			name = PRTextView;
+			sourceTree = "<group>";
+		};
+		889BA2831D64117000BC5413 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				889BA2841D64124E00BC5413 /* AAPLCameraNavController.h */,
+				889BA2851D64124E00BC5413 /* AAPLCameraNavController.m */,
+				889BA2861D64124E00BC5413 /* AAPLCameraViewController.h */,
+				889BA2871D64124E00BC5413 /* AAPLCameraViewController.m */,
+				889BA2881D64124E00BC5413 /* AAPLPreviewView.h */,
+				889BA2891D64124E00BC5413 /* AAPLPreviewView.m */,
+				889BA28A1D64124E00BC5413 /* Camera.storyboard */,
+				889BA28B1D64124E00BC5413 /* CameraViewController.h */,
+				889BA28C1D64124E00BC5413 /* CameraViewController.m */,
+				889BA28D1D64124E00BC5413 /* PhotoPreviewController.h */,
+				889BA28E1D64124E00BC5413 /* PhotoPreviewController.m */,
+				889BA28F1D64124E00BC5413 /* PhotoViewCell.h */,
+				889BA2901D64124E00BC5413 /* PhotoViewCell.m */,
+				889BA2911D64124E00BC5413 /* PhotoViewController.h */,
+				889BA2921D64124E00BC5413 /* PhotoViewController.m */,
+				889BA2931D64124E00BC5413 /* SkimPhotoViewController.h */,
+				889BA2941D64124E00BC5413 /* SkimPhotoViewController.m */,
+			);
+			name = camera;
+			sourceTree = "<group>";
+		};
+		889BA2A21D64159600BC5413 /* ELCAlbumPicker */ = {
+			isa = PBXGroup;
+			children = (
+				889BA2A31D64159600BC5413 /* AAPLGridViewCell.h */,
+				889BA2A41D64159600BC5413 /* AAPLGridViewCell.m */,
+				889BA2A51D64159600BC5413 /* AssetPicker.storyboard */,
+				889BA2A61D64159600BC5413 /* ELCAlbumPickerController.h */,
+				889BA2A71D64159600BC5413 /* ELCAlbumPickerController.m */,
+				889BA2A81D64159600BC5413 /* ELCAlbumPickerController.xib */,
+				889BA2A91D64159600BC5413 /* ELCAsset.h */,
+				889BA2AA1D64159600BC5413 /* ELCAsset.m */,
+				889BA2AB1D64159600BC5413 /* ELCAssetCell.h */,
+				889BA2AC1D64159600BC5413 /* ELCAssetCell.m */,
+				889BA2AD1D64159600BC5413 /* ELCAssetPicker.xib */,
+				889BA2AE1D64159600BC5413 /* ELCAssetPickerFilterDelegate.h */,
+				889BA2AF1D64159600BC5413 /* ELCAssetSelectionDelegate.h */,
+				889BA2B01D64159600BC5413 /* ELCAssetTablePicker.h */,
+				889BA2B11D64159600BC5413 /* ELCAssetTablePicker.m */,
+				889BA2B21D64159600BC5413 /* ELCAssetTablePicker.xib */,
+				889BA2B31D64159600BC5413 /* ELCConsole.h */,
+				889BA2B41D64159600BC5413 /* ELCConsole.m */,
+				889BA2B51D64159600BC5413 /* ELCImagePickerController.h */,
+				889BA2B61D64159600BC5413 /* ELCImagePickerController.m */,
+				889BA2B71D64159600BC5413 /* ELCImagePickerHeader.h */,
+				889BA2B81D64159600BC5413 /* ELCOverlayImageView.h */,
+				889BA2B91D64159600BC5413 /* ELCOverlayImageView.m */,
+				889BA2BA1D64159600BC5413 /* NSIndexSet+Convenience.h */,
+				889BA2BB1D64159600BC5413 /* NSIndexSet+Convenience.m */,
+				889BA2BC1D64159600BC5413 /* UICollectionView+Convenience.h */,
+				889BA2BD1D64159600BC5413 /* UICollectionView+Convenience.m */,
+			);
+			path = ELCAlbumPicker;
 			sourceTree = "<group>";
 		};
 		88A893891D332B260050D9F3 = {
@@ -400,6 +563,10 @@
 				88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */,
 				880787BD1D61A2BD00BA6F05 /* ChoosePersonViewController.h */,
 				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
+				88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */,
+				88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */,
+				889BA27A1D63F5AB00BC5413 /* TaskChuli1ViewController.h */,
+				889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -407,6 +574,9 @@
 		88E927F11D5DBC2A00152BBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				889BA2A21D64159600BC5413 /* ELCAlbumPicker */,
+				889BA2831D64117000BC5413 /* camera */,
+				889BA27D1D63FE3600BC5413 /* PRTextView */,
 				88E928011D5DC10E00152BBF /* connect */,
 				88E927F61D5DBCD300152BBF /* date */,
 				88E927F21D5DBC6000152BBF /* ActionSheetPickerView */,
@@ -552,14 +722,24 @@
 				88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
+				889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */,
+				889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */,
+				889BA2C11D64159600BC5413 /* ELCAlbumPickerController.xib in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
 				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
+				889BA2C61D64159600BC5413 /* ELCAssetTablePicker.xib in Resources */,
+				889BA2821D64076300BC5413 /* add_image.png in Resources */,
+				889BA2BF1D64159600BC5413 /* AssetPicker.storyboard in Resources */,
 				88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */,
+				889BA2D01D64181300BC5413 /* camera-flash-off.png in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
+				889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */,
+				889BA2C41D64159600BC5413 /* ELCAssetPicker.xib in Resources */,
 				880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */,
+				889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */,
 				880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,28 +814,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */,
+				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
+				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
+				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
+				889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */,
+				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
+				889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
+				889BA29C1D64124E00BC5413 /* PhotoViewController.m in Sources */,
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
+				889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
+				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
 				88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */,
 				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
+				889BA2A01D64141900BC5413 /* UIImage+Resolution.m in Sources */,
+				88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */,
+				889BA29B1D64124E00BC5413 /* PhotoViewCell.m in Sources */,
+				889BA2991D64124E00BC5413 /* CameraViewController.m in Sources */,
+				889BA29A1D64124E00BC5413 /* PhotoPreviewController.m in Sources */,
+				889BA2BE1D64159600BC5413 /* AAPLGridViewCell.m in Sources */,
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
+				889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
+				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
+				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
+				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
+				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,
 				88821E7D1D5C661100C72DA3 /* TaskTableViewController.m in Sources */,
 				88821E801D5C67D700C72DA3 /* TaskEntity.m in Sources */,
+				889BA2961D64124E00BC5413 /* AAPLCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

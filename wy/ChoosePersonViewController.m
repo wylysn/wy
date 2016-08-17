@@ -33,7 +33,9 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.allowsMultipleSelection = TRUE;
+    if (self.type == 2) {
+        self.tableView.allowsMultipleSelection = TRUE;
+    }
     
     personService = [[ChoosePersonService alloc] init];
     
@@ -57,8 +59,8 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
     
-    if (_delegate && [_delegate respondsToSelector:@selector(getSelectedPersons:)]) {
-        [_delegate getSelectedPersons:personArr];
+    if (_delegate && [_delegate respondsToSelector:@selector(getSelectedPersons:withType:)]) {
+        [_delegate getSelectedPersons:personArr withType:self.type];
     }
 }
 

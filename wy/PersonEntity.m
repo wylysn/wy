@@ -17,6 +17,7 @@
         _id = dictionary[@"id"];
         _name = dictionary[@"name"];
         _phone = dictionary[@"phone"];
+        _isInCharge = dictionary[@"isInCharge"];
         _isChecked = FALSE;
     }
     return self;

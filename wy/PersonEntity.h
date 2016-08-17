@@ -14,5 +14,6 @@
 @property (nonatomic, copy, readonly) NSString *id;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *phone;
+@property (nonatomic, assign) NSString *isInCharge;
 @property (nonatomic, assign) BOOL isChecked;
 @end

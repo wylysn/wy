@@ -9,6 +9,8 @@
 #import "TaskTableViewCell.h"
 #import "NSString+Extensions.h"
 #import "TaskPaiGongViewController.h"
+#import "TaskJiedanViewController.h"
+#import "TaskChuli1ViewController.h"
 
 @implementation TaskTableViewCell
 
@@ -79,22 +81,24 @@
 }
 
 - (IBAction)doTask:(id)sender {
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+    UIViewController *viewController;
     if ([@"1" isEqualToString:_entity.type]) {
-        
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
+        ((TaskJiedanViewController *)viewController).id = _entity.id;
     } else if ([@"2" isEqualToString:_entity.type]) {
-        
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
+        ((TaskChuli1ViewController *)viewController).id = _entity.id;
     } else if ([@"3" isEqualToString:_entity.type]) {
-        UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-        TaskPaiGongViewController *taskPGViewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
-        taskPGViewController.id = _entity.id;
-        
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.parentController.navigationItem.backBarButtonItem = backButton;
-        taskPGViewController.hidesBottomBarWhenPushed = YES;
-        [self.parentController.navigationController pushViewController:taskPGViewController animated:YES];
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
+        ((TaskPaiGongViewController *)viewController).id = _entity.id;
     } else if ([@"4" isEqualToString:_entity.type]) {
         
     }
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.parentController.navigationItem.backBarButtonItem = backButton;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.parentController.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

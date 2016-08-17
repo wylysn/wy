@@ -10,7 +10,7 @@
 
 @protocol ChoosePersonViewDelegate <NSObject>
 
-- (void)getSelectedPersons:(NSArray *) persons;
+- (void)getSelectedPersons:(NSArray *) persons withType:(int) type;
 
 @end
 
@@ -19,5 +19,7 @@
 @property(assign,nonatomic) id<ChoosePersonViewDelegate> delegate;
 
 @property(assign,nonatomic) NSMutableDictionary *selectedPersonsDic;
+
+@property(assign,nonatomic) int type;
 
 @end

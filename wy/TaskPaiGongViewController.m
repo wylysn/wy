@@ -30,10 +30,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *timeDiffLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *personInExcuteView;
+@property (weak, nonatomic) IBOutlet UIView *excuteTitleView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *excuteViewHeightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIView *personInChargeView;
-@property (weak, nonatomic) IBOutlet UIView *estimateTimeView;
-@property (weak, nonatomic) IBOutlet UIView *chargeViewTitleView;
+@property (weak, nonatomic) IBOutlet UIView *chargeTitleView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *chargeViewHeightConstraint;
+
 
 @end
 
@@ -41,11 +45,17 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     UIWindow *window;
     NSInteger btnTag;
     NSInteger addTimes;
-    NSMutableDictionary *personDics;
-    UIView *personsView;
-    float chargeTitleViewHeight;
+    
+    float personTitleViewHeight;
     float scrollViewContentHeight;
     int personHeight;
+    
+    NSMutableDictionary *excutePersonDics;
+    UIView *excutePersonsView;
+    NSMutableArray *excutePersons;
+    
+    NSMutableDictionary *chargePersonDics;
+    UIView *chargePersonsView;
     NSMutableArray *chargePersons;
 }
 
@@ -54,7 +64,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     
     [self.navigationItem setTitle:@"派工"];
     
-    float ht = 1.f/[UIScreen mainScreen].scale;;
+    float ht = 1.f/[UIScreen mainScreen].scale;
     self.ct1.constant = ht;
     self.ct2.constant = ht;
     self.ct3.constant = ht;
@@ -66,14 +76,18 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"派工" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
-    personDics = [[NSMutableDictionary alloc] init];
+    chargePersonDics = [[NSMutableDictionary alloc] init];
     chargePersons = [[NSMutableArray alloc] init];
+    excutePersonDics = [[NSMutableDictionary alloc] init];
+    excutePersons = [[NSMutableArray alloc] init];
     
-    chargeTitleViewHeight = self.chargeViewTitleView.frame.size.height;
+    personTitleViewHeight = self.excuteTitleView.frame.size.height;
     personHeight = 30;
     scrollViewContentHeight = self.scrollView.contentSize.height;
-    personsView = [[UIView alloc] initWithFrame:CGRectMake(0, chargeTitleViewHeight, SCREEN_WIDTH, 0)];
-    [self.personInChargeView addSubview:personsView];
+    chargePersonsView = [[UIView alloc] initWithFrame:CGRectMake(0, personTitleViewHeight, SCREEN_WIDTH, 0)];
+    [self.personInChargeView addSubview:chargePersonsView];
+    excutePersonsView = [[UIView alloc] initWithFrame:CGRectMake(0, personTitleViewHeight, SCREEN_WIDTH, 0)];
+    [self.personInExcuteView addSubview:excutePersonsView];
 }
 
 - (IBAction)dateBtnClick:(id)sender {
@@ -119,12 +133,25 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     }
 }
 
-- (IBAction)addPersonInCharge:(id)sender {
+- (void)toChoosePerson:(int)type {
     UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
     ChoosePersonViewController *choosePersonViewController = [taskSB instantiateViewControllerWithIdentifier:@"CHOOSEPERSON"];
     choosePersonViewController.delegate = self;
-    choosePersonViewController.selectedPersonsDic = personDics;
+    choosePersonViewController.type = type;
+    if (type==1) {
+        choosePersonViewController.selectedPersonsDic = chargePersonDics;
+    } else {
+        choosePersonViewController.selectedPersonsDic = excutePersonDics;
+    }
     [self.navigationController pushViewController:choosePersonViewController animated:YES];
+}
+    
+
+- (IBAction)addPersonInCharge:(id)sender {
+    [self toChoosePerson:1];
+}
+- (IBAction)addPersonInExcute:(id)sender {
+    [self toChoosePerson:2];
 }
 
 - (void)disMissBackView {
@@ -133,37 +160,45 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     window = nil;
 }
 
-- (void)getSelectedPersons:(NSArray *)persons {
-    UIView *splitView = [self.chargeViewTitleView viewWithTag:1];
-    if (personDics.count < 1 && !splitView) {
+- (void)getSelectedPersons:(NSArray *)persons withType:(int)type {
+    if (type == 1) {
+        [self doChargePersons:persons];
+    } else {
+        [self doExcutePersons:persons];
+    }
+}
+
+- (void)doChargePersons:(NSArray *)persons {
+    UIView *splitView = [self.chargeTitleView viewWithTag:1];
+    if (chargePersonDics.count < 1 && !splitView) {
         splitView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
         splitView.tag = 1;
         splitView.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
-        [self.chargeViewTitleView addSubview:splitView];
+        [self.chargeTitleView addSubview:splitView];
     }
     
     [chargePersons removeAllObjects];
     [chargePersons addObjectsFromArray:persons];
     
-    [personDics removeAllObjects];
+    [chargePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [personDics setObject:person forKey:person.id];
+        [chargePersonDics setObject:person forKey:person.id];
     }
     
-    for(UIView *subView in [personsView subviews])
+    for(UIView *subView in [chargePersonsView subviews])
     {
         [subView removeFromSuperview];
     }
     
     NSInteger ADDHEIGHT = persons.count*personHeight;
     
-    CGRect newFrame2 = personsView.frame;
+    CGRect newFrame2 = chargePersonsView.frame;
     newFrame2.size.height = ADDHEIGHT;
-    [personsView setFrame:newFrame2];
+    [chargePersonsView setFrame:newFrame2];
     
     CGRect newFrame = self.personInChargeView.frame;
-    newFrame.size.height = chargeTitleViewHeight+ADDHEIGHT;
+    newFrame.size.height = personTitleViewHeight+ADDHEIGHT;
     [self.personInChargeView setFrame:newFrame];
     //修改约束,防止滚动条滚动将view的的frame重置为storyboard重的设置值
     self.chargeViewHeightConstraint.constant = newFrame.size.height;
@@ -175,7 +210,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         
         UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, personHeight*i, SCREEN_WIDTH, personHeight)];
         
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 50, personHeight)];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 80, personHeight)];
         nameLabel.text = person.name;
         nameLabel.font = [UIFont systemFontOfSize:14];
         nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
@@ -183,7 +218,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         
         UIImageView *deleteView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-30, 8, 14, 14)];
         deleteView.image = [UIImage imageNamed:@"delete"];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deletePerson:)];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteChargePerson:)];
         [deleteView addGestureRecognizer:gesture];
         [deleteView setUserInteractionEnabled:YES];
         deleteView.tag = j+i;
@@ -195,18 +230,95 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             [personView addSubview:splitView];
         }
         
-        [personsView addSubview:personView];
+        [chargePersonsView addSubview:personView];
         
     }
 }
 
-- (void)deletePerson:(UITapGestureRecognizer *)recognizer
+- (void)doExcutePersons:(NSArray *)persons {
+    UIView *splitView = [self.excuteTitleView viewWithTag:1];
+    if (excutePersonDics.count < 1 && !splitView) {
+        splitView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
+        splitView.tag = 1;
+        splitView.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
+        [self.excuteTitleView addSubview:splitView];
+    }
+    
+    [excutePersons removeAllObjects];
+    [excutePersons addObjectsFromArray:persons];
+    
+    [excutePersonDics removeAllObjects];
+    for (unsigned i = 0; i < persons.count; i++) {
+        PersonEntity *person = (PersonEntity*)persons[i];
+        [excutePersonDics setObject:person forKey:person.id];
+    }
+    
+    for(UIView *subView in [excutePersonsView subviews])
+    {
+        [subView removeFromSuperview];
+    }
+    
+    NSInteger ADDHEIGHT = persons.count*personHeight;
+    
+    CGRect newFrame2 = excutePersonsView.frame;
+    newFrame2.size.height = ADDHEIGHT;
+    [excutePersonsView setFrame:newFrame2];
+    
+    CGRect newFrame = self.personInExcuteView.frame;
+    newFrame.size.height = personTitleViewHeight+ADDHEIGHT;
+    [self.personInExcuteView setFrame:newFrame];
+    //修改约束,防止滚动条滚动将view的的frame重置为storyboard重的设置值
+    self.excuteViewHeightConstraint.constant = newFrame.size.height;
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, scrollViewContentHeight+ADDHEIGHT);
+    
+    int j = 100;
+    for (NSInteger i=0; i<persons.count; i++) {
+        PersonEntity *person = persons[i];
+        
+        UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, personHeight*i, SCREEN_WIDTH, personHeight)];
+        
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 80, personHeight)];
+        nameLabel.text = person.name;
+        nameLabel.font = [UIFont systemFontOfSize:14];
+        nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        [personView addSubview:nameLabel];
+        
+        UIImageView *deleteView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-30, 8, 14, 14)];
+        deleteView.image = [UIImage imageNamed:@"delete"];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExcutePerson:)];
+        [deleteView addGestureRecognizer:gesture];
+        [deleteView setUserInteractionEnabled:YES];
+        deleteView.tag = j+i;
+        [personView addSubview:deleteView];
+        
+        if (i!=persons.count-1) {
+            UIView *splitView = [[UIView alloc] initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH, 1/[UIScreen mainScreen].scale)];
+            splitView.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
+            [personView addSubview:splitView];
+        }
+        
+        [excutePersonsView addSubview:personView];
+        
+    }
+}
+
+- (void)deleteChargePerson:(UITapGestureRecognizer *)recognizer
 {
     if ([recognizer.view isKindOfClass:[UIImageView class]]) {
         UIImageView *imageView = (UIImageView *)recognizer.view;
         [chargePersons removeObjectAtIndex:imageView.tag-100];
         NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:chargePersons];
-        [self getSelectedPersons:newPersons];
+        [self getSelectedPersons:newPersons withType:1];
+    }
+}
+
+- (void)deleteExcutePerson:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer.view isKindOfClass:[UIImageView class]]) {
+        UIImageView *imageView = (UIImageView *)recognizer.view;
+        [excutePersons removeObjectAtIndex:imageView.tag-100];
+        NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:excutePersons];
+        [self getSelectedPersons:newPersons withType:2];
     }
 }
 
@@ -214,7 +326,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
     [alertController addAction:okAction];
-    if (chargePersons.count<1) {
+    if (excutePersons.count<1) {
         alertController.message = @"请至少添加一位执行人！";
         [self presentViewController:alertController animated:YES completion:nil];
         return;
