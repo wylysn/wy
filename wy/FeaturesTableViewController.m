@@ -7,6 +7,8 @@
 //
 
 #import "FeaturesTableViewController.h"
+#import "TaskTableViewController.h"
+#import "WorkOrderViewController.h"
 
 @interface FeaturesTableViewController ()
 
@@ -24,6 +26,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -31,18 +38,18 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 3;
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 3;
-    } else if (section == 1) {
-        return 2;
-    }
-    return 0;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    if (section == 0) {
+//        return 3;
+//    } else if (section == 1) {
+//        return 2;
+//    }
+//    return 0;
+//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 20;
@@ -50,6 +57,37 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return CGFLOAT_MIN;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"功能" style:UIBarButtonItemStylePlain target:nil action:nil];
+    if (section==0 && (row==0 || row==1 || row==2)) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        TaskTableViewController *taskTableViewController = [mainSB instantiateViewControllerWithIdentifier:@"TASK_LIST"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title;
+        if (row==0) {
+            title = @"待处理工单";
+        } else if (row==1) {
+            title = @"待派工工单";
+        } else if (row==2) {
+            title = @"待审批工单";
+        }
+        [taskTableViewController setTitle:title];
+        taskTableViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:taskTableViewController animated:YES];
+    }
+    if (section==0 && row==3) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        WorkOrderViewController *workOrderViewController = [mainSB instantiateViewControllerWithIdentifier:@"WORKORDER"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"工单查询";
+        [workOrderViewController setTitle:title];
+        workOrderViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:workOrderViewController animated:YES];
+    }
 }
 
 /*

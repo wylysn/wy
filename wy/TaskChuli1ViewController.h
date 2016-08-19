@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSString *id;
 
 @property (nonatomic,strong) NSMutableArray * imageArray;
+@property (nonatomic,strong) NSMutableArray * imageViewArray;
 
 @end

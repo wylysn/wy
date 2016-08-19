@@ -20,6 +20,8 @@
     UIButton* cancelButton;
     UIButton* doneButton;
     NSInteger _idNum;
+    
+    UIDatePickerMode pickerMode;
 }
 
 

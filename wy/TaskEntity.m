@@ -15,9 +15,12 @@
     if (self) {
         _identifier = [self uniqueIdentifier];
         _id = dictionary[@"id"];
+        _name = dictionary[@"name"];
         _type = dictionary[@"type"];
         _desc = dictionary[@"desc"];
         _position = dictionary[@"position"];
+        _priority = dictionary[@"priority"];
+        _orderStatus = dictionary[@"orderStatus"];
         _time = dictionary[@"time"];
     }
     return self;

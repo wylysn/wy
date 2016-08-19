@@ -8,7 +8,7 @@
 
 @protocol SkimPhotoViewDelegate <NSObject>
 
-- (void)usePhoto:(NSMutableArray*)imageArray;
+- (void)deletePhoto:(NSInteger)index;
 
 @end
 
@@ -18,6 +18,6 @@
 
 @property (nonatomic,assign) NSInteger  index;
 
-@property(retain,nonatomic)id<SkimPhotoViewDelegate> delegate;
+@property (assign,nonatomic) id<SkimPhotoViewDelegate> delegate;
 
 @end

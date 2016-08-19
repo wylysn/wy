@@ -1,23 +1,23 @@
+
 //
-//  MainViewController.m
+//  TaskChuli2ViewController.m
 //  wy
 //
-//  Created by wangyilu on 16/8/11.
+//  Created by wangyilu on 16/8/19.
 //  Copyright © 2016年 ___PURANG___. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "TaskChuli2ViewController.h"
 
-@interface MainViewController ()
+@interface TaskChuli2ViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation TaskChuli2ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[UITabBar appearance] setTintColor:[UIColor colorFromHexCode:@"1380B8"]];
 }
 
 - (void)didReceiveMemoryWarning {

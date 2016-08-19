@@ -314,7 +314,7 @@ static CGSize AssetGridThumbnailSize;
     if ([[ELCConsole mainConsole] onOrder]) {
         [selectedAssetsImages sortUsingSelector:@selector(compareWithIndex:)];
     }
-        [self.parent selectedAssets:selectedAssetsImages];
+    [self.parent selectedAssets:selectedAssetsImages];
     
 //    for (ELCAsset *elcAsset in self.elcAssets) {
 ////        if ([elcAsset selected]) {

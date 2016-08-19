@@ -71,7 +71,7 @@
 
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat totalHeight = 0;
-    totalHeight += [self.typeLabel sizeThatFits:size].height;
+    totalHeight += [self.idLabel sizeThatFits:size].height;
     totalHeight += [self.typeLabel sizeThatFits:size].height;
     totalHeight += [self.descLabel sizeThatFits:size].height;
     totalHeight += [self.positionLabel sizeThatFits:size].height;
@@ -87,7 +87,7 @@
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
         ((TaskJiedanViewController *)viewController).id = _entity.id;
     } else if ([@"2" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI2"];
         ((TaskChuli1ViewController *)viewController).id = _entity.id;
     } else if ([@"3" isEqualToString:_entity.type]) {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];

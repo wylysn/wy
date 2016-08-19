@@ -76,13 +76,12 @@
         
         NSInteger  x = self.scrollView.contentOffset.x/SCREEN_WIDTH;
         [self.imageArray removeObjectAtIndex:x];
+        if (_delegate && [_delegate respondsToSelector:@selector(deletePhoto:)]) {
+            [self.delegate deletePhoto:x];
+        }
         if (self.imageArray.count>0) {
             [self creatUI];
         }else{
-            if (_delegate && [_delegate respondsToSelector:@selector(usePhoto:)]) {
-                
-                [self.delegate usePhoto:self.imageArray];
-            }
            [self.navigationController popViewControllerAnimated:YES];
         }
     
@@ -91,10 +90,10 @@
 }
 
 - (IBAction)backClick:(id)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(usePhoto:)]) {
-        
-        [self.delegate usePhoto:self.imageArray];
-    }
+//    if (_delegate && [_delegate respondsToSelector:@selector(usePhoto:)]) {
+//        
+//        [self.delegate usePhoto:self.imageArray];
+//    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

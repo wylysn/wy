@@ -21,6 +21,8 @@
 
 @property(assign,nonatomic) id<PRActionSheetPickerViewDelegate> delegate;
 
+//@property(assign,nonatomic) UIDatePickerMode pickerMode;
+
 @property (nonatomic, strong) NSString *defaultDate;
 
 - (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum;

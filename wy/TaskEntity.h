@@ -13,8 +13,11 @@
 
 @property (nonatomic, copy, readonly) NSString *identifier;
 @property (nonatomic, copy, readonly) NSString *id;
+@property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *type;
 @property (nonatomic, copy, readonly) NSString *desc;
 @property (nonatomic, copy, readonly) NSString *position;
+@property (nonatomic, copy, readonly) NSString *priority;
+@property (nonatomic, copy, readonly) NSString *orderStatus;
 @property (nonatomic, copy, readonly) NSString *time;
 @end
