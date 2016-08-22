@@ -25,7 +25,9 @@
 
 @property (nonatomic, strong) NSString *defaultDate;
 
-- (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum;
+//- (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum;
+
+- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)pickerMode;
 
 
 @end

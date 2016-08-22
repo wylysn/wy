@@ -2427,8 +2427,8 @@
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="ZQW-0J-ARy"/>
                                                                 <exclude reference="Rva-nR-fVq"/>
+                                                                <exclude reference="ZQW-0J-ARy"/>
                                                             </mask>
                                                         </variation>
                                                     </label>
@@ -2478,8 +2478,8 @@
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="X57-N7-tdr"/>
                                                                 <exclude reference="6jV-RV-Lib"/>
+                                                                <exclude reference="X57-N7-tdr"/>
                                                             </mask>
                                                         </variation>
                                                     </label>
@@ -2581,8 +2581,8 @@
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="w9c-zt-bfP"/>
                                                                 <exclude reference="QhB-Ny-EEa"/>
+                                                                <exclude reference="w9c-zt-bfP"/>
                                                             </mask>
                                                         </variation>
                                                     </label>
@@ -2632,8 +2632,8 @@
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="mM6-dh-Cyf"/>
                                                                 <exclude reference="kIG-Dd-uy7"/>
+                                                                <exclude reference="mM6-dh-Cyf"/>
                                                             </mask>
                                                         </variation>
                                                     </label>

@@ -8,6 +8,7 @@
 
 #import "PRActionSheetPickerView.h"
 #import "DateUtil.h"
+#import "NTMonthYearPicker.h"
 
 @implementation PRActionSheetPickerView
 {
@@ -21,7 +22,9 @@
     UIButton* doneButton;
     NSInteger _idNum;
     
-    UIDatePickerMode pickerMode;
+    NTMonthYearPicker *ntPicker;
+    
+    NSInteger pickerMode;
 }
 
 
@@ -85,24 +88,92 @@
     //    NSLog(@"%@",date);
 }
 
-- (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum
+- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)mode
 {
     [view addSubview:self];
+    NSString *formatter;
+    pickerMode = mode;
+    if (mode == 0) {
+        datePicker.datePickerMode = UIDatePickerModeTime;
+        formatter = @"HH:mm";
+    } else if (mode == 1) {
+        datePicker.datePickerMode = UIDatePickerModeDate;
+        formatter = @"yyyy-MM-dd";
+    } else if (mode == 2) {
+        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        formatter = @"yyyy-MM-dd HH:mm:00";
+    } else if (mode == 3) {
+        datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
+        formatter = @"HH:mm";
+    } else if (mode == 4) {
+        // Initialize the picker
+        ntPicker = [[NTMonthYearPicker alloc] initWithFrame:CGRectMake(0, [UIDevice height], [UIDevice width], 260)];
+        [ntPicker addTarget:self action:@selector(onDatePicked:) forControlEvents:UIControlEventValueChanged];
+        
+//        NSDateComponents *comps = [[NSDateComponents alloc] init];
+//        NSCalendar *cal = [NSCalendar currentCalendar];
+        
+        // Set mode to month + year
+        // This is optional; default is month + year
+        ntPicker.datePickerMode = NTMonthYearPickerModeMonthAndYear;
+        
+        // Set minimum date to January 2000
+        // This is optional; default is no min date
+//        [comps setDay:1];
+//        [comps setMonth:1];
+//        [comps setYear:2000];
+//        picker.minimumDate = [cal dateFromComponents:comps];
+        
+        // Set maximum date to next month
+        // This is optional; default is no max date
+//        [comps setDay:0];
+//        [comps setMonth:1];
+//        [comps setYear:0];
+//        picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+        
+        // Set initial date to last month
+        // This is optional; default is current month/year
+//        [comps setDay:0];
+//        [comps setMonth:-1];
+//        [comps setYear:0];
+//        picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+        [datePicker removeFromSuperview];
+        [self addSubview:ntPicker];
+        formatter = @"yyyy-MM-dd";
+    }
     
     if (self.defaultDate) {
-        NSDate* date = [DateUtil dateFromString:self.defaultDate withFormatter:@"yyyy-MM-dd HH:mm:00"];
-        [datePicker setDate:date animated:NO];
+        NSDate* date = [DateUtil dateFromString:self.defaultDate withFormatter:formatter];
+        if (mode == 4) {
+            [ntPicker setDate:date];
+        } else {
+            [datePicker setDate:date animated:NO];
+        }
+        
     }
     
     [UIView animateWithDuration:0.2 animations:^{
         
         buttomView.frame = CGRectMake(0, height - 300, width, 300);
         datePicker.frame = CGRectMake(0, height - 260, width, 260);
+        ntPicker.frame = CGRectMake(0, height - 260, width, 260);
         doneButton.frame = CGRectMake(width - 70, height - 300, 50, 40);
         backView.alpha = 0.5;
         
     }];
 }
+
+- (void)onDatePicked:(UITapGestureRecognizer *)gestureRecognizer {
+//    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//    if( ntPicker.datePickerMode == NTMonthYearPickerModeMonthAndYear ) {
+//        [df setDateFormat:@"MMMM yyyy"];
+//    } else {
+//        [df setDateFormat:@"yyyy"];
+//    }
+//    NSString *dateStr = [df stringFromDate:ntPicker.date];
+//    NSLog(@"========%@", dateStr);
+}
+
 
 - (void)tap:(UITapGestureRecognizer*)tap
 {
@@ -112,6 +183,9 @@
 - (void)doneButtonClick:(id)sender
 {
     NSDate* date = datePicker.date;
+    if (pickerMode == 4) {
+        date = ntPicker.date;
+    }
     //    NSLog(@"%@",date);
     if (_delegate && [_delegate respondsToSelector:@selector(getDateWithDate:andId:)]) {
         [_delegate getDateWithDate:date andId:_idNum];

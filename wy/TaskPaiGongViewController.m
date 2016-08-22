@@ -105,7 +105,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
         pickerView.defaultDate = btn.titleLabel.text;
     }
-    [pickerView showDatePickerInView:window withId:2];
+    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime];
     
     
 }
