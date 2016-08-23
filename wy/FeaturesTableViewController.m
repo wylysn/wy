@@ -9,6 +9,7 @@
 #import "FeaturesTableViewController.h"
 #import "TaskTableViewController.h"
 #import "WorkOrderViewController.h"
+#import "InspectTaskListViewController.h"
 
 @interface FeaturesTableViewController ()
 
@@ -87,6 +88,16 @@
         [workOrderViewController setTitle:title];
         workOrderViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:workOrderViewController animated:YES];
+    }
+    
+    if (section==1 && row==0) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        InspectTaskListViewController *inspectTaskViewController = [mainSB instantiateViewControllerWithIdentifier:@"INSPECT_TASKLIST"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"巡检任务";
+        [inspectTaskViewController setTitle:title];
+        inspectTaskViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:inspectTaskViewController animated:YES];
     }
 }
 

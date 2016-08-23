@@ -101,11 +101,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     
     PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
     pickerView.delegate = self;
-//    pickerView.pickerMode = UIDatePickerModeDateAndTime;
     if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
         pickerView.defaultDate = btn.titleLabel.text;
     }
-    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime];
+    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime withBackId:1];
     
     
 }

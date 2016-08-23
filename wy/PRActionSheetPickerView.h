@@ -27,7 +27,7 @@
 
 //- (void)showDatePickerInView:(UIView*)view withId:(NSInteger)idNum;
 
-- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)pickerMode;
+- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)pickerMode withBackId:(NSInteger)idNum;
 
 
 @end

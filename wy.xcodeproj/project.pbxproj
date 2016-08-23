@@ -86,6 +86,10 @@
 		88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FB1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m */; };
 		88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927FE1D5DBF1D00152BBF /* UIColor+HexCode.m */; };
 		88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */; };
+		88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */; };
+		88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F140D01D6C21C400B8BCCC /* InspectTaskTableViewCell.m */; };
+		88F140D41D6C258200B8BCCC /* InspectTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */; };
+		88F140D71D6C269100B8BCCC /* InspectTaskService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F140D61D6C269100B8BCCC /* InspectTaskService.m */; };
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
@@ -250,6 +254,14 @@
 		88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHTTPSessionManager.h; sourceTree = "<group>"; };
 		88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHTTPSessionManager.m; sourceTree = "<group>"; };
 		88E928051D5DC14B00152BBF /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
+		88F140CC1D6C1A6D00B8BCCC /* InspectTaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskListViewController.h; sourceTree = "<group>"; };
+		88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskListViewController.m; sourceTree = "<group>"; };
+		88F140CF1D6C21C400B8BCCC /* InspectTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskTableViewCell.h; sourceTree = "<group>"; };
+		88F140D01D6C21C400B8BCCC /* InspectTaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskTableViewCell.m; sourceTree = "<group>"; };
+		88F140D21D6C258200B8BCCC /* InspectTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskEntity.h; sourceTree = "<group>"; };
+		88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskEntity.m; sourceTree = "<group>"; };
+		88F140D51D6C269100B8BCCC /* InspectTaskService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskService.h; sourceTree = "<group>"; };
+		88F140D61D6C269100B8BCCC /* InspectTaskService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskService.m; sourceTree = "<group>"; };
 		88FCC1351D62A9F800ED8979 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		88FCC1371D62C0DE00ED8979 /* ChoosePersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePersonTableViewCell.h; sourceTree = "<group>"; };
 		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
@@ -562,6 +574,8 @@
 			children = (
 				88B6FDA01D66E74800418972 /* WorkOrderTableViewCell.h */,
 				88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */,
+				88F140CF1D6C21C400B8BCCC /* InspectTaskTableViewCell.h */,
+				88F140D01D6C21C400B8BCCC /* InspectTaskTableViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -569,6 +583,8 @@
 		88A893CF1D3393280050D9F3 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				88F140D21D6C258200B8BCCC /* InspectTaskEntity.h */,
+				88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -582,6 +598,8 @@
 				88B6FD9E1D66D6DA00418972 /* WorkOrderViewController.m */,
 				8819BCCD1D6ADF0C00E04B49 /* SiftWorkOrderViewController.h */,
 				8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */,
+				88F140CC1D6C1A6D00B8BCCC /* InspectTaskListViewController.h */,
+				88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -632,6 +650,8 @@
 			children = (
 				88B6FDA41D66E99400418972 /* WorkOrderService.h */,
 				88B6FDA51D66E99400418972 /* WorkOrderService.m */,
+				88F140D51D6C269100B8BCCC /* InspectTaskService.h */,
+				88F140D61D6C269100B8BCCC /* InspectTaskService.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -893,10 +913,12 @@
 				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
 				889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */,
 				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
+				88F140D71D6C269100B8BCCC /* InspectTaskService.m in Sources */,
 				889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
 				889BA29C1D64124E00BC5413 /* PhotoViewController.m in Sources */,
+				88F140D41D6C258200B8BCCC /* InspectTaskEntity.m in Sources */,
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
 				889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
@@ -925,11 +947,13 @@
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
+				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
 				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
+				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
 				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,

@@ -1,41 +1,41 @@
 //
-//  WorkOrderViewController.m
+//  InspectTaskListViewController.m
 //  wy
 //
-//  Created by wangyilu on 16/8/19.
+//  Created by wangyilu on 16/8/23.
 //  Copyright © 2016年 ___PURANG___. All rights reserved.
 //
 
-#import "WorkOrderViewController.h"
-#import "WorkOrderService.h"
-#import "WorkOrderTableViewCell.h"
+#import "InspectTaskListViewController.h"
+#import "InspectTaskService.h"
+#import "InspectTaskTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
 #import "PRActionSheetPickerView.h"
 #import "DateUtil.h"
 #import "PRButton.h"
 #import <MJRefresh.h>
 
-#define CELLID @"WORKORDERENTIFIER_CELL"
+#define CELLID @"INSPECTTASKENTIFIER_CELL"
 
 typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     FilterViewHideByCancel       = 0,
     FilterViewHideByConfirm      = 1 << 0
 };
 
-@interface WorkOrderViewController ()<UITableViewDataSource,UITableViewDelegate,PRActionSheetPickerViewDelegate>
+@interface InspectTaskListViewController ()<UITableViewDataSource,UITableViewDelegate,PRActionSheetPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet PRButton *dateBtn;
 
 @end
 
-@implementation WorkOrderViewController {
-    WorkOrderService *workOrderService;
+@implementation InspectTaskListViewController {
+    InspectTaskService *inspectTaskService;
     UIWindow *window;
     UIWindow *filterWindow;
     UIView *filterView;
     NSDate *defaultDate;
-    UIView *priorityView;
+    UIView *inspectTimeView;
     UIView *orderStatusView;
     
     NSMutableDictionary *filterDic;
@@ -50,10 +50,10 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     [filterImageView addGestureRecognizer:gesture];
     [filterImageView setUserInteractionEnabled:YES];
     UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]
-                                    initWithCustomView:filterImageView];
+                                   initWithCustomView:filterImageView];
     self.navigationItem.rightBarButtonItem = filterItem;
     
-    workOrderService = [[WorkOrderService alloc] init];
+    inspectTaskService = [[InspectTaskService alloc] init];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -137,7 +137,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         UILabel *f1titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, (F1VIEW_HEIGHT-21)/2, 100, 21)];
         f1titleLabel.textAlignment = NSTextAlignmentLeft;
         f1titleLabel.font = [UIFont systemFontOfSize:17];
-        f1titleLabel.text = @"优先级";
+        f1titleLabel.text = @"巡检时间";
         [f1titleView addSubview:f1titleLabel];
         [scrollView addSubview:f1titleView];
         //分割线2
@@ -147,53 +147,44 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [scrollView addSubview:splitView2];
         //条件
         float PRIORITY_HEIGHT = 60;
-        priorityView = [[UIView alloc] initWithFrame:CGRectMake(0, TITLEVIEW_HEIGHT+SPLITVIEW_HEIGHT+F1VIEW_HEIGHT+SPLITVIEW2_HEIGHT, pwidth, PRIORITY_HEIGHT)];
-        float sp;
-        if (SCREEN_WIDTH<=320) {
-            sp = 10;
-        } else if (SCREEN_WIDTH<=375) {
-            sp = 15;
-        } else {
-            sp = 15;
-        }
-        for (NSInteger i=1; i<=4; i++) {
-            NSString *color;
-            float x;
-            float width;
-            NSString *title;
-            if (i==1) {
-                x = 15;
-                title = @"低";
-                width = 27;
-                color = @"8EC158";
-            } else if(i==2) {
-                x = 15+27+sp;
-                title = @"中";
-                width = 27;
-                color = @"1380B8";
-            } else if(i==3) {
-                x = 15+27+sp+27+sp;
-                title = @"高";
-                width = 27;
-                color = @"FD705A";
-            } else if(i==4) {
-                x = 15+27+sp+27+sp+27+sp;
-                title = @"紧急";
-                width = 44;
-                color = @"F53D5A";
-            }
-            UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(x, (PRIORITY_HEIGHT-21)/2, width, 21)];
-            btn1.tag = i;
-            [btn1 setTitle:title forState:UIControlStateNormal];
-            [btn1 setTitleColor:[UIColor colorFromHexCode:color] forState:UIControlStateNormal];
-            [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-            [btn1 addTarget:self action:@selector(conditionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            btn1.layer.borderColor = [UIColor colorFromHexCode:color].CGColor;
-            btn1.layer.cornerRadius = 3;
-            btn1.layer.borderWidth = 1;
-            [priorityView addSubview:btn1];
-        }
-        [scrollView addSubview:priorityView];
+        inspectTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, TITLEVIEW_HEIGHT+SPLITVIEW_HEIGHT+F1VIEW_HEIGHT+SPLITVIEW2_HEIGHT, pwidth, PRIORITY_HEIGHT)];
+        //到场时间
+        UIView *startTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pwidth, 30)];
+        UILabel *startDescLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, (30-21)/2, 100, 21)];
+        startDescLabel.text = @"到场时间";
+        startDescLabel.font = [UIFont systemFontOfSize:14];
+        startDescLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        [startTimeView addSubview:startDescLabel];
+        UIButton *startTimeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15+100, (30-21)/2, pwidth-100-15-8, 21)];
+        startTimeBtn.tag = 1;
+        [startTimeBtn setTitle:@"请输入到场时间" forState:UIControlStateNormal];
+//        startTimeBtn.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
+        startTimeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [startTimeBtn setTitleColor:[UIColor colorFromHexCode:@"555555"] forState:UIControlStateNormal];
+        [startTimeView addSubview:startTimeBtn];
+        UIView *splitView22 = [[UIView alloc] initWithFrame:CGRectMake(0, 30, pwidth, 1/[UIScreen mainScreen].scale)];
+        splitView22.backgroundColor = [UIColor colorFromHexCode:SPLITLINE_COLOR];
+        [startTimeView addSubview:splitView22];
+        [inspectTimeView addSubview:startTimeView];
+        //结束时间
+        UIView *endTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, 30, pwidth, 30)];
+        UILabel *endDescLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, (30-21)/2, 100, 21)];
+        endDescLabel.text = @"结束时间";
+        endDescLabel.font = [UIFont systemFontOfSize:14];
+        endDescLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        [endTimeView addSubview:endDescLabel];
+        UIButton *endTimeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15+100, (30-21)/2, pwidth-100-15-8, 21)];
+        endTimeBtn.tag = 2;
+        [endTimeBtn setTitle:@"请输入结束时间" forState:UIControlStateNormal];
+        endTimeBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+        endTimeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [endTimeBtn setTitleColor:[UIColor colorFromHexCode:@"555555"] forState:UIControlStateNormal];
+        [endTimeView addSubview:endTimeBtn];
+        [inspectTimeView addSubview:endTimeView];
+        [scrollView addSubview:inspectTimeView];
+        
+        [startTimeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
+        [endTimeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         
         //分割线3
         float SPLITVIEW3_HEIGHT = 6;
@@ -216,6 +207,14 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [scrollView addSubview:splitView4];
         
         //条件
+        float sp;
+        if (SCREEN_WIDTH<=320) {
+            sp = 10;
+        } else if (SCREEN_WIDTH<=375) {
+            sp = 15;
+        } else {
+            sp = 15;
+        }
         float ORDERSTATUS_HEIGHT = 60;
         orderStatusView = [[UIView alloc] initWithFrame:CGRectMake(0, TITLEVIEW_HEIGHT+SPLITVIEW_HEIGHT+F1VIEW_HEIGHT+SPLITVIEW2_HEIGHT+PRIORITY_HEIGHT+SPLITVIEW3_HEIGHT+F2VIEW_HEIGHT+SPLITVIEW4_HEIGHT, pwidth, ORDERSTATUS_HEIGHT)];
         for (NSInteger i=1; i<=4; i++) {
@@ -290,7 +289,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [btnGroupView addSubview:confirmBtn];
         [bottomView addSubview:btnGroupView];
         [filterView addSubview:bottomView];
-    
+        
         [filterWindow addSubview:filterView];
         [UIView animateWithDuration:0.2 animations:^{
             CGRect newFrame = filterView.frame;
@@ -324,11 +323,11 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     [self filterViewHideWithTye:FilterViewHideByConfirm];
     NSMutableArray *priorityArr = [[NSMutableArray alloc] init];
     NSMutableArray *orderStatusArr = [[NSMutableArray alloc] init];
-    for (UIButton *btn in priorityView.subviews) {
-        if (btn.selected) {
-            [priorityArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
-        }
-    }
+//    for (UIButton *btn in inspectTimeView.subviews) {
+//        if (btn.selected) {
+//            [priorityArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
+//        }
+//    }
     for (UIButton *btn in orderStatusView.subviews) {
         if (btn.selected) {
             [orderStatusArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
@@ -341,6 +340,24 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     [self.tableView.mj_header beginRefreshing];
 }
 
+- (IBAction)selectTime:(id)sender {
+    window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    window.rootViewController = self;
+    window.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    [window makeKeyAndVisible];
+    
+    NSInteger type = ((UIButton *)sender).tag;
+    if (type == 1) {
+        
+    }
+    PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
+    pickerView.delegate = self;
+    //        if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
+    //            pickerView.defaultDate = btn.titleLabel.text;
+    //        }
+    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime withBackId:type];
+}
+
 - (void)hideFilterView:(UITapGestureRecognizer *)recognizer {
     [self filterViewHideWithTye:FilterViewHideByCancel];
 }
@@ -348,18 +365,18 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (void)filterViewHideWithTye:(FilterViewHideType) type {
     if (type == FilterViewHideByCancel) {
         //重置筛选条件
-        for (UIButton *btn in priorityView.subviews) {
-            NSArray *pArr = filterDic[@"prioritys"];
-            if (!pArr) {
-                btn.selected = FALSE;
-                [btn setBackgroundColor:[UIColor whiteColor]];
-            } else {
-                if (![pArr containsObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]]) {
-                    btn.selected = FALSE;
-                    [btn setBackgroundColor:[UIColor whiteColor]];
-                }
-            }
-        }
+//        for (UIButton *btn in inspectTimeView.subviews) {
+//            NSArray *pArr = filterDic[@"prioritys"];
+//            if (!pArr) {
+//                btn.selected = FALSE;
+//                [btn setBackgroundColor:[UIColor whiteColor]];
+//            } else {
+//                if (![pArr containsObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]]) {
+//                    btn.selected = FALSE;
+//                    [btn setBackgroundColor:[UIColor whiteColor]];
+//                }
+//            }
+//        }
         
         for (UIButton *btn in orderStatusView.subviews) {
             NSArray *oArr = filterDic[@"orderStatus"];
@@ -391,13 +408,13 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return workOrderService.taskEntitysList.count;
+    return inspectTaskService.taskEntitysList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WorkOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
+    InspectTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[WorkOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
+        cell = [[InspectTaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -405,21 +422,12 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     return cell;
 }
 
-- (void)configureCell:(WorkOrderTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > workOrderService.taskEntitysList.count) {
+- (void)configureCell:(InspectTaskTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > inspectTaskService.taskEntitysList.count) {
         return;
     }
-    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
-    cell.entity = workOrderService.taskEntitysList[indexPath.row];
+    cell.entity = inspectTaskService.taskEntitysList[indexPath.row];
     cell.parentController = self;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskEntity *entity = workOrderService.taskEntitysList[indexPath.row];
-    
-    return [tableView fd_heightForCellWithIdentifier:CELLID cacheByKey:entity.identifier configuration:^(WorkOrderTableViewCell *cell) {
-        [self configureCell:cell atIndexPath:indexPath];
-    }];
 }
 
 - (IBAction)dateClick:(id)sender {
@@ -431,14 +439,24 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
     pickerView.delegate = self;
     pickerView.defaultDate = [DateUtil formatDateString:defaultDate withFormatter:@"yyyy-MM-dd"];
-    [pickerView showDatePickerInView:window withType:4 withBackId:1];
+    [pickerView showDatePickerInView:window withType:4 withBackId:3];
 }
 
 - (void)getDateWithDate:(NSDate *)date andId:(NSInteger)idNum {
-    [self disMissBackView];
-    defaultDate = date;
-    NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy年MM月"];
-    [self.dateBtn setTitle:title forState:UIControlStateNormal];
+    [self disMissBackView];//startTimeView
+    if (idNum == 1) {
+        UIButton *startbtn = [inspectTimeView viewWithTag:1];
+        NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
+        [startbtn setTitle:title forState:UIControlStateNormal];
+    } else if (idNum == 2) {
+        UIButton *endbtn = [inspectTimeView viewWithTag:1];
+        NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
+        [endbtn setTitle:title forState:UIControlStateNormal];
+    } else if (idNum == 3) {
+        defaultDate = date;
+        NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy年MM月"];
+        [self.dateBtn setTitle:title forState:UIControlStateNormal];
+    }
 }
 
 - (void)disMissBackView {

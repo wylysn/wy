@@ -88,8 +88,9 @@
     //    NSLog(@"%@",date);
 }
 
-- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)mode
+- (void)showDatePickerInView:(UIView*)view withType:(NSInteger)mode withBackId:(NSInteger)idNum
 {
+    _idNum = idNum;
     [view addSubview:self];
     NSString *formatter;
     pickerMode = mode;
