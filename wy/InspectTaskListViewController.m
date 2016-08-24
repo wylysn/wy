@@ -15,7 +15,9 @@
 #import "PRButton.h"
 #import <MJRefresh.h>
 
-#define CELLID @"INSPECTTASKENTIFIER_CELL"
+#define CELLID                 @"INSPECTTASKENTIFIER_CELL"
+#define STARTTIME_PLACEHOLDER  @"请输入到场时间"
+#define ENDTIME_PLACEHOLDER    @"请输入结束时间"
 
 typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     FilterViewHideByCancel       = 0,
@@ -157,7 +159,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [startTimeView addSubview:startDescLabel];
         UIButton *startTimeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15+100, (30-21)/2, pwidth-100-15-8, 21)];
         startTimeBtn.tag = 1;
-        [startTimeBtn setTitle:@"请输入到场时间" forState:UIControlStateNormal];
+        [startTimeBtn setTitle:STARTTIME_PLACEHOLDER forState:UIControlStateNormal];
 //        startTimeBtn.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
         startTimeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [startTimeBtn setTitleColor:[UIColor colorFromHexCode:@"555555"] forState:UIControlStateNormal];
@@ -175,7 +177,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [endTimeView addSubview:endDescLabel];
         UIButton *endTimeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15+100, (30-21)/2, pwidth-100-15-8, 21)];
         endTimeBtn.tag = 2;
-        [endTimeBtn setTitle:@"请输入结束时间" forState:UIControlStateNormal];
+        [endTimeBtn setTitle:ENDTIME_PLACEHOLDER forState:UIControlStateNormal];
         endTimeBtn.titleLabel.textAlignment = NSTextAlignmentRight;
         endTimeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [endTimeBtn setTitleColor:[UIColor colorFromHexCode:@"555555"] forState:UIControlStateNormal];
@@ -224,22 +226,22 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
             NSString *title;
             if (i==1) {
                 x = 15;
-                title = @"终止";
+                title = @"正常";
                 width = 44;
                 color = @"8EC158";
             } else if(i==2) {
                 x = 15+44+sp;
-                title = @"完成";
+                title = @"漏检";
                 width = 44;
                 color = @"1380B8";
             } else if(i==3) {
                 x = 15+44+sp+44+sp;
-                title = @"已验证";
-                width = 62;
+                title = @"报修";
+                width = 44;
                 color = @"FD705A";
             } else if(i==4) {
-                x = 15+44+sp+44+sp+62+sp;
-                title = @"已存档";
+                x = 15+44+sp+44+sp+44+sp;
+                title = @"异常";
                 width = 62;
                 color = @"F53D5A";
             }
@@ -321,19 +323,20 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (IBAction)filterConfirmBtnClick:(id)sender
 {
     [self filterViewHideWithTye:FilterViewHideByConfirm];
-    NSMutableArray *priorityArr = [[NSMutableArray alloc] init];
+    NSString *startTime;
+    NSString *endTime;
     NSMutableArray *orderStatusArr = [[NSMutableArray alloc] init];
-//    for (UIButton *btn in inspectTimeView.subviews) {
-//        if (btn.selected) {
-//            [priorityArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
-//        }
-//    }
+    UIButton *startTimeBtn = [inspectTimeView viewWithTag:1];
+    UIButton *endTimeBtn = [inspectTimeView viewWithTag:2];
+    startTime = [STARTTIME_PLACEHOLDER isEqualToString:startTimeBtn.titleLabel.text]?@"":startTimeBtn.titleLabel.text;
+    endTime = [ENDTIME_PLACEHOLDER isEqualToString:endTimeBtn.titleLabel.text]?@"":endTimeBtn.titleLabel.text;
     for (UIButton *btn in orderStatusView.subviews) {
         if (btn.selected) {
             [orderStatusArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
         }
     }
-    [filterDic setObject:priorityArr forKey:@"prioritys"];
+    [filterDic setObject:startTime forKey:@"startTime"];
+    [filterDic setObject:endTime forKey:@"endTime"];
     [filterDic setObject:orderStatusArr forKey:@"orderStatus"];
     
     NSLog(@"筛选条件：%@", filterDic);
@@ -346,16 +349,15 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     window.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     [window makeKeyAndVisible];
     
-    NSInteger type = ((UIButton *)sender).tag;
-    if (type == 1) {
-        
-    }
     PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
     pickerView.delegate = self;
-    //        if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
-    //            pickerView.defaultDate = btn.titleLabel.text;
-    //        }
-    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime withBackId:type];
+    UIButton *btn = (UIButton *)sender;
+    NSInteger tag = btn.tag;
+    NSString *title = btn.titleLabel.text;
+    if (![STARTTIME_PLACEHOLDER isEqualToString:title] && ![ENDTIME_PLACEHOLDER isEqualToString:title]) {
+        pickerView.defaultDate = title;
+    }
+    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime withBackId:tag];
 }
 
 - (void)hideFilterView:(UITapGestureRecognizer *)recognizer {
@@ -365,18 +367,12 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (void)filterViewHideWithTye:(FilterViewHideType) type {
     if (type == FilterViewHideByCancel) {
         //重置筛选条件
-//        for (UIButton *btn in inspectTimeView.subviews) {
-//            NSArray *pArr = filterDic[@"prioritys"];
-//            if (!pArr) {
-//                btn.selected = FALSE;
-//                [btn setBackgroundColor:[UIColor whiteColor]];
-//            } else {
-//                if (![pArr containsObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]]) {
-//                    btn.selected = FALSE;
-//                    [btn setBackgroundColor:[UIColor whiteColor]];
-//                }
-//            }
-//        }
+        UIButton *startTimeBtn = [inspectTimeView viewWithTag:1];
+        UIButton *endTimeBtn = [inspectTimeView viewWithTag:2];
+        NSString *startTime = [@"" isEqualToString:filterDic[@"startTime"]]?STARTTIME_PLACEHOLDER:filterDic[@"startTime"];
+        NSString *endTime = [@"" isEqualToString:filterDic[@"endTime"]]?ENDTIME_PLACEHOLDER:filterDic[@"endTime"];
+        [startTimeBtn setTitle:startTime forState:UIControlStateNormal];
+        [endTimeBtn setTitle:endTime forState:UIControlStateNormal];
         
         for (UIButton *btn in orderStatusView.subviews) {
             NSArray *oArr = filterDic[@"orderStatus"];
@@ -449,7 +445,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
         [startbtn setTitle:title forState:UIControlStateNormal];
     } else if (idNum == 2) {
-        UIButton *endbtn = [inspectTimeView viewWithTag:1];
+        UIButton *endbtn = [inspectTimeView viewWithTag:2];
         NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
         [endbtn setTitle:title forState:UIControlStateNormal];
     } else if (idNum == 3) {
