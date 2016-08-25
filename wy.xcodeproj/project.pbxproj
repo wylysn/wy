@@ -768,6 +768,7 @@
 				TargetAttributes = {
 					88A893911D332B260050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5938F43692;
 					};
 					88A893AD1D332B270050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1099,6 +1100,8 @@
 			baseConfigurationReference = C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1116,6 +1119,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1124,6 +1128,8 @@
 			baseConfigurationReference = 1D0E858E30DB4351C8DB27FD /* Pods-wy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1141,6 +1147,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
