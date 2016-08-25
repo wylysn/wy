@@ -254,6 +254,7 @@
 		88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHTTPSessionManager.h; sourceTree = "<group>"; };
 		88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHTTPSessionManager.m; sourceTree = "<group>"; };
 		88E928051D5DC14B00152BBF /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
+		88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通20160814.docx"; sourceTree = "<group>"; };
 		88F140CC1D6C1A6D00B8BCCC /* InspectTaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskListViewController.h; sourceTree = "<group>"; };
 		88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskListViewController.m; sourceTree = "<group>"; };
 		88F140CF1D6C21C400B8BCCC /* InspectTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskTableViewCell.h; sourceTree = "<group>"; };
@@ -488,6 +489,7 @@
 		88A893941D332B260050D9F3 /* wy */ = {
 			isa = PBXGroup;
 			children = (
+				88EB3A1A1D6ECE0300807899 /* doc */,
 				88E927F11D5DBC2A00152BBF /* Utilities */,
 				88821E841D5C6EDC00C72DA3 /* categories */,
 				88821E651D5C4BE800C72DA3 /* images */,
@@ -696,6 +698,14 @@
 				88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */,
 			);
 			name = connect;
+			sourceTree = "<group>";
+		};
+		88EB3A1A1D6ECE0300807899 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */,
+			);
+			name = doc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
