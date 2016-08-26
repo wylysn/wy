@@ -297,7 +297,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故障发生时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIy-MY-97Y">
-                                                    <rect key="frame" x="18" y="11" width="103" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="103" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="aPH-54-sdU"/>
                                                         <constraint firstAttribute="height" constant="21" id="hSp-eT-x4a"/>
@@ -307,7 +307,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-08-26 14:50:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMF-Nn-V1S">
-                                                    <rect key="frame" x="141" y="11" width="220" height="21"/>
+                                                    <rect key="frame" x="133" y="11" width="228" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="xpR-I0-pb2"/>
                                                     </constraints>
@@ -317,7 +317,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="uIy-MY-97Y" firstAttribute="leading" secondItem="tBB-Xg-RXG" secondAttribute="leadingMargin" constant="10" id="2Hg-kh-7VI"/>
+                                                <constraint firstItem="uIy-MY-97Y" firstAttribute="leading" secondItem="tBB-Xg-RXG" secondAttribute="leadingMargin" constant="2" id="2Hg-kh-7VI"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="GMF-Nn-V1S" secondAttribute="trailing" constant="6" id="2gu-vO-ON6"/>
                                                 <constraint firstItem="GMF-Nn-V1S" firstAttribute="centerY" secondItem="tBB-Xg-RXG" secondAttribute="centerY" id="T3W-yN-2lI"/>
                                                 <constraint firstItem="GMF-Nn-V1S" firstAttribute="leading" secondItem="uIy-MY-97Y" secondAttribute="trailing" constant="20" id="TDp-PO-00q"/>
@@ -337,7 +337,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wMc-aC-SoC" customClass="PRPlaceHolderTextView">
-                                                    <rect key="frame" x="18" y="8" width="339" height="90"/>
+                                                    <rect key="frame" x="10" y="8" width="355" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="r1L-IH-vdJ"/>
@@ -348,8 +348,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wMc-aC-SoC" firstAttribute="trailing" secondItem="9Fr-ZY-6iM" secondAttribute="trailingMargin" constant="10" id="7Ar-Kh-bv6"/>
-                                                <constraint firstItem="wMc-aC-SoC" firstAttribute="leading" secondItem="9Fr-ZY-6iM" secondAttribute="leadingMargin" constant="10" id="JeE-DR-Pqi"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wMc-aC-SoC" secondAttribute="trailing" constant="10" id="S29-66-2C9"/>
+                                                <constraint firstItem="wMc-aC-SoC" firstAttribute="leading" secondItem="9Fr-ZY-6iM" secondAttribute="leadingMargin" constant="2" id="JeE-DR-Pqi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wMc-aC-SoC" secondAttribute="trailing" constant="2" id="S29-66-2C9"/>
                                                 <constraint firstItem="wMc-aC-SoC" firstAttribute="bottom" secondItem="9Fr-ZY-6iM" secondAttribute="bottomMargin" id="hnM-zN-3ak"/>
                                                 <constraint firstItem="wMc-aC-SoC" firstAttribute="top" secondItem="9Fr-ZY-6iM" secondAttribute="topMargin" id="yYu-kT-fyO"/>
                                             </constraints>
@@ -384,7 +384,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdY-cz-iMA">
-                                                    <rect key="frame" x="18" y="11" width="103" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="103" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="8tN-GS-xIH"/>
                                                         <constraint firstAttribute="height" constant="21" id="zQO-jF-uPM"/>
@@ -394,7 +394,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="选填，方便我们与您联系" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t6f-wd-wYp">
-                                                    <rect key="frame" x="141" y="7" width="226" height="30"/>
+                                                    <rect key="frame" x="133" y="7" width="234" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3Yj-0p-ah7"/>
                                                     </constraints>
@@ -404,7 +404,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="t6f-wd-wYp" firstAttribute="leading" secondItem="BdY-cz-iMA" secondAttribute="trailing" constant="20" id="5Tg-Da-58j"/>
-                                                <constraint firstItem="BdY-cz-iMA" firstAttribute="leading" secondItem="XXO-3M-Ch0" secondAttribute="leadingMargin" constant="10" id="G23-Vf-VnY"/>
+                                                <constraint firstItem="BdY-cz-iMA" firstAttribute="leading" secondItem="XXO-3M-Ch0" secondAttribute="leadingMargin" constant="2" id="G23-Vf-VnY"/>
                                                 <constraint firstItem="BdY-cz-iMA" firstAttribute="centerY" secondItem="XXO-3M-Ch0" secondAttribute="centerY" id="IgO-9V-N3k"/>
                                                 <constraint firstItem="t6f-wd-wYp" firstAttribute="centerY" secondItem="XXO-3M-Ch0" secondAttribute="centerY" id="Sxd-cq-Phw"/>
                                                 <constraint firstItem="t6f-wd-wYp" firstAttribute="trailing" secondItem="XXO-3M-Ch0" secondAttribute="trailingMargin" id="oNr-bM-Cuq"/>

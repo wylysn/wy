@@ -33,6 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
     self.contentTextView.placeholder=@"请简要描述你的问题及意见，限100字";
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addImage:)];
@@ -41,7 +48,7 @@
     
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
-    PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-18)/PICS_PER_LINE;
+    PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-10)/PICS_PER_LINE;
     allLines = 1;
     
     [self resetAddImageView];
@@ -52,7 +59,7 @@
 }
 
 - (void)resetAddImageView {
-    UIImageView *addImageView = [[UIImageView alloc] initWithFrame:CGRectMake(18, 10, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+    UIImageView *addImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
     addImageView.image = [UIImage imageNamed:@"tianjia"];
     addImageView.tag = 1;
 //    [self resetImagesViewFrameWithLines:1];
@@ -110,7 +117,7 @@
     
     UIImageView *imageView;
     NSInteger lines = self.imageArray.count/PICS_PER_LINE+1;
-    float X = PIC_WIDTH_HEIGHT*(self.imageArray.count%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(self.imageArray.count%PICS_PER_LINE)+18;
+    float X = PIC_WIDTH_HEIGHT*(self.imageArray.count%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(self.imageArray.count%PICS_PER_LINE)+10;
     float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
     imageView.tag = self.imageArray.count;
@@ -158,7 +165,7 @@
         UIImageView *imageView = self.imageViewArray[i];
         imageView.tag = imageView.tag-1;
         CGRect newFrame = imageView.frame;
-        float newX = PIC_WIDTH_HEIGHT*((i+1)%PICS_PER_LINE)+IMAGESPLIT_WIDTH*((i+1)%PICS_PER_LINE)+18;
+        float newX = PIC_WIDTH_HEIGHT*((i+1)%PICS_PER_LINE)+IMAGESPLIT_WIDTH*((i+1)%PICS_PER_LINE)+10;
         newFrame.origin.x = newX;
         if ((i+2)%4 == 0) {
             float newY = newFrame.origin.y-PIC_WIDTH_HEIGHT-10;
@@ -197,14 +204,14 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, (44-21)/2, 100, 21)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 100, 21)];
         titleLabel.text = @"问题及意见";
         [header addSubview:titleLabel];
         return header;
     }
     if (section == 2) {
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, (44-21)/2, 200, 21)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"图片(选填，提供问题截图)";
         [header addSubview:titleLabel];
         return header;
@@ -237,6 +244,15 @@
         return allLines*(PIC_WIDTH_HEIGHT+10)+10;
     } else {
         return 44;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
 }
 
