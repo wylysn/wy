@@ -78,6 +78,14 @@
 		88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD9E1D66D6DA00418972 /* WorkOrderViewController.m */; };
 		88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */; };
 		88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FDA51D66E99400418972 /* WorkOrderService.m */; };
+		88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */; };
+		88D5CB2D1D6FDBBE0041C9A1 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */; };
+		88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2F1D6FDECC0041C9A1 /* ModifyMobileViewController.m */; };
+		88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB321D6FEF4C0041C9A1 /* MobileNumberTableViewController.m */; };
+		88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB351D7011FE0041C9A1 /* ModifyPasswordViewController.m */; };
+		88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB3B1D70126F0041C9A1 /* ModifyPasswordChildViewController.m */; };
+		88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */; };
+		88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */; };
 		88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E927E91D5D55A800152BBF /* Task.storyboard */; };
 		88E927ED1D5D588900152BBF /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EC1D5D588900152BBF /* PRButton.m */; };
 		88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */; };
@@ -237,6 +245,21 @@
 		88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderTableViewCell.m; sourceTree = "<group>"; };
 		88B6FDA41D66E99400418972 /* WorkOrderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderService.h; sourceTree = "<group>"; };
 		88B6FDA51D66E99400418972 /* WorkOrderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderService.m; sourceTree = "<group>"; };
+		88D5CB291D6FCED80041C9A1 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
+		88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
+		88D5CB2E1D6FDECC0041C9A1 /* ModifyMobileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyMobileViewController.h; sourceTree = "<group>"; };
+		88D5CB2F1D6FDECC0041C9A1 /* ModifyMobileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyMobileViewController.m; sourceTree = "<group>"; };
+		88D5CB311D6FEF4C0041C9A1 /* MobileNumberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileNumberTableViewController.h; sourceTree = "<group>"; };
+		88D5CB321D6FEF4C0041C9A1 /* MobileNumberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileNumberTableViewController.m; sourceTree = "<group>"; };
+		88D5CB341D7011FE0041C9A1 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
+		88D5CB351D7011FE0041C9A1 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		88D5CB3A1D70126F0041C9A1 /* ModifyPasswordChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordChildViewController.h; sourceTree = "<group>"; };
+		88D5CB3B1D70126F0041C9A1 /* ModifyPasswordChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordChildViewController.m; sourceTree = "<group>"; };
+		88D5CB3D1D7022920041C9A1 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		88D5CB401D7022CA0041C9A1 /* FeedbackChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChildTableViewController.h; sourceTree = "<group>"; };
+		88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChildTableViewController.m; sourceTree = "<group>"; };
 		88E927E91D5D55A800152BBF /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		88E927EB1D5D588900152BBF /* PRButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRButton.h; sourceTree = "<group>"; };
 		88E927EC1D5D588900152BBF /* PRButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRButton.m; sourceTree = "<group>"; };
@@ -555,6 +578,8 @@
 		88A893CC1D3392BD0050D9F3 /* my */ = {
 			isa = PBXGroup;
 			children = (
+				88D5CB281D6FCEA60041C9A1 /* controller */,
+				88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */,
 			);
 			name = my;
 			sourceTree = "<group>";
@@ -656,6 +681,27 @@
 				88F140D61D6C269100B8BCCC /* InspectTaskService.m */,
 			);
 			name = service;
+			sourceTree = "<group>";
+		};
+		88D5CB281D6FCEA60041C9A1 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				88D5CB291D6FCED80041C9A1 /* MyTableViewController.h */,
+				88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */,
+				88D5CB2E1D6FDECC0041C9A1 /* ModifyMobileViewController.h */,
+				88D5CB2F1D6FDECC0041C9A1 /* ModifyMobileViewController.m */,
+				88D5CB311D6FEF4C0041C9A1 /* MobileNumberTableViewController.h */,
+				88D5CB321D6FEF4C0041C9A1 /* MobileNumberTableViewController.m */,
+				88D5CB341D7011FE0041C9A1 /* ModifyPasswordViewController.h */,
+				88D5CB351D7011FE0041C9A1 /* ModifyPasswordViewController.m */,
+				88D5CB3A1D70126F0041C9A1 /* ModifyPasswordChildViewController.h */,
+				88D5CB3B1D70126F0041C9A1 /* ModifyPasswordChildViewController.m */,
+				88D5CB3D1D7022920041C9A1 /* FeedbackViewController.h */,
+				88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */,
+				88D5CB401D7022CA0041C9A1 /* FeedbackChildTableViewController.h */,
+				88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */,
+			);
+			name = controller;
 			sourceTree = "<group>";
 		};
 		88E927F11D5DBC2A00152BBF /* Utilities */ = {
@@ -778,7 +824,7 @@
 				TargetAttributes = {
 					88A893911D332B260050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 5938F43692;
+						DevelopmentTeam = DE538Y3UT9;
 					};
 					88A893AD1D332B270050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -816,6 +862,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */,
+				88D5CB2D1D6FDBBE0041C9A1 /* My.storyboard in Resources */,
 				88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
@@ -919,6 +966,7 @@
 				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
 				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
@@ -946,14 +994,17 @@
 				889BA2BE1D64159600BC5413 /* AAPLGridViewCell.m in Sources */,
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */,
+				88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */,
 				889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
+				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
+				88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */,
 				88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */,
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
@@ -961,10 +1012,13 @@
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
 				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
+				88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
+				88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
 				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,
+				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
 				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,

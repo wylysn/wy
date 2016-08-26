@@ -87,7 +87,7 @@
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
         ((TaskJiedanViewController *)viewController).id = _entity.id;
     } else if ([@"2" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI2"];
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
         ((TaskChuli1ViewController *)viewController).id = _entity.id;
     } else if ([@"3" isEqualToString:_entity.type]) {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
