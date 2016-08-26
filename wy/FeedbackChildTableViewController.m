@@ -15,7 +15,7 @@
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
-#define PIC_WIDTH_HEIGHT 80
+#define PICS_PER_LINE 4
 
 @interface FeedbackChildTableViewController ()<UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate>
 
@@ -26,7 +26,7 @@
 @end
 
 @implementation FeedbackChildTableViewController {
-    NSInteger PICS_PER_LINE;
+    NSInteger PIC_WIDTH_HEIGHT;
     NSInteger allLines;
 }
 
@@ -41,9 +41,26 @@
     
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
-    
-    PICS_PER_LINE = (SCREEN_WIDTH-18)/(PIC_WIDTH_HEIGHT+IMAGESPLIT_WIDTH);
+    PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-18)/PICS_PER_LINE;
     allLines = 1;
+    
+    [self resetAddImageView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)resetAddImageView {
+    UIImageView *addImageView = [[UIImageView alloc] initWithFrame:CGRectMake(18, 10, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+    addImageView.image = [UIImage imageNamed:@"tianjia"];
+    addImageView.tag = 1;
+//    [self resetImagesViewFrameWithLines:1];
+    [self.imagesView addSubview:addImageView];
+    
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addImage:)];
+    [addImageView addGestureRecognizer:gesture];
+    [addImageView setUserInteractionEnabled:YES];
 }
 
 - (void)addImage:(UITapGestureRecognizer *)recognizer
@@ -135,25 +152,25 @@
 
 - (void)deletePhoto:(NSInteger)index {
     //删除对应的imageview，并重置其他imageview的位置
-//    [self.imageViewArray[index] removeFromSuperview];
-//    [self.imageViewArray removeObjectAtIndex:index];
-//    for (NSInteger i=index; i<self.imageViewArray.count; i++) {
-//        UIImageView *imageView = self.imageViewArray[i];
-//        imageView.tag = imageView.tag-1;
-//        CGRect newFrame = imageView.frame;
-//        float newX = PIC_HEIGHT*((i+1)%PICS_PER_LINE)+IMAGESPLIT_WIDTH*((i+1)%PICS_PER_LINE+1);
-//        newFrame.origin.x = newX;
-//        if ((i+2)%4 == 0) {
-//            float newY = newFrame.origin.y-PIC_HEIGHT-6;
-//            newFrame.origin.y = newY;
-//        }
-//        imageView.frame = newFrame;
-//    }
-//    
-//    //减一行
-//    if ((self.imageArray.count+1)%4 == 0) {
-//        [self resetImagesViewFrameWithLines:-1];
-//    }
+    [self.imageViewArray[index] removeFromSuperview];
+    [self.imageViewArray removeObjectAtIndex:index];
+    for (NSInteger i=index; i<self.imageViewArray.count; i++) {
+        UIImageView *imageView = self.imageViewArray[i];
+        imageView.tag = imageView.tag-1;
+        CGRect newFrame = imageView.frame;
+        float newX = PIC_WIDTH_HEIGHT*((i+1)%PICS_PER_LINE)+IMAGESPLIT_WIDTH*((i+1)%PICS_PER_LINE)+18;
+        newFrame.origin.x = newX;
+        if ((i+2)%4 == 0) {
+            float newY = newFrame.origin.y-PIC_WIDTH_HEIGHT-10;
+            newFrame.origin.y = newY;
+        }
+        imageView.frame = newFrame;
+    }
+    
+    //减一行
+    if ((self.imageArray.count+1)%4 == 0) {
+        [self resetImagesViewFrameWithLines:-1];
+    }
 }
 
 #pragma mark - ELCImagePickerControllerDelegate Methods
