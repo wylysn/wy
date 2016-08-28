@@ -104,6 +104,7 @@
 		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
 		D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */; };
+		D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -302,6 +303,8 @@
 		D28AD5591D727F410033ADB6 /* PriorityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityLabel.m; sourceTree = "<group>"; };
 		D28AD55B1D7289440033ADB6 /* PriorityWrapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityWrapView.h; sourceTree = "<group>"; };
 		D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityWrapView.m; sourceTree = "<group>"; };
+		D28AD55E1D72DC570033ADB6 /* TaskChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChildTableViewController.h; sourceTree = "<group>"; };
+		D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChildTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -683,6 +686,8 @@
 				889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */,
 				88B6FD8C1D668D9E00418972 /* TaskChuli2ViewController.h */,
 				88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */,
+				D28AD55E1D72DC570033ADB6 /* TaskChildTableViewController.h */,
+				D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1039,6 +1044,7 @@
 				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
 				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,
+				D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,
 				88821E7D1D5C661100C72DA3 /* TaskTableViewController.m in Sources */,
 				88821E801D5C67D700C72DA3 /* TaskEntity.m in Sources */,

@@ -252,7 +252,7 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
     }
     if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
     }
 }
 
