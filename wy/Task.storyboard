@@ -3129,6 +3129,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hIN-oe-Jon" secondAttribute="trailing" id="0dG-Pp-gPr"/>
                                             <constraint firstItem="L1r-C5-fQU" firstAttribute="top" secondItem="d33-wh-c9E" secondAttribute="bottom" id="2bE-s0-Fyo"/>
+                                            <constraint firstAttribute="bottom" secondItem="gim-5w-4g3" secondAttribute="bottom" id="59j-W9-dyp"/>
                                             <constraint firstItem="L1r-C5-fQU" firstAttribute="leading" secondItem="VFc-tv-Mp2" secondAttribute="leading" id="7eU-oa-Qr0"/>
                                             <constraint firstAttribute="trailing" secondItem="HFi-yB-m8s" secondAttribute="trailing" id="AQ2-I3-b4E"/>
                                             <constraint firstItem="b82-aT-jSo" firstAttribute="leading" secondItem="VFc-tv-Mp2" secondAttribute="leading" id="ByF-L7-Yws"/>
@@ -3143,24 +3144,16 @@
                                             <constraint firstAttribute="trailing" secondItem="urh-Pb-3h8" secondAttribute="trailing" id="TFZ-O9-Sjr"/>
                                             <constraint firstAttribute="trailing" secondItem="gim-5w-4g3" secondAttribute="trailing" id="UDz-ht-aBo"/>
                                             <constraint firstItem="xv5-p2-7Yr" firstAttribute="leading" secondItem="VFc-tv-Mp2" secondAttribute="leading" id="VAy-VP-UCE"/>
-                                            <constraint firstAttribute="height" constant="221" id="aD0-fE-awm"/>
                                             <constraint firstItem="HFi-yB-m8s" firstAttribute="leading" secondItem="VFc-tv-Mp2" secondAttribute="leading" id="c3S-7i-Bup"/>
                                             <constraint firstAttribute="trailing" secondItem="d33-wh-c9E" secondAttribute="trailing" id="fP4-Uo-8sh"/>
-                                            <constraint firstAttribute="height" constant="249" id="gEz-ys-Fzk"/>
                                             <constraint firstItem="xv5-p2-7Yr" firstAttribute="top" secondItem="L1r-C5-fQU" secondAttribute="bottom" id="jTc-ig-aDI"/>
                                             <constraint firstAttribute="trailing" secondItem="b82-aT-jSo" secondAttribute="trailing" id="ja5-zl-JbN"/>
                                             <constraint firstItem="gim-5w-4g3" firstAttribute="leading" secondItem="VFc-tv-Mp2" secondAttribute="leading" id="mlk-K4-NMF"/>
-                                            <constraint firstAttribute="height" constant="221" id="nRS-kW-eC8"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="221" id="nRS-kW-eC8"/>
                                             <constraint firstItem="d33-wh-c9E" firstAttribute="top" secondItem="VFc-tv-Mp2" secondAttribute="top" id="q3Y-lL-PWw"/>
                                             <constraint firstItem="gim-5w-4g3" firstAttribute="top" secondItem="HFi-yB-m8s" secondAttribute="bottom" id="qJ1-X4-EZ9"/>
                                             <constraint firstItem="HFi-yB-m8s" firstAttribute="top" secondItem="hIN-oe-Jon" secondAttribute="bottom" id="vjk-eo-EC0"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="aD0-fE-awm"/>
-                                                <exclude reference="gEz-ys-Fzk"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0mg-ai-xOb">
                                         <rect key="frame" x="0.0" y="227" width="375" height="40"/>
@@ -3519,8 +3512,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="600"/>
                     <connections>
-                        <outlet property="baseInfoHeightConstraint" destination="nRS-kW-eC8" id="byA-xq-JSX"/>
-                        <outlet property="baseInfoView" destination="VFc-tv-Mp2" id="1oz-D1-S9p"/>
                         <outlet property="chargeTitleView" destination="K1W-QW-dJW" id="i5a-wf-eh3"/>
                         <outlet property="chargeViewHeightConstraint" destination="N60-tt-kYf" id="iZd-g5-Z4z"/>
                         <outlet property="ct1" destination="1mv-Ey-Zrh" id="Jla-Oq-6uT"/>

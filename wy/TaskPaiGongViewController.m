@@ -26,7 +26,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct6;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ct8;
 
-@property (weak, nonatomic) IBOutlet UIView *baseInfoView;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
@@ -39,7 +38,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 @property (weak, nonatomic) IBOutlet UIView *personInChargeView;
 @property (weak, nonatomic) IBOutlet UIView *chargeTitleView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *chargeViewHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baseInfoHeightConstraint;
 
 
 @end
@@ -93,11 +91,11 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [self.personInExcuteView addSubview:excutePersonsView];
     
     self.descLabel.text = @"定义一个父类FatherViewController 和一个子类SonViewController，其中子类继承父类";
-    CGRect newbaseFrame = self.baseInfoView.frame;
-    CGFloat labelHeight = [self.descLabel sizeThatFits:CGSizeMake(self.descLabel.frame.size.width, MAXFLOAT)].height;
-    newbaseFrame.size.height += (labelHeight-21);
-    [self.baseInfoView setFrame:newbaseFrame];
-    self.baseInfoHeightConstraint.constant = newbaseFrame.size.height;
+//    CGRect newbaseFrame = self.baseInfoView.frame;
+//    CGFloat labelHeight = [self.descLabel sizeThatFits:CGSizeMake(self.descLabel.frame.size.width, MAXFLOAT)].height;
+//    newbaseFrame.size.height += (labelHeight-21);
+//    [self.baseInfoView setFrame:newbaseFrame];
+//    self.baseInfoHeightConstraint.constant = newbaseFrame.size.height;
 //    CGFloat labelHeight = [self.descLabel sizeThatFits:CGSizeMake(self.descLabel.frame.size.width, MAXFLOAT)].height;
 //    CGRect newFrame = self.descLabel.frame;
 //    CGFloat oldLabelHeight = newFrame.size.height;
