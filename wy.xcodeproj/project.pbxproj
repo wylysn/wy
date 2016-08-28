@@ -305,6 +305,8 @@
 		D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityWrapView.m; sourceTree = "<group>"; };
 		D28AD55E1D72DC570033ADB6 /* TaskChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChildTableViewController.h; sourceTree = "<group>"; };
 		D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChildTableViewController.m; sourceTree = "<group>"; };
+		D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义.docx"; sourceTree = "<group>"; };
+		D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通_APP_第1版.docx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -769,6 +771,8 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */,
+				D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */,
 				88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */,
 			);
 			name = doc;
