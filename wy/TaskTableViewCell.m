@@ -35,18 +35,39 @@
     } else {
         self.typeLabel.text = @"";
     }
+    
+    if (![entity.priority isBlankString]) {
+        self.priorityLabel.text = entity.priority;
+    } else {
+        self.priorityLabel.text = @"";
+    }
+    
     if ([@"1" isEqualToString:entity.type]) {
-        [self.typeNextBtn setTitle:@"接单" forState:UIControlStateNormal];
-        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:252/255.0 green:103/255.0 blue:33/255.0 alpha:1.0];
+        self.taskStatusView.bgColor = @"fc6721";
+        self.taskStatusLabel.text = @"接单";
     } else if ([@"2" isEqualToString:entity.type]) {
-        [self.typeNextBtn setTitle:@"处理" forState:UIControlStateNormal];
-        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:252/255.0 green:41/255.0 blue:28/255.0 alpha:1.0];
+        self.taskStatusView.bgColor = @"fc291c";
+        self.taskStatusLabel.text = @"处理";
     } else if ([@"3" isEqualToString:entity.type]) {
-        [self.typeNextBtn setTitle:@"派工" forState:UIControlStateNormal];
-        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:78/255.0 green:192/255.0 blue:48/255.0 alpha:1.0];
+        self.taskStatusView.bgColor = @"4ec030";
+        self.taskStatusLabel.text = @"派工";
     } else if ([@"4" isEqualToString:entity.type]) {
-        [self.typeNextBtn setTitle:@"作废" forState:UIControlStateNormal];
-        self.typeNextBtn.backgroundColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+        self.taskStatusView.bgColor = @"808080";
+        self.taskStatusLabel.text = @"作废";
+    }
+    
+    if ([@"1" isEqualToString:entity.priority]) {
+        self.priorityWrapView.bgColor = @"fc6721";
+        self.priorityLabel.text = @"低";
+    } else if ([@"2" isEqualToString:entity.type]) {
+        self.priorityWrapView.bgColor = @"fc291c";
+        self.priorityLabel.text = @"中";
+    } else if ([@"3" isEqualToString:entity.type]) {
+        self.priorityWrapView.bgColor = @"4ec030";
+        self.priorityLabel.text = @"高";
+    } else if ([@"4" isEqualToString:entity.type]) {
+        self.priorityWrapView.bgColor = @"808080";
+        self.priorityLabel.text = @"紧急";
     }
     
     if (![entity.time isBlankString]) {

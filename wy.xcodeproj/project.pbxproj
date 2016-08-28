@@ -101,6 +101,9 @@
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
+		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
+		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
+		D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -293,6 +296,12 @@
 		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
+		D28AD5551D726CEC0033ADB6 /* TaskStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskStatusView.h; sourceTree = "<group>"; };
+		D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskStatusView.m; sourceTree = "<group>"; };
+		D28AD5581D727F410033ADB6 /* PriorityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityLabel.h; sourceTree = "<group>"; };
+		D28AD5591D727F410033ADB6 /* PriorityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityLabel.m; sourceTree = "<group>"; };
+		D28AD55B1D7289440033ADB6 /* PriorityWrapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityWrapView.h; sourceTree = "<group>"; };
+		D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityWrapView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -638,6 +647,12 @@
 				88821E821D5C69B600C72DA3 /* TaskTableViewCell.m */,
 				88FCC1371D62C0DE00ED8979 /* ChoosePersonTableViewCell.h */,
 				88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */,
+				D28AD5551D726CEC0033ADB6 /* TaskStatusView.h */,
+				D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */,
+				D28AD5581D727F410033ADB6 /* PriorityLabel.h */,
+				D28AD5591D727F410033ADB6 /* PriorityLabel.m */,
+				D28AD55B1D7289440033ADB6 /* PriorityWrapView.h */,
+				D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -980,6 +995,7 @@
 				88F140D41D6C258200B8BCCC /* InspectTaskEntity.m in Sources */,
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
 				889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */,
+				D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
@@ -991,6 +1007,7 @@
 				889BA29B1D64124E00BC5413 /* PhotoViewCell.m in Sources */,
 				889BA2991D64124E00BC5413 /* CameraViewController.m in Sources */,
 				889BA29A1D64124E00BC5413 /* PhotoPreviewController.m in Sources */,
+				D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */,
 				889BA2BE1D64159600BC5413 /* AAPLGridViewCell.m in Sources */,
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */,
@@ -1004,6 +1021,7 @@
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
+				D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */,
 				88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */,
 				88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */,
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,

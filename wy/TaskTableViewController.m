@@ -11,6 +11,9 @@
 #import "TaskTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
 #import <MJRefresh.h>
+#import "TaskPaiGongViewController.h"
+#import "TaskJiedanViewController.h"
+#import "TaskChuli1ViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -73,18 +76,40 @@
     if (indexPath.row > taskService.taskEntitysList.count) {
         return;
     }
-    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
+//    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
     cell.entity = taskService.taskEntitysList[indexPath.row];
     cell.parentController = self;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TaskEntity *entity = taskService.taskEntitysList[indexPath.row];
-    
-    return [tableView fd_heightForCellWithIdentifier:CELLID cacheByKey:entity.identifier configuration:^(TaskTableViewCell *cell) {
-        [self configureCell:cell atIndexPath:indexPath];
-    }];
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+    UIViewController *viewController;
+    if ([@"1" isEqualToString:entity.type]) {
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
+        ((TaskJiedanViewController *)viewController).id = entity.id;
+    } else if ([@"2" isEqualToString:entity.type]) {
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
+        ((TaskChuli1ViewController *)viewController).id = entity.id;
+    } else if ([@"3" isEqualToString:entity.type]) {
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
+        ((TaskPaiGongViewController *)viewController).id = entity.id;
+    } else if ([@"4" isEqualToString:entity.type]) {
+        
+    }
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    TaskEntity *entity = taskService.taskEntitysList[indexPath.row];
+//    
+//    return [tableView fd_heightForCellWithIdentifier:CELLID cacheByKey:entity.identifier configuration:^(TaskTableViewCell *cell) {
+//        [self configureCell:cell atIndexPath:indexPath];
+//    }];
+//}
 
 
 /*
