@@ -12,13 +12,14 @@
 #import "TaskStatusView.h"
 #import "PriorityLabel.h"
 #import "PriorityWrapView.h"
+#import "PRLabel.h"
 
 @interface TaskTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) TaskEntity *entity;
 @property (nonatomic, strong) TaskTableViewController *parentController;
 @property (weak, nonatomic) IBOutlet UILabel *idLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priorityLabel;
+@property (weak, nonatomic) IBOutlet PriorityLabel *priorityLabel;
 @property (weak, nonatomic) IBOutlet PriorityWrapView *priorityWrapView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;

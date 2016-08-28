@@ -137,26 +137,20 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9z-yI-KBi" customClass="PriorityWrapView">
-                                                    <rect key="frame" x="130" y="8" width="42" height="21"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wv-d3-yJe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-of-KvV" customClass="PriorityLabel">
+                                                    <rect key="frame" x="136" y="8" width="35.5" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="0kd-wB-GBl"/>
-                                                        <constraint firstAttribute="width" constant="42" id="6gQ-hr-uCT"/>
-                                                        <constraint firstAttribute="trailing" secondItem="2wv-d3-yJe" secondAttribute="trailing" id="Ebr-hk-NA3"/>
-                                                        <constraint firstItem="2wv-d3-yJe" firstAttribute="top" secondItem="k9z-yI-KBi" secondAttribute="top" id="QaH-lf-hOD"/>
-                                                        <constraint firstAttribute="bottom" secondItem="2wv-d3-yJe" secondAttribute="bottom" id="oqU-eQ-gtA"/>
-                                                        <constraint firstItem="2wv-d3-yJe" firstAttribute="leading" secondItem="k9z-yI-KBi" secondAttribute="leading" id="vuO-JD-ter"/>
+                                                        <constraint firstAttribute="height" constant="21" id="eSr-Uq-O5p"/>
                                                     </constraints>
-                                                </view>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -168,11 +162,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="UF0-ce-eBj" secondAttribute="trailing" id="8ra-iz-dhS"/>
                                                 <constraint firstItem="6wK-CY-TaS" firstAttribute="leading" secondItem="pyR-1h-bXF" secondAttribute="leading" constant="8" id="9Nd-9F-6zB"/>
                                                 <constraint firstItem="J2K-4a-cg3" firstAttribute="leading" secondItem="pyR-1h-bXF" secondAttribute="leading" constant="8" id="AjS-Ft-zRW"/>
-                                                <constraint firstItem="k9z-yI-KBi" firstAttribute="leading" secondItem="J2K-4a-cg3" secondAttribute="trailing" constant="2" id="JRI-JJ-Gyx"/>
+                                                <constraint firstItem="EQe-of-KvV" firstAttribute="centerY" secondItem="J2K-4a-cg3" secondAttribute="centerY" id="Hyg-Uf-1i2"/>
                                                 <constraint firstItem="jMU-gU-2jH" firstAttribute="top" secondItem="tiV-Se-GFE" secondAttribute="bottom" id="KDx-Xo-crT"/>
                                                 <constraint firstItem="J2K-4a-cg3" firstAttribute="top" secondItem="pyR-1h-bXF" secondAttribute="top" constant="8" id="QhF-eZ-KTG"/>
                                                 <constraint firstItem="tiV-Se-GFE" firstAttribute="centerY" secondItem="6wK-CY-TaS" secondAttribute="centerY" id="Rhj-IY-y5H"/>
-                                                <constraint firstItem="k9z-yI-KBi" firstAttribute="centerY" secondItem="J2K-4a-cg3" secondAttribute="centerY" id="Snu-pI-HFS"/>
                                                 <constraint firstItem="QhO-Or-w6u" firstAttribute="top" secondItem="4Ei-ks-nch" secondAttribute="bottom" id="TCx-qV-yR0"/>
                                                 <constraint firstItem="jMU-gU-2jH" firstAttribute="centerY" secondItem="4Ei-ks-nch" secondAttribute="centerY" id="Tto-he-RaE"/>
                                                 <constraint firstItem="tiV-Se-GFE" firstAttribute="top" secondItem="49w-NI-LVy" secondAttribute="bottom" constant="8" id="V8k-Cd-N1D"/>
@@ -187,9 +180,9 @@
                                                 <constraint firstAttribute="height" constant="116" id="gcJ-04-vfa"/>
                                                 <constraint firstItem="tiV-Se-GFE" firstAttribute="leading" secondItem="6wK-CY-TaS" secondAttribute="trailing" id="kf0-7M-y0B"/>
                                                 <constraint firstAttribute="bottom" secondItem="vbI-84-rAl" secondAttribute="bottom" id="nYP-Qj-FJA"/>
+                                                <constraint firstItem="EQe-of-KvV" firstAttribute="leading" secondItem="J2K-4a-cg3" secondAttribute="trailing" constant="8" id="qSq-1m-oaw"/>
                                                 <constraint firstAttribute="trailing" secondItem="jMU-gU-2jH" secondAttribute="trailing" id="qoZ-Oc-e2u"/>
                                                 <constraint firstAttribute="trailing" secondItem="vbI-84-rAl" secondAttribute="trailing" id="ru8-iu-9w9"/>
-                                                <constraint firstItem="k9z-yI-KBi" firstAttribute="baseline" secondItem="J2K-4a-cg3" secondAttribute="baseline" id="ryV-45-fVh"/>
                                                 <constraint firstAttribute="bottom" secondItem="vbI-84-rAl" secondAttribute="bottom" id="tqr-Bk-Dgp"/>
                                                 <constraint firstItem="vbI-84-rAl" firstAttribute="leading" secondItem="jMU-gU-2jH" secondAttribute="trailing" constant="8" id="tt2-9p-7E9"/>
                                                 <constraint firstItem="QhO-Or-w6u" firstAttribute="leading" secondItem="pyR-1h-bXF" secondAttribute="leading" constant="8" id="uQ3-nE-7Pm"/>
@@ -204,7 +197,6 @@
                                                     <exclude reference="TCx-qV-yR0"/>
                                                     <exclude reference="anw-bb-hMI"/>
                                                     <exclude reference="8ra-iz-dhS"/>
-                                                    <exclude reference="ryV-45-fVh"/>
                                                     <exclude reference="nYP-Qj-FJA"/>
                                                 </mask>
                                             </variation>
@@ -239,8 +231,7 @@
                                     <outlet property="descLabel" destination="jMU-gU-2jH" id="Qir-av-gP8"/>
                                     <outlet property="idLabel" destination="J2K-4a-cg3" id="dqZ-7V-AsV"/>
                                     <outlet property="positionLabel" destination="UF0-ce-eBj" id="Avs-p1-unk"/>
-                                    <outlet property="priorityLabel" destination="2wv-d3-yJe" id="Ggc-Kw-al0"/>
-                                    <outlet property="priorityWrapView" destination="k9z-yI-KBi" id="m7l-eT-HnS"/>
+                                    <outlet property="priorityLabel" destination="EQe-of-KvV" id="Qpo-YX-yGn"/>
                                     <outlet property="seprateContraint" destination="eJE-J7-RVk" id="5xP-Jb-q0P"/>
                                     <outlet property="splitView" destination="jAX-YI-Tj1" id="4M5-Ch-EnP"/>
                                     <outlet property="taskStatusLabel" destination="1C7-A4-fpp" id="xAR-UW-xqy"/>

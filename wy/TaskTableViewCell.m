@@ -57,16 +57,16 @@
     }
     
     if ([@"1" isEqualToString:entity.priority]) {
-        self.priorityWrapView.bgColor = @"fc6721";
+        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"fc6721"];
         self.priorityLabel.text = @"低";
     } else if ([@"2" isEqualToString:entity.type]) {
-        self.priorityWrapView.bgColor = @"fc291c";
+        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"fc291c"];
         self.priorityLabel.text = @"中";
     } else if ([@"3" isEqualToString:entity.type]) {
-        self.priorityWrapView.bgColor = @"4ec030";
+        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"4ec030"];
         self.priorityLabel.text = @"高";
     } else if ([@"4" isEqualToString:entity.type]) {
-        self.priorityWrapView.bgColor = @"808080";
+        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"808080"];
         self.priorityLabel.text = @"紧急";
     }
     

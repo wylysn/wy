@@ -10,6 +10,8 @@
 
 @interface PriorityLabel : UILabel
 
-@property (nonatomic, strong) NSString *bgColor;
+@property(assign,nonatomic)IBInspectable CGFloat cornerRadius;
+@property(assign,nonatomic)IBInspectable CGFloat borderWidth;
+@property(retain,nonatomic)IBInspectable UIColor* borderColor;
 
 @end
