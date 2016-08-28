@@ -101,6 +101,7 @@
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
+		D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */; };
 		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
 		D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */; };
@@ -297,6 +298,8 @@
 		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
+		D27C15671D733DDF003651A4 /* TaskBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBaseInfoViewController.h; sourceTree = "<group>"; };
+		D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskBaseInfoViewController.m; sourceTree = "<group>"; };
 		D28AD5551D726CEC0033ADB6 /* TaskStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskStatusView.h; sourceTree = "<group>"; };
 		D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskStatusView.m; sourceTree = "<group>"; };
 		D28AD5581D727F410033ADB6 /* PriorityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityLabel.h; sourceTree = "<group>"; };
@@ -690,6 +693,8 @@
 				88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */,
 				D28AD55E1D72DC570033ADB6 /* TaskChildTableViewController.h */,
 				D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */,
+				D27C15671D733DDF003651A4 /* TaskBaseInfoViewController.h */,
+				D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1042,6 +1047,7 @@
 				88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
+				D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */,
 				88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
 				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,

@@ -83,11 +83,11 @@
         [chargePersonDics setObject:person forKey:person.id];
     }
     
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    for (int i=0; i<persons.count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
-        [indexPaths addObject: indexPath];
-    }
+//    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//    for (int i=0; i<persons.count; i++) {
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+//        [indexPaths addObject: indexPath];
+//    }
     
 //    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView reloadData];
@@ -103,11 +103,11 @@
         [excutePersonDics setObject:person forKey:person.id];
     }
     
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    for (int i=0; i<persons.count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
-        [indexPaths addObject: indexPath];
-    }
+//    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//    for (int i=0; i<persons.count; i++) {
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+//        [indexPaths addObject: indexPath];
+//    }
     
     //    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView reloadData];
@@ -117,7 +117,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     if (section == 1) {
         return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     } else if (section == 2) {
