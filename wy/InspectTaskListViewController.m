@@ -426,6 +426,16 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     cell.parentController = self;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    InspectTaskEntity *entity = inspectTaskService.taskEntitysList[indexPath.row];
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+    UIViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail"];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
 - (IBAction)dateClick:(id)sender {
     window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     window.rootViewController = self;
