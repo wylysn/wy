@@ -52,6 +52,8 @@
     allLines = 1;
     
     [self resetAddImageView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"addPhotos" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,6 +70,12 @@
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addImage:)];
     [addImageView addGestureRecognizer:gesture];
     [addImageView setUserInteractionEnabled:YES];
+}
+
+- (void)showImage:(NSNotification*) aNotification {
+    UIImage *image = [aNotification object];
+    
+    [self showImageWithImage:image];
 }
 
 - (void)addImage:(UITapGestureRecognizer *)recognizer

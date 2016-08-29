@@ -27,7 +27,7 @@
 @implementation ReportImpaireViewController {
     NSMutableArray *deviceArr;
     NSInteger PIC_WIDTH_HEIGHT;
-    NSInteger allLines;
+//    NSInteger allLines;
     UITableViewCell *picCell;
     UIImageView *addImageView;
 }
@@ -50,7 +50,8 @@
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
     PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-10)/PICS_PER_LINE;
-    allLines = 1;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"addPhotos" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,6 +69,11 @@
         [addImageView addGestureRecognizer:gesture];
         [addImageView setUserInteractionEnabled:YES];
     }
+}
+
+- (void)showImage:(NSNotification*) aNotification {
+    UIImage *image = [aNotification object];
+    [self showImageWithImage:image];
 }
 
 - (void)addImage:(UITapGestureRecognizer *)recognizer
@@ -112,13 +118,14 @@
     }
 }
 
-- (void)showImageWithImage:(UIImage*) image withNumber:(NSInteger)number {
+- (void)showImageWithImage:(UIImage*) image {
+    [self.imageArray addObject:image];
     UIImageView *imageView;
-    NSInteger lines = number/PICS_PER_LINE+1;
-    float X = PIC_WIDTH_HEIGHT*(number%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(number%PICS_PER_LINE)+10;
+    NSInteger lines = self.imageArray.count/PICS_PER_LINE+1;
+    float X = PIC_WIDTH_HEIGHT*(self.imageArray.count%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(self.imageArray.count%PICS_PER_LINE)+10;
     float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
-    imageView.tag = number;
+    imageView.tag = self.imageArray.count;
     imageView.image = [image imageScaledToSize2:CGSizeMake(PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
     [picCell.contentView addSubview:imageView];
     
@@ -143,12 +150,21 @@
 #pragma mark - SkimPhotoViewDelegate Methods
 
 - (void)deletePhoto:(NSInteger)index {
-    for (UIImageView *imageView in self.imageViewArray) {
-        [imageView removeFromSuperview];
+    //删除对应的imageview，并重置其他imageview的位置
+    [self.imageViewArray[index] removeFromSuperview];
+    [self.imageViewArray removeObjectAtIndex:index];
+    for (NSInteger i=index; i<self.imageViewArray.count; i++) {
+        UIImageView *imageView = self.imageViewArray[i];
+        imageView.tag = imageView.tag-1;
+        CGRect newFrame = imageView.frame;
+        float newX = PIC_WIDTH_HEIGHT*((i+1)%PICS_PER_LINE)+IMAGESPLIT_WIDTH*((i+1)%PICS_PER_LINE)+10;
+        newFrame.origin.x = newX;
+        if ((i+2)%4 == 0) {
+            float newY = newFrame.origin.y-PIC_WIDTH_HEIGHT-10;
+            newFrame.origin.y = newY;
+        }
+        imageView.frame = newFrame;
     }
-    [self.imageViewArray removeAllObjects];
-    
-    allLines = self.imageArray.count/PICS_PER_LINE+1;
     [self.tableView reloadData];
 }
 
@@ -157,9 +173,9 @@
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
 {
     for (NSInteger i=0; i<info.count; i++) {
-        [self.imageArray addObject:info[i][UIImagePickerControllerOriginalImage]];
+        UIImage *image = info[i][UIImagePickerControllerOriginalImage];
+        [self showImageWithImage:image];
     }
-    allLines = self.imageArray.count/PICS_PER_LINE+1;
     [self.tableView reloadData];
 }
 
@@ -250,7 +266,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     if (section == 2) {
-        return allLines*PIC_WIDTH_HEIGHT+(allLines+1)*10;
+        return (self.imageArray.count/PICS_PER_LINE+1)*PIC_WIDTH_HEIGHT+(self.imageArray.count/PICS_PER_LINE+1+1)*10;
     }
     if (section == 3) {
         return 96;
@@ -305,17 +321,6 @@
     } else if (section == 2) {
         picCell = cell;
         [self showAddImageView];
-        
-        //移除原有防止imageview一直累加
-        for (UIImageView *imageView in self.imageViewArray) {
-            [imageView removeFromSuperview];
-        }
-        [self.imageViewArray removeAllObjects];
-        
-        for (NSInteger i=0; i<self.imageArray.count; i++) {
-            UIImage *image = self.imageArray[i];
-            [self showImageWithImage:image withNumber:(i+1)];
-        }
     } else if (section == 3) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
         textView.placeholder = @"请简要描述";

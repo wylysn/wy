@@ -152,7 +152,7 @@
     [self.imageArray addObject:image];
     
     UIImageView *imageView;
-    int lines = self.imageArray.count/PICS_PER_LINE+1;
+    NSInteger lines = self.imageArray.count/PICS_PER_LINE+1;
     float X = PIC_HEIGHT*(self.imageArray.count%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(self.imageArray.count%PICS_PER_LINE+1);
     float Y = TITLE_HEIGHT+(lines-1)*(PIC_HEIGHT+6)+6;
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_HEIGHT, PIC_HEIGHT)];
