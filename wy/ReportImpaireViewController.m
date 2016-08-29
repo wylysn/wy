@@ -30,7 +30,6 @@
     NSInteger allLines;
     UITableViewCell *picCell;
     UIImageView *addImageView;
-    BOOL isAddDeletePicReload;
 }
 
 - (void)viewDidLoad {
@@ -114,9 +113,6 @@
 }
 
 - (void)showImageWithImage:(UIImage*) image withNumber:(NSInteger)number {
-    if (!isAddDeletePicReload) {
-        return;
-    }
     UIImageView *imageView;
     NSInteger lines = number/PICS_PER_LINE+1;
     float X = PIC_WIDTH_HEIGHT*(number%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(number%PICS_PER_LINE)+10;
@@ -153,7 +149,6 @@
     [self.imageViewArray removeAllObjects];
     
     allLines = self.imageArray.count/PICS_PER_LINE+1;
-    isAddDeletePicReload = TRUE;
     [self.tableView reloadData];
 }
 
@@ -165,7 +160,6 @@
         [self.imageArray addObject:info[i][UIImagePickerControllerOriginalImage]];
     }
     allLines = self.imageArray.count/PICS_PER_LINE+1;
-    isAddDeletePicReload = TRUE;
     [self.tableView reloadData];
 }
 
@@ -187,7 +181,6 @@
     DeviceEntity *d2 = [[DeviceEntity alloc] initWithDictionary:deviceDic2];
     [deviceArr addObject:d1];
     [deviceArr addObject:d2];
-    isAddDeletePicReload = FALSE;
     [self.tableView reloadData];
 }
 
@@ -312,6 +305,13 @@
     } else if (section == 2) {
         picCell = cell;
         [self showAddImageView];
+        
+        //移除原有防止imageview一直累加
+        for (UIImageView *imageView in self.imageViewArray) {
+            [imageView removeFromSuperview];
+        }
+        [self.imageViewArray removeAllObjects];
+        
         for (NSInteger i=0; i<self.imageArray.count; i++) {
             UIImage *image = self.imageArray[i];
             [self showImageWithImage:image withNumber:(i+1)];
