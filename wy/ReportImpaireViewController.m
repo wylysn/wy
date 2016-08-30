@@ -200,8 +200,25 @@
     [self.navigationController pushViewController:chooseDeviceViewController animated:YES];
 }
 
-- (void)getSelectedDevices:(NSArray *)deviceArray {
+- (void)deleteDevice:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer.view isKindOfClass:[UIButton class]]) {
+        UIButton *imageView = (UIButton *)recognizer.view;
+        UITableViewCell *cell = (UITableViewCell *)[[[imageView superview] superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [deviceArr removeObjectAtIndex:indexPath.row];
+        NSMutableArray *newDevices = [[NSMutableArray alloc] initWithArray:deviceArr];
+        [self showSelectedDevices:newDevices];
+    }
+}
+
+- (void)showSelectedDevices:(NSArray *)deviceArray {
     deviceArr = [[NSMutableArray alloc] initWithArray:deviceArray];
+    [selectedDevicesDic removeAllObjects];
+    for (unsigned i = 0; i < deviceArr.count; i++) {
+        DeviceEntity *device = (DeviceEntity *)deviceArr[i];
+        [selectedDevicesDic setObject:device forKey:device.code];
+    }
     [self.tableView reloadData];
 }
 
@@ -322,7 +339,13 @@
             valueLabel.text = @"";
         }
     } else if (section == 1) {
-        
+        DeviceEntity *device = deviceArr[row];
+        UILabel *nameLabel = [cell viewWithTag:1];
+        nameLabel.text = device.name;
+        UIImageView *deleteView = [cell viewWithTag:2];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDevice:)];
+        [deleteView addGestureRecognizer:gesture];
+        [deleteView setUserInteractionEnabled:YES];
     } else if (section == 2) {
         picCell = cell;
         [self showAddImageView];

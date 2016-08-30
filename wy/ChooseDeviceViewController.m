@@ -109,8 +109,8 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
     
-    if (_delegate && [_delegate respondsToSelector:@selector(getSelectedDevices:)]) {
-        [_delegate getSelectedDevices:deviceArr];
+    if (_delegate && [_delegate respondsToSelector:@selector(showSelectedDevices:)]) {
+        [_delegate showSelectedDevices:deviceArr];
     }
 }
 

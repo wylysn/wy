@@ -91,7 +91,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
     sqlite3 *database = [DBManager open];
     if (database) {
-        NSString *querySQL = [NSString stringWithFormat: @"select code, name, position from Device where name '%%%@%%'",  [NSString stringWithCString:[name UTF8String] encoding:NSUnicodeStringEncoding]];
+        NSString *querySQL = [NSString stringWithFormat: @"select code, name, position from Device where name like '%%%@%%'",  [NSString stringWithCString:[name UTF8String] encoding:NSUTF8StringEncoding]];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {

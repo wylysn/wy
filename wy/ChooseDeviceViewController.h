@@ -10,7 +10,7 @@
 
 @protocol ChooseDeviceViewDelegate <NSObject>
 
-- (void)getSelectedDevices:(NSArray *) deviceArray;
+- (void)showSelectedDevices:(NSArray *) deviceArray;
 
 @end
 

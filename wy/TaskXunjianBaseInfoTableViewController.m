@@ -51,6 +51,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 6;
+    }
     if (section == 1 || section == 2) {
         return 44;
     }
