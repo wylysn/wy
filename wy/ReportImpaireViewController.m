@@ -13,12 +13,13 @@
 #import "SkimPhotoViewController.h"
 #import "ELCImagePickerController.h"
 #import "UIImage+Resolution.h"
+#import "ChooseDeviceViewController.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
 #define PICS_PER_LINE 4
 
-@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate>
+@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -27,9 +28,9 @@
 @implementation ReportImpaireViewController {
     NSMutableArray *deviceArr;
     NSInteger PIC_WIDTH_HEIGHT;
-//    NSInteger allLines;
     UITableViewCell *picCell;
     UIImageView *addImageView;
+    NSMutableDictionary *selectedDevicesDic;
 }
 
 - (void)viewDidLoad {
@@ -46,6 +47,7 @@
     }
     
     deviceArr = [[NSMutableArray alloc] init];
+    selectedDevicesDic = [[NSMutableDictionary alloc] init];
     
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
@@ -191,12 +193,15 @@
 
 - (void)addDevice:(UITapGestureRecognizer *)recognizer
 {
-    NSDictionary *deviceDic1 = @{@"code":@"000001",@"name":@"加药棒"};
-    NSDictionary *deviceDic2 = @{@"code":@"000002",@"name":@"冷却塔"};
-    DeviceEntity *d1 = [[DeviceEntity alloc] initWithDictionary:deviceDic1];
-    DeviceEntity *d2 = [[DeviceEntity alloc] initWithDictionary:deviceDic2];
-    [deviceArr addObject:d1];
-    [deviceArr addObject:d2];
+    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ChooseDeviceViewController *chooseDeviceViewController = [mainSB instantiateViewControllerWithIdentifier:@"CHOOSEDEVICE"];
+    chooseDeviceViewController.delegate = self;
+    chooseDeviceViewController.selectedDevicesDic = selectedDevicesDic;
+    [self.navigationController pushViewController:chooseDeviceViewController animated:YES];
+}
+
+- (void)getSelectedDevices:(NSArray *)deviceArray {
+    deviceArr = [[NSMutableArray alloc] initWithArray:deviceArray];
     [self.tableView reloadData];
 }
 

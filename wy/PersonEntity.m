@@ -16,6 +16,8 @@
     if (self) {
         _id = dictionary[@"id"];
         _name = dictionary[@"name"];
+        _department = dictionary[@"department"];
+        _position = dictionary[@"position"];
         _phone = dictionary[@"phone"];
         _isInCharge = dictionary[@"isInCharge"];
         _isChecked = FALSE;

@@ -16,6 +16,8 @@
 
 #define SPLITLINE_COLOR @"aaaaaa"
 
+#define DBNAME @"wy.db"
+
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>

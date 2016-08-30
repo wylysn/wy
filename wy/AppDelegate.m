@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "PersonDBService.h"
+#import "PersonEntity.h"
+#import "DeviceEntity.h"
+#import "DeviceDBService.h"
 
 @interface AppDelegate ()
 
@@ -17,8 +21,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    //状态栏颜色
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //创建打开数据库
+    /*
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PersonDBService *dbService1 = [PersonDBService getSharedInstance];
+        PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"id":@"1",@"name":@"张三",@"department":@"运维部",@"position":@"总经理"}];
+        [dbService1 saveData:person];
+        
+        PersonEntity *person1 = [dbService1 findById:@"1"];
+        NSLog(@"从数据库中找出人员数据：%@", person1);
+        
+        DeviceDBService *dbService = [DeviceDBService getSharedInstance];
+        DeviceEntity *device1 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"0001",@"name":@"冷却塔",@"position":@"世博馆"}];
+        [dbService saveDevice:device1];
+        DeviceEntity *device2 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"0002",@"name":@"水泵",@"position":@"科技馆"}];
+        [dbService saveDevice:device2];
+        
+        DeviceEntity *d1 = [dbService findDeviceById:@"0001"];
+        NSLog(@"从数据库中找出设备信息：%@", d1.code);
+        
+        NSArray *dArr = [dbService findAll];
+        NSLog(@"从数据库中找出%ld台设备信息", dArr.count);
+    });
+     */
     
     return YES;
 }

@@ -107,6 +107,11 @@
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
+		88FF11481D7510CA0073EDBB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FF11471D7510CA0073EDBB /* libsqlite3.tbd */; };
+		88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF114D1D751C1E0073EDBB /* PersonDBService.m */; };
+		88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11501D7552E90073EDBB /* DeviceDBService.m */; };
+		88FF11541D7556D70073EDBB /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11531D7556D70073EDBB /* DBManager.m */; };
+		88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */; };
 		D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */; };
 		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
@@ -314,6 +319,16 @@
 		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
 		88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskJiedanViewController.h; sourceTree = "<group>"; };
 		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
+		88FF11411D750F860073EDBB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		88FF11471D7510CA0073EDBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		88FF114C1D751C1E0073EDBB /* PersonDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDBService.h; sourceTree = "<group>"; };
+		88FF114D1D751C1E0073EDBB /* PersonDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDBService.m; sourceTree = "<group>"; };
+		88FF114F1D7552E90073EDBB /* DeviceDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDBService.h; sourceTree = "<group>"; };
+		88FF11501D7552E90073EDBB /* DeviceDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDBService.m; sourceTree = "<group>"; };
+		88FF11521D7556D70073EDBB /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		88FF11531D7556D70073EDBB /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		88FF11561D7571960073EDBB /* ChooseDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDeviceViewController.h; sourceTree = "<group>"; };
+		88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDeviceViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 		D27C15671D733DDF003651A4 /* TaskBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBaseInfoViewController.h; sourceTree = "<group>"; };
@@ -335,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88FF11481D7510CA0073EDBB /* libsqlite3.tbd in Frameworks */,
 				ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +384,8 @@
 		8574640E84AE4436000DBE81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88FF11471D7510CA0073EDBB /* libsqlite3.tbd */,
+				88FF11411D750F860073EDBB /* libsqlite3.0.tbd */,
 				B3319D88501D496DD566B807 /* libPods-wy.a */,
 			);
 			name = Frameworks;
@@ -690,10 +708,6 @@
 			children = (
 				88821E7E1D5C67D700C72DA3 /* TaskEntity.h */,
 				88821E7F1D5C67D700C72DA3 /* TaskEntity.m */,
-				880787C71D61B45200BA6F05 /* PersonEntity.h */,
-				880787C81D61B45200BA6F05 /* PersonEntity.m */,
-				8841D4791D73DF14003E4495 /* DeviceEntity.h */,
-				8841D47A1D73DF14003E4495 /* DeviceEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -725,6 +739,8 @@
 				8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */,
 				8841D47F1D741807003E4495 /* ReportImpaireViewController.h */,
 				8841D4801D741807003E4495 /* ReportImpaireViewController.m */,
+				88FF11561D7571960073EDBB /* ChooseDeviceViewController.h */,
+				88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -764,6 +780,7 @@
 		88E927F11D5DBC2A00152BBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				88FF11431D750F940073EDBB /* sqlite */,
 				889BA2A21D64159600BC5413 /* ELCAlbumPicker */,
 				889BA2831D64117000BC5413 /* camera */,
 				889BA27D1D63FE3600BC5413 /* PRTextView */,
@@ -811,6 +828,23 @@
 				88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */,
 			);
 			name = doc;
+			sourceTree = "<group>";
+		};
+		88FF11431D750F940073EDBB /* sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				88FF11521D7556D70073EDBB /* DBManager.h */,
+				88FF11531D7556D70073EDBB /* DBManager.m */,
+				880787C71D61B45200BA6F05 /* PersonEntity.h */,
+				880787C81D61B45200BA6F05 /* PersonEntity.m */,
+				88FF114C1D751C1E0073EDBB /* PersonDBService.h */,
+				88FF114D1D751C1E0073EDBB /* PersonDBService.m */,
+				8841D4791D73DF14003E4495 /* DeviceEntity.h */,
+				8841D47A1D73DF14003E4495 /* DeviceEntity.m */,
+				88FF114F1D7552E90073EDBB /* DeviceDBService.h */,
+				88FF11501D7552E90073EDBB /* DeviceDBService.m */,
+			);
+			name = sqlite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1028,6 +1062,7 @@
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
+				88FF11541D7556D70073EDBB /* DBManager.m in Sources */,
 				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
 				889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */,
 				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
@@ -1035,6 +1070,7 @@
 				889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */,
 				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
+				88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */,
 				8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */,
 				889BA29C1D64124E00BC5413 /* PhotoViewController.m in Sources */,
 				88F140D41D6C258200B8BCCC /* InspectTaskEntity.m in Sources */,
@@ -1058,6 +1094,7 @@
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */,
 				8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */,
+				88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */,
 				88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */,
 				8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */,
 				889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */,
@@ -1075,6 +1112,7 @@
 				88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */,
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
+				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
 				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
