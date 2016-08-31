@@ -119,6 +119,7 @@
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
 		D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */; };
 		D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */; };
+		D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -349,6 +350,8 @@
 		D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChildTableViewController.m; sourceTree = "<group>"; };
 		D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义.docx"; sourceTree = "<group>"; };
 		D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通_APP_第1版.docx"; sourceTree = "<group>"; };
+		D297AAA61D770020004612BA /* KnowledgeDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeDetailTableViewController.h; sourceTree = "<group>"; };
+		D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeDetailTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -688,6 +691,8 @@
 				88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */,
 				889B51F81D76A9BC001A542A /* KnowledgeViewController.h */,
 				889B51F91D76A9BC001A542A /* KnowledgeViewController.m */,
+				D297AAA61D770020004612BA /* KnowledgeDetailTableViewController.h */,
+				D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1112,6 +1117,7 @@
 				8841D4781D73DEA1003E4495 /* TaskDevicesService.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
+				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "KnowledgeViewController.h"
 #import "KnowledgeEntity.h"
 #import "KnowledgeDBService.h"
+#import "KnowledgeDetailTableViewController.h"
 
 #define CELLID @"KNOWLEDGEIDENTIFIER"
 
@@ -42,24 +43,28 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    CGRect tableFrame = self.tableView.frame;
-    float tableWidth = tableFrame.size.width;
-    float tableHeight = tableFrame.size.height;
-    noDataView = [[UIView alloc] initWithFrame:tableFrame];
-    UIView *noView = [[UIView alloc] initWithFrame:CGRectMake((tableWidth-100)/2, (tableHeight-100)/2, 100, 100)];
-    UIImageView *nodataImage = [[UIImageView alloc] initWithFrame:CGRectMake((100-65)/2, 0, 65, 57)];
-    nodataImage.image = [UIImage imageNamed:@"nodata"];
-    [noView addSubview:nodataImage];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, 100, 21)];
-    label.text = @"暂无检索数据";
-    label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [UIColor darkGrayColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [noView addSubview:label];
-    
-    [noDataView addSubview:noView];
-    
-    [self.view addSubview:noDataView];
+    if (noDataView) {
+        return;
+    } else {
+        CGRect tableFrame = self.tableView.frame;
+        float tableWidth = tableFrame.size.width;
+        float tableHeight = tableFrame.size.height;
+        noDataView = [[UIView alloc] initWithFrame:tableFrame];
+        UIView *noView = [[UIView alloc] initWithFrame:CGRectMake((tableWidth-100)/2, (tableHeight-100)/2, 100, 100)];
+        UIImageView *nodataImage = [[UIImageView alloc] initWithFrame:CGRectMake((100-65)/2, 0, 65, 57)];
+        nodataImage.image = [UIImage imageNamed:@"nodata"];
+        [noView addSubview:nodataImage];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, 100, 21)];
+        label.text = @"暂无检索数据";
+        label.font = [UIFont systemFontOfSize:15];
+        label.textColor = [UIColor darkGrayColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        [noView addSubview:label];
+        
+        [noDataView addSubview:noView];
+        
+        [self.view addSubview:noDataView];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,7 +126,16 @@
 //}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+    KnowledgeDetailTableViewController *viewController = [featureSB instantiateViewControllerWithIdentifier:@"KNOWLEDGEDETAIL"];
     
+    viewController.keyword = keyWord;
+    viewController.knowlwdge = knowledgeList[indexPath.section];
+    [viewController setTitle:keyWord];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"知识库" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [self.navigationController pushViewController:viewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
