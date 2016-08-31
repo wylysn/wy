@@ -38,7 +38,7 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
     }
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
     }
     
     deviceList = [[DeviceDBService getSharedInstance] findAll];
@@ -71,6 +71,14 @@
     }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,6 +124,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     deviceList = [[DeviceDBService getSharedInstance] findDevicesByName:textField.text];
+    [self.searchField resignFirstResponder];
     [self.tableView reloadData];
     return YES;
 }

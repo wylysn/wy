@@ -14,6 +14,7 @@
 #import "TaskPaiGongViewController.h"
 #import "TaskJiedanViewController.h"
 #import "TaskChuli1ViewController.h"
+#import "TaskHandleViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -95,7 +96,8 @@
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
         ((TaskPaiGongViewController *)viewController).id = entity.id;
     } else if ([@"4" isEqualToString:entity.type]) {
-        
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
+        ((TaskHandleViewController *)viewController).id = entity.id;
     }
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;

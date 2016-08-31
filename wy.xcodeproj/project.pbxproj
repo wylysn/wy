@@ -34,6 +34,10 @@
 		88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E861D5C6F1D00C72DA3 /* NSString+Extensions.m */; };
 		88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */; };
 		88821E8E1D5C704200C72DA3 /* TaskService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E8D1D5C704200C72DA3 /* TaskService.m */; };
+		889B51F71D7663D8001A542A /* TaskHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889B51F61D7663D8001A542A /* TaskHandleViewController.m */; };
+		889B51FA1D76A9BC001A542A /* KnowledgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889B51F91D76A9BC001A542A /* KnowledgeViewController.m */; };
+		889B51FD1D76ABFC001A542A /* KnowledgeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 889B51FC1D76ABFC001A542A /* KnowledgeEntity.m */; };
+		889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 889B51FF1D76B00E001A542A /* KnowledgeDBService.m */; };
 		889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */; };
 		889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889BA27F1D63FE7A00BC5413 /* PRPlaceHolderTextView.m */; };
 		889BA2821D64076300BC5413 /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2811D64076300BC5413 /* add_image.png */; };
@@ -67,8 +71,6 @@
 		889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */; };
 		88A893971D332B260050D9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893961D332B260050D9F3 /* main.m */; };
 		88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893991D332B260050D9F3 /* AppDelegate.m */; };
-		88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A8939C1D332B260050D9F3 /* FirstViewController.m */; };
-		88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A8939F1D332B260050D9F3 /* SecondViewController.m */; };
 		88A893A31D332B260050D9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A11D332B260050D9F3 /* Main.storyboard */; };
 		88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A41D332B260050D9F3 /* Assets.xcassets */; };
 		88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A61D332B260050D9F3 /* LaunchScreen.storyboard */; };
@@ -184,6 +186,14 @@
 		88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		88821E8C1D5C704200C72DA3 /* TaskService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskService.h; sourceTree = "<group>"; };
 		88821E8D1D5C704200C72DA3 /* TaskService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskService.m; sourceTree = "<group>"; };
+		889B51F51D7663D8001A542A /* TaskHandleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHandleViewController.h; sourceTree = "<group>"; };
+		889B51F61D7663D8001A542A /* TaskHandleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHandleViewController.m; sourceTree = "<group>"; };
+		889B51F81D76A9BC001A542A /* KnowledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeViewController.h; sourceTree = "<group>"; };
+		889B51F91D76A9BC001A542A /* KnowledgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeViewController.m; sourceTree = "<group>"; };
+		889B51FB1D76ABFC001A542A /* KnowledgeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeEntity.h; sourceTree = "<group>"; };
+		889B51FC1D76ABFC001A542A /* KnowledgeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeEntity.m; sourceTree = "<group>"; };
+		889B51FE1D76B00E001A542A /* KnowledgeDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeDBService.h; sourceTree = "<group>"; };
+		889B51FF1D76B00E001A542A /* KnowledgeDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeDBService.m; sourceTree = "<group>"; };
 		889BA27A1D63F5AB00BC5413 /* TaskChuli1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChuli1ViewController.h; sourceTree = "<group>"; };
 		889BA27B1D63F5AB00BC5413 /* TaskChuli1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChuli1ViewController.m; sourceTree = "<group>"; };
 		889BA27E1D63FE7A00BC5413 /* PRPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPlaceHolderTextView.h; sourceTree = "<group>"; };
@@ -243,10 +253,6 @@
 		88A893961D332B260050D9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A893981D332B260050D9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88A893991D332B260050D9F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		88A8939B1D332B260050D9F3 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		88A8939C1D332B260050D9F3 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		88A8939E1D332B260050D9F3 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		88A8939F1D332B260050D9F3 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		88A893A21D332B260050D9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88A893A41D332B260050D9F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88A893A71D332B260050D9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -576,10 +582,6 @@
 				88A893CB1D3392B00050D9F3 /* task */,
 				88A893981D332B260050D9F3 /* AppDelegate.h */,
 				88A893991D332B260050D9F3 /* AppDelegate.m */,
-				88A8939B1D332B260050D9F3 /* FirstViewController.h */,
-				88A8939C1D332B260050D9F3 /* FirstViewController.m */,
-				88A8939E1D332B260050D9F3 /* SecondViewController.h */,
-				88A8939F1D332B260050D9F3 /* SecondViewController.m */,
 				88A893A11D332B260050D9F3 /* Main.storyboard */,
 				88A893A41D332B260050D9F3 /* Assets.xcassets */,
 				88A893A61D332B260050D9F3 /* LaunchScreen.storyboard */,
@@ -667,6 +669,8 @@
 			children = (
 				88F140D21D6C258200B8BCCC /* InspectTaskEntity.h */,
 				88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */,
+				889B51FB1D76ABFC001A542A /* KnowledgeEntity.h */,
+				889B51FC1D76ABFC001A542A /* KnowledgeEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -682,6 +686,8 @@
 				8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */,
 				88F140CC1D6C1A6D00B8BCCC /* InspectTaskListViewController.h */,
 				88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */,
+				889B51F81D76A9BC001A542A /* KnowledgeViewController.h */,
+				889B51F91D76A9BC001A542A /* KnowledgeViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -741,6 +747,8 @@
 				8841D4801D741807003E4495 /* ReportImpaireViewController.m */,
 				88FF11561D7571960073EDBB /* ChooseDeviceViewController.h */,
 				88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */,
+				889B51F51D7663D8001A542A /* TaskHandleViewController.h */,
+				889B51F61D7663D8001A542A /* TaskHandleViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -843,6 +851,8 @@
 				8841D47A1D73DF14003E4495 /* DeviceEntity.m */,
 				88FF114F1D7552E90073EDBB /* DeviceDBService.h */,
 				88FF11501D7552E90073EDBB /* DeviceDBService.m */,
+				889B51FE1D76B00E001A542A /* KnowledgeDBService.h */,
+				889B51FF1D76B00E001A542A /* KnowledgeDBService.m */,
 			);
 			name = sqlite;
 			sourceTree = "<group>";
@@ -1059,7 +1069,9 @@
 				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				889B51FD1D76ABFC001A542A /* KnowledgeEntity.m in Sources */,
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
+				889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
 				88FF11541D7556D70073EDBB /* DBManager.m in Sources */,
@@ -1068,7 +1080,6 @@
 				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
 				88F140D71D6C269100B8BCCC /* InspectTaskService.m in Sources */,
 				889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */,
-				88A893A01D332B260050D9F3 /* SecondViewController.m in Sources */,
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
 				88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */,
 				8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */,
@@ -1119,9 +1130,10 @@
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
 				88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
-				88A8939D1D332B260050D9F3 /* FirstViewController.m in Sources */,
+				889B51FA1D76A9BC001A542A /* KnowledgeViewController.m in Sources */,
 				D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */,
 				88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */,
+				889B51F71D7663D8001A542A /* TaskHandleViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
 				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,
 				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,

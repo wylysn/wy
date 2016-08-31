@@ -11,6 +11,7 @@
 #import "TaskPaiGongViewController.h"
 #import "TaskJiedanViewController.h"
 #import "TaskChuli1ViewController.h"
+#import "TaskHandleViewController.h"
 
 @implementation TaskTableViewCell
 
@@ -101,6 +102,7 @@
     return CGSizeMake(size.width, totalHeight);
 }
 
+/*
 - (IBAction)doTask:(id)sender {
     UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
     UIViewController *viewController;
@@ -114,13 +116,15 @@
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
         ((TaskPaiGongViewController *)viewController).id = _entity.id;
     } else if ([@"4" isEqualToString:_entity.type]) {
-        
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
+        ((TaskHandleViewController *)viewController).id = _entity.id;
     }
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.parentController.navigationItem.backBarButtonItem = backButton;
     viewController.hidesBottomBarWhenPushed = YES;
     [self.parentController.navigationController pushViewController:viewController animated:YES];
 }
+ */
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

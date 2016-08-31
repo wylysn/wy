@@ -10,6 +10,7 @@
 #import "TaskTableViewController.h"
 #import "WorkOrderViewController.h"
 #import "InspectTaskListViewController.h"
+#import "KnowledgeViewController.h"
 
 @interface FeaturesTableViewController ()
 
@@ -99,6 +100,16 @@
         [inspectTaskViewController setTitle:title];
         inspectTaskViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];
+    }
+    
+    if (section==4 && row==0) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        KnowledgeViewController *knowledgeViewController = [mainSB instantiateViewControllerWithIdentifier:@"KNOWLEDGESEARCH"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"知识库查询";
+        [knowledgeViewController setTitle:title];
+        knowledgeViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:knowledgeViewController animated:YES];
     }
 }
 

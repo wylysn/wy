@@ -9,34 +9,60 @@
 #import "PersonDBService.h"
 
 static PersonDBService *sharedInstance = nil;
+static sqlite3 *database = nil;
 static sqlite3_stmt *statement = nil;
 
-@implementation PersonDBService
+@implementation PersonDBService {
+    NSString *databasePath;
+}
 
 + (PersonDBService*)getSharedInstance {
     if (!sharedInstance) {
         sharedInstance = [[super allocWithZone:NULL] init];
-        [sharedInstance createPersonTable];
+        [sharedInstance createDB];
     }
     return sharedInstance;
+}
+
+- (void)createDB {
+    NSString *docsDir;
+    NSArray *dirPaths;
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
+    // Build the path to the database file
+    databasePath = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: @"wy-person.db"]];
+    const char *dbpath = [databasePath UTF8String];
+    NSLog(@"数据库存储路径：%@", docsDir);
+    
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+    {
+        NSLog(@"数据库打开成功。。。。。。");
+        [sharedInstance createPersonTable];
+    }
+    else {
+        NSLog(@"数据库打开失败。。。。。。");
+    }
 }
 
 - (void) createPersonTable {
     char *errMsg;
     NSString *sql_stmt =@"create table if not exists Person (id integer primary key, name text, department text, position text)";
-    sqlite3 *database = [DBManager open];
-    if (database) {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
             NSLog(@"创建人员表失败。。。。。%s", errMsg);
         }
     }
-    [DBManager close];
+    sqlite3_close(database);
 }
 
 - (BOOL) saveData:(PersonEntity *)person {
     BOOL isSuccess = FALSE;
-    sqlite3 *database = [DBManager open];
-    if (database) {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         NSString *insertSQL = [NSString stringWithFormat:@"insert into Person (id, name, department, position) values (\"%ld\",\"%@\", \"%@\", \"%@\")",(long)[person.id integerValue], person.name, person.department, person.position];
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
@@ -60,8 +86,8 @@ static sqlite3_stmt *statement = nil;
 - (PersonEntity *) findById:(NSString*)id
 {
     PersonEntity *person;
-    sqlite3 *database = [DBManager open];
-    if (database) {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         NSString *querySQL = [NSString stringWithFormat: @"select id, name, department, position from Person where id=\"%@\"",id];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -88,8 +114,8 @@ static sqlite3_stmt *statement = nil;
 
 - (void)deleteData:(NSInteger)id {
     char *sql = "delete from Person where id = ?";
-    sqlite3 *database = [DBManager open];
-    if (database) {
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         int result = sqlite3_prepare(database, sql, -1, &statement, NULL);
         
         if (result == SQLITE_OK) {

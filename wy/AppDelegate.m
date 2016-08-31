@@ -11,6 +11,8 @@
 #import "PersonEntity.h"
 #import "DeviceEntity.h"
 #import "DeviceDBService.h"
+#import "KnowledgeDBService.h"
+#import "KnowledgeEntity.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +29,7 @@
     //创建打开数据库
     /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         PersonDBService *dbService1 = [PersonDBService getSharedInstance];
         PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"id":@"1",@"name":@"张三",@"department":@"运维部",@"position":@"总经理"}];
         [dbService1 saveData:person];
@@ -45,9 +48,13 @@
         
         NSArray *dArr = [dbService findAll];
         NSLog(@"从数据库中找出%ld台设备信息", dArr.count);
+        
+        
+        KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"id":@"1",@"content":@"机器语言学校是什么鬼，我还真不知道",@"source":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];
+        KnowledgeDBService *knowledgeService = [KnowledgeDBService getSharedInstance];
+        [knowledgeService saveKnowledge:knowledge1];
     });
-     */
-    
+    */
     return YES;
 }
 

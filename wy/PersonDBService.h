@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "PersonEntity.h"
-#import "DBManager.h"
 
 @interface PersonDBService : NSObject
 

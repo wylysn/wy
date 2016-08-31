@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "DeviceEntity.h"
-#import "DBManager.h"
 
 @interface DeviceDBService : NSObject
 
