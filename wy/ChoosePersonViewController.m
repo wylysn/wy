@@ -42,7 +42,7 @@
     UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
     confirmBtn.layer.cornerRadius = 3;
     confirmBtn.titleLabel.font = [UIFont fontWithName:@"System" size:15];
-    confirmBtn.backgroundColor = [UIColor colorFromHexCode:@"7aff67"];
+    confirmBtn.backgroundColor = [UIColor colorFromHexCode:@"FF6F55"];
     [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
     [confirmBtn addTarget:self action:@selector(confirmPerson) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *confirmItem = [[UIBarButtonItem alloc]

@@ -13,6 +13,8 @@
 #import "DeviceDBService.h"
 #import "KnowledgeDBService.h"
 #import "KnowledgeEntity.h"
+#import "PositionEntity.h"
+#import "PositionDBservice.h"
 
 @interface AppDelegate ()
 
@@ -27,9 +29,9 @@
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //创建打开数据库
-    /*
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+        /*
         PersonDBService *dbService1 = [PersonDBService getSharedInstance];
         PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"id":@"1",@"name":@"张三",@"department":@"运维部",@"position":@"总经理"}];
         [dbService1 saveData:person];
@@ -53,8 +55,25 @@
         KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"id":@"1",@"content":@"机器语言学校是什么鬼，我还真不知道",@"source":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];
         KnowledgeDBService *knowledgeService = [KnowledgeDBService getSharedInstance];
         [knowledgeService saveKnowledge:knowledge1];
+         */
+        
+        PositionEntity *p1 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"1", @"Code":@"0001", @"Name":@"上海国际旅游度假区", @"FullName":@"上海国际旅游度假区", @"Sort":@"1", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"0"}];
+        PositionEntity *p2 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"2", @"Code":@"000101", @"Name":@"运输管理所", @"FullName":@"运输管理所", @"Sort":@"2", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"1"}];
+        PositionEntity *p3 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"3", @"Code":@"00010101", @"Name":@"所1", @"FullName":@"所1", @"Sort":@"3", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"2"}];
+        PositionEntity *p4 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"4", @"Code":@"00010102", @"Name":@"所2", @"FullName":@"所2", @"Sort":@"4", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"2"}];
+        PositionEntity *p5 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"5", @"Code":@"000102", @"Name":@"设备系统", @"FullName":@"设备系统", @"Sort":@"5", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"1"}];
+        PositionEntity *p6 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"6", @"Code":@"00010201", @"Name":@"化水车间1", @"FullName":@"化水车间1", @"Sort":@"6", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"5"}];
+        PositionEntity *p7 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"7", @"Code":@"00010202", @"Name":@"化水车间2", @"FullName":@"化水车间2", @"Sort":@"7", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"5"}];
+        PositionDBservice *positionService = [PositionDBservice getSharedInstance];
+        [positionService savePosition:p1];
+        [positionService savePosition:p2];
+        [positionService savePosition:p3];
+        [positionService savePosition:p4];
+        [positionService savePosition:p5];
+        [positionService savePosition:p6];
+        [positionService savePosition:p7];
     });
-    */
+    
     return YES;
 }
 

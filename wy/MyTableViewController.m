@@ -21,12 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
+//    }
     
 }
 
@@ -38,6 +38,9 @@
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return CGFLOAT_MIN;
+    }
     return 20;
 }
 
@@ -51,15 +54,15 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"我的" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-    if (section == 1) {
+    if (section == 3) {
         if (row == 0) {
-            ModifyMobileViewController *modifyPhoneViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYMOBILE"];
-            self.navigationItem.backBarButtonItem = backButton;
-            NSString *title = @"修改手机号";
-            [modifyPhoneViewController setTitle:title];
-            modifyPhoneViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:modifyPhoneViewController animated:YES];
-        } else if (row == 1) {
+//            ModifyMobileViewController *modifyPhoneViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYMOBILE"];
+//            self.navigationItem.backBarButtonItem = backButton;
+//            NSString *title = @"修改手机号";
+//            [modifyPhoneViewController setTitle:title];
+//            modifyPhoneViewController.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:modifyPhoneViewController animated:YES];
+            
             ModifyPasswordViewController *modifyPassWordViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYPASSWORD"];
             self.navigationItem.backBarButtonItem = backButton;
             NSString *title = @"修改密码";
@@ -69,26 +72,26 @@
         }
     }
     if (section == 4) {
-        if (row == 0) {
-            FeedbackViewController *feedbackViewController = [mainSB instantiateViewControllerWithIdentifier:@"FEEDBACK"];
-            self.navigationItem.backBarButtonItem = backButton;
-            NSString *title = @"反馈";
-            [feedbackViewController setTitle:title];
-            feedbackViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:feedbackViewController animated:YES];
-        }
+//        if (row == 0) {
+//            FeedbackViewController *feedbackViewController = [mainSB instantiateViewControllerWithIdentifier:@"FEEDBACK"];
+//            self.navigationItem.backBarButtonItem = backButton;
+//            NSString *title = @"反馈";
+//            [feedbackViewController setTitle:title];
+//            feedbackViewController.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:feedbackViewController animated:YES];
+//        }
     }
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//}
 
 
 - (void)didReceiveMemoryWarning {

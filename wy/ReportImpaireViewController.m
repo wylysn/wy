@@ -14,12 +14,13 @@
 #import "ELCImagePickerController.h"
 #import "UIImage+Resolution.h"
 #import "ChooseDeviceViewController.h"
+#import "ChoosePositionViewController.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
 #define PICS_PER_LINE 4
 
-@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate>
+@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePositionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -38,13 +39,6 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
     
     deviceArr = [[NSMutableArray alloc] init];
     selectedDevicesDic = [[NSMutableDictionary alloc] init];
@@ -222,6 +216,10 @@
     [self.tableView reloadData];
 }
 
+- (void)showSelectedPositions:(NSArray *) positionArray {
+    //显示地址
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -313,6 +311,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (section == 0) {
         UILabel *keyLabel = [cell viewWithTag:1];
         UILabel *valueLabel = [cell viewWithTag:2];
@@ -357,13 +356,17 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if (section==0 && row==3) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        ChoosePositionViewController *choosePositionViewController = [mainSB instantiateViewControllerWithIdentifier:@"CHOOSEPOSITION"];
+        choosePositionViewController.delegate = self;
+        [self.navigationController pushViewController:choosePositionViewController animated:YES];
     }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

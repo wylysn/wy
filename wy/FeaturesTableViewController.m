@@ -21,12 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,6 +55,9 @@
 //}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return CGFLOAT_MIN;
+    }
     return 20;
 }
 
@@ -113,14 +116,14 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
+//    }
+//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -13,6 +13,9 @@
 		880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787C81D61B45200BA6F05 /* PersonEntity.m */; };
 		880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CA1D61C53800BA6F05 /* checked@2x.png */; };
 		880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CC1D61C55900BA6F05 /* checked_filled@2x.png */; };
+		8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */; };
+		8811E7A61D77D96400CE7CE2 /* PositionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A51D77D96400CE7CE2 /* PositionEntity.m */; };
+		8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */; };
 		8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCB1D6A9D8A00E04B49 /* NTMonthYearPicker.m */; };
 		8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */; };
 		8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8819BCD21D6AE1D900E04B49 /* filter@2x.png */; };
@@ -151,6 +154,14 @@
 		880787C81D61B45200BA6F05 /* PersonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonEntity.m; sourceTree = "<group>"; };
 		880787CA1D61C53800BA6F05 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
 		880787CC1D61C55900BA6F05 /* checked_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked_filled@2x.png"; sourceTree = "<group>"; };
+		8811E7A11D77D6EF00CE7CE2 /* PositionDBservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDBservice.h; sourceTree = "<group>"; };
+		8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDBservice.m; sourceTree = "<group>"; };
+		8811E7A41D77D96400CE7CE2 /* PositionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionEntity.h; sourceTree = "<group>"; };
+		8811E7A51D77D96400CE7CE2 /* PositionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionEntity.m; sourceTree = "<group>"; };
+		8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEOS20160831.rar; sourceTree = "<group>"; };
+		8811E7A81D77E93300CE7CE2 /* 问题列表.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "问题列表.docx"; sourceTree = "<group>"; };
+		8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePositionViewController.h; sourceTree = "<group>"; };
+		8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePositionViewController.m; sourceTree = "<group>"; };
 		8819BCCA1D6A9D8A00E04B49 /* NTMonthYearPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTMonthYearPicker.h; sourceTree = "<group>"; };
 		8819BCCB1D6A9D8A00E04B49 /* NTMonthYearPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTMonthYearPicker.m; sourceTree = "<group>"; };
 		8819BCCD1D6ADF0C00E04B49 /* SiftWorkOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiftWorkOrderViewController.h; sourceTree = "<group>"; };
@@ -400,6 +411,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8811E7A91D77FB9F00CE7CE2 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				8811E7AA1D77FBAE00CE7CE2 /* controller */,
+			);
+			name = public;
+			sourceTree = "<group>";
+		};
+		8811E7AA1D77FBAE00CE7CE2 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8841D47F1D741807003E4495 /* ReportImpaireViewController.h */,
+				8841D4801D741807003E4495 /* ReportImpaireViewController.m */,
+				88FF11561D7571960073EDBB /* ChooseDeviceViewController.h */,
+				88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */,
+				880787BD1D61A2BD00BA6F05 /* ChoosePersonViewController.h */,
+				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
+				8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */,
+				8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
 		8819BCC81D6A9D8A00E04B49 /* NTMonthYearPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +614,7 @@
 				88E927F11D5DBC2A00152BBF /* Utilities */,
 				88821E841D5C6EDC00C72DA3 /* categories */,
 				88821E651D5C4BE800C72DA3 /* images */,
+				8811E7A91D77FB9F00CE7CE2 /* public */,
 				88A893CD1D3392CC0050D9F3 /* features */,
 				88A893CC1D3392BD0050D9F3 /* my */,
 				88A893CB1D3392B00050D9F3 /* task */,
@@ -730,8 +765,6 @@
 				88821E7C1D5C661100C72DA3 /* TaskTableViewController.m */,
 				88E927EE1D5D681600152BBF /* TaskPaiGongViewController.h */,
 				88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */,
-				880787BD1D61A2BD00BA6F05 /* ChoosePersonViewController.h */,
-				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
 				88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */,
 				88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */,
 				889BA27A1D63F5AB00BC5413 /* TaskChuli1ViewController.h */,
@@ -748,10 +781,6 @@
 				8841D4701D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m */,
 				8841D4721D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.h */,
 				8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */,
-				8841D47F1D741807003E4495 /* ReportImpaireViewController.h */,
-				8841D4801D741807003E4495 /* ReportImpaireViewController.m */,
-				88FF11561D7571960073EDBB /* ChooseDeviceViewController.h */,
-				88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */,
 				889B51F51D7663D8001A542A /* TaskHandleViewController.h */,
 				889B51F61D7663D8001A542A /* TaskHandleViewController.m */,
 			);
@@ -836,6 +865,8 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				8811E7A81D77E93300CE7CE2 /* 问题列表.docx */,
+				8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */,
 				D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */,
 				D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */,
 				88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */,
@@ -858,6 +889,10 @@
 				88FF11501D7552E90073EDBB /* DeviceDBService.m */,
 				889B51FE1D76B00E001A542A /* KnowledgeDBService.h */,
 				889B51FF1D76B00E001A542A /* KnowledgeDBService.m */,
+				8811E7A41D77D96400CE7CE2 /* PositionEntity.h */,
+				8811E7A51D77D96400CE7CE2 /* PositionEntity.m */,
+				8811E7A11D77D6EF00CE7CE2 /* PositionDBservice.h */,
+				8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */,
 			);
 			name = sqlite;
 			sourceTree = "<group>";
@@ -1078,8 +1113,11 @@
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
 				889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
+				8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
+				8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */,
 				88FF11541D7556D70073EDBB /* DBManager.m in Sources */,
+				8811E7A61D77D96400CE7CE2 /* PositionEntity.m in Sources */,
 				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
 				889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */,
 				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
