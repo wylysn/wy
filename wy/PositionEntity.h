@@ -22,7 +22,9 @@
 @property (nonatomic, readonly) int ParentID;
 @property (nonatomic, copy, readonly) NSString *Prj_Code;
 
-@property (nonatomic, assign) BOOL hasChild;    //有子节点
+/*扩展属性*/
+@property (nonatomic, assign) int level;
+@property (nonatomic, assign) NSInteger childNum;    //有子节点
 @property (nonatomic, assign) BOOL hasChildDisplay; //子节点已展示
 
 @end

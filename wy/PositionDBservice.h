@@ -15,6 +15,6 @@
 + (PositionDBservice*) getSharedInstance;
 - (BOOL) savePosition:(PositionEntity *)position;
 - (NSArray *) findAllPositions;
-- (NSArray *) findPositionsByParentId:(int) parentId;
+- (NSArray *) findPositionsByParent:(PositionEntity *)parent;
 
 @end

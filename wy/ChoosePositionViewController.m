@@ -27,8 +27,58 @@
     self.tableView.delegate = self;
     
     positionDics = [[NSMutableDictionary alloc] init];
-    positionList = [[PositionDBservice getSharedInstance] findPositionsByParentId:0];
-    [positionDics setObject:positionList forKey:@0];
+    //最初显示第一级地址
+    PositionEntity *parent = [[PositionEntity alloc] initWithDictionary:@{@"id":@0}];
+    parent.level = 0;
+    positionList = [[PositionDBservice getSharedInstance] findPositionsByParent:parent];
+    for (PositionEntity *position in positionList) {
+        position.level = 1;
+        NSMutableArray *childArr = [[NSMutableArray alloc] initWithObjects:position, nil];
+        [positionDics setObject:childArr forKey:@(position.id)];
+    }
+}
+
+- (void)showPositionsWithParent:(PositionEntity *)parent andIndexPath:(NSIndexPath *)indexPath {
+    NSArray *newPositionList = [[PositionDBservice getSharedInstance] findPositionsByParent:parent];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    PositionEntity *headPosition = positionList[section];
+    NSRange range = NSMakeRange(row+1, [newPositionList count]);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [(NSMutableArray *)positionDics[@(headPosition.id)] insertObjects:newPositionList atIndexes:indexSet];
+    
+    [self.tableView reloadData];
+}
+
+- (void)hidePositionsWithParent:(PositionEntity *)parent andIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    PositionEntity *headPosition = positionList[section];
+    NSMutableArray *allChilds = (NSMutableArray *)positionDics[@(headPosition.id)];
+
+    NSInteger length=0;
+    for (NSInteger i = row+1; i<allChilds.count; i++) {
+        PositionEntity *position = allChilds[i];
+        if (position.level>parent.level) {
+            length += 1;
+        } else {
+            break;
+        }
+    }
+    NSRange range = NSMakeRange(row+1, length);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [allChilds removeObjectsAtIndexes:indexSet];
+    
+    [self.tableView reloadData];
+}
+
+- (PositionEntity *)getPostionByIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    PositionEntity *headPosition = positionList[section];
+    NSArray *childPositions = (NSArray *)positionDics[@(headPosition.id)];
+    PositionEntity *position = childPositions[row];
+    return position;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,15 +100,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *CELLID = @"POSITIONIDENTITY1";
+    PositionEntity *position = [self getPostionByIndexPath:indexPath];
+    if (indexPath.row!=0) {
+        CELLID = @"POSITIONIDENTITY2";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-//    PositionEntity *position = positionList[indexPath.row];
     UILabel *nameLabel = [cell viewWithTag:1];
-    nameLabel.text = @"上海儿童艺术中心";//position.Name;
+    nameLabel.text = position.Name;
+    for (int i=1; i<position.level; i++) {
+        nameLabel.text = [NSString stringWithFormat:@"      %@", nameLabel.text];
+    }
+    UIImageView *imageView = [cell viewWithTag:2];
+    if (position.childNum<1) {
+        imageView.hidden = YES;
+    } else {
+        imageView.hidden = NO;
+        if (position.hasChildDisplay) {
+            imageView.image = [UIImage imageNamed:position.level>1?@"subarrow-down":@"arrow-down"];
+        } else {
+            imageView.image = [UIImage imageNamed:position.level>1?@"subarrow-left":@"arrow-right"];
+        }
+    }
     
     return cell;
 }
@@ -77,15 +144,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *nameLabel = [cell viewWithTag:1];
-    nameLabel.textColor = [UIColor whiteColor];
-    cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
+    PositionEntity *position = [self getPostionByIndexPath:indexPath];
+    if (position.childNum>0) {
+        if (position.hasChildDisplay) {
+            [self hidePositionsWithParent:position andIndexPath:indexPath];
+            position.hasChildDisplay = NO;
+        } else {
+            [self showPositionsWithParent:position andIndexPath:indexPath];
+            position.hasChildDisplay = YES;
+        }
+    } else {
+        UILabel *nameLabel = [cell viewWithTag:1];
+        nameLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UILabel *nameLabel = [cell viewWithTag:1];
-    nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+    NSString *color = @"5555555";
+    if (indexPath.row!=0) {
+        color = @"999999";
+    }
+    nameLabel.textColor = [UIColor colorFromHexCode:color];
     cell.backgroundColor = [UIColor whiteColor];
 }
 

@@ -103,7 +103,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
                 int parentId = sqlite3_column_int(statement, 7);
                 NSString *prj_Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
-                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":[NSString stringWithFormat:@"%d", sort], @"Status":[NSString stringWithFormat:@"%d", status], @"Description":description, @"ParentId":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
+                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":[NSString stringWithFormat:@"%d", sort], @"Status":[NSString stringWithFormat:@"%d", status], @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
                 [positionArr addObject:position];
             }
         } else {
@@ -116,11 +116,11 @@ static sqlite3_stmt *statement = nil;
     return positionArr;
 }
 
-- (NSArray *) findPositionsByParentId:(int) parentId {
+- (NSArray *) findPositionsByParent:(PositionEntity *)parent {
     NSMutableArray *positionArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat:@"select a.*,ifnull(b.count,0) as CHILDNUM from ( select * from Position a where a.parentId = %d) a left join (select b.parentId, count(1) as count from (select * from Position a where a.parentId = %d) a, Position b where a.id = b.parentId group by b.parentId) b on a.id = b.parentId", parentId, parentId];
+        NSString *querySQL = [NSString stringWithFormat:@"select a.*,ifnull(b.count,0) as CHILDNUM from ( select * from Position a where a.parentId = %d) a left join (select b.parentId, count(1) as count from (select * from Position a where a.parentId = %d) a, Position b where a.id = b.parentId group by b.parentId) b on a.id = b.parentId", parent.id, parent.id];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -133,10 +133,11 @@ static sqlite3_stmt *statement = nil;
                 int status = sqlite3_column_int(statement, 5);
                 NSString *description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
                 int parentId = sqlite3_column_int(statement, 7);
-                int childnum = sqlite3_column_int(statement, 8);
                 NSString *prj_Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
-                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":[NSString stringWithFormat:@"%d", sort], @"Status":[NSString stringWithFormat:@"%d", status], @"Description":description, @"ParentId":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
-                position.hasChild = childnum>0?YES:NO;
+                int childnum = sqlite3_column_int(statement, 9);
+                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":[NSString stringWithFormat:@"%d", sort], @"Status":[NSString stringWithFormat:@"%d", status], @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
+                position.childNum = childnum;
+                position.level = parent.level+1;
                 [positionArr addObject:position];
             }
         } else {
