@@ -7,8 +7,6 @@
 //
 
 #import "ChoosePositionViewController.h"
-#import "PositionEntity.h"
-#import "PositionDBservice.h"
 
 @interface ChoosePositionViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,6 +24,16 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
+    confirmBtn.layer.cornerRadius = 3;
+    confirmBtn.titleLabel.font = [UIFont fontWithName:@"System" size:15];
+    confirmBtn.backgroundColor = [UIColor colorFromHexCode:@"FF6F55"];
+    [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [confirmBtn addTarget:self action:@selector(confirmPosition) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *confirmItem = [[UIBarButtonItem alloc]
+                                    initWithCustomView:confirmBtn];
+    self.navigationItem.rightBarButtonItem = confirmItem;
+    
     positionDics = [[NSMutableDictionary alloc] init];
     //最初显示第一级地址
     PositionEntity *parent = [[PositionEntity alloc] initWithDictionary:@{@"id":@0}];
@@ -35,6 +43,23 @@
         position.level = 1;
         NSMutableArray *childArr = [[NSMutableArray alloc] initWithObjects:position, nil];
         [positionDics setObject:childArr forKey:@(position.id)];
+    }
+}
+
+- (void)confirmPosition {
+    NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
+    PositionEntity *position = [self getPostionByIndexPath:indexPathsOfSelectedRows[0]];
+    if (position.childNum>0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择地址！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(showSelectedPositions:)]) {
+        [_delegate showSelectedPositions:position];
     }
 }
 

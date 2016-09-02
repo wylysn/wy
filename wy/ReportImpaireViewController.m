@@ -15,6 +15,7 @@
 #import "UIImage+Resolution.h"
 #import "ChooseDeviceViewController.h"
 #import "ChoosePositionViewController.h"
+#import "AppDelegate.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
@@ -32,6 +33,9 @@
     UITableViewCell *picCell;
     UIImageView *addImageView;
     NSMutableDictionary *selectedDevicesDic;
+    PositionEntity *position;
+    NSInteger serviceType;
+    NSInteger priority;
 }
 
 - (void)viewDidLoad {
@@ -90,28 +94,43 @@
 #pragma mark - actionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
-    {
-        
-        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
-        
-        AAPLCameraViewController* cameraViewController = [mainSB instantiateViewControllerWithIdentifier:@"camera"];
-        
-        [self presentViewController:cameraViewController animated:YES completion:nil];
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0)
+        {
+            
+            UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
+            
+            AAPLCameraViewController* cameraViewController = [mainSB instantiateViewControllerWithIdentifier:@"camera"];
+            
+            [self presentViewController:cameraViewController animated:YES completion:nil];
+        }
+        else if (buttonIndex == 1)
+        {
+            ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+            elcPicker.maximumImagesCount = 5 - self.imageArray.count; //Set the maximum number of images to select to 100
+            elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
+            elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+            elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
+            elcPicker.isTrim = YES;
+            elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
+            elcPicker.imagePickerDelegate = self;
+            
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
+    } else if (actionSheet.tag == 2) {
+        if (buttonIndex==4) {
+            return;
+        }
+        serviceType = buttonIndex+1;
+        [self.tableView reloadData];
+    } else if (actionSheet.tag == 3) {
+        if (buttonIndex==4) {
+            return;
+        }
+        priority = buttonIndex+1;
+        [self.tableView reloadData];
     }
-    else if (buttonIndex == 1)
-    {
-        ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-        elcPicker.maximumImagesCount = 5 - self.imageArray.count; //Set the maximum number of images to select to 100
-        elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
-        elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-        elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
-        elcPicker.isTrim = YES;
-        elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
-        elcPicker.imagePickerDelegate = self;
-        
-        [self presentViewController:elcPicker animated:YES completion:nil];
-    }
+    
 }
 
 - (void)showImageWithImage:(UIImage*) image {
@@ -216,8 +235,9 @@
     [self.tableView reloadData];
 }
 
-- (void)showSelectedPositions:(NSArray *) positionArray {
-    //显示地址
+- (void)showSelectedPositions:(PositionEntity *) selectedPosition {
+    position = selectedPosition;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -300,6 +320,9 @@
     NSInteger row = indexPath.row;
     if (section == 0) {
         CELLID = @"BASEINFOCELL";
+        if (row==0 || row==1 || row==2 || row==4) {
+            CELLID = @"BASEINFOCELL2";
+        }
     } else if (section == 1) {
         CELLID = @"DEVICECELL";
     } else if (section == 2) {
@@ -325,17 +348,51 @@
             keyLabel.text = @"部门";
             valueLabel.text = @"";
         } else if (row==3) {
-            keyLabel.text = @"位置";
-            valueLabel.text = @"";
-        } else if (row==4) {
             keyLabel.text = @"服务类型";
-            valueLabel.text = @"";
+            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypeDic;
+            NSString *serviceTypeText = [dic objectForKey:[NSString stringWithFormat:@"%ld", serviceType]];
+            if (serviceTypeText) {
+                valueLabel.text = serviceTypeText;
+            } else {
+                NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:@""];
+                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                attch.image = [UIImage imageNamed:@"arrow-right"];
+                attch.bounds = CGRectMake(0, 0, 7, 12);
+                NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+                [attri appendAttributedString:string];
+                valueLabel.attributedText = attri;
+            }
+        } else if (row==4) {
+            keyLabel.text = @"任务类型";
+            valueLabel.text = @"工单任务";
         } else if (row==5) {
-            keyLabel.text = @"工单类型";
-            valueLabel.text = @"";
-        } else if (row==6) {
             keyLabel.text = @"优先级";
-            valueLabel.text = @"";
+            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).priorityDic;
+            NSString *priorityText = [dic objectForKey:[NSString stringWithFormat:@"%ld", priority]];
+            if (priorityText) {
+                valueLabel.text = priorityText;
+            } else {
+                NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:@""];
+                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                attch.image = [UIImage imageNamed:@"arrow-right"];
+                attch.bounds = CGRectMake(0, 0, 7, 12);
+                NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+                [attri appendAttributedString:string];
+                valueLabel.attributedText = attri;
+            }
+        } else if (row==6) {
+            keyLabel.text = @"位置";
+            if (position) {
+                valueLabel.text = position.Name;
+            } else {
+                NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:@""];
+                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                attch.image = [UIImage imageNamed:@"arrow-right"];
+                attch.bounds = CGRectMake(0, 0, 7, 12);
+                NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+                [attri appendAttributedString:string];
+                valueLabel.attributedText = attri;
+            }
         }
     } else if (section == 1) {
         DeviceEntity *device = deviceArr[row];
@@ -359,11 +416,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    if (section==0 && row==3) {
+    if (section==0 && row==6) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         ChoosePositionViewController *choosePositionViewController = [mainSB instantiateViewControllerWithIdentifier:@"CHOOSEPOSITION"];
         choosePositionViewController.delegate = self;
         [self.navigationController pushViewController:choosePositionViewController animated:YES];
+    } else if (section==0 && row==3) {
+        UIActionSheet* changeImageSheet = [[UIActionSheet alloc]initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"工程服务",@"安保服务",@"保洁服务",@"其他服务", nil];
+        changeImageSheet.tag=2;
+        [changeImageSheet showInView:self.view];
+    } else if (section==0 && row==5) {
+        UIActionSheet* changeImageSheet = [[UIActionSheet alloc]initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"低",@"中",@"高",@"紧急", nil];
+        changeImageSheet.tag=3;
+        [changeImageSheet showInView:self.view];
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PositionEntity.h"
+#import "PositionDBservice.h"
 
 @protocol ChoosePositionViewDelegate <NSObject>
 
-- (void)showSelectedPositions:(NSArray *) positionArray;
+- (void)showSelectedPositions:(PositionEntity *) position;
 
 @end
 
