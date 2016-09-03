@@ -52,6 +52,10 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -120,7 +124,6 @@
     }
     
     self.navigationItem.backBarButtonItem = backButton;
-    viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -129,7 +132,7 @@
     UIViewController *viewController = [mainSB instantiateViewControllerWithIdentifier:@"REPORTIMPAIRE"];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
-    viewController.hidesBottomBarWhenPushed = YES;
+//    viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

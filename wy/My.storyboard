@@ -144,7 +144,7 @@
         <!--Modify Password View Controller-->
         <scene sceneID="lmQ-hV-yul">
             <objects>
-                <viewController storyboardIdentifier="MODIFYPASSWORD" id="kd3-5U-l7B" customClass="ModifyPasswordViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MODIFYPASSWORD" hidesBottomBarWhenPushed="YES" id="kd3-5U-l7B" customClass="ModifyPasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qyo-W9-3d1"/>
                         <viewControllerLayoutGuide type="bottom" id="Cca-57-CVT"/>

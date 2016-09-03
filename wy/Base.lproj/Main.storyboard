@@ -292,7 +292,7 @@
         <!--报障-->
         <scene sceneID="zpA-kA-ALY">
             <objects>
-                <viewController storyboardIdentifier="REPORTIMPAIRE" title="报障" id="yuB-F7-b9L" customClass="ReportImpaireViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="REPORTIMPAIRE" title="报障" hidesBottomBarWhenPushed="YES" id="yuB-F7-b9L" customClass="ReportImpaireViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W3T-aM-q16"/>
                         <viewControllerLayoutGuide type="bottom" id="DSp-am-9JB"/>
@@ -333,6 +333,11 @@
                                     <constraint firstItem="b2q-Yi-vLK" firstAttribute="centerX" secondItem="QSe-sl-Epl" secondAttribute="centerX" id="mIH-oG-zDe"/>
                                     <constraint firstItem="b2q-Yi-vLK" firstAttribute="leading" secondItem="QSe-sl-Epl" secondAttribute="leading" constant="16" id="ppm-LI-DDN"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XJd-bQ-Z7Z"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="laz-Se-opZ">
                                 <rect key="frame" x="0.0" y="20" width="375" height="525"/>
@@ -490,12 +495,18 @@
                         <constraints>
                             <constraint firstItem="laz-Se-opZ" firstAttribute="centerX" secondItem="6K4-9H-byw" secondAttribute="centerX" id="D0S-BH-vF2"/>
                             <constraint firstItem="DSp-am-9JB" firstAttribute="top" secondItem="QSe-sl-Epl" secondAttribute="bottom" id="P8V-XM-Hc0"/>
+                            <constraint firstAttribute="bottom" secondItem="QSe-sl-Epl" secondAttribute="bottom" id="e9M-7F-0x1"/>
                             <constraint firstItem="laz-Se-opZ" firstAttribute="width" secondItem="6K4-9H-byw" secondAttribute="width" id="exl-o8-DBM"/>
                             <constraint firstItem="QSe-sl-Epl" firstAttribute="width" secondItem="6K4-9H-byw" secondAttribute="width" id="gLM-Px-8hb"/>
                             <constraint firstItem="laz-Se-opZ" firstAttribute="top" secondItem="W3T-aM-q16" secondAttribute="bottom" id="jvS-VK-QRT"/>
                             <constraint firstItem="QSe-sl-Epl" firstAttribute="centerX" secondItem="6K4-9H-byw" secondAttribute="centerX" id="kez-n3-vj7"/>
                             <constraint firstItem="QSe-sl-Epl" firstAttribute="top" secondItem="laz-Se-opZ" secondAttribute="bottom" id="oEN-8i-HQN"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="P8V-XM-Hc0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="600"/>

@@ -30,6 +30,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    self.tabBarController.tabBar.hidden = NO;
+    
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -82,7 +84,6 @@
             title = @"待审批工单";
         }
         [taskTableViewController setTitle:title];
-        taskTableViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskTableViewController animated:YES];
     }
     if (section==0 && row==3) {
@@ -91,7 +92,6 @@
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"工单查询";
         [workOrderViewController setTitle:title];
-        workOrderViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:workOrderViewController animated:YES];
     }
     
@@ -103,7 +103,6 @@
         [taskListViewController setTitle:title];
         NSDictionary *filterDic = @{@"ShortTitle":@"2"};
         taskListViewController.filterDic = filterDic;
-        taskListViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskListViewController animated:YES];
     }
     
@@ -113,7 +112,6 @@
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"巡检查询";
         [inspectTaskViewController setTitle:title];
-        inspectTaskViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];
     }
     
@@ -123,7 +121,6 @@
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"知识库查询";
         [knowledgeViewController setTitle:title];
-        knowledgeViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:knowledgeViewController animated:YES];
     }
 }

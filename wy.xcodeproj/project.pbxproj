@@ -124,6 +124,8 @@
 		D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */; };
 		D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */; };
 		D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DB71D7A900E0022D8BD /* TaskListEntity.m */; };
+		D2997DBE1D7AFD770022D8BD /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2997DBD1D7AFD770022D8BD /* WarningView.xib */; };
+		D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DC01D7AFE3B0022D8BD /* WarningView.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -366,6 +368,9 @@
 		D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeDetailTableViewController.m; sourceTree = "<group>"; };
 		D2997DB61D7A900E0022D8BD /* TaskListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListEntity.h; sourceTree = "<group>"; };
 		D2997DB71D7A900E0022D8BD /* TaskListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListEntity.m; sourceTree = "<group>"; };
+		D2997DBD1D7AFD770022D8BD /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
+		D2997DBF1D7AFE3B0022D8BD /* WarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningView.h; sourceTree = "<group>"; };
+		D2997DC01D7AFE3B0022D8BD /* WarningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -676,8 +681,10 @@
 		88A893CC1D3392BD0050D9F3 /* my */ = {
 			isa = PBXGroup;
 			children = (
+				D2997DC21D7AFE410022D8BD /* view */,
 				88D5CB281D6FCEA60041C9A1 /* controller */,
 				88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */,
+				D2997DBD1D7AFD770022D8BD /* WarningView.xib */,
 			);
 			name = my;
 			sourceTree = "<group>";
@@ -902,6 +909,15 @@
 			name = sqlite;
 			sourceTree = "<group>";
 		};
+		D2997DC21D7AFE410022D8BD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				D2997DBF1D7AFE3B0022D8BD /* WarningView.h */,
+				D2997DC01D7AFE3B0022D8BD /* WarningView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1036,6 +1052,7 @@
 				8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */,
 				889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */,
 				880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */,
+				D2997DBE1D7AFD770022D8BD /* WarningView.xib in Resources */,
 				88B6FD9C1D66D61C00418972 /* Feature.storyboard in Resources */,
 				88B6FD961D66A13500418972 /* plus32@2x.png in Resources */,
 			);
@@ -1143,6 +1160,7 @@
 				88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */,
 				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
 				889BA2A01D64141900BC5413 /* UIImage+Resolution.m in Sources */,
+				D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */,
 				88B6FD941D66954700418972 /* PRLabel.m in Sources */,
 				88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */,
 				889BA29B1D64124E00BC5413 /* PhotoViewCell.m in Sources */,
