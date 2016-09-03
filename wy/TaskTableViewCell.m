@@ -12,6 +12,7 @@
 #import "TaskJiedanViewController.h"
 #import "TaskChuli1ViewController.h"
 #import "TaskHandleViewController.h"
+#import "AppDelegate.h"
 
 @implementation TaskTableViewCell
 
@@ -21,110 +22,100 @@
     self.seprateContraint.constant = 1.f/[UIScreen mainScreen].scale;
 }
 
-- (void)setEntity:(TaskEntity *)entity
+- (void)setEntity:(TaskListEntity *)entity
 {
     _entity = entity;
     
-    if (![entity.id isBlankString]) {
-        self.idLabel.text = entity.id;
+    if (![entity.Code isBlankString]) {
+        self.CodeLabel.text = entity.Code;
     } else {
-        self.idLabel.text = @"";
+        self.CodeLabel.text = @"";
     }
     
-    if (![entity.type isBlankString]) {
-        self.typeLabel.text = entity.type;
+    
+    if (![entity.ServiceType isBlankString]) {
+        self.ServiceTypeLabel.text = [serviceTypeDic objectForKey:entity.ShortTitle];
     } else {
-        self.typeLabel.text = @"";
+        self.ServiceTypeLabel.text = @"";
     }
     
-    if (![entity.priority isBlankString]) {
-        self.priorityLabel.text = entity.priority;
+    if (![entity.ShortTitle isBlankString]) {
+        self.ShortTitleLabel.text = [shortTitleDic objectForKey:entity.ShortTitle];
     } else {
-        self.priorityLabel.text = @"";
+        self.ShortTitleLabel.text = @"";
     }
-    
-    if ([@"1" isEqualToString:entity.type]) {
-        self.taskStatusView.bgColor = @"fc6721";
-        self.taskStatusLabel.text = @"接单";
-    } else if ([@"2" isEqualToString:entity.type]) {
-        self.taskStatusView.bgColor = @"fc291c";
-        self.taskStatusLabel.text = @"处理";
-    } else if ([@"3" isEqualToString:entity.type]) {
-        self.taskStatusView.bgColor = @"4ec030";
-        self.taskStatusLabel.text = @"派工";
-    } else if ([@"4" isEqualToString:entity.type]) {
-        self.taskStatusView.bgColor = @"808080";
-        self.taskStatusLabel.text = @"作废";
-    }
-    
-    if ([@"1" isEqualToString:entity.priority]) {
-        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"fc6721"];
-        self.priorityLabel.text = @"低";
-    } else if ([@"2" isEqualToString:entity.type]) {
-        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"fc291c"];
-        self.priorityLabel.text = @"中";
-    } else if ([@"3" isEqualToString:entity.type]) {
-        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"4ec030"];
-        self.priorityLabel.text = @"高";
-    } else if ([@"4" isEqualToString:entity.type]) {
-        self.priorityLabel.backgroundColor = [UIColor colorFromHexCode:@"808080"];
-        self.priorityLabel.text = @"紧急";
-    }
-    
-    if (![entity.time isBlankString]) {
-        self.timeLabel.text = entity.time;
+    if (![entity.TaskStatus isBlankString]) {
+        self.TaskStatusLabel.text = [taskStatusShowDic objectForKey:entity.TaskStatus];
+        NSString *color = @"ffffff";
+        if ([@"0" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_ORANGE_COLOR;
+        } else if ([@"1" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_RED_COLOR;
+        } else if ([@"2" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_GREEN_COLOR;
+        } else if ([@"3" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_BLUE_COLOR;
+        } else if ([@"4" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_DARKGRAY_COLOR;
+        } else if ([@"5" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_DARKGRAY_COLOR;
+        } else if ([@"6" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_DARKGRAY_COLOR;
+        } else if ([@"7" isEqualToString:entity.TaskStatus]) {
+            color = BUTTON_DARKGRAY_COLOR;
+        }
+        self.taskStatusView.bgColor = color;
     } else {
-        self.timeLabel.text = @"";
+        self.TaskStatusLabel.text = @"";
+    }
+    if (![entity.Priority isBlankString]) {
+        self.PriorityLabel.text = [priorityDic objectForKey:entity.Priority];
+        NSString *color = @"ffffff";
+        if ([@"1" isEqualToString:entity.Priority]) {
+            color = BUTTON_GREEN_COLOR;
+        } else if ([@"2" isEqualToString:entity.Priority]) {
+            color = BUTTON_BLUE_COLOR;
+        } else if ([@"3" isEqualToString:entity.Priority]) {
+            color = BUTTON_ORANGE_COLOR;
+        } else if ([@"4" isEqualToString:entity.Priority]) {
+            color = BUTTON_RED_COLOR;
+        }
+        self.PriorityLabel.backgroundColor = [UIColor colorFromHexCode:color];
+    } else {
+        self.PriorityLabel.text = @"";
     }
     
-    if (![entity.desc isBlankString]) {
-        self.descLabel.text = entity.desc;
+    if (![entity.ReceiveTime isBlankString]) {
+        self.ReceiveTimeLabel.text = entity.ReceiveTime;
     } else {
-        self.descLabel.text = @"";
+        self.ReceiveTimeLabel.text = @"";
     }
     
-    if (![entity.position isBlankString]) {
-        self.positionLabel.text = entity.position;
+    if (![entity.Subject isBlankString]) {
+        self.SubjectLabel.text = entity.Subject;
     } else {
-        self.positionLabel.text = @"";
+        self.SubjectLabel.text = @"";
+    }
+    
+    if (![entity.Position isBlankString]) {
+        self.PositionLabel.text = entity.Position;
+    } else {
+        self.PositionLabel.text = @"";
     }
     
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat totalHeight = 0;
-    totalHeight += [self.idLabel sizeThatFits:size].height;
-    totalHeight += [self.typeLabel sizeThatFits:size].height;
-    totalHeight += [self.descLabel sizeThatFits:size].height;
-    totalHeight += [self.positionLabel sizeThatFits:size].height;
+    totalHeight += [self.CodeLabel sizeThatFits:size].height;
+    totalHeight += [self.ShortTitleLabel sizeThatFits:size].height;
+    totalHeight += [self.ServiceTypeLabel sizeThatFits:size].height;
+    totalHeight += [self.SubjectLabel sizeThatFits:size].height;
+    totalHeight += [self.PositionLabel sizeThatFits:size].height;
     
     totalHeight += 25; // margins
     return CGSizeMake(size.width, totalHeight);
 }
-
-/*
-- (IBAction)doTask:(id)sender {
-    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-    UIViewController *viewController;
-    if ([@"1" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
-        ((TaskJiedanViewController *)viewController).id = _entity.id;
-    } else if ([@"2" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
-        ((TaskChuli1ViewController *)viewController).id = _entity.id;
-    } else if ([@"3" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
-        ((TaskPaiGongViewController *)viewController).id = _entity.id;
-    } else if ([@"4" isEqualToString:_entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
-        ((TaskHandleViewController *)viewController).id = _entity.id;
-    }
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.parentController.navigationItem.backBarButtonItem = backButton;
-    viewController.hidesBottomBarWhenPushed = YES;
-    [self.parentController.navigationController pushViewController:viewController animated:YES];
-}
- */
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -349,8 +349,8 @@
             valueLabel.text = @"";
         } else if (row==3) {
             keyLabel.text = @"服务类型";
-            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypeDic;
-            NSString *serviceTypeText = [dic objectForKey:[NSString stringWithFormat:@"%ld", serviceType]];
+//            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypeDic;
+            NSString *serviceTypeText = [serviceTypeDic objectForKey:[NSString stringWithFormat:@"%ld", serviceType]];
             if (serviceTypeText) {
                 valueLabel.text = serviceTypeText;
             } else {
@@ -367,8 +367,7 @@
             valueLabel.text = @"工单任务";
         } else if (row==5) {
             keyLabel.text = @"优先级";
-            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).priorityDic;
-            NSString *priorityText = [dic objectForKey:[NSString stringWithFormat:@"%ld", priority]];
+            NSString *priorityText = [priorityDic objectForKey:[NSString stringWithFormat:@"%ld", priority]];
             if (priorityText) {
                 valueLabel.text = priorityText;
             } else {

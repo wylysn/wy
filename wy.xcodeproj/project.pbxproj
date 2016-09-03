@@ -123,6 +123,7 @@
 		D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */; };
 		D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */; };
 		D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */; };
+		D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DB71D7A900E0022D8BD /* TaskListEntity.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -363,6 +364,8 @@
 		D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通_APP_第1版.docx"; sourceTree = "<group>"; };
 		D297AAA61D770020004612BA /* KnowledgeDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeDetailTableViewController.h; sourceTree = "<group>"; };
 		D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeDetailTableViewController.m; sourceTree = "<group>"; };
+		D2997DB61D7A900E0022D8BD /* TaskListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListEntity.h; sourceTree = "<group>"; };
+		D2997DB71D7A900E0022D8BD /* TaskListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -752,6 +755,8 @@
 		88A893D21D3393530050D9F3 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				D2997DB61D7A900E0022D8BD /* TaskListEntity.h */,
+				D2997DB71D7A900E0022D8BD /* TaskListEntity.m */,
 				88821E7E1D5C67D700C72DA3 /* TaskEntity.h */,
 				88821E7F1D5C67D700C72DA3 /* TaskEntity.m */,
 			);
@@ -1180,6 +1185,7 @@
 				889B51F71D7663D8001A542A /* TaskHandleViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
 				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,
+				D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */,
 				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
 				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,

@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TaskEntity.h"
+#import "TaskListEntity.h"
 
 @interface TaskService : NSObject
 
-@property(retain,nonatomic)NSMutableArray *taskEntitysList;
+- (NSMutableArray *)getTaskListEntityArr:(NSDictionary *)condition;
+
+- (TaskEntity *)getTaskEntity:(NSString *)code;
 
 @end

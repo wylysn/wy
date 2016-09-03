@@ -14,7 +14,18 @@
 // 屏幕宽度
 #define SCREEN_WIDTH          [[UIScreen mainScreen] bounds].size.width
 
+#define serviceTypeDic          @{@"1":@"工程服务",@"2":@"安保服务",@"3":@"保洁服务",@"4":@"其他服务"}
+#define shortTitleDic           @{@"1":@"工单任务",@"2":@"巡检任务",@"3":@"维护任务"}
+#define priorityDic             @{@"1":@"低",@"2":@"中",@"3":@"高",@"4":@"紧急"}
+#define taskStatusDic           @{@"0":@"待接单",@"1":@"待处理",@"2":@"待派工",@"3":@"待审批",@"4":@"终止",@"5":@"完成",@"6":@"已验证",@"7":@"已存档"}
+#define taskStatusShowDic       @{@"0":@"接单",@"1":@"处理",@"2":@"派工",@"3":@"审批",@"4":@"终止",@"5":@"完成",@"6":@"已验证",@"7":@"已存档"}
+
 #define SPLITLINE_COLOR @"aaaaaa"
+#define BUTTON_GREEN_COLOR @"8dc351"
+#define BUTTON_RED_COLOR @"EE5162"
+#define BUTTON_ORANGE_COLOR @"FF6F55"
+#define BUTTON_BLUE_COLOR @"3DACE1"
+#define BUTTON_DARKGRAY_COLOR @"808080"
 
 #define DBNAME @"wy.db"
 

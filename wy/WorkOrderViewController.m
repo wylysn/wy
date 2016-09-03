@@ -14,6 +14,7 @@
 #import "DateUtil.h"
 #import "PRButton.h"
 #import <MJRefresh.h>
+#import "TaskTableViewController.h"
 
 #define CELLID @"WORKORDERENTIFIER_CELL"
 
@@ -22,14 +23,16 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     FilterViewHideByConfirm      = 1 << 0
 };
 
-@interface WorkOrderViewController ()<UITableViewDataSource,UITableViewDelegate,PRActionSheetPickerViewDelegate>
+@interface WorkOrderViewController ()<PRActionSheetPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet PRButton *dateBtn;
 
 @end
 
 @implementation WorkOrderViewController {
+    TaskTableViewController *taskListViewController;
+    
     WorkOrderService *workOrderService;
     UIWindow *window;
     UIWindow *filterWindow;
@@ -54,20 +57,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     self.navigationItem.rightBarButtonItem = filterItem;
     
     workOrderService = [[WorkOrderService alloc] init];
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.fd_debugLogEnabled = NO;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self.tableView.mj_header endRefreshing];
-    }];
-    
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self.tableView.mj_footer endRefreshing];
-    }];
     
     defaultDate = [NSDate date];
     
@@ -338,7 +327,8 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     [filterDic setObject:orderStatusArr forKey:@"orderStatus"];
     
     NSLog(@"筛选条件：%@", filterDic);
-    [self.tableView.mj_header beginRefreshing];
+    taskListViewController.filterDic = filterDic;
+    [taskListViewController.tableView.mj_header beginRefreshing];
 }
 
 - (void)hideFilterView:(UITapGestureRecognizer *)recognizer {
@@ -384,44 +374,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     }];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return workOrderService.taskEntitysList.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WorkOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[WorkOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
-    }
-    
-    [self configureCell:cell atIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
-}
-
-- (void)configureCell:(WorkOrderTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > workOrderService.taskEntitysList.count) {
-        return;
-    }
-    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
-    cell.entity = workOrderService.taskEntitysList[indexPath.row];
-    cell.parentController = self;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskEntity *entity = workOrderService.taskEntitysList[indexPath.row];
-    
-    return [tableView fd_heightForCellWithIdentifier:CELLID cacheByKey:entity.identifier configuration:^(WorkOrderTableViewCell *cell) {
-        [self configureCell:cell atIndexPath:indexPath];
-    }];
-}
-
 - (IBAction)dateClick:(id)sender {
     window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     window.rootViewController = self;
@@ -452,14 +404,19 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+// 获取子控制器
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([@"EMBED_TASKLIST" isEqualToString:segue.identifier]) {
+        taskListViewController = segue.destinationViewController;
+        NSDictionary *dic = @{};
+        taskListViewController.filterDic = dic;
+    }
 }
-*/
+
 
 @end

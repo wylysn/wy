@@ -41,14 +41,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
+        
     deviceArr = [[NSMutableArray alloc] init];
     chargePersonArr = [[NSMutableArray alloc] init];
     excutePersonArr = [[NSMutableArray alloc] init];
@@ -433,15 +426,6 @@
     }
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
 }
 
 @end

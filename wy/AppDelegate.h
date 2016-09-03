@@ -12,10 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) NSDictionary *serviceTypeDic;
-
-@property (strong, nonatomic) NSDictionary *priorityDic;
-
 
 @end
 

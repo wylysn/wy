@@ -12,12 +12,25 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @property (nonatomic, copy, readonly) NSString *identifier;
-@property (nonatomic, copy, readonly) NSString *id;
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *type;
-@property (nonatomic, copy, readonly) NSString *desc;
-@property (nonatomic, copy, readonly) NSString *position;
-@property (nonatomic, copy, readonly) NSString *priority;
-@property (nonatomic, copy, readonly) NSString *orderStatus;
-@property (nonatomic, copy, readonly) NSString *time;
+@property (nonatomic, copy, readonly) NSString *Code;
+@property (nonatomic, copy, readonly) NSString *Applyer;
+@property (nonatomic, copy, readonly) NSString *ApplyerTel;
+@property (nonatomic, copy, readonly) NSString *ServiceType;
+@property (nonatomic, copy, readonly) NSString *Priority;
+@property (nonatomic, copy, readonly) NSString *Location;
+@property (nonatomic, copy, readonly) NSString *Description;
+@property (nonatomic, copy, readonly) NSString *CreateDate;
+@property (nonatomic, copy, readonly) NSString *Creator;
+
+@property (nonatomic, copy, readonly) NSString *Executors;
+@property (nonatomic, copy, readonly) NSString *Leader;
+@property (nonatomic, copy, readonly) NSString *EStartTime;
+@property (nonatomic, copy, readonly) NSString *EEndTime;
+@property (nonatomic, copy, readonly) NSString *EWorkHours;
+@property (nonatomic, copy, readonly) NSString *AStartTime;
+@property (nonatomic, copy, readonly) NSString *AEndTime;
+@property (nonatomic, copy, readonly) NSString *AWorkHours;
+@property (nonatomic, copy, readonly) NSString *WorkContent;
+@property (nonatomic, copy, readonly) NSString *EditFields;
+@property (nonatomic, readonly) BOOL IsLocalSave;
 @end

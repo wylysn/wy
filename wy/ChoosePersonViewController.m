@@ -85,7 +85,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //已选中样式设置
     if (self.selectedPersonsDic[person.id]) {
-        UIImage *image = [UIImage imageNamed:@"checked_filled"];
+        UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         [cell.checkImageView setImage:image];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
@@ -107,13 +107,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChoosePersonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImage *image = [UIImage imageNamed:@"checked_filled"];
+    UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
     [cell.checkImageView setImage:image];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     ChoosePersonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImage *image = [UIImage imageNamed:@"checked"];
+    UIImage *image = [UIImage imageNamed:@"checkbox-unchecked"];
     [cell.checkImageView setImage:image];
 }
 

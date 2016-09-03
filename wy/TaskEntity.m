@@ -13,15 +13,28 @@
 {
     self = super.init;
     if (self) {
-        _identifier = [self uniqueIdentifier];
-        _id = dictionary[@"id"];
-        _name = dictionary[@"name"];
-        _type = dictionary[@"type"];
-        _desc = dictionary[@"desc"];
-        _position = dictionary[@"position"];
-        _priority = dictionary[@"priority"];
-        _orderStatus = dictionary[@"orderStatus"];
-        _time = dictionary[@"time"];
+        _Code = dictionary[@"Code"];
+        _Applyer = dictionary[@"Applyer"];
+        _ApplyerTel = dictionary[@"ApplyerTel"];
+        _ApplyerTel = dictionary[@"ApplyerTel"];
+        _ServiceType = dictionary[@"ServiceType"];
+        _Priority = dictionary[@"Priority"];
+        _Location = dictionary[@"Location"];
+        _Description = dictionary[@"Description"];
+        _CreateDate = dictionary[@"CreateDate"];
+        _Creator = dictionary[@"Creator"];
+        _Executors = dictionary[@"Executors"];
+        _Leader = dictionary[@"Leader"];
+        _EStartTime = dictionary[@"EStartTime"];
+        _EEndTime = dictionary[@"EEndTime"];
+        _EEndTime = dictionary[@"EEndTime"];
+        _EWorkHours = dictionary[@"EWorkHours"];
+        _AStartTime = dictionary[@"AStartTime"];
+        _AEndTime = dictionary[@"AEndTime"];
+        _AWorkHours = dictionary[@"AWorkHours"];
+        _WorkContent = dictionary[@"WorkContent"];
+        _EditFields = dictionary[@"EditFields"];
+        _IsLocalSave = dictionary[@"IsLocalSave"];
     }
     return self;
 }

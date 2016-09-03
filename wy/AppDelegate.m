@@ -28,9 +28,6 @@
     //状态栏颜色
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    _serviceTypeDic = @{@"1":@"工程服务",@"2":@"安保服务",@"3":@"保洁服务",@"4":@"其他服务"};
-    _priorityDic = @{@"1":@"低",@"2":@"中",@"3":@"高",@"4":@"紧急"};
-    
     //创建打开数据库
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         /*

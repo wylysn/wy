@@ -65,7 +65,7 @@
     codeLabel.text = device.code;
 
     if (self.selectedDevicesDic[device.code]) {
-        UIImage *image = [UIImage imageNamed:@"checked_filled"];
+        UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         [checkImageView setImage:image];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
@@ -87,14 +87,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImage *image = [UIImage imageNamed:@"checked_filled"];
+    UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
     UIImageView *checkImageView = [cell viewWithTag:3];
     [checkImageView setImage:image];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIImage *image = [UIImage imageNamed:@"checked"];
+    UIImage *image = [UIImage imageNamed:@"checkbox-unchecked"];
     UIImageView *checkImageView = [cell viewWithTag:3];
     [checkImageView setImage:image];
 }

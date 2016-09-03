@@ -10,4 +10,7 @@
 
 @interface TaskXunjianViewController : UIViewController
 
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSString *taskStatus;
+
 @end

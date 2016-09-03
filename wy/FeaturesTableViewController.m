@@ -96,10 +96,22 @@
     }
     
     if (section==1 && row==0) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        TaskTableViewController *taskListViewController = [mainSB instantiateViewControllerWithIdentifier:@"TASK_LIST"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"巡检任务";
+        [taskListViewController setTitle:title];
+        NSDictionary *filterDic = @{@"ShortTitle":@"2"};
+        taskListViewController.filterDic = filterDic;
+        taskListViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:taskListViewController animated:YES];
+    }
+    
+    if (section==1 && row==1) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         InspectTaskListViewController *inspectTaskViewController = [mainSB instantiateViewControllerWithIdentifier:@"INSPECT_TASKLIST"];
         self.navigationItem.backBarButtonItem = backButton;
-        NSString *title = @"巡检任务";
+        NSString *title = @"巡检查询";
         [inspectTaskViewController setTitle:title];
         inspectTaskViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];

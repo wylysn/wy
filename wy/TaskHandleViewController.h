@@ -10,7 +10,8 @@
 
 @interface TaskHandleViewController : UIViewController
 
-@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSString *taskStatus;
 
 @property (nonatomic,strong) NSMutableArray * imageArray;
 @property (nonatomic,strong) NSMutableArray * imageViewArray;

@@ -11,10 +11,11 @@
 #import "TaskTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
 #import <MJRefresh.h>
-#import "TaskPaiGongViewController.h"
-#import "TaskJiedanViewController.h"
-#import "TaskChuli1ViewController.h"
+//#import "TaskPaiGongViewController.h"
+//#import "TaskJiedanViewController.h"
+//#import "TaskChuli1ViewController.h"
 #import "TaskHandleViewController.h"
+#import "TaskXunjianViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -24,6 +25,7 @@
 
 @implementation TaskTableViewController {
     TaskService *taskService;
+    NSMutableArray *taskListArray;
 }
 
 - (void)viewDidLoad {
@@ -45,6 +47,9 @@
         [self.tableView.mj_footer endRefreshing];
     }];
     
+    taskListArray = [[NSMutableArray alloc] init];
+    taskListArray = [taskService getTaskListEntityArr:@{}];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +64,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return taskService.taskEntitysList.count;
+    return taskListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,32 +79,46 @@
 }
 
 - (void)configureCell:(TaskTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > taskService.taskEntitysList.count) {
+    if (indexPath.row > taskListArray.count) {
         return;
     }
 //    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
-    cell.entity = taskService.taskEntitysList[indexPath.row];
+    cell.entity = taskListArray[indexPath.row];
     cell.parentController = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskEntity *entity = taskService.taskEntitysList[indexPath.row];
+    TaskListEntity *entity = taskListArray[indexPath.row];
     UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
     UIViewController *viewController;
-    if ([@"1" isEqualToString:entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
-        ((TaskJiedanViewController *)viewController).id = entity.id;
-    } else if ([@"2" isEqualToString:entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
-        ((TaskChuli1ViewController *)viewController).id = entity.id;
-    } else if ([@"3" isEqualToString:entity.type]) {
-        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
-        ((TaskPaiGongViewController *)viewController).id = entity.id;
-    } else if ([@"4" isEqualToString:entity.type]) {
+    UIBarButtonItem *backButton;
+    if ([@"1" isEqualToString:entity.ShortTitle]) {
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail"];
+        ((TaskXunjianViewController *)viewController).code = entity.Code;
+        ((TaskXunjianViewController *)viewController).taskStatus = entity.TaskStatus;
+        backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+    } else {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
-        ((TaskHandleViewController *)viewController).id = entity.id;
+        ((TaskHandleViewController *)viewController).code = entity.Code;
+        ((TaskHandleViewController *)viewController).taskStatus = entity.TaskStatus;
+        backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+        /*
+        if ([@"1" isEqualToString:entity.TaskStatus]) {
+            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
+            ((TaskJiedanViewController *)viewController).id = entity.Code;
+        } else if ([@"2" isEqualToString:entity.TaskStatus]) {
+            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
+            ((TaskChuli1ViewController *)viewController).id = entity.Code;
+        } else if ([@"3" isEqualToString:entity.TaskStatus]) {
+            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
+            ((TaskPaiGongViewController *)viewController).id = entity.Code;
+        } else if ([@"4" isEqualToString:entity.TaskStatus]) {
+            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
+            ((TaskHandleViewController *)viewController).id = entity.Code;
+        }
+         */
     }
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     self.navigationItem.backBarButtonItem = backButton;
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TaskEntity.h"
+#import "TaskListEntity.h"
 #import "TaskTableViewController.h"
 #import "TaskStatusView.h"
 #import "PriorityLabel.h"
@@ -16,17 +16,17 @@
 
 @interface TaskTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) TaskEntity *entity;
+@property (nonatomic, strong) TaskListEntity *entity;
 @property (nonatomic, strong) TaskTableViewController *parentController;
-@property (weak, nonatomic) IBOutlet UILabel *idLabel;
-@property (weak, nonatomic) IBOutlet PriorityLabel *priorityLabel;
-@property (weak, nonatomic) IBOutlet PriorityWrapView *priorityWrapView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *descLabel;
-@property (weak, nonatomic) IBOutlet UILabel *taskStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *CodeLabel;
+@property (weak, nonatomic) IBOutlet PriorityLabel *PriorityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ReceiveTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ServiceTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ShortTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *SubjectLabel;
+@property (weak, nonatomic) IBOutlet UILabel *TaskStatusLabel;
 @property (weak, nonatomic) IBOutlet TaskStatusView *taskStatusView;
-@property (weak, nonatomic) IBOutlet UILabel *positionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *PositionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *seprateContraint;
 @property (weak, nonatomic) IBOutlet UIView *splitView;
 

@@ -14,6 +14,7 @@
 #import "DateUtil.h"
 #import "PRButton.h"
 #import <MJRefresh.h>
+#import "TaskTableViewController.h"
 
 #define CELLID                 @"INSPECTTASKENTIFIER_CELL"
 #define STARTTIME_PLACEHOLDER  @"请输入到场时间"
@@ -24,14 +25,15 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     FilterViewHideByConfirm      = 1 << 0
 };
 
-@interface InspectTaskListViewController ()<UITableViewDataSource,UITableViewDelegate,PRActionSheetPickerViewDelegate>
+@interface InspectTaskListViewController ()<PRActionSheetPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet PRButton *dateBtn;
 
 @end
 
 @implementation InspectTaskListViewController {
+    TaskTableViewController *taskListViewController;
+    
     InspectTaskService *inspectTaskService;
     UIWindow *window;
     UIWindow *filterWindow;
@@ -56,20 +58,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     self.navigationItem.rightBarButtonItem = filterItem;
     
     inspectTaskService = [[InspectTaskService alloc] init];
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.fd_debugLogEnabled = NO;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self.tableView.mj_header endRefreshing];
-    }];
-    
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self.tableView.mj_footer endRefreshing];
-    }];
     
     defaultDate = [NSDate date];
     
@@ -340,7 +328,8 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     [filterDic setObject:orderStatusArr forKey:@"orderStatus"];
     
     NSLog(@"筛选条件：%@", filterDic);
-    [self.tableView.mj_header beginRefreshing];
+    taskListViewController.filterDic = filterDic;
+    [taskListViewController.tableView.mj_header beginRefreshing];
 }
 
 - (IBAction)selectTime:(id)sender {
@@ -397,45 +386,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     }];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return inspectTaskService.taskEntitysList.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    InspectTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[InspectTaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
-    }
-    
-    [self configureCell:cell atIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
-}
-
-- (void)configureCell:(InspectTaskTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > inspectTaskService.taskEntitysList.count) {
-        return;
-    }
-    cell.entity = inspectTaskService.taskEntitysList[indexPath.row];
-    cell.parentController = self;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    InspectTaskEntity *entity = inspectTaskService.taskEntitysList[indexPath.row];
-    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-    UIViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail"];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = backButton;
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
 - (IBAction)dateClick:(id)sender {
     window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     window.rootViewController = self;
@@ -476,14 +426,17 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+// 获取子控制器
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([@"EMBED_TASKLIST" isEqualToString:segue.identifier]) {
+        taskListViewController = segue.destinationViewController;
+        NSDictionary *dic = @{};
+        taskListViewController.filterDic = dic;
+    }
 }
-*/
 
 @end

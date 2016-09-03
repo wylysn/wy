@@ -10,4 +10,6 @@
 
 @interface TaskTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSDictionary *filterDic; //为了不同入口进来使用的过滤条件
+
 @end

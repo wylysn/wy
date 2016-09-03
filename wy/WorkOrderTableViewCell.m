@@ -21,6 +21,7 @@
 {
     _entity = entity;
     
+    /*
     if (![entity.id isBlankString]) {
         self.nameLabel.text = entity.id;
     } else {
@@ -62,7 +63,7 @@
     } else {
         self.positionLabel.text = @"";
     }
-    
+    */
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
