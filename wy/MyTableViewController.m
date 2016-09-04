@@ -12,6 +12,7 @@
 #import "FeedbackViewController.h"
 #import "FeedbackChildTableViewController.h"
 #import "WarningView.h"
+#import "AboutViewController.h"
 
 @interface MyTableViewController ()
 
@@ -50,15 +51,15 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     
-    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+    UIStoryboard* mySB = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"我的" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    if (section == 0 && row == 0) {
-        UIViewController *loginViewController = [mainSB instantiateViewControllerWithIdentifier:@"LOGIN"];
-        [self presentViewController:loginViewController animated:YES completion:nil];
-    }
-    
-    if (section == 1 && row == 0) {
+    if (section == 0) {
+        if (row == 0) {
+            UIViewController *loginViewController = [mySB instantiateViewControllerWithIdentifier:@"LOGIN"];
+            [self presentViewController:loginViewController animated:YES completion:nil];
+        }
+    } else if (section == 1 && row == 0) {
         if (!window) {
             window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
             window.rootViewController = self;
@@ -94,34 +95,22 @@
         }
         [window makeKeyAndVisible];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-    
-    
-    if (section == 3) {
+    } else if (section == 3) {
         if (row == 0) {
-//            ModifyMobileViewController *modifyPhoneViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYMOBILE"];
-//            self.navigationItem.backBarButtonItem = backButton;
-//            NSString *title = @"修改手机号";
-//            [modifyPhoneViewController setTitle:title];
-//            modifyPhoneViewController.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:modifyPhoneViewController animated:YES];
-            
-            ModifyPasswordViewController *modifyPassWordViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYPASSWORD"];
+            ModifyPasswordViewController *modifyPassWordViewController = [mySB instantiateViewControllerWithIdentifier:@"MODIFYPASSWORD"];
             self.navigationItem.backBarButtonItem = backButton;
             NSString *title = @"修改密码";
             [modifyPassWordViewController setTitle:title];
             [self.navigationController pushViewController:modifyPassWordViewController animated:YES];
         }
-    }
-    if (section == 4) {
-//        if (row == 0) {
-//            FeedbackViewController *feedbackViewController = [mainSB instantiateViewControllerWithIdentifier:@"FEEDBACK"];
-//            self.navigationItem.backBarButtonItem = backButton;
-//            NSString *title = @"反馈";
-//            [feedbackViewController setTitle:title];
-//            feedbackViewController.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:feedbackViewController animated:YES];
-//        }
+    } else if (section == 4) {
+        if (row == 0) {
+            AboutViewController *aboutViewController = [mySB instantiateViewControllerWithIdentifier:@"ABOUT"];
+            self.navigationItem.backBarButtonItem = backButton;
+            NSString *title = @"关于";
+            [aboutViewController setTitle:title];
+            [self.navigationController pushViewController:aboutViewController animated:YES];
+        }
     }
 }
 

@@ -126,6 +126,8 @@
 		D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DB71D7A900E0022D8BD /* TaskListEntity.m */; };
 		D2997DBE1D7AFD770022D8BD /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2997DBD1D7AFD770022D8BD /* WarningView.xib */; };
 		D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DC01D7AFE3B0022D8BD /* WarningView.m */; };
+		D2AAA61C1D7C07E200A40FF1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */; };
+		D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
@@ -373,6 +375,10 @@
 		D2997DBD1D7AFD770022D8BD /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		D2997DBF1D7AFE3B0022D8BD /* WarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningView.h; sourceTree = "<group>"; };
 		D2997DC01D7AFE3B0022D8BD /* WarningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningView.m; sourceTree = "<group>"; };
+		D2AAA61A1D7C07E200A40FF1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		D2AAA61D1D7C086200A40FF1 /* AboutChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutChildTableViewController.h; sourceTree = "<group>"; };
+		D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutChildTableViewController.m; sourceTree = "<group>"; };
 		D2CF2E701D7BB29E0020759A /* PRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRView.h; sourceTree = "<group>"; };
 		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -837,6 +843,10 @@
 				88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */,
 				D2CF2E731D7BDABA0020759A /* LoginViewController.h */,
 				D2CF2E741D7BDABA0020759A /* LoginViewController.m */,
+				D2AAA61A1D7C07E200A40FF1 /* AboutViewController.h */,
+				D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */,
+				D2AAA61D1D7C086200A40FF1 /* AboutChildTableViewController.h */,
+				D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1163,6 +1173,7 @@
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,
 				889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */,
 				D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */,
+				D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
 				8841D47B1D73DF14003E4495 /* DeviceEntity.m in Sources */,
@@ -1171,6 +1182,7 @@
 				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
 				889BA2A01D64141900BC5413 /* UIImage+Resolution.m in Sources */,
 				D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */,
+				D2AAA61C1D7C07E200A40FF1 /* AboutViewController.m in Sources */,
 				88B6FD941D66954700418972 /* PRLabel.m in Sources */,
 				88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */,
 				889BA29B1D64124E00BC5413 /* PhotoViewCell.m in Sources */,
