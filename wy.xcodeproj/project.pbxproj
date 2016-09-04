@@ -126,6 +126,8 @@
 		D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DB71D7A900E0022D8BD /* TaskListEntity.m */; };
 		D2997DBE1D7AFD770022D8BD /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2997DBD1D7AFD770022D8BD /* WarningView.xib */; };
 		D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DC01D7AFE3B0022D8BD /* WarningView.m */; };
+		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
+		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -371,6 +373,10 @@
 		D2997DBD1D7AFD770022D8BD /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		D2997DBF1D7AFE3B0022D8BD /* WarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningView.h; sourceTree = "<group>"; };
 		D2997DC01D7AFE3B0022D8BD /* WarningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningView.m; sourceTree = "<group>"; };
+		D2CF2E701D7BB29E0020759A /* PRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRView.h; sourceTree = "<group>"; };
+		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
+		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D2CF2E741D7BDABA0020759A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +515,8 @@
 				88821E881D5C6F1D00C72DA3 /* NSString+MD5.m */,
 				88B6FD921D66954700418972 /* PRLabel.h */,
 				88B6FD931D66954700418972 /* PRLabel.m */,
+				D2CF2E701D7BB29E0020759A /* PRView.h */,
+				D2CF2E711D7BB29E0020759A /* PRView.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -827,6 +835,8 @@
 				88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */,
 				88D5CB401D7022CA0041C9A1 /* FeedbackChildTableViewController.h */,
 				88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */,
+				D2CF2E731D7BDABA0020759A /* LoginViewController.h */,
+				D2CF2E741D7BDABA0020759A /* LoginViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1171,6 +1181,7 @@
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */,
 				8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */,
+				D2CF2E721D7BB29E0020759A /* PRView.m in Sources */,
 				88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */,
 				88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */,
 				8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */,
@@ -1190,6 +1201,7 @@
 				88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */,
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
+				D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,

@@ -49,7 +49,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
+    
+    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"我的" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    if (section == 0 && row == 0) {
+        UIViewController *loginViewController = [mainSB instantiateViewControllerWithIdentifier:@"LOGIN"];
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
     
     if (section == 1 && row == 0) {
         if (!window) {
@@ -89,7 +96,7 @@
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
-    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+    
     if (section == 3) {
         if (row == 0) {
 //            ModifyMobileViewController *modifyPhoneViewController = [mainSB instantiateViewControllerWithIdentifier:@"MODIFYMOBILE"];
