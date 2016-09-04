@@ -44,7 +44,7 @@
     
     for (int i = 0; i<self.imageArray.count; i++) {
         UIImageView * photoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*i, 10, SCREEN_WIDTH, SCREEN_HEIGHT-74-64)];
-        photoImage.image = [self.imageArray[i] imageScaledToSize2:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-74-64)];
+        photoImage.image = [self.imageArray[i] imageScaledToSize3:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-74-64)];
         [self.scrollView addSubview:photoImage];
         
     }
