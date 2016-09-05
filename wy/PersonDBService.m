@@ -49,7 +49,7 @@ static sqlite3_stmt *statement = nil;
 
 - (void) createPersonTable {
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Person (id integer primary key, name text, department text, position text)";
+    NSString *sql_stmt =@"create table if not exists Person (AppUserName text primary key, EmployeeName text, DepartName text, SortIndex integer, Phone text, Mobile text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -63,7 +63,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into Person (id, name, department, position) values (\"%ld\",\"%@\", \"%@\", \"%@\")",(long)[person.id integerValue], person.name, person.department, person.position];
+        NSString *insertSQL = [NSString stringWithFormat:@"insert into Person (AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile) values (\"%@\",\"%@\", \"%@\", \"%ld\", \"%@\", \"%@\")",person.AppUserName, person.EmployeeName, person.DepartName, person.SortIndex, person.Phone, person.Mobile];
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -83,26 +83,28 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 
-- (PersonEntity *) findById:(NSString*)id
+- (PersonEntity *) findByAppUserName:(NSString*)AppUserName
 {
     PersonEntity *person;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select id, name, department, position from Person where id=\"%@\"",id];
+        NSString *querySQL = [NSString stringWithFormat: @"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person where AppUserName=\"%@\"",AppUserName];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
-                NSString *id = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
-                NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *department = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSString *position = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
-                person = [[PersonEntity alloc] initWithDictionary:@{@"id":id, @"name":name, @"department":department, @"position":position}];
+                NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 3);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
             }
             else{
-                NSLog(@"没有找到id位%@的人员......", id);
+                NSLog(@"没有找到username为%@的人员......", AppUserName);
             }
         } else {
             NSLog(@"查找失败:%s", sqlite3_errmsg(database));
@@ -112,26 +114,60 @@ static sqlite3_stmt *statement = nil;
     return person;
 }
 
-- (void)deleteData:(NSInteger)id {
-    char *sql = "delete from Person where id = ?";
+- (NSArray *) findAllPersons {
+    NSMutableArray *resultArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        int result = sqlite3_prepare(database, sql, -1, &statement, NULL);
-        
-        if (result == SQLITE_OK) {
-            NSLog(@"删除语句正确");
-            // 绑定数据
-            sqlite3_bind_int(statement, (int)(id), 58);
-            // 判断时候执行成功
-            if (sqlite3_step(statement) == SQLITE_DONE) {
-                NSLog(@"删除成功");
-            } else {
-                NSLog(@"删除是吧i");
+        NSString *querySQL = @"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person order by SortIndex";
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 3);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
+                [resultArr addObject:person];
             }
         } else {
-            NSLog(@"删除语句错误");
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
         }
     }
+    sqlite3_finalize(statement);
+    return resultArr;
+}
+
+- (NSArray *) findPersonsByEmployeeName:(NSString*)AppUserName {
+    NSMutableArray *resultArr = [[NSMutableArray alloc] init];
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat:@"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person where EmployeeName like '%%%@%%' order by SortIndex", AppUserName];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 3);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
+                [resultArr addObject:person];
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    }
+    sqlite3_finalize(statement);
+    return resultArr;
 }
 
 @end

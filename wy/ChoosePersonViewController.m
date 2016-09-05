@@ -9,18 +9,19 @@
 #define CELLID @"PERSONIDENTIFIER"
 
 #import "ChoosePersonViewController.h"
-#import "ChoosePersonService.h"
+#import "PersonDBService.h"
 #import "PersonEntity.h"
 #import "ChoosePersonTableViewCell.h"
 
-@interface ChoosePersonViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ChoosePersonViewController ()<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation ChoosePersonViewController{
-    ChoosePersonService *personService;
+//    ChoosePersonService *personService;
+    NSArray *personList;
 }
 
 - (void)viewDidLoad {
@@ -30,6 +31,7 @@
     image1.frame=CGRectMake(0, 0, 25, 25);
     self.searchField.leftView=image1;
     self.searchField.leftViewMode=UITextFieldViewModeAlways;
+    self.searchField.delegate = self;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -37,7 +39,7 @@
         self.tableView.allowsMultipleSelection = TRUE;
     }
     
-    personService = [[ChoosePersonService alloc] init];
+    personList = [[PersonDBService getSharedInstance] findAllPersons];
     
     UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 28)];
     confirmBtn.layer.cornerRadius = 3;
@@ -54,23 +56,22 @@
     NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
     NSMutableArray *personArr = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
-        PersonEntity *person = personService.deptsList[indexPath.section][@"persons"][indexPath.row];
+        PersonEntity *person = personList[indexPath.row];
         [personArr addObject:person];
     }
     [self.navigationController popViewControllerAnimated:YES];
     
-    if (_delegate && [_delegate respondsToSelector:@selector(getSelectedPersons:withType:)]) {
-        [_delegate getSelectedPersons:personArr withType:self.type];
+    if (_delegate && [_delegate respondsToSelector:@selector(showSelectedPersons:withType:)]) {
+        [_delegate showSelectedPersons:personArr withType:self.type];
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return personService.deptsList.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *persons = personService.deptsList[section][@"persons"];
-    return persons.count;
+    return personList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,10 +79,9 @@
     if (cell == nil) {
         cell = [[ChoosePersonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
-    NSArray *persons = personService.deptsList[indexPath.section][@"persons"];
-    PersonEntity *person = persons[indexPath.row];
-    cell.nameLabel.text = person.name;
-    cell.phoneLabel.text = person.phone;
+    PersonEntity *person = personList[indexPath.row];
+    cell.nameLabel.text = person.EmployeeName;
+    cell.phoneLabel.text = person.Mobile;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //已选中样式设置
     if (self.selectedPersonsDic[person.id]) {
@@ -94,11 +94,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
+    return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
+    return CGFLOAT_MIN;//40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -117,6 +117,7 @@
     [cell.checkImageView setImage:image];
 }
 
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     int emptyViewWidth = 17;
     UIView *view = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, emptyViewWidth)];
@@ -127,20 +128,18 @@
     titleLabel.text = personService.deptsList[section][@"dept"];
     return view;
 }
+ */
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    personList = [[PersonDBService getSharedInstance] findPersonsByEmployeeName:textField.text];
+    [self.searchField resignFirstResponder];
+    [self.tableView reloadData];
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

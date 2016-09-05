@@ -14,6 +14,8 @@
 
 + (PersonDBService*) getSharedInstance;
 - (BOOL) saveData:(PersonEntity *)person;
-- (PersonEntity *) findById:(NSString*)id;
+- (PersonEntity *) findByAppUserName:(NSString*)AppUserName;
+- (NSArray *) findAllPersons;
+- (NSArray *) findPersonsByEmployeeName:(NSString*)AppUserName;
 
 @end

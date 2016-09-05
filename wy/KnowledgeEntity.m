@@ -15,8 +15,9 @@
     self = super.init;
     if (self) {
         _id = (int)[dictionary[@"id"] integerValue];
-        _content = dictionary[@"content"];
-        _source = dictionary[@"source"];
+        _Code = dictionary[@"Code"];
+        _Content = dictionary[@"Content"];
+        _Lyxm = dictionary[@"Lyxm"];
         _createPerson = dictionary[@"createPerson"];
         _createTime = dictionary[@"createTime"];
     }

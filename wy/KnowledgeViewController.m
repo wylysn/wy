@@ -90,10 +90,10 @@
         valueLabel.text = keyWord;
     } else if (row == 1) {
         keyLabel.text = @"内容";
-        valueLabel.text = knowledge.content;
+        valueLabel.text = knowledge.Content;
     } else if (row == 2) {
         keyLabel.text = @"来源项目";
-        valueLabel.text = knowledge.source;
+        valueLabel.text = knowledge.Lyxm;
     }
     
     return cell;

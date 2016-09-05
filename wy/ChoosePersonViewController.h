@@ -10,7 +10,7 @@
 
 @protocol ChoosePersonViewDelegate <NSObject>
 
-- (void)getSelectedPersons:(NSArray *) persons withType:(int) type;
+- (void)showSelectedPersons:(NSArray *) persons withType:(int) type;
 
 @end
 

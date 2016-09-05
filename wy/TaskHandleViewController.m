@@ -15,12 +15,13 @@
 #import "ELCImagePickerController.h"
 #import "UIImage+Resolution.h"
 #import "ChooseDeviceViewController.h"
+#import "ChoosePersonViewController.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
 #define PICS_PER_LINE 4
 
-@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate>
+@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePersonViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -32,7 +33,9 @@
     UITableViewCell *picCell;
     UIImageView *addImageView;
     NSMutableDictionary *selectedDevicesDic;
+    NSMutableDictionary *selectedChargesDic;
     NSMutableArray *chargePersonArr;
+    NSMutableDictionary *selectedExcutesDic;
     NSMutableArray *excutePersonArr;
 }
 
@@ -43,9 +46,11 @@
     self.tableView.delegate = self;
         
     deviceArr = [[NSMutableArray alloc] init];
-    chargePersonArr = [[NSMutableArray alloc] init];
-    excutePersonArr = [[NSMutableArray alloc] init];
     selectedDevicesDic = [[NSMutableDictionary alloc] init];
+    selectedChargesDic = [[NSMutableDictionary alloc] init];
+    chargePersonArr = [[NSMutableArray alloc] init];
+    selectedExcutesDic = [[NSMutableDictionary alloc] init];
+    excutePersonArr = [[NSMutableArray alloc] init];
     
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
@@ -220,27 +225,68 @@
     [self.tableView reloadData];
 }
 
-//- (void)deleteChargePerson:(UITapGestureRecognizer *)recognizer
-//{
-//    if ([recognizer.view isKindOfClass:[UIButton class]]) {
-//        UIButton *imageView = (UIButton *)recognizer.view;
-//        UITableViewCell *cell = (UITableViewCell *)[[[imageView superview] superview] superview];
-//        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//        [chargePersonArr removeObjectAtIndex:indexPath.row];
-//        NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:chargePersonArr];
-//        [self showSelectedDevices:newDevices];
-//    }
-//}
-//
-//- (void)showSelectedCharges:(NSArray *)chargeArray {
-//    chargePersonArr = [[NSMutableArray alloc] initWithArray:chargeArray];
-//    [selectedDevicesDic removeAllObjects];
-//    for (unsigned i = 0; i < chargePersonArr.count; i++) {
-//        DeviceEntity *device = (DeviceEntity *)deviceArr[i];
-//        [selectedDevicesDic setObject:device forKey:device.code];
-//    }
-//    [self.tableView reloadData];
-//}
+- (IBAction)addPersonInCharge:(id)sender {
+    [self toChoosePerson:1];
+}
+- (IBAction)addPersonInExcute:(id)sender {
+    [self toChoosePerson:2];
+}
+- (void)toChoosePerson:(int)type {
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ChoosePersonViewController *choosePersonViewController = [taskSB instantiateViewControllerWithIdentifier:@"CHOOSEPERSON"];
+    choosePersonViewController.delegate = self;
+    choosePersonViewController.type = type;
+    if (type==1) {
+        choosePersonViewController.selectedPersonsDic = selectedChargesDic;
+    } else {
+        choosePersonViewController.selectedPersonsDic = selectedChargesDic;
+    }
+    [self.navigationController pushViewController:choosePersonViewController animated:YES];
+}
+
+- (void)showSelectedPersons:(NSArray *)persons withType:(int)type {
+    if (type == 1) {
+        chargePersonArr = [[NSMutableArray alloc] initWithArray:persons];
+        [selectedChargesDic removeAllObjects];
+        for (unsigned i = 0; i < chargePersonArr.count; i++) {
+            PersonEntity *person = (PersonEntity *)chargePersonArr[i];
+            [selectedChargesDic setObject:person forKey:person.AppUserName];
+        }
+        [self.tableView reloadData];
+    } else {
+        excutePersonArr = [[NSMutableArray alloc] initWithArray:persons];
+        [selectedChargesDic removeAllObjects];
+        for (unsigned i = 0; i < excutePersonArr.count; i++) {
+            PersonEntity *person = (PersonEntity *)excutePersonArr[i];
+            [selectedChargesDic setObject:person forKey:person.AppUserName];
+        }
+        [self.tableView reloadData];
+    }
+}
+
+- (void)deleteChargePerson:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer.view isKindOfClass:[UIButton class]]) {
+        UIButton *imageView = (UIButton *)recognizer.view;
+        UITableViewCell *cell = (UITableViewCell *)[[[imageView superview] superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [chargePersonArr removeObjectAtIndex:indexPath.row];
+        NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:chargePersonArr];
+        [self showSelectedPersons:newPersons withType:1];
+    }
+}
+
+- (void)deleteExcutePerson:(UITapGestureRecognizer *)recognizer
+{
+    if ([recognizer.view isKindOfClass:[UIButton class]]) {
+        UIButton *imageView = (UIButton *)recognizer.view;
+        UITableViewCell *cell = (UITableViewCell *)[[[imageView superview] superview] superview];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [excutePersonArr removeObjectAtIndex:indexPath.row];
+        NSMutableArray *newPersons = [[NSMutableArray alloc] initWithArray:excutePersonArr];
+        [self showSelectedPersons:newPersons withType:2];
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -312,6 +358,16 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"负责人";
         [header addSubview:titleLabel];
+        
+        UIButton *addChargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
+        [addChargeBtn setTitle:@"添加" forState:UIControlStateNormal];
+        [addChargeBtn addTarget:self action:@selector(addPersonInCharge:) forControlEvents:UIControlEventTouchUpInside];
+        addChargeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        addChargeBtn.tintColor = [UIColor whiteColor];
+        addChargeBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+        addChargeBtn.layer.cornerRadius = 3;
+        [header addSubview:addChargeBtn];
+        
         return header;
     }
     if (section == 6) {
@@ -319,6 +375,16 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"执行人";
         [header addSubview:titleLabel];
+        
+        UIButton *addExcuteBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
+        [addExcuteBtn setTitle:@"添加" forState:UIControlStateNormal];
+        [addExcuteBtn addTarget:self action:@selector(addPersonInExcute:) forControlEvents:UIControlEventTouchUpInside];
+        addExcuteBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        addExcuteBtn.tintColor = [UIColor whiteColor];
+        addExcuteBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+        addExcuteBtn.layer.cornerRadius = 3;
+        [header addSubview:addExcuteBtn];
+        
         return header;
     }
     return nil;
@@ -410,7 +476,7 @@
     } else if (section == 5) {
         PersonEntity *person = chargePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
-        nameLabel.text = person.name;
+        nameLabel.text = person.EmployeeName;
         UIImageView *deleteView = [cell viewWithTag:2];
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteChargePerson:)];
         [deleteView addGestureRecognizer:gesture];
@@ -418,7 +484,7 @@
     } else if (section == 6) {
         PersonEntity *person = excutePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
-        nameLabel.text = person.name;
+        nameLabel.text = person.EmployeeName;
         UIImageView *deleteView = [cell viewWithTag:2];
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExcutePerson:)];
         [deleteView addGestureRecognizer:gesture];

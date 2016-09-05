@@ -12,10 +12,12 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @property (nonatomic, copy, readonly) NSString *id;
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *department;
-@property (nonatomic, copy, readonly) NSString *position;
-@property (nonatomic, copy, readonly) NSString *phone;
+@property (nonatomic, copy, readonly) NSString *AppUserName;
+@property (nonatomic, copy, readonly) NSString *EmployeeName;
+@property (nonatomic, copy, readonly) NSString *DepartName;
+@property (nonatomic, readonly) NSInteger SortIndex;
+@property (nonatomic, copy, readonly) NSString *Phone;
+@property (nonatomic, copy, readonly) NSString *Mobile;
 @property (nonatomic, assign) NSString *isInCharge;
 @property (nonatomic, assign) BOOL isChecked;
 @end

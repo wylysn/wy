@@ -64,13 +64,13 @@
     } else if(section == 1) {
         if (row==0) {
             UITextView *textView = [cell viewWithTag:1];
-            textView.text = _knowlwdge.content;//@"这里是畅行中国合肥站（che.ah122.cn），秉承122交通网“交通安全、文明出行”的传统，为合肥送上本地权威汽车信息。这里有最权威汽车资讯";//
+            textView.text = _knowlwdge.Content;//@"这里是畅行中国合肥站（che.ah122.cn），秉承122交通网“交通安全、文明出行”的传统，为合肥送上本地权威汽车信息。这里有最权威汽车资讯";//
         } else {
             UILabel *keyLabel = [cell viewWithTag:1];
             UILabel *valueLabel = [cell viewWithTag:2];
             if(row==1) {
                 keyLabel.text = @"来源项目";
-                valueLabel.text = _knowlwdge.source;
+                valueLabel.text = _knowlwdge.Lyxm;
             } else if(row==2) {
                 keyLabel.text = @"录入人";
                 valueLabel.text = _knowlwdge.createPerson;

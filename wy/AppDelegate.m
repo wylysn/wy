@@ -30,14 +30,21 @@
     
     //创建打开数据库
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        /*
+        
         PersonDBService *dbService1 = [PersonDBService getSharedInstance];
-        PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"id":@"1",@"name":@"张三",@"department":@"运维部",@"position":@"总经理"}];
-        [dbService1 saveData:person];
+        PersonEntity *person1 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00001", @"EmployeeName":@"张三", @"DepartName":@"运维1部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
+        [dbService1 saveData:person1];
+        PersonEntity *person2 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00002", @"EmployeeName":@"李四", @"DepartName":@"运维2部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
+        [dbService1 saveData:person2];
+        PersonEntity *person3 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00003", @"EmployeeName":@"王五", @"DepartName":@"运维3部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
+        [dbService1 saveData:person3];
+        PersonEntity *person4 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00004", @"EmployeeName":@"周六", @"DepartName":@"运维4部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
+        [dbService1 saveData:person4];
         
-        PersonEntity *person1 = [dbService1 findById:@"1"];
-        NSLog(@"从数据库中找出人员数据：%@", person1);
+        PersonEntity *person = [dbService1 findByAppUserName:@"00001"];
+        NSLog(@"从数据库中找出人员数据：%@", person);
         
+        /*
         DeviceDBService *dbService = [DeviceDBService getSharedInstance];
         DeviceEntity *device1 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"0001",@"name":@"冷却塔",@"position":@"世博馆"}];
         [dbService saveDevice:device1];
@@ -51,7 +58,7 @@
         NSLog(@"从数据库中找出%ld台设备信息", dArr.count);
         
         
-        KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"id":@"1",@"content":@"机器语言学校是什么鬼，我还真不知道",@"source":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];
+        KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"conDE":@"机器语言",@"Content":@"机器语言学校是什么鬼，我还真不知道",@"Lyxm":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];
         KnowledgeDBService *knowledgeService = [KnowledgeDBService getSharedInstance];
         [knowledgeService saveKnowledge:knowledge1];
          */

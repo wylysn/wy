@@ -731,8 +731,6 @@
 			children = (
 				88F140D21D6C258200B8BCCC /* InspectTaskEntity.h */,
 				88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */,
-				889B51FB1D76ABFC001A542A /* KnowledgeEntity.h */,
-				889B51FC1D76ABFC001A542A /* KnowledgeEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -919,6 +917,8 @@
 				8841D47A1D73DF14003E4495 /* DeviceEntity.m */,
 				88FF114F1D7552E90073EDBB /* DeviceDBService.h */,
 				88FF11501D7552E90073EDBB /* DeviceDBService.m */,
+				889B51FB1D76ABFC001A542A /* KnowledgeEntity.h */,
+				889B51FC1D76ABFC001A542A /* KnowledgeEntity.m */,
 				889B51FE1D76B00E001A542A /* KnowledgeDBService.h */,
 				889B51FF1D76B00E001A542A /* KnowledgeDBService.m */,
 				8811E7A41D77D96400CE7CE2 /* PositionEntity.h */,

@@ -229,7 +229,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, personHeight*i, SCREEN_WIDTH, personHeight)];
         
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 80, personHeight)];
-        nameLabel.text = person.name;
+        nameLabel.text = person.EmployeeName;
         nameLabel.font = [UIFont systemFontOfSize:14];
         nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
         [personView addSubview:nameLabel];
@@ -296,7 +296,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UIView *personView = [[UIView alloc] initWithFrame:CGRectMake(0, personHeight*i, SCREEN_WIDTH, personHeight)];
         
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 80, personHeight)];
-        nameLabel.text = person.name;
+        nameLabel.text = person.EmployeeName;
         nameLabel.font = [UIFont systemFontOfSize:14];
         nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
         [personView addSubview:nameLabel];

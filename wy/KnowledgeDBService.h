@@ -14,7 +14,7 @@
 
 + (KnowledgeDBService*) getSharedInstance;
 - (BOOL) saveKnowledge:(KnowledgeEntity *)knowledge;
-- (KnowledgeEntity *) findKnowledgeById:(int)id;
+- (KnowledgeEntity *) findKnowledgeByCode:(NSString *)Code;
 - (NSArray *) findKnowledgeByKeyword:(NSString*)keyword;
 
 @end
