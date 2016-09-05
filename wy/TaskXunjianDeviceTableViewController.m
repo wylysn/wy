@@ -68,13 +68,13 @@
     DeviceListEntity *device = (DeviceListEntity *)deviceService.taskDevicesList[section];
     if (row == 0) {
         keyLabel.text = @"设备编码";
-        valueLabel.text = device.code;
+        valueLabel.text = device.Code;
     } else if (row == 1) {
         keyLabel.text = @"设备名称";
-        valueLabel.text = device.name;
+        valueLabel.text = device.Name;
     } else if (row == 2) {
         keyLabel.text = @"巡检点位";
-        valueLabel.text = device.position;
+        valueLabel.text = device.Location;
     }
     
     return cell;

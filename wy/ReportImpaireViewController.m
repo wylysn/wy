@@ -230,7 +230,7 @@
     [selectedDevicesDic removeAllObjects];
     for (unsigned i = 0; i < deviceArr.count; i++) {
         DeviceListEntity *device = (DeviceListEntity *)deviceArr[i];
-        [selectedDevicesDic setObject:device forKey:device.code];
+        [selectedDevicesDic setObject:device forKey:device.Code];
     }
     [self.tableView reloadData];
 }
@@ -396,7 +396,7 @@
     } else if (section == 1) {
         DeviceListEntity *device = deviceArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
-        nameLabel.text = device.name;
+        nameLabel.text = device.Name;
         UIImageView *deleteView = [cell viewWithTag:2];
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDevice:)];
         [deleteView addGestureRecognizer:gesture];

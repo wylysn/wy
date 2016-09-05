@@ -46,7 +46,7 @@
         
         
         DeviceDBService *dbService = [DeviceDBService getSharedInstance];
-        DeviceListEntity *deviceList1 = [[DeviceListEntity alloc] initWithDictionary:@{@"Code":@"0001",@"Name":@"冷却塔",@"Class":@"",@"Location":@"",@"KeyId":@""}];
+        DeviceListEntity *deviceList1 = [[DeviceListEntity alloc] initWithDictionary:@{@"Code":@"0001",@"Name":@"冷却塔",@"Class":@"",@"Location":@"上海科技馆",@"KeyId":@""}];
         [dbService saveDeviceList:deviceList1];
         
         KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"conDE":@"机器语言",@"Content":@"机器语言学校是什么鬼，我还真不知道",@"Lyxm":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];

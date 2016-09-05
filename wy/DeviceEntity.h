@@ -10,6 +10,8 @@
 
 @interface DeviceEntity : NSObject
 
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 @property (nonatomic, copy, readonly) NSString *Code;
 @property (nonatomic, copy, readonly) NSString *Name;
 @property (nonatomic, copy, readonly) NSString *QRCode;
