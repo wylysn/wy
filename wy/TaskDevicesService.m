@@ -7,7 +7,7 @@
 //
 
 #import "TaskDevicesService.h"
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 
 @implementation TaskDevicesService
 
@@ -17,9 +17,9 @@
     if (self) {
         self.taskDevicesList = [[NSMutableArray alloc] init];
         
-        DeviceEntity *device1 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"000268",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
-        DeviceEntity *device2 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"000269",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
-        DeviceEntity *device3 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"000270",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
+        DeviceListEntity *device1 = [[DeviceListEntity alloc] initWithDictionary:@{@"code":@"000268",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
+        DeviceListEntity *device2 = [[DeviceListEntity alloc] initWithDictionary:@{@"code":@"000269",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
+        DeviceListEntity *device3 = [[DeviceListEntity alloc] initWithDictionary:@{@"code":@"000270",@"name":@"冷却塔饮水设备",@"position":@"非电力系统/化水/化水设备"}];
         
         [self.taskDevicesList addObject:device1];
         [self.taskDevicesList addObject:device2];

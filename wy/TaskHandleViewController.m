@@ -8,7 +8,7 @@
 
 #import "TaskHandleViewController.h"
 #import "PRPlaceHolderTextView.h"
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 #import "PersonEntity.h"
 #import "AAPLCameraViewController.h"
 #import "SkimPhotoViewController.h"
@@ -219,7 +219,7 @@
     deviceArr = [[NSMutableArray alloc] initWithArray:deviceArray];
     [selectedDevicesDic removeAllObjects];
     for (unsigned i = 0; i < deviceArr.count; i++) {
-        DeviceEntity *device = (DeviceEntity *)deviceArr[i];
+        DeviceListEntity *device = (DeviceListEntity *)deviceArr[i];
         [selectedDevicesDic setObject:device forKey:device.code];
     }
     [self.tableView reloadData];
@@ -457,7 +457,7 @@
             valueLabel.text = @"";
         }
     } else if (section == 1) {
-        DeviceEntity *device = deviceArr[row];
+        DeviceListEntity *device = deviceArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = device.name;
         UIImageView *deleteView = [cell viewWithTag:2];

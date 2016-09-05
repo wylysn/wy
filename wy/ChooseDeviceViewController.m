@@ -8,7 +8,7 @@
 
 #import "ChooseDeviceViewController.h"
 #import "DeviceDBService.h"
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 
 #define CELLID @"DEVICEIDENTIFIER"
 
@@ -35,7 +35,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    deviceList = [[DeviceDBService getSharedInstance] findAll];
+    deviceList = [[DeviceDBService getSharedInstance] findAllDeviceLists];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,14 +51,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
-    DeviceEntity *device = deviceList[indexPath.row];
+    DeviceListEntity *device = deviceList[indexPath.row];
     UILabel *nameLabel = [cell viewWithTag:1];
     UILabel *codeLabel = [cell viewWithTag:2];
     UIImageView *checkImageView = [cell viewWithTag:3];
-    nameLabel.text = device.name;
-    codeLabel.text = device.code;
+    nameLabel.text = device.Name;
+    codeLabel.text = device.Code;
 
-    if (self.selectedDevicesDic[device.code]) {
+    if (self.selectedDevicesDic[device.Code]) {
         UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         [checkImageView setImage:image];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -97,7 +97,7 @@
     NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
     NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
-        DeviceEntity *device = deviceList[indexPath.row];
+        DeviceListEntity *device = deviceList[indexPath.row];
         [deviceArr addObject:device];
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -108,7 +108,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    deviceList = [[DeviceDBService getSharedInstance] findDevicesByName:textField.text];
+    deviceList = [[DeviceDBService getSharedInstance] findDeviceListsByName:textField.text];
     [self.searchField resignFirstResponder];
     [self.tableView reloadData];
     return YES;

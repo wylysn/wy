@@ -50,7 +50,7 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createDeviceTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Knowledge (id integer primary key autoincrement, Code text, Content text, Lyxm text, createPerson text, createTime text)";
+    NSString *sql_stmt =@"create table if not exists Knowledge (Code text primary key, Content text, Lyxm text, createPerson text, createTime text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -90,19 +90,18 @@ static sqlite3_stmt *statement = nil;
     KnowledgeEntity *knowledge;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select id, Code, Content, Lyxm, createPerson, createTime from Knowledge where Code=\"%@\"",Code];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Content, Lyxm, createPerson, createTime from Knowledge where Code=\"%@\"",Code];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
-                int id = sqlite3_column_int(statement, 0);
-                NSString *code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *content = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSString *source = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
-                NSString *createPerson = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *createTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *content = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *source = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *createPerson = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *createTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 knowledge = [[KnowledgeEntity alloc] initWithDictionary:@{@"Code":code, @"Content":content, @"Lyxm":source, @"createPerson":createPerson, @"createTime":createTime}];
             }
             else{
@@ -120,17 +119,16 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *knowledgeArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select id, Code, Content, Lyxm, createPerson, createTime from Knowledge where Content like '%%%@%%'",  [NSString stringWithCString:[keyword UTF8String] encoding:NSUTF8StringEncoding]];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Content, Lyxm, createPerson, createTime from Knowledge where Content like '%%%@%%'",  [NSString stringWithCString:[keyword UTF8String] encoding:NSUTF8StringEncoding]];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                int id = sqlite3_column_int(statement, 0);
-                NSString *code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *content = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSString *source = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
-                NSString *createPerson = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *createTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *content = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *source = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *createPerson = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *createTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 KnowledgeEntity *knowledge = [[KnowledgeEntity alloc] initWithDictionary:@{@"Code":code, @"Content":content, @"Lyxm":source, @"createPerson":createPerson, @"createTime":createTime}];
                 [knowledgeArr addObject:knowledge];
             }

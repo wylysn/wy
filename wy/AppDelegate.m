@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "PersonDBService.h"
 #import "PersonEntity.h"
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 #import "DeviceDBService.h"
 #import "KnowledgeDBService.h"
 #import "KnowledgeEntity.h"
@@ -44,24 +44,15 @@
         PersonEntity *person = [dbService1 findByAppUserName:@"00001"];
         NSLog(@"从数据库中找出人员数据：%@", person);
         
-        /*
+        
         DeviceDBService *dbService = [DeviceDBService getSharedInstance];
-        DeviceEntity *device1 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"0001",@"name":@"冷却塔",@"position":@"世博馆"}];
-        [dbService saveDevice:device1];
-        DeviceEntity *device2 = [[DeviceEntity alloc] initWithDictionary:@{@"code":@"0002",@"name":@"水泵",@"position":@"科技馆"}];
-        [dbService saveDevice:device2];
-        
-        DeviceEntity *d1 = [dbService findDeviceById:@"0001"];
-        NSLog(@"从数据库中找出设备信息：%@", d1.code);
-        
-        NSArray *dArr = [dbService findAll];
-        NSLog(@"从数据库中找出%ld台设备信息", dArr.count);
-        
+        DeviceListEntity *deviceList1 = [[DeviceListEntity alloc] initWithDictionary:@{@"Code":@"0001",@"Name":@"冷却塔",@"Class":@"",@"Location":@"",@"KeyId":@""}];
+        [dbService saveDeviceList:deviceList1];
         
         KnowledgeEntity *knowledge1 = [[KnowledgeEntity alloc] initWithDictionary:@{@"conDE":@"机器语言",@"Content":@"机器语言学校是什么鬼，我还真不知道",@"Lyxm":@"人民日报",@"createPerson":@"系统录入",@"createTime":@"2016-08-31"}];
         KnowledgeDBService *knowledgeService = [KnowledgeDBService getSharedInstance];
         [knowledgeService saveKnowledge:knowledge1];
-         */
+        
         
         PositionEntity *p1 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"1", @"Code":@"0001", @"Name":@"上海国际旅游度假区", @"FullName":@"上海国际旅游度假区", @"Sort":@"1", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"0"}];
         PositionEntity *p2 = [[PositionEntity alloc] initWithDictionary:@{@"id":@"2", @"Code":@"000101", @"Name":@"运输管理所", @"FullName":@"运输管理所", @"Sort":@"2", @"Status":@"1", @"Description":@"张东路1388号", @"ParentID":@"1"}];

@@ -23,7 +23,7 @@
 		8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4701D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m */; };
 		8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */; };
 		8841D4781D73DEA1003E4495 /* TaskDevicesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4771D73DEA1003E4495 /* TaskDevicesService.m */; };
-		8841D47B1D73DF14003E4495 /* DeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D47A1D73DF14003E4495 /* DeviceEntity.m */; };
+		8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D47A1D73DF14003E4495 /* DeviceListEntity.m */; };
 		8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4801D741807003E4495 /* ReportImpaireViewController.m */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
 		88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6D1D5C4E7600C72DA3 /* home@2x.png */; };
@@ -80,6 +80,7 @@
 		88A893B31D332B270050D9F3 /* wyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893B21D332B270050D9F3 /* wyTests.m */; };
 		88A893BE1D332B270050D9F3 /* wyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893BD1D332B270050D9F3 /* wyUITests.m */; };
 		88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */; };
+		88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ABE1DA1D7D4E2A0035D39F /* DeviceEntity.m */; };
 		88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */; };
 		88B6FD941D66954700418972 /* PRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD931D66954700418972 /* PRLabel.m */; };
 		88B6FD961D66A13500418972 /* plus32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88B6FD951D66A13500418972 /* plus32@2x.png */; };
@@ -182,8 +183,8 @@
 		8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjianDeviceTableViewController.m; sourceTree = "<group>"; };
 		8841D4761D73DEA1003E4495 /* TaskDevicesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDevicesService.h; sourceTree = "<group>"; };
 		8841D4771D73DEA1003E4495 /* TaskDevicesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDevicesService.m; sourceTree = "<group>"; };
-		8841D4791D73DF14003E4495 /* DeviceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceEntity.h; sourceTree = "<group>"; };
-		8841D47A1D73DF14003E4495 /* DeviceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceEntity.m; sourceTree = "<group>"; };
+		8841D4791D73DF14003E4495 /* DeviceListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListEntity.h; sourceTree = "<group>"; };
+		8841D47A1D73DF14003E4495 /* DeviceListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListEntity.m; sourceTree = "<group>"; };
 		8841D47F1D741807003E4495 /* ReportImpaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportImpaireViewController.h; sourceTree = "<group>"; };
 		8841D4801D741807003E4495 /* ReportImpaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportImpaireViewController.m; sourceTree = "<group>"; };
 		88821E601D5C458300C72DA3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -284,6 +285,8 @@
 		88A893BF1D332B270050D9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A893D41D33940D0050D9F3 /* FeaturesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesTableViewController.h; sourceTree = "<group>"; };
 		88A893D51D33940D0050D9F3 /* FeaturesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesTableViewController.m; sourceTree = "<group>"; };
+		88ABE1D91D7D4E2A0035D39F /* DeviceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceEntity.h; sourceTree = "<group>"; };
+		88ABE1DA1D7D4E2A0035D39F /* DeviceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceEntity.m; sourceTree = "<group>"; };
 		88B6FD8C1D668D9E00418972 /* TaskChuli2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChuli2ViewController.h; sourceTree = "<group>"; };
 		88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChuli2ViewController.m; sourceTree = "<group>"; };
 		88B6FD921D66954700418972 /* PRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRLabel.h; sourceTree = "<group>"; };
@@ -913,8 +916,10 @@
 				880787C81D61B45200BA6F05 /* PersonEntity.m */,
 				88FF114C1D751C1E0073EDBB /* PersonDBService.h */,
 				88FF114D1D751C1E0073EDBB /* PersonDBService.m */,
-				8841D4791D73DF14003E4495 /* DeviceEntity.h */,
-				8841D47A1D73DF14003E4495 /* DeviceEntity.m */,
+				8841D4791D73DF14003E4495 /* DeviceListEntity.h */,
+				8841D47A1D73DF14003E4495 /* DeviceListEntity.m */,
+				88ABE1D91D7D4E2A0035D39F /* DeviceEntity.h */,
+				88ABE1DA1D7D4E2A0035D39F /* DeviceEntity.m */,
 				88FF114F1D7552E90073EDBB /* DeviceDBService.h */,
 				88FF11501D7552E90073EDBB /* DeviceDBService.m */,
 				889B51FB1D76ABFC001A542A /* KnowledgeEntity.h */,
@@ -1176,7 +1181,7 @@
 				D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
-				8841D47B1D73DF14003E4495 /* DeviceEntity.m in Sources */,
+				8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
 				88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */,
 				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
@@ -1206,6 +1211,7 @@
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
+				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
 				88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
 				D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */,

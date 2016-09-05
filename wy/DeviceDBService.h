@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 
 @interface DeviceDBService : NSObject
 
 + (DeviceDBService*) getSharedInstance;
-- (BOOL) saveDevice:(DeviceEntity *)device;
-- (DeviceEntity *) findDeviceById:(NSString*)id;
-- (NSArray *) findAll;
-- (NSArray *) findDevicesByName:(NSString*)name;
+- (BOOL) saveDeviceList:(DeviceListEntity *)deviceList;
+- (DeviceListEntity *) findDeviceListByCode:(NSString*)Code;
+- (NSArray *) findAllDeviceLists;
+- (NSArray *) findDeviceListsByName:(NSString*)name;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "TaskXunjianDeviceTableViewController.h"
 #import "TaskDevicesService.h"
-#import "DeviceEntity.h"
+#import "DeviceListEntity.h"
 
 @interface TaskXunjianDeviceTableViewController ()
 
@@ -65,7 +65,7 @@
     NSInteger row = indexPath.row;
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
-    DeviceEntity *device = (DeviceEntity *)deviceService.taskDevicesList[section];
+    DeviceListEntity *device = (DeviceListEntity *)deviceService.taskDevicesList[section];
     if (row == 0) {
         keyLabel.text = @"设备编码";
         valueLabel.text = device.code;
