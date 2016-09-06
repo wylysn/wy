@@ -9,7 +9,7 @@
 #import "DownloadViewController.h"
 #import "AppDelegate.h"
 
-@interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate, NSURLSessionDownloadDelegate>
+@interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate, NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDownloadDelegate,UIDocumentInteractionControllerDelegate>
 
 @end
 
@@ -66,7 +66,7 @@
 //    NSURLSession *session =[NSURLSession sessionWithConfiguration:sessionConfig
 //                                                         delegate:self
 //                                                    delegateQueue:nil];
-//    NSURLSessionDownloadTask * task =[session downloadTaskWithURL:[NSURL URLWithString:@"http://img6.cache.netease.com/photo/0001/2016-09-06/C08AKTHD3R710001.jpg"]];
+//    NSURLSessionDownloadTask * task =[session downloadTaskWithURL:[NSURL URLWithString:@"http://down.sandai.net/xljiasu/XlaccSetup3.13.0.8950_jsqgw.exe"]];
 //    NSURLSessionDownloadTask * task =[session downloadTaskWithURL:[NSURL URLWithString:[[URLManager getSharedInstance] getURL:URL_CALENDAR_LASTYEAR]]];
 //    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:[[URLManager getSharedInstance] getURL:URL_CALENDAR_LASTYEAR]]
 //                                            completionHandler:^(NSData *data,
@@ -83,8 +83,9 @@
 //    }];
 //    [task resume];
     
-    NSURL * url = [NSURL URLWithString:@"http://img6.cache.netease.com/photo/0001/2016-09-06/C08AKTHD3R710001.jpg"];
-    NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"backgroundtask2"];
+    NSURL * url = [NSURL URLWithString:@"http://down.sandai.net/thunder9/Thunder9.0.14.358.exe"];
+    //@"http://down.sandai.net/thunder9/Thunder9.0.14.358.exe";//http://down.sandai.net/xljiasu/XlaccSetup3.13.0.8950_jsqgw.exe
+    NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.purang.wy"];
     
     NSURLSession *backgroundSeesion = [NSURLSession sessionWithConfiguration: backgroundConfig delegate:self delegateQueue: [NSOperationQueue mainQueue]];
     
@@ -93,7 +94,7 @@
 }
 
 //前台下载的代理方法
-/*
+
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
     NSLog(@"Temporary File :%@\n", location);
@@ -101,12 +102,21 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSURL *docsDirURL = [NSURL fileURLWithPath:[docsDir stringByAppendingPathComponent:@"download.json"]];
+    NSURL *originalURL = [[downloadTask originalRequest] URL];
+    NSURL *docsDirURL = [NSURL fileURLWithPath:[docsDir stringByAppendingPathComponent:[originalURL lastPathComponent]]];
+    [fileManager removeItemAtURL:docsDirURL error:NULL];
     if ([fileManager moveItemAtURL:location
                              toURL:docsDirURL
                              error: &err])
     {
-        NSLog(@"File is saved to =%@",docsDir);
+        NSLog(@"文件存储到 =%@",docsDirURL);
+        NSFileManager* manager = [NSFileManager defaultManager];
+        
+        if ([manager fileExistsAtPath:[docsDir stringByAppendingPathComponent:[originalURL lastPathComponent]]]){
+            
+            float size = [[manager attributesOfItemAtPath:[docsDir stringByAppendingPathComponent:[originalURL lastPathComponent]] error:nil] fileSize]/(1024*1024);
+            NSLog(@"文件大小：%f", size);
+        }
     }
     else
     {
@@ -118,21 +128,34 @@
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     //You can get progress here
-    NSLog(@"Received: %lld bytes (Downloaded: %lld bytes)  Expected: %lld bytes.\n",
-          bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+    NSLog(@"Received: %lld bytes (Downloaded: %lld bytes)  Expected: %lld bytes.\n",bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
 }
-*/
--(void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
+
+#pragma mark - NSURLSessionTaskDelegate
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    NSLog(@"Background URL session %@ finished events.\n", session);
-    
-    AppDelegate * delegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    if(delegate.completionHandler)
-//    {
-//        void (^handler)() = delegate.completionHandler;
-//        handler();
-//    }
-    
+    if (error == nil) {
+        NSLog(@"任务: %@ 成功完成", task);
+    } else {
+        NSLog(@"任务: %@ 发生错误: %@", task, [error localizedDescription]);
+    }
+//    double progress = (double)task.countOfBytesReceived / (double)task.countOfBytesExpectedToReceive;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        self.progressView.progress = progress;
+//    });
+//    self.downloadTask = nil;
+}
+
+#pragma mark - NSURLSessionDelegate
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.backgroundSessionCompletionHandler) {
+        void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
+        appDelegate.backgroundSessionCompletionHandler = nil;
+        completionHandler();
+    }
+    NSLog(@"所有任务已完成!");
 }
 
 - (void)didReceiveMemoryWarning {

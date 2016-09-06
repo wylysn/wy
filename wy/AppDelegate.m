@@ -104,101 +104,35 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
-{
-    NSLog(@"Save completionHandler");
-//    self.completionHandler = completionHandler;
-    
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier
+  completionHandler:(void (^)())completionHandler {
+    self.backgroundSessionCompletionHandler = completionHandler;
+    //添加本地通知
+    [self presentNotification];
 }
 
-//
-//- (NSURLSession *)backgroundURLSession
-//{
-//    static NSURLSession *session = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        NSString *identifier = @"io.objc.backgroundTransferExample";
-//        NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
-//        session = [NSURLSession sessionWithConfiguration:sessionConfig
-//                                                delegate:self
-//                                           delegateQueue:[NSOperationQueue mainQueue]];
-//    });
-//    
-//    return session;
-//}
-//
-//#pragma mark - NSURLSessionDownloadDelegate
-//
-//- (void) URLSession:(NSURLSession *)session
-//       downloadTask:(NSURLSessionDownloadTask *)downloadTask
-//didFinishDownloadingToURL:(NSURL *)location
-//{
-//    NSLog(@"downloadTask:%@ didFinishDownloadingToURL:%@", downloadTask.taskDescription, location);
-//    
-//    // 必须用 NSFileManager 将文件复制到应用的存储中，因为临时文件在方法返回后会被删除
-//    // ...
-//    
-//    // 通知 UI 刷新
-//}
-//
-//- (void) URLSession:(NSURLSession *)session
-//       downloadTask:(NSURLSessionDownloadTask *)downloadTask
-//  didResumeAtOffset:(int64_t)fileOffset
-// expectedTotalBytes:(int64_t)expectedTotalBytes
-//{
-//}
-//
-//- (void) URLSession:(NSURLSession *)session
-//       downloadTask:(NSURLSessionDownloadTask *)downloadTask
-//       didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten
-//totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
-//{
-//}
-//后台的任务完成后如果应用没有在前台运行，需要实现UIApplication的两个delegate让系统唤醒应用
-
-//- (void) application:(UIApplication *)application
-//handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
-//{
-//    // 你必须重新建立一个后台 seesiong 的参照
-//    // 否则 NSURLSessionDownloadDelegate 和 NSURLSessionDelegate 方法会因为
-//    // 没有 对 session 的 delegate 设定而不会被调用。参见上面的 backgroundURLSession
-//    NSURLSession *backgroundSession = [self backgroundURLSession];
-//    
-//    NSLog(@"Rejoining session with identifier %@ %@", identifier, backgroundSession);
-//    
-//    // 保存 completion handler 以在处理 session 事件后更新 UI
-//    [self addCompletionHandler:completionHandler forSession:identifier];
-//}
-//
-//- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
-//{
-//    NSLog(@"Background URL session %@ finished events.", session);
-//          
-//          if (session.configuration.identifier) {
-//              // 调用在 -application:handleEventsForBackgroundURLSession: 中保存的 handler
-//              [self callCompletionHandlerForSession:session.configuration.identifier];
-//          }
-//}
-//
-//- (void)addCompletionHandler:(CompletionHandlerType)handler forSession:(NSString *)identifier
-//{
-//    if ([self.completionHandlerDictionary objectForKey:identifier]) {
-//        NSLog(@"Error: Got multiple handlers for a single session identifier. This should not happen. ");
-//    }
-//              
-//    [self.completionHandlerDictionary setObject:handler forKey:identifier];
-//            }
-
-//              - (void)callCompletionHandlerForSession: (NSString *)identifier
-//        {
-//            CompletionHandlerType handler = [self.completionHandlerDictionary objectForKey: identifier];
-//            
-//            if (handler) {
-//                [self.completionHandlerDictionary removeObjectForKey: identifier];
-//                NSLog(@"Calling completion handler for session %@", identifier);
-//                
-//                handler();
-//            }
-//        }
+-(void)presentNotification{
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.alertBody = @"下载完成!";
+    localNotification.alertAction = @"后台传输下载已完成!";
+    //提示音
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    //icon提示加1
+//    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    // ios8后，需要添加这个注册，才能得到授权
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        // 通知重复提示的单位，可以是天、周、月
+        //        notification.repeatInterval = NSCalendarUnitDay;
+    } else {
+        // 通知重复提示的单位，可以是天、周、月
+        //        notification.repeatInterval = NSDayCalendarUnit; //ios7使用
+    }
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+}
 
 @end
