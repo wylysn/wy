@@ -35,10 +35,11 @@
 #import "UIColor+HexCode.h"
 #import "UIDevice+UIDeviceCategory.h"
 #import "PRButton.h"
-//#import "URL.h"
+#import "URL.h"
 #import <AFNetworking.h>
 #import "PRHTTPSessionManager.h"
 #import "Reachability.h"
+#import "URLManager.h"
 
 
 #endif /* PrefixHeader_pch */

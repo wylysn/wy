@@ -13,6 +13,7 @@
 #import "FeedbackChildTableViewController.h"
 #import "WarningView.h"
 #import "AboutViewController.h"
+#import "DownloadViewController.h"
 
 @interface MyTableViewController ()
 
@@ -95,6 +96,14 @@
         }
         [window makeKeyAndVisible];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (section == 2) {
+        if (row == 0) {
+            DownloadViewController *downloadViewController = [mySB instantiateViewControllerWithIdentifier:@"DOWNLOAD"];
+            self.navigationItem.backBarButtonItem = backButton;
+            NSString *title = @"离线数据下载";
+            [downloadViewController setTitle:title];
+            [self.navigationController pushViewController:downloadViewController animated:YES];
+        }
     } else if (section == 3) {
         if (row == 0) {
             ModifyPasswordViewController *modifyPassWordViewController = [mySB instantiateViewControllerWithIdentifier:@"MODIFYPASSWORD"];

@@ -93,6 +93,8 @@
 		88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD9E1D66D6DA00418972 /* WorkOrderViewController.m */; };
 		88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */; };
 		88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FDA51D66E99400418972 /* WorkOrderService.m */; };
+		88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2D71D7E4AB800F2FFBD /* URLManager.m */; };
+		88CDD2DB1D7EA6A200F2FFBD /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */; };
 		88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */; };
 		88D5CB2D1D6FDBBE0041C9A1 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */; };
 		88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2F1D6FDECC0041C9A1 /* ModifyMobileViewController.m */; };
@@ -310,6 +312,10 @@
 		88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderTableViewCell.m; sourceTree = "<group>"; };
 		88B6FDA41D66E99400418972 /* WorkOrderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderService.h; sourceTree = "<group>"; };
 		88B6FDA51D66E99400418972 /* WorkOrderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderService.m; sourceTree = "<group>"; };
+		88CDD2D61D7E4AB800F2FFBD /* URLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
+		88CDD2D71D7E4AB800F2FFBD /* URLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
+		88CDD2D91D7EA6A200F2FFBD /* DownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
+		88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadViewController.m; sourceTree = "<group>"; };
 		88D5CB291D6FCED80041C9A1 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
 		88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
@@ -857,6 +863,8 @@
 				D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */,
 				D2AAA61D1D7C086200A40FF1 /* AboutChildTableViewController.h */,
 				D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */,
+				88CDD2D91D7EA6A200F2FFBD /* DownloadViewController.h */,
+				88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -900,6 +908,8 @@
 				88E928051D5DC14B00152BBF /* URL.h */,
 				88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */,
 				88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */,
+				88CDD2D61D7E4AB800F2FFBD /* URLManager.h */,
+				88CDD2D71D7E4AB800F2FFBD /* URLManager.m */,
 			);
 			name = connect;
 			sourceTree = "<group>";
@@ -1171,6 +1181,7 @@
 				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */,
 				889B51FD1D76ABFC001A542A /* KnowledgeEntity.m in Sources */,
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
 				889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */,
@@ -1240,6 +1251,7 @@
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
+				88CDD2DB1D7EA6A200F2FFBD /* DownloadViewController.m in Sources */,
 				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
 				88E927FF1D5DBF1D00152BBF /* UIColor+HexCode.m in Sources */,
 				88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */,

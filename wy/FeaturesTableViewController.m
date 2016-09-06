@@ -84,6 +84,7 @@
             title = @"待审批工单";
         }
         [taskTableViewController setTitle:title];
+        taskTableViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskTableViewController animated:YES];
     }
     if (section==0 && row==3) {
@@ -103,6 +104,7 @@
         [taskListViewController setTitle:title];
         NSDictionary *filterDic = @{@"ShortTitle":@"2"};
         taskListViewController.filterDic = filterDic;
+        taskListViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskListViewController animated:YES];
     }
     

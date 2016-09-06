@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1912" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--Work Order View Controller-->
         <scene sceneID="h0B-Y4-Jsr">
             <objects>
-                <viewController storyboardIdentifier="WORKORDER" id="InY-He-dDc" customClass="WorkOrderViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WORKORDER" hidesBottomBarWhenPushed="YES" id="InY-He-dDc" customClass="WorkOrderViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qIT-tA-MlN"/>
                         <viewControllerLayoutGuide type="bottom" id="n1t-WX-0Ox"/>
@@ -92,6 +92,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JwK-Cr-YUA" firstAttribute="width" secondItem="F8y-vS-F8J" secondAttribute="width" id="6cm-Mk-qnT"/>
+                            <constraint firstAttribute="bottom" secondItem="JwK-Cr-YUA" secondAttribute="bottom" id="ChY-3J-edf"/>
                             <constraint firstItem="JwK-Cr-YUA" firstAttribute="centerX" secondItem="F8y-vS-F8J" secondAttribute="centerX" id="KyY-HA-fIJ"/>
                             <constraint firstItem="n1t-WX-0Ox" firstAttribute="top" secondItem="JwK-Cr-YUA" secondAttribute="bottom" id="TQt-jW-5OQ"/>
                             <constraint firstItem="cSf-uo-Wy5" firstAttribute="top" secondItem="qIT-tA-MlN" secondAttribute="bottom" id="Y0s-2E-b3Y"/>
@@ -99,6 +100,11 @@
                             <constraint firstItem="cSf-uo-Wy5" firstAttribute="width" secondItem="F8y-vS-F8J" secondAttribute="width" id="b2a-Ys-TtH"/>
                             <constraint firstItem="JwK-Cr-YUA" firstAttribute="top" secondItem="cSf-uo-Wy5" secondAttribute="bottom" id="jSn-wY-KYJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TQt-jW-5OQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="600"/>
@@ -741,7 +747,7 @@
         <!--Knowledge View Controller-->
         <scene sceneID="jx7-MK-9Fv">
             <objects>
-                <viewController storyboardIdentifier="KNOWLEDGESEARCH" id="bgB-kr-2MT" customClass="KnowledgeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KNOWLEDGESEARCH" hidesBottomBarWhenPushed="YES" id="bgB-kr-2MT" customClass="KnowledgeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vIT-iB-AcO"/>
                         <viewControllerLayoutGuide type="bottom" id="jgD-hN-NUo"/>
@@ -787,10 +793,10 @@
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KNOWLEDGEIDENTIFIER" id="T1i-ms-VnZ">
-                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T1i-ms-VnZ" id="qn4-Q0-6yv">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DK-oO-r5M">
@@ -828,6 +834,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6T1-Nv-Y9v" firstAttribute="centerX" secondItem="HJH-zk-RDK" secondAttribute="centerX" id="2pT-qD-K37"/>
+                            <constraint firstAttribute="bottom" secondItem="ose-f8-qAK" secondAttribute="bottom" id="8zY-Zg-gM5"/>
                             <constraint firstItem="ose-f8-qAK" firstAttribute="top" secondItem="6T1-Nv-Y9v" secondAttribute="bottom" id="d2Z-rt-rYX"/>
                             <constraint firstItem="6T1-Nv-Y9v" firstAttribute="top" secondItem="vIT-iB-AcO" secondAttribute="bottom" constant="8" id="e3g-Jh-4gb"/>
                             <constraint firstItem="ose-f8-qAK" firstAttribute="width" secondItem="HJH-zk-RDK" secondAttribute="width" id="eu9-AG-xi2"/>
@@ -835,6 +842,11 @@
                             <constraint firstItem="ose-f8-qAK" firstAttribute="centerX" secondItem="HJH-zk-RDK" secondAttribute="centerX" id="ipR-Dd-jki"/>
                             <constraint firstItem="jgD-hN-NUo" firstAttribute="top" secondItem="ose-f8-qAK" secondAttribute="bottom" id="ybQ-u5-Je2"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ybQ-u5-Je2"/>
+                            </mask>
+                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="600"/>
@@ -858,10 +870,10 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TITLEIDENTIFY" id="azD-4S-Re3">
-                                <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="azD-4S-Re3" id="GmD-03-S1C">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROF-i0-E6q">
@@ -883,10 +895,10 @@
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CONTENTIDENTIFY1" id="3lL-Sw-5uf">
-                                <rect key="frame" x="0.0" y="93.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3lL-Sw-5uf" id="HM9-a2-DRn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqT-ya-EnF">
@@ -920,10 +932,10 @@
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CONTENTIDENTIFY2" id="9pP-0I-WrX">
-                                <rect key="frame" x="0.0" y="137.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9pP-0I-WrX" id="49u-2v-WfC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5OM-Xe-f8s">
@@ -1051,7 +1063,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nFp-sz-x7e" id="s5h-EZ-Nq7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbm-wo-AIw">
@@ -1158,8 +1170,8 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="D94-VP-Qff"/>
                                                             <exclude reference="9KO-dv-tbM"/>
+                                                            <exclude reference="D94-VP-Qff"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -1224,9 +1236,9 @@
                                                 <mask key="constraints">
                                                     <exclude reference="lFJ-YI-W1A"/>
                                                     <exclude reference="z8r-Yt-8CW"/>
-                                                    <exclude reference="lpY-p6-Ipg"/>
-                                                    <exclude reference="Nso-w5-PcF"/>
                                                     <exclude reference="0nb-RK-f5T"/>
+                                                    <exclude reference="Nso-w5-PcF"/>
+                                                    <exclude reference="lpY-p6-Ipg"/>
                                                     <exclude reference="sb5-vI-Z6d"/>
                                                 </mask>
                                             </variation>
@@ -1268,6 +1280,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fw4-Eq-vLT"/>
+        <segue reference="MfH-Wz-3if"/>
     </inferredMetricsTieBreakers>
 </document>
