@@ -34,7 +34,6 @@
     if (server) {
         [[URLManager getSharedInstance] setURL_PATH:server];
     }
-    NSLog(@"server:%@",[[URLManager getSharedInstance] getURL:URL_CALENDAR_LASTYEAR]);
     
     //创建打开数据库
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -103,7 +102,8 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -114,15 +114,16 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+/*
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier
   completionHandler:(void (^)())completionHandler {
     self.backgroundSessionCompletionHandler = completionHandler;
     //添加本地通知
     [self presentNotification:identifier];
-}
+ }
+ */
 
 -(void)presentNotification:(NSString *)identifier{
-    
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = [NSString stringWithFormat:@"%@下载完成!", identifier];
     localNotification.alertAction = @"后台传输下载已完成!";
@@ -130,16 +131,21 @@
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     //icon提示加1
 //    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-    // ios8后，需要添加这个注册，才能得到授权
-//    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-//        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
-//                                                                                 categories:nil];
-//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-//    } else {
-//        
-//    }
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
+{
+//    NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: identifier];
+    
+//    NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration: backgroundConfigObject delegate: self.downloadViewController delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSLog(@"Rejoining session %@\n", identifier);
+    
+    [self.downloadViewController addCompletionHandler: completionHandler forSession: identifier];
+    
+    //添加本地通知
+    [self presentNotification:identifier];
 }
 
 @end

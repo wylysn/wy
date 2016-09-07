@@ -14,14 +14,19 @@
 #import "WarningView.h"
 #import "AboutViewController.h"
 #import "DownloadViewController.h"
+#import "ClearCacheViewController.h"
+#import "BaseInfoEntity.h"
 
 @interface MyTableViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *cacheSizeLabel;
 
 @end
 
 @implementation MyTableViewController {
     UIWindow *window;
     UIWebView *callWebview;
+    DownloadViewController *downloadViewController;
 }
 
 - (void)viewDidLoad {
@@ -33,6 +38,18 @@
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    double cacheSize = 0;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *downloadDic = [userDefaults objectForKey:@"downloads"];
+    NSEnumerator *enumeratorObject = [downloadDic objectEnumerator];
+    for (BaseInfoEntity *info in enumeratorObject) {
+        cacheSize += info.size;
+    }
+    self.cacheSizeLabel.text = [NSString stringWithFormat:@"%.1fMB",cacheSize];
 }
 
 #pragma mark - Table view data source
@@ -98,11 +115,16 @@
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else if (section == 2) {
         if (row == 0) {
-            DownloadViewController *downloadViewController = [mySB instantiateViewControllerWithIdentifier:@"DOWNLOAD"];
-            self.navigationItem.backBarButtonItem = backButton;
-            NSString *title = @"离线数据下载";
-            [downloadViewController setTitle:title];
+            if (!downloadViewController) {
+                downloadViewController = [mySB instantiateViewControllerWithIdentifier:@"DOWNLOAD"];
+                self.navigationItem.backBarButtonItem = backButton;
+                NSString *title = @"离线数据下载";
+                [downloadViewController setTitle:title];
+            }
             [self.navigationController pushViewController:downloadViewController animated:YES];
+        } else if (row == 1) {
+            ClearCacheViewController *clearController = [mySB instantiateViewControllerWithIdentifier:@"CLEARCACHE"];
+            [self.navigationController pushViewController:clearController animated:YES];
         }
     } else if (section == 3) {
         if (row == 0) {

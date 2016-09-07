@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^CompletionHandlerType)();
+
 @interface DownloadViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet PRButton *downloadAllBtn;
+
+@property NSMutableDictionary *completionHandlerDictionary;
+
+- (void) addCompletionHandler: (CompletionHandlerType) handler forSession: (NSString *)identifier;
+- (void) callCompletionHandlerForSession: (NSString *)identifier;
 
 @end

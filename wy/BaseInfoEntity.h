@@ -12,8 +12,9 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, copy, readonly) NSString *KeyId;
-@property (nonatomic, copy, readonly) NSString *Name;
+@property (nonatomic, copy) NSString *KeyId;
+@property (nonatomic, copy) NSString *Name;
 @property (nonatomic, assign) BOOL hasDownLoad;
+@property (nonatomic, assign) double size;
 
 @end

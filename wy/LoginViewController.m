@@ -43,6 +43,7 @@
         [userDefaults setObject:serverField.text forKey:@"server"];
         //2.1立即同步
         [userDefaults synchronize];
+        //设置新服务器
         [[URLManager getSharedInstance] setURL_PATH:serverField.text];
     }];
     [alertController addAction:cancelAction];

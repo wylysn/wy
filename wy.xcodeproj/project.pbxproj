@@ -14,6 +14,7 @@
 		880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CA1D61C53800BA6F05 /* checked@2x.png */; };
 		880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CC1D61C55900BA6F05 /* checked_filled@2x.png */; };
 		880CFDCF1D7FA1290017F84F /* BaseInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */; };
+		880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880CFDD21D8011F40017F84F /* ClearCacheViewController.m */; };
 		8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */; };
 		8811E7A61D77D96400CE7CE2 /* PositionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A51D77D96400CE7CE2 /* PositionEntity.m */; };
 		8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */; };
@@ -170,6 +171,8 @@
 		880787CC1D61C55900BA6F05 /* checked_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked_filled@2x.png"; sourceTree = "<group>"; };
 		880CFDCD1D7FA1290017F84F /* BaseInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoEntity.h; sourceTree = "<group>"; };
 		880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoEntity.m; sourceTree = "<group>"; };
+		880CFDD11D8011F40017F84F /* ClearCacheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCacheViewController.h; sourceTree = "<group>"; };
+		880CFDD21D8011F40017F84F /* ClearCacheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearCacheViewController.m; sourceTree = "<group>"; };
 		8811E7A11D77D6EF00CE7CE2 /* PositionDBservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDBservice.h; sourceTree = "<group>"; };
 		8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDBservice.m; sourceTree = "<group>"; };
 		8811E7A41D77D96400CE7CE2 /* PositionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionEntity.h; sourceTree = "<group>"; };
@@ -878,6 +881,8 @@
 				D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */,
 				88CDD2D91D7EA6A200F2FFBD /* DownloadViewController.h */,
 				88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */,
+				880CFDD11D8011F40017F84F /* ClearCacheViewController.h */,
+				880CFDD21D8011F40017F84F /* ClearCacheViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1251,6 +1256,7 @@
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
+				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
 				88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
