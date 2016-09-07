@@ -61,6 +61,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     //刷新下载列表页面
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *downloadDic = [userDefaults objectForKey:@"downloads"];
+    for (BaseInfoEntity *info in filesArray) {
+        [keyIdArray addObject:info.KeyId];
+        if ([downloadDic objectForKey:info.KeyId]) {
+            info.hasDownLoad = YES;
+        } else {
+            info.hasDownLoad = NO;
+        }
+    }
     [self.tableView reloadData];
     
     [self resetDownloadAllBtn];
@@ -191,8 +201,8 @@
             } else {
                 newDic = [[NSMutableDictionary alloc] init];
             }
-            info.size = size;
-            [newDic setObject:info forKey:keyId];
+            NSDictionary *objDic = @{@"KeyId":info.KeyId,@"Name":info.Name,@"size":[NSNumber numberWithDouble:size]};
+            [newDic setObject:objDic forKey:keyId];
             [userDefaults setObject:newDic forKey:@"downloads"];
             [userDefaults synchronize];
             

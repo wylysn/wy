@@ -46,8 +46,8 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *downloadDic = [userDefaults objectForKey:@"downloads"];
     NSEnumerator *enumeratorObject = [downloadDic objectEnumerator];
-    for (BaseInfoEntity *info in enumeratorObject) {
-        cacheSize += info.size;
+    for (NSDictionary *objDic in enumeratorObject) {
+        cacheSize += [objDic[@"size"] doubleValue];
     }
     self.cacheSizeLabel.text = [NSString stringWithFormat:@"%.1fMB",cacheSize];
 }
