@@ -13,6 +13,7 @@
 		880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787C81D61B45200BA6F05 /* PersonEntity.m */; };
 		880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CA1D61C53800BA6F05 /* checked@2x.png */; };
 		880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CC1D61C55900BA6F05 /* checked_filled@2x.png */; };
+		880CFDCF1D7FA1290017F84F /* BaseInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */; };
 		8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */; };
 		8811E7A61D77D96400CE7CE2 /* PositionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A51D77D96400CE7CE2 /* PositionEntity.m */; };
 		8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */; };
@@ -167,6 +168,8 @@
 		880787C81D61B45200BA6F05 /* PersonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonEntity.m; sourceTree = "<group>"; };
 		880787CA1D61C53800BA6F05 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
 		880787CC1D61C55900BA6F05 /* checked_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked_filled@2x.png"; sourceTree = "<group>"; };
+		880CFDCD1D7FA1290017F84F /* BaseInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoEntity.h; sourceTree = "<group>"; };
+		880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoEntity.m; sourceTree = "<group>"; };
 		8811E7A11D77D6EF00CE7CE2 /* PositionDBservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDBservice.h; sourceTree = "<group>"; };
 		8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDBservice.m; sourceTree = "<group>"; };
 		8811E7A41D77D96400CE7CE2 /* PositionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionEntity.h; sourceTree = "<group>"; };
@@ -449,6 +452,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		880CFDD01D7FA1590017F84F /* model */ = {
+			isa = PBXGroup;
+			children = (
+				880CFDCD1D7FA1290017F84F /* BaseInfoEntity.h */,
+				880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		8811E7A91D77FB9F00CE7CE2 /* public */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,6 +725,7 @@
 		88A893CC1D3392BD0050D9F3 /* my */ = {
 			isa = PBXGroup;
 			children = (
+				880CFDD01D7FA1590017F84F /* model */,
 				D2997DC21D7AFE410022D8BD /* view */,
 				88D5CB281D6FCEA60041C9A1 /* controller */,
 				88D5CB2C1D6FDBBE0041C9A1 /* My.storyboard */,
@@ -1244,6 +1257,7 @@
 				D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */,
 				88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */,
 				88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */,
+				880CFDCF1D7FA1290017F84F /* BaseInfoEntity.m in Sources */,
 				88ABE1E11D7D66090035D39F /* InspectionModelEntity.m in Sources */,
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,

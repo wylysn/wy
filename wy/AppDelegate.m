@@ -79,6 +79,16 @@
         [positionService savePosition:p7];
     });
     
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    } else {
+        
+    }
+    
     return YES;
 }
 
@@ -108,30 +118,27 @@
   completionHandler:(void (^)())completionHandler {
     self.backgroundSessionCompletionHandler = completionHandler;
     //添加本地通知
-    [self presentNotification];
+    [self presentNotification:identifier];
 }
 
--(void)presentNotification{
+-(void)presentNotification:(NSString *)identifier{
     
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = @"下载完成!";
+    localNotification.alertBody = [NSString stringWithFormat:@"%@下载完成!", identifier];
     localNotification.alertAction = @"后台传输下载已完成!";
     //提示音
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     //icon提示加1
 //    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     // ios8后，需要添加这个注册，才能得到授权
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
-                                                                                 categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        // 通知重复提示的单位，可以是天、周、月
-        //        notification.repeatInterval = NSCalendarUnitDay;
-    } else {
-        // 通知重复提示的单位，可以是天、周、月
-        //        notification.repeatInterval = NSDayCalendarUnit; //ios7使用
-    }
+//    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+//        UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
+//                                                                                 categories:nil];
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    } else {
+//        
+//    }
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 

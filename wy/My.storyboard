@@ -805,7 +805,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wy-ep-ZXk">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wy-ep-ZXk">
                                                     <rect key="frame" x="18" y="11" width="100" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="0ht-wK-efe"/>
@@ -815,11 +815,11 @@
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3w-uy-g09" customClass="PRButton">
-                                                    <rect key="frame" x="297" y="11" width="60" height="21"/>
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3w-uy-g09" customClass="PRButton">
+                                                    <rect key="frame" x="293" y="10" width="64" height="23"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="B8b-Bv-nqw"/>
-                                                        <constraint firstAttribute="width" constant="60" id="k9r-4h-L9u"/>
+                                                        <constraint firstAttribute="height" constant="23" id="B8b-Bv-nqw"/>
+                                                        <constraint firstAttribute="width" constant="64" id="k9r-4h-L9u"/>
                                                     </constraints>
                                                     <state key="normal" title="下载">
                                                         <color key="titleColor" red="0.55294117649999996" green="0.76470588240000004" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -836,11 +836,23 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3s-f1-xNZ">
+                                                    <rect key="frame" x="218" y="11" width="60" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="EYU-Eb-dlN"/>
+                                                        <constraint firstAttribute="width" constant="60" id="aqa-we-1ET"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="P3w-uy-g09" firstAttribute="trailing" secondItem="IwB-34-Fsl" secondAttribute="trailingMargin" id="9zM-00-1V8"/>
                                                 <constraint firstItem="6wy-ep-ZXk" firstAttribute="leading" secondItem="IwB-34-Fsl" secondAttribute="leadingMargin" constant="10" id="Ceh-S5-vhw"/>
+                                                <constraint firstItem="P3w-uy-g09" firstAttribute="leading" secondItem="U3s-f1-xNZ" secondAttribute="trailing" constant="15" id="I3u-hO-UsB"/>
                                                 <constraint firstItem="6wy-ep-ZXk" firstAttribute="centerY" secondItem="IwB-34-Fsl" secondAttribute="centerY" id="Vju-Pa-ZoP"/>
+                                                <constraint firstItem="U3s-f1-xNZ" firstAttribute="centerY" secondItem="IwB-34-Fsl" secondAttribute="centerY" id="WG1-9A-Eng"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="P3w-uy-g09" secondAttribute="trailing" constant="10" id="oP0-MX-wWZ"/>
                                                 <constraint firstItem="P3w-uy-g09" firstAttribute="centerY" secondItem="IwB-34-Fsl" secondAttribute="centerY" id="x3f-UN-Sli"/>
                                             </constraints>
