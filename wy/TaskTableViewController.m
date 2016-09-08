@@ -16,6 +16,7 @@
 //#import "TaskChuli1ViewController.h"
 #import "TaskHandleViewController.h"
 #import "TaskXunjianViewController.h"
+#import "TaskXunjian2ViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -97,9 +98,16 @@
     UIViewController *viewController;
     UIBarButtonItem *backButton;
     if ([@"1" isEqualToString:entity.ShortTitle]) {
+        /*
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail"];
         ((TaskXunjianViewController *)viewController).code = entity.Code;
         ((TaskXunjianViewController *)viewController).taskStatus = entity.TaskStatus;
+        backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
+         */
+        //巡检任务查询详情
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail2"];
+        ((TaskXunjian2ViewController *)viewController).code = entity.Code;
+        ((TaskXunjian2ViewController *)viewController).taskStatus = entity.TaskStatus;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     } else {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];

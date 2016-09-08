@@ -27,6 +27,8 @@
 		8841D4781D73DEA1003E4495 /* TaskDevicesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4771D73DEA1003E4495 /* TaskDevicesService.m */; };
 		8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D47A1D73DF14003E4495 /* DeviceListEntity.m */; };
 		8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4801D741807003E4495 /* ReportImpaireViewController.m */; };
+		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
+		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
 		88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6D1D5C4E7600C72DA3 /* home@2x.png */; };
 		88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6F1D5C4F6600C72DA3 /* features@2x.png */; };
@@ -198,6 +200,10 @@
 		8841D47A1D73DF14003E4495 /* DeviceListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListEntity.m; sourceTree = "<group>"; };
 		8841D47F1D741807003E4495 /* ReportImpaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportImpaireViewController.h; sourceTree = "<group>"; };
 		8841D4801D741807003E4495 /* ReportImpaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportImpaireViewController.m; sourceTree = "<group>"; };
+		887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjian2ViewController.h; sourceTree = "<group>"; };
+		887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjian2ViewController.m; sourceTree = "<group>"; };
+		8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianBaseInfo2TableViewController.h; sourceTree = "<group>"; };
+		8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjianBaseInfo2TableViewController.m; sourceTree = "<group>"; };
 		88821E601D5C458300C72DA3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		88821E611D5C458300C72DA3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		88821E6D1D5C4E7600C72DA3 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
@@ -841,6 +847,10 @@
 				8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */,
 				889B51F51D7663D8001A542A /* TaskHandleViewController.h */,
 				889B51F61D7663D8001A542A /* TaskHandleViewController.m */,
+				887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */,
+				887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */,
+				8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */,
+				8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1211,6 +1221,7 @@
 				8811E7A61D77D96400CE7CE2 /* PositionEntity.m in Sources */,
 				889BA27C1D63F5AB00BC5413 /* TaskChuli1ViewController.m in Sources */,
 				889BA2971D64124E00BC5413 /* AAPLPreviewView.m in Sources */,
+				887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */,
 				889BA2C21D64159600BC5413 /* ELCAsset.m in Sources */,
 				88F140D71D6C269100B8BCCC /* InspectTaskService.m in Sources */,
 				889BA2C31D64159600BC5413 /* ELCAssetCell.m in Sources */,
@@ -1238,6 +1249,7 @@
 				889BA2991D64124E00BC5413 /* CameraViewController.m in Sources */,
 				889BA29A1D64124E00BC5413 /* PhotoPreviewController.m in Sources */,
 				D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */,
+				8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */,
 				889BA2BE1D64159600BC5413 /* AAPLGridViewCell.m in Sources */,
 				88821E8A1D5C6F1D00C72DA3 /* NSString+MD5.m in Sources */,
 				8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */,

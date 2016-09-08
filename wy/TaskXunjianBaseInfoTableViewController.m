@@ -17,12 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,23 +26,9 @@
 
 #pragma mark - Table view data source
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 100, 21)];
-        titleLabel.text = @"计划时间";
-        [header addSubview:titleLabel];
-        return header;
-    }
-    if (section == 2) {
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
-        titleLabel.text = @"实际时间";
-        [header addSubview:titleLabel];
-        return header;
-    }
-    return nil;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    return nil;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
@@ -64,14 +44,6 @@
     return CGFLOAT_MIN;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-    }
-}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
