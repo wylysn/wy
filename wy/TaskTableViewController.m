@@ -22,15 +22,34 @@
 
 @interface TaskTableViewController ()
 
+@property (nonatomic) Reachability *hostReachability;
+
 @end
 
 @implementation TaskTableViewController {
     TaskService *taskService;
     NSMutableArray *taskListArray;
+    AFNetworkReachabilityManager *mgr;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //判断真实服务器的连通
+    /*
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSURL *url1 = [NSURL URLWithString:[[URLManager getSharedInstance] getURL:@""]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url1 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:2];
+        NSHTTPURLResponse *response;
+        [NSURLConnection sendSynchronousRequest:request returningResponse: &response error: nil];
+        if (response == nil) {
+            NSLog(@"没有网络");
+        }
+        else{
+            NSLog(@"网络是通的");
+        }
+    });
+     */
     
     taskService = [[TaskService alloc] init];
     

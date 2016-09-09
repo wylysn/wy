@@ -25,7 +25,7 @@ static NSString *newURL_PATH = URL_PATH;
 }
 
 - (NSString *)getURL:(NSString *)url {
-    return [newURL_PATH stringByAppendingString:@"/mobile/queryBankLastYear.htm"];
+    return [newURL_PATH stringByAppendingString:url];
 }
 
 @end

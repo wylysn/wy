@@ -21,7 +21,7 @@ static PRHTTPSessionManager *client = nil;
     dispatch_once(&onceToken, ^{
         client = [[PRHTTPSessionManager alloc] initWithBaseURL:nil];
         client.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        client.requestSerializer.timeoutInterval = 20.f;
+        client.requestSerializer.timeoutInterval = 15.f;
         //        client.securityPolicy.allowInvalidCertificates = YES;
     });
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
