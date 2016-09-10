@@ -136,6 +136,9 @@
 		D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DB71D7A900E0022D8BD /* TaskListEntity.m */; };
 		D2997DBE1D7AFD770022D8BD /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2997DBD1D7AFD770022D8BD /* WarningView.xib */; };
 		D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2997DC01D7AFE3B0022D8BD /* WarningView.m */; };
+		D299B53D1D842FBC0073C360 /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D299B53C1D842FBC0073C360 /* NSDate+Extensions.m */; };
+		D299B53F1D843D330073C360 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D299B53E1D843D330073C360 /* Security.framework */; };
+		D299B55C1D8461130073C360 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = D299B55B1D8461130073C360 /* SSKeychain.m */; };
 		D2AAA61C1D7C07E200A40FF1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */; };
 		D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
@@ -405,6 +408,11 @@
 		D2997DBD1D7AFD770022D8BD /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		D2997DBF1D7AFE3B0022D8BD /* WarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningView.h; sourceTree = "<group>"; };
 		D2997DC01D7AFE3B0022D8BD /* WarningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningView.m; sourceTree = "<group>"; };
+		D299B53B1D842FBC0073C360 /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
+		D299B53C1D842FBC0073C360 /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extensions.m"; sourceTree = "<group>"; };
+		D299B53E1D843D330073C360 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D299B55A1D8461130073C360 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		D299B55B1D8461130073C360 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		D2AAA61A1D7C07E200A40FF1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		D2AAA61D1D7C086200A40FF1 /* AboutChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutChildTableViewController.h; sourceTree = "<group>"; };
@@ -420,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D299B53F1D843D330073C360 /* Security.framework in Frameworks */,
 				88FF11481D7510CA0073EDBB /* libsqlite3.tbd in Frameworks */,
 				ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */,
 			);
@@ -454,6 +463,7 @@
 		8574640E84AE4436000DBE81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D299B53E1D843D330073C360 /* Security.framework */,
 				88FF11471D7510CA0073EDBB /* libsqlite3.tbd */,
 				88FF11411D750F860073EDBB /* libsqlite3.0.tbd */,
 				B3319D88501D496DD566B807 /* libPods-wy.a */,
@@ -546,6 +556,8 @@
 		88821E841D5C6EDC00C72DA3 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				D299B53B1D842FBC0073C360 /* NSDate+Extensions.h */,
+				D299B53C1D842FBC0073C360 /* NSDate+Extensions.m */,
 				889BA29E1D64141900BC5413 /* UIImage+Resolution.h */,
 				889BA29F1D64141900BC5413 /* UIImage+Resolution.m */,
 				88E927FD1D5DBF1D00152BBF /* UIColor+HexCode.h */,
@@ -900,6 +912,7 @@
 		88E927F11D5DBC2A00152BBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D299B5531D845EB70073C360 /* SSKeychain */,
 				88FF11431D750F940073EDBB /* sqlite */,
 				889BA2A21D64159600BC5413 /* ELCAlbumPicker */,
 				889BA2831D64117000BC5413 /* camera */,
@@ -994,6 +1007,15 @@
 				D2997DC01D7AFE3B0022D8BD /* WarningView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		D299B5531D845EB70073C360 /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				D299B55A1D8461130073C360 /* SSKeychain.h */,
+				D299B55B1D8461130073C360 /* SSKeychain.m */,
+			);
+			name = SSKeychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1209,6 +1231,7 @@
 				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				D299B53D1D842FBC0073C360 /* NSDate+Extensions.m in Sources */,
 				88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */,
 				889B51FD1D76ABFC001A542A /* KnowledgeEntity.m in Sources */,
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
@@ -1269,6 +1292,7 @@
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
+				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
 				88B6FDA61D66E99400418972 /* WorkOrderService.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,

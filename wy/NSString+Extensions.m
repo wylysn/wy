@@ -8,6 +8,7 @@
 
 #import "NSString+Extensions.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "SSKeychain.h"
 
 @implementation NSString (Extensions)
 
@@ -225,6 +226,23 @@
     NSData *objectData = [self dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&error];
     return (!json ? nil : json);
+}
+
++ (NSString *)getDeviceId {
+    NSError * error = nil;
+    NSString *token = [SSKeychain passwordForService:[[NSBundle mainBundle] bundleIdentifier] account:@"uuid" error:&error];
+    if ([error code] == SSKeychainErrorNotFound) {
+        NSLog(@"Password not found");
+        CFUUIDRef uuid = CFUUIDCreate(NULL);
+        assert(uuid != NULL);
+        CFStringRef uuidStrRef = CFUUIDCreateString(NULL, uuid);
+        NSString *uuidStr = [NSString stringWithFormat:@"%@", uuidStrRef];
+        [SSKeychain setPassword: uuidStr
+                     forService:[[NSBundle mainBundle] bundleIdentifier] account:@"uuid"];
+        token = uuidStr;
+    }
+    
+    return token;
 }
 
 @end

@@ -68,11 +68,11 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [taskService getTaskListEntityArr:self.filterDic success:^{
             [self.tableView.mj_header endRefreshing];
-            self.tableView.mj_footer.hidden = NO;
+//            self.tableView.mj_footer.hidden = NO;
             taskListArray = taskService.taskList;
         } failure:^(NSString *message) {
             [self.tableView.mj_header endRefreshing];
-            self.tableView.mj_footer.hidden = YES;
+//            self.tableView.mj_footer.hidden = YES;
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];

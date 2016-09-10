@@ -21,4 +21,6 @@
 
 - (NSDictionary *)json_StringToDictionary;
 
++ (NSString *)getDeviceId;
+
 @end

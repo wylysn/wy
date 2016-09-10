@@ -42,7 +42,7 @@
     NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
     [condition setObject:@"gettasklist" forKey:@"action"];
     [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
-    [condition setObject:@"" forKey:@"imei"];
+    [condition setObject:[NSString getDeviceId] forKey:@"imei"];
     [condition setObject:@"" forKey:@"username"];   //后续补上
     [condition setObject:filterDic forKey:@"filter"];
     [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -60,9 +60,10 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         TaskDBService *dbService = [TaskDBService getSharedInstance];
-        NSArray *taskArray = [dbService findTaskLists:condition];
+        NSArray *taskArray = [dbService findTaskLists:filterDic];
         [self.taskList removeAllObjects];
         [self.taskList addObjectsFromArray:taskArray];
+        success();
     }];
     return taskEntityArr;
 }
