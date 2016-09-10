@@ -59,16 +59,32 @@
     self.tableView.fd_debugLogEnabled = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     
+    taskListArray = [[NSMutableArray alloc] init];
+//    taskListArray = [taskService getTaskListEntityArr:@{}];
+    
+    if (!self.filterDic) {
+        self.filterDic = [[NSMutableDictionary alloc] init];
+    }
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self.tableView.mj_header endRefreshing];
+        [taskService getTaskListEntityArr:self.filterDic success:^{
+            [self.tableView.mj_header endRefreshing];
+            self.tableView.mj_footer.hidden = NO;
+            taskListArray = taskService.taskList;
+        } failure:^(NSString *message) {
+            [self.tableView.mj_header endRefreshing];
+            self.tableView.mj_footer.hidden = YES;
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
     }];
+    [self.tableView.mj_header beginRefreshing];
     
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self.tableView.mj_footer endRefreshing];
     }];
-    
-    taskListArray = [[NSMutableArray alloc] init];
-    taskListArray = [taskService getTaskListEntityArr:@{}];
     
 }
 

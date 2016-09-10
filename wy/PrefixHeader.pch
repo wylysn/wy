@@ -33,6 +33,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "UIColor+HexCode.h"
+#import "NSString+Extensions.h"
+#import "DateUtil.h"
 #import "UIDevice+UIDeviceCategory.h"
 #import "PRButton.h"
 #import "URL.h"

@@ -18,4 +18,6 @@
 
 + (NSInteger)intervalFromLastDate: (NSDate *) date1  toTheDate:(NSDate *) date2;
 
++ (NSString *)getCurrentTimestamp;
+
 @end

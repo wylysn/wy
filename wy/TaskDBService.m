@@ -127,11 +127,36 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 
-- (NSArray *)findTaskLists {
+- (NSArray *)findTaskLists:(NSDictionary *)condition {
     NSMutableArray *taskArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Position from TaskList"];
+        NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Position from TaskList where 1=1"];
+        NSEnumerator *keyIterater = condition.keyEnumerator;
+        for (NSString *key in keyIterater) {
+            if (![key isBlankString]) {
+                [querySQL appendString:@" and "];
+                if ([@"ServiceType" isEqualToString:key]) {
+                    [querySQL appendString:@"ServiceType"];
+                } else if ([@"Priority" isEqualToString:key]) {
+                    [querySQL appendString:@"Priority"];
+                } else if ([@"ShortTitle" isEqualToString:key]) {
+                    [querySQL appendString:@"ShortTitle"];
+                } else if ([@"TaskStatus" isEqualToString:key]) {
+                    [querySQL appendString:@"TaskStatus"];
+                }
+                [querySQL appendString:@" in ("];
+                NSArray *vArray = [key componentsSeparatedByString:@","];
+                for (int i=0; i<vArray.count; i++) {
+                    NSString *vl = vArray[i];
+                    [querySQL appendString:[NSString stringWithFormat:@"'%@'", vl]];
+                    if (i!=vArray.count-1) {
+                        [querySQL appendString:@","];
+                    }
+                }
+                [querySQL appendString:@")"];
+            }
+        }
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {

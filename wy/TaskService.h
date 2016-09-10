@@ -12,7 +12,11 @@
 
 @interface TaskService : NSObject
 
-- (NSMutableArray *)getTaskListEntityArr:(NSDictionary *)condition;
+//@property (nonatomic, strong) UIViewController *rtController;
+
+@property (retain,nonatomic) NSMutableArray *taskList;
+
+- (NSMutableArray *)getTaskListEntityArr:(NSMutableDictionary *)filterDic success:(void (^)())success failure:(void (^)(NSString *message))failure;
 
 - (TaskEntity *)getTaskEntity:(NSString *)code;
 

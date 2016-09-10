@@ -15,9 +15,11 @@
 + (TaskDBService*) getSharedInstance;
 
 - (BOOL) saveTaskList:(TaskListEntity *)taskList;
-- (NSArray *) findTaskLists;
+
+- (NSArray *) findTaskLists:(NSDictionary *)condition;
 
 - (BOOL) saveTask:(TaskEntity *)device;
+
 - (TaskEntity *) findTaskByCode:(NSString*)Code;
 
 @end

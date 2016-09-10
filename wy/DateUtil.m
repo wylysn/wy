@@ -42,4 +42,11 @@
     return hours;
 }
 
++ (NSString *)getCurrentTimestamp {
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString *timeString = [NSString stringWithFormat:@"%0.f", a];
+    return timeString;
+}
+
 @end
