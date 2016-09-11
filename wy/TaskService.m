@@ -10,7 +10,9 @@
 #import "TaskEntity.h"
 #import "TaskDBService.h"
 
-@implementation TaskService
+@implementation TaskService {
+    TaskDBService *dbService;
+}
 
 - (instancetype)init
 {
@@ -18,6 +20,7 @@
     if (self)
     {
         self.taskList = [[NSMutableArray alloc] init];
+        dbService = [TaskDBService getSharedInstance];
     }
     return self;
 }
@@ -58,21 +61,28 @@
                 NSArray* response = responseObject[@"data"];
                 [self.taskList removeAllObjects];
                 for (NSDictionary *obj in response) {
-                    [self.taskList addObject:[[TaskEntity alloc] initWithDictionary:obj]];
+                    TaskListEntity *taskListEntity = [[TaskListEntity alloc] initWithDictionary:obj];
+                    [self.taskList addObject:taskListEntity];
                 }
+                //离线存储
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    for (TaskListEntity *taskListEntity in self.taskList) {
+                        if (taskListEntity.IsLocalSave) {
+                            [dbService saveTaskList:taskListEntity];
+                        }
+                    }
+                });
                 success();
             } else {
                 failure(responseObject[@"message"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            TaskDBService *dbService = [TaskDBService getSharedInstance];
             NSArray *taskArray = [dbService findTaskLists:filterDic];
             [self.taskList removeAllObjects];
             [self.taskList addObjectsFromArray:taskArray];
             success();
         }];
     } else {
-        TaskDBService *dbService = [TaskDBService getSharedInstance];
         NSArray *taskArray = [dbService findTaskLists:filterDic];
         [self.taskList removeAllObjects];
         [self.taskList addObjectsFromArray:taskArray];

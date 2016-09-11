@@ -60,7 +60,6 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     
     taskListArray = [[NSMutableArray alloc] init];
-//    taskListArray = [taskService getTaskListEntityArr:@{}];
     
     if (!self.filterDic) {
         self.filterDic = [[NSMutableDictionary alloc] init];
