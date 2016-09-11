@@ -36,35 +36,49 @@
     [taskEntityArr addObject:e3];
     [taskEntityArr addObject:e4];
     [taskEntityArr addObject:e5];
-     */
+    [self.taskList removeAllObjects];
+    [self.taskList addObjectsFromArray:taskEntityArr];
+    success();
+    */
+    
     NSMutableArray *taskEntityArr = [[NSMutableArray alloc] init];
-    PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
-    NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
-    [condition setObject:@"gettasklist" forKey:@"action"];
-    [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
-    [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-    [condition setObject:@"" forKey:@"username"];   //后续补上
-    [condition setObject:filterDic forKey:@"filter"];
-    [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject[@"success"] isEqualToString:@"true"]) {
-            NSArray* response = responseObject[@"data"];
-            [self.taskList removeAllObjects];
-            for (NSDictionary *obj in response) {
-                [self.taskList addObject:[[TaskEntity alloc] initWithDictionary:obj]];
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    if (reach.isReachable) {
+        PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+        NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
+        [condition setObject:@"gettasklist" forKey:@"action"];
+        [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
+        [condition setObject:[NSString getDeviceId] forKey:@"imei"];
+        [condition setObject:@"" forKey:@"username"];   //后续补上
+        [condition setObject:filterDic forKey:@"filter"];
+        [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if ([responseObject[@"success"] isEqualToString:@"true"]) {
+                NSArray* response = responseObject[@"data"];
+                [self.taskList removeAllObjects];
+                for (NSDictionary *obj in response) {
+                    [self.taskList addObject:[[TaskEntity alloc] initWithDictionary:obj]];
+                }
+                success();
+            } else {
+                failure(responseObject[@"message"]);
             }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            TaskDBService *dbService = [TaskDBService getSharedInstance];
+            NSArray *taskArray = [dbService findTaskLists:filterDic];
+            [self.taskList removeAllObjects];
+            [self.taskList addObjectsFromArray:taskArray];
             success();
-        } else {
-            failure(responseObject[@"message"]);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        }];
+    } else {
         TaskDBService *dbService = [TaskDBService getSharedInstance];
         NSArray *taskArray = [dbService findTaskLists:filterDic];
         [self.taskList removeAllObjects];
         [self.taskList addObjectsFromArray:taskArray];
         success();
-    }];
+    }
+    
     return taskEntityArr;
 }
 

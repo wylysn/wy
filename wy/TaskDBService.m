@@ -146,7 +146,7 @@ static sqlite3_stmt *statement = nil;
                     [querySQL appendString:@"TaskStatus"];
                 }
                 [querySQL appendString:@" in ("];
-                NSArray *vArray = [key componentsSeparatedByString:@","];
+                NSArray *vArray = [condition[key] componentsSeparatedByString:@","];
                 for (int i=0; i<vArray.count; i++) {
                     NSString *vl = vArray[i];
                     [querySQL appendString:[NSString stringWithFormat:@"'%@'", vl]];

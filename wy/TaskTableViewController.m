@@ -29,7 +29,7 @@
 @implementation TaskTableViewController {
     TaskService *taskService;
     NSMutableArray *taskListArray;
-    AFNetworkReachabilityManager *mgr;
+    UIView *noDataView;
 }
 
 - (void)viewDidLoad {
@@ -70,6 +70,34 @@
             [self.tableView.mj_header endRefreshing];
 //            self.tableView.mj_footer.hidden = NO;
             taskListArray = taskService.taskList;
+            
+            if (taskListArray.count<1) {
+                if (noDataView) {
+                    noDataView.hidden = NO;
+                } else {
+                    CGRect tableFrame = self.tableView.frame;
+                    float tableWidth = tableFrame.size.width;
+                    float tableHeight = tableFrame.size.height;
+                    noDataView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableWidth, tableHeight)];
+                    UIView *noView = [[UIView alloc] initWithFrame:CGRectMake((tableWidth-100)/2, (tableHeight-100)/2-64, 100, 100)];
+                    UIImageView *nodataImage = [[UIImageView alloc] initWithFrame:CGRectMake((100-50)/2, 0, 50, 65)];
+                    nodataImage.image = [UIImage imageNamed:@"nolist"];
+                    [noView addSubview:nodataImage];
+                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, 100, 21)];
+                    label.text = @"暂无任务";
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = [UIColor darkGrayColor];
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [noView addSubview:label];
+                    
+                    [noDataView addSubview:noView];
+                    
+                    [self.view addSubview:noDataView];
+                }
+            } else {
+                noDataView.hidden = YES;
+            }
+            [self.tableView reloadData];
         } failure:^(NSString *message) {
             [self.tableView.mj_header endRefreshing];
 //            self.tableView.mj_footer.hidden = YES;
@@ -82,9 +110,9 @@
     }];
     [self.tableView.mj_header beginRefreshing];
     
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self.tableView.mj_footer endRefreshing];
-    }];
+//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self.tableView.mj_footer endRefreshing];
+//    }];
     
 }
 
