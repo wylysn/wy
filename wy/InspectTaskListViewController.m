@@ -15,6 +15,7 @@
 #import "PRButton.h"
 #import <MJRefresh.h>
 #import "TaskTableViewController.h"
+#import "InspectTaskSiftView.h"
 
 #define CELLID                 @"INSPECTTASKENTIFIER_CELL"
 #define STARTTIME_PLACEHOLDER  @"请输入到场时间"
@@ -38,6 +39,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     UIWindow *window;
     UIWindow *filterWindow;
     UIView *filterView;
+    InspectTaskSiftView *siftView;
     NSDate *defaultDate;
     UIView *inspectTimeView;
     UIView *orderStatusView;
@@ -77,10 +79,19 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     float pwidth = SCREEN_WIDTH-px;
     if (filterWindow) {
         filterWindow.hidden = NO;
+        /*
         [UIView animateWithDuration:0.2 animations:^{
             CGRect newFrame = filterView.frame;
             newFrame.origin.x = px;
             filterView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+         */
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
         } completion:^(BOOL finished) {
             
         }];
@@ -98,6 +109,24 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [backView addGestureRecognizer:gesture];
         [backView setUserInteractionEnabled:YES];
         
+        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"InspectTaskListSiftView" owner:nil options:nil];
+        siftView = views[0];
+
+        siftView.frame = CGRectMake(SCREEN_WIDTH, 0, pwidth, SCREEN_HEIGHT);
+        [filterWindow addSubview:siftView];
+        
+        [siftView.cancelButton addTarget:self action:@selector(filterCancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [siftView.confirmButton addTarget:self action:@selector(filterConfirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        /*
         float bottomHeight = 66;
         filterView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, pwidth, SCREEN_HEIGHT)];
         filterView.backgroundColor = [UIColor whiteColor];
@@ -234,6 +263,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
                 color = @"F53D5A";
             }
             UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(x, (PRIORITY_HEIGHT-21)/2, width, 21)];
+            btn1.titleLabel.font = [UIFont systemFontOfSize:15];
             btn1.tag = i;
             [btn1 setTitle:title forState:UIControlStateNormal];
             [btn1 setTitleColor:[UIColor colorFromHexCode:color] forState:UIControlStateNormal];
@@ -288,6 +318,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         } completion:^(BOOL finished) {
             
         }];
+         */
     }
 }
 
@@ -311,23 +342,30 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (IBAction)filterConfirmBtnClick:(id)sender
 {
     [self filterViewHideWithTye:FilterViewHideByConfirm];
-    NSString *startTime;
-    NSString *endTime;
-    NSMutableArray *orderStatusArr = [[NSMutableArray alloc] init];
-    UIButton *startTimeBtn = [inspectTimeView viewWithTag:1];
-    UIButton *endTimeBtn = [inspectTimeView viewWithTag:2];
-    startTime = [STARTTIME_PLACEHOLDER isEqualToString:startTimeBtn.titleLabel.text]?@"":startTimeBtn.titleLabel.text;
-    endTime = [ENDTIME_PLACEHOLDER isEqualToString:endTimeBtn.titleLabel.text]?@"":endTimeBtn.titleLabel.text;
-    for (UIButton *btn in orderStatusView.subviews) {
-        if (btn.selected) {
-            [orderStatusArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
-        }
+//    NSString *startTime;
+//    NSString *endTime;
+//    NSMutableArray *orderStatusArr = [[NSMutableArray alloc] init];
+//    UIButton *startTimeBtn = [inspectTimeView viewWithTag:1];
+//    UIButton *endTimeBtn = [inspectTimeView viewWithTag:2];
+//    startTime = [STARTTIME_PLACEHOLDER isEqualToString:startTimeBtn.titleLabel.text]?@"":startTimeBtn.titleLabel.text;
+//    endTime = [ENDTIME_PLACEHOLDER isEqualToString:endTimeBtn.titleLabel.text]?@"":endTimeBtn.titleLabel.text;
+//    for (UIButton *btn in orderStatusView.subviews) {
+//        if (btn.selected) {
+//            [orderStatusArr addObject:[NSString stringWithFormat:@"%ld", (long)btn.tag]];
+//        }
+//    }
+//    [filterDic setObject:startTime forKey:@"startTime"];
+//    [filterDic setObject:endTime forKey:@"endTime"];
+//    [filterDic setObject:orderStatusArr forKey:@"orderStatus"];
+//    
+//    NSLog(@"筛选条件：%@", filterDic);
+    NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [siftView.siftTableView indexPathsForSelectedRows];
+    NSMutableArray *statusArr = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
+        NSString *status = siftView.listData[indexPath.row];
+        [statusArr addObject:status];
     }
-    [filterDic setObject:startTime forKey:@"startTime"];
-    [filterDic setObject:endTime forKey:@"endTime"];
-    [filterDic setObject:orderStatusArr forKey:@"orderStatus"];
-    
-    NSLog(@"筛选条件：%@", filterDic);
+    [filterDic setObject:[statusArr componentsJoinedByString:@","] forKey:@"PositionStatus"];
     taskListViewController.filterDic = filterDic;
     [taskListViewController.tableView.mj_header beginRefreshing];
 }
@@ -356,6 +394,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (void)filterViewHideWithTye:(FilterViewHideType) type {
     if (type == FilterViewHideByCancel) {
         //重置筛选条件
+        /*
         UIButton *startTimeBtn = [inspectTimeView viewWithTag:1];
         UIButton *endTimeBtn = [inspectTimeView viewWithTag:2];
         NSString *startTime = [@"" isEqualToString:filterDic[@"startTime"]]?STARTTIME_PLACEHOLDER:filterDic[@"startTime"];
@@ -375,12 +414,33 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
                 }
             }
         }
+         */
+        NSString *PositionStatus = filterDic[@"PositionStatus"];
+        NSArray *positionStatusArr = [PositionStatus componentsSeparatedByString:@","];
+        for (int i=0; i<siftView.listData.count; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            UITableViewCell *cell = [siftView.siftTableView cellForRowAtIndexPath:indexPath];
+            if (!positionStatusArr || [positionStatusArr indexOfObject:siftView.listData[i]]==NSNotFound) {
+                [siftView.siftTableView deselectRowAtIndexPath:indexPath animated:NO];  //不能触发diddeselect代理方法，操蛋
+                cell.selected = FALSE;
+            }
+        }
+        siftView.positionStatusArr = positionStatusArr;
+        [siftView.siftTableView reloadData];
     }
-    
+    /*
     [UIView animateWithDuration:0.2 animations:^{
         CGRect newFrame = filterView.frame;
         newFrame.origin.x = SCREEN_WIDTH;
         filterView.frame = newFrame;
+    } completion:^(BOOL finished) {
+        filterWindow.hidden = YES;
+    }];
+    */
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect newFrame = siftView.frame;
+        newFrame.origin.x = SCREEN_WIDTH;
+        siftView.frame = newFrame;
     } completion:^(BOOL finished) {
         filterWindow.hidden = YES;
     }];

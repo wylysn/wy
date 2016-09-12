@@ -24,37 +24,52 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNg-cM-gwz" customClass="PRButton">
                                         <rect key="frame" x="15" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="上一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-wj-9o6" customClass="PRButton">
                                         <rect key="frame" x="267" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="下一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-FB-CDg" customClass="PRButton">
                                         <rect key="frame" x="118" y="10" width="139" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2016年6月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -137,6 +152,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSo-vD-imV">
+                                <rect key="frame" x="0.0" y="534" width="375" height="66"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XL5-Iv-Oaj">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="6"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="6" id="KJa-fA-nzz"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="6" id="QdP-6P-VaY"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="QdP-6P-VaY"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgB-EU-aO4" customClass="PRButton">
+                                        <rect key="frame" x="162" y="21" width="198" height="30"/>
+                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="oZt-er-iK9"/>
+                                        </constraints>
+                                        <state key="normal" title="确定">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xi-YL-v1c" customClass="PRButton">
+                                        <rect key="frame" x="15" y="21" width="132" height="30"/>
+                                        <color key="backgroundColor" red="0.99215686270000003" green="0.43921568630000002" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jBs-rg-bzz"/>
+                                        </constraints>
+                                        <state key="normal" title="取消">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="268-ji-8Kh"/>
+                                    <constraint firstItem="AgB-EU-aO4" firstAttribute="width" secondItem="0xi-YL-v1c" secondAttribute="width" multiplier="1.5" id="9uX-bi-jSZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="AgB-EU-aO4" secondAttribute="trailing" constant="15" id="FS8-PZ-Q37"/>
+                                    <constraint firstAttribute="bottom" secondItem="AgB-EU-aO4" secondAttribute="bottom" constant="15" id="Pns-RH-68e"/>
+                                    <constraint firstAttribute="bottom" secondItem="0xi-YL-v1c" secondAttribute="bottom" constant="15" id="PqE-Oq-99E"/>
+                                    <constraint firstItem="0xi-YL-v1c" firstAttribute="leading" secondItem="hSo-vD-imV" secondAttribute="leading" constant="15" id="bVK-Ko-j1F"/>
+                                    <constraint firstItem="XL5-Iv-Oaj" firstAttribute="top" secondItem="hSo-vD-imV" secondAttribute="top" id="fxa-cO-qgz"/>
+                                    <constraint firstAttribute="trailing" secondItem="XL5-Iv-Oaj" secondAttribute="trailing" id="jBS-hv-aEj"/>
+                                    <constraint firstItem="AgB-EU-aO4" firstAttribute="leading" secondItem="0xi-YL-v1c" secondAttribute="trailing" constant="15" id="krx-sd-MBH"/>
+                                    <constraint firstItem="XL5-Iv-Oaj" firstAttribute="leading" secondItem="hSo-vD-imV" secondAttribute="leading" id="sH3-Vg-oPy"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53A-Cs-FrK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="534"/>
                                 <subviews>
@@ -551,67 +627,6 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSo-vD-imV">
-                                <rect key="frame" x="0.0" y="534" width="375" height="66"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XL5-Iv-Oaj">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="6"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="6" id="KJa-fA-nzz"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="6" id="QdP-6P-VaY"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="QdP-6P-VaY"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgB-EU-aO4" customClass="PRButton">
-                                        <rect key="frame" x="162" y="21" width="198" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="oZt-er-iK9"/>
-                                        </constraints>
-                                        <state key="normal" title="确定">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xi-YL-v1c" customClass="PRButton">
-                                        <rect key="frame" x="15" y="21" width="132" height="30"/>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.43921568630000002" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="jBs-rg-bzz"/>
-                                        </constraints>
-                                        <state key="normal" title="取消">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="268-ji-8Kh"/>
-                                    <constraint firstItem="AgB-EU-aO4" firstAttribute="width" secondItem="0xi-YL-v1c" secondAttribute="width" multiplier="1.5" id="9uX-bi-jSZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="AgB-EU-aO4" secondAttribute="trailing" constant="15" id="FS8-PZ-Q37"/>
-                                    <constraint firstAttribute="bottom" secondItem="AgB-EU-aO4" secondAttribute="bottom" constant="15" id="Pns-RH-68e"/>
-                                    <constraint firstAttribute="bottom" secondItem="0xi-YL-v1c" secondAttribute="bottom" constant="15" id="PqE-Oq-99E"/>
-                                    <constraint firstItem="0xi-YL-v1c" firstAttribute="leading" secondItem="hSo-vD-imV" secondAttribute="leading" constant="15" id="bVK-Ko-j1F"/>
-                                    <constraint firstItem="XL5-Iv-Oaj" firstAttribute="top" secondItem="hSo-vD-imV" secondAttribute="top" id="fxa-cO-qgz"/>
-                                    <constraint firstAttribute="trailing" secondItem="XL5-Iv-Oaj" secondAttribute="trailing" id="jBS-hv-aEj"/>
-                                    <constraint firstItem="AgB-EU-aO4" firstAttribute="leading" secondItem="0xi-YL-v1c" secondAttribute="trailing" constant="15" id="krx-sd-MBH"/>
-                                    <constraint firstItem="XL5-Iv-Oaj" firstAttribute="leading" secondItem="hSo-vD-imV" secondAttribute="leading" id="sH3-Vg-oPy"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -658,37 +673,52 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH8-Vl-ks7" customClass="PRButton">
                                         <rect key="frame" x="15" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="上一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIs-fC-QjS" customClass="PRButton">
                                         <rect key="frame" x="267" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="下一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-gx-S3y" customClass="PRButton">
                                         <rect key="frame" x="118" y="10" width="139" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2016年6月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -719,7 +749,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95U-QU-huJ">
                                 <rect key="frame" x="0.0" y="70" width="375" height="530"/>
                                 <connections>
-                                    <segue destination="YnW-EO-2Cp" kind="embed" id="fw4-Eq-vLT"/>
+                                    <segue destination="YnW-EO-2Cp" kind="embed" identifier="EMBED_TASKLIST" id="fw4-Eq-vLT"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -997,37 +1027,52 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxW-yS-51Q" customClass="PRButton">
                                         <rect key="frame" x="15" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="上一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkM-nB-HIM" customClass="PRButton">
                                         <rect key="frame" x="267" y="10" width="93" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="下一月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP3-NH-7Eb" customClass="PRButton">
                                         <rect key="frame" x="118" y="10" width="139" height="30"/>
-                                        <color key="backgroundColor" red="0.5568627451" green="0.75686274509999996" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="2016年6月">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -1280,6 +1325,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MfH-Wz-3if"/>
+        <segue reference="fw4-Eq-vLT"/>
     </inferredMetricsTieBreakers>
 </document>

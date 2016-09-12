@@ -172,6 +172,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
                 color = @"F53D5A";
             }
             UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(x, (PRIORITY_HEIGHT-21)/2, width, 21)];
+            btn1.titleLabel.font = [UIFont systemFontOfSize:15];
             btn1.tag = i;
             [btn1 setTitle:title forState:UIControlStateNormal];
             [btn1 setTitleColor:[UIColor colorFromHexCode:color] forState:UIControlStateNormal];
@@ -234,6 +235,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
                 color = @"F53D5A";
             }
             UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(x, (PRIORITY_HEIGHT-21)/2, width, 21)];
+            btn1.titleLabel.font = [UIFont systemFontOfSize:15];
             btn1.tag = i;
             [btn1 setTitle:title forState:UIControlStateNormal];
             [btn1 setTitleColor:[UIColor colorFromHexCode:color] forState:UIControlStateNormal];

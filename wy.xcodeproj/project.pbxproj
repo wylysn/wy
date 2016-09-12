@@ -29,6 +29,8 @@
 		8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4801D741807003E4495 /* ReportImpaireViewController.m */; };
 		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
 		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
+		8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */; };
+		8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
 		88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6D1D5C4E7600C72DA3 /* home@2x.png */; };
 		88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88821E6F1D5C4F6600C72DA3 /* features@2x.png */; };
@@ -207,6 +209,9 @@
 		887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjian2ViewController.m; sourceTree = "<group>"; };
 		8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianBaseInfo2TableViewController.h; sourceTree = "<group>"; };
 		8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjianBaseInfo2TableViewController.m; sourceTree = "<group>"; };
+		8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectTaskListSiftView.xib; sourceTree = "<group>"; };
+		8876FCF41D867D4400767C3F /* InspectTaskSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskSiftView.h; sourceTree = "<group>"; };
+		8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskSiftView.m; sourceTree = "<group>"; };
 		88821E601D5C458300C72DA3 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		88821E611D5C458300C72DA3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		88821E6D1D5C4E7600C72DA3 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
@@ -763,6 +768,7 @@
 				88A893CF1D3393280050D9F3 /* model */,
 				88A893CE1D33931F0050D9F3 /* view */,
 				88B6FD9B1D66D61C00418972 /* Feature.storyboard */,
+				8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */,
 			);
 			name = features;
 			sourceTree = "<group>";
@@ -774,6 +780,8 @@
 				88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */,
 				88F140CF1D6C21C400B8BCCC /* InspectTaskTableViewCell.h */,
 				88F140D01D6C21C400B8BCCC /* InspectTaskTableViewCell.m */,
+				8876FCF41D867D4400767C3F /* InspectTaskSiftView.h */,
+				8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1133,6 +1141,7 @@
 				889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */,
 				889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */,
 				88B6FD9A1D66AE6400418972 /* phone@2x.png in Resources */,
+				8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */,
 				889BA2C11D64159600BC5413 /* ELCAlbumPickerController.xib in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
@@ -1238,6 +1247,7 @@
 				889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
 				8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */,
+				8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
 				8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */,
 				88FF11541D7556D70073EDBB /* DBManager.m in Sources */,

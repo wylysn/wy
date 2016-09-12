@@ -134,7 +134,7 @@ static sqlite3_stmt *statement = nil;
         NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Position from TaskList where 1=1"];
         NSEnumerator *keyIterater = condition.keyEnumerator;
         for (NSString *key in keyIterater) {
-            if (![key isBlankString]) {
+            if (![key isBlankString] || ![@"ServiceType" isEqualToString:key] || ![@"Priority" isEqualToString:key] || ![@"ShortTitle" isEqualToString:key] || ![@"TaskStatus" isEqualToString:key]) {
                 [querySQL appendString:@" and "];
                 if ([@"ServiceType" isEqualToString:key]) {
                     [querySQL appendString:@"ServiceType"];

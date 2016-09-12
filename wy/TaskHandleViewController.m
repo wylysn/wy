@@ -16,6 +16,7 @@
 #import "UIImage+Resolution.h"
 #import "ChooseDeviceViewController.h"
 #import "ChoosePersonViewController.h"
+#import "TaskService.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
@@ -37,14 +38,29 @@
     NSMutableArray *chargePersonArr;
     NSMutableDictionary *selectedExcutesDic;
     NSMutableArray *excutePersonArr;
+    
+    TaskService *taskService;
+    TaskEntity *taskEntity;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    taskService = [[TaskService alloc] init];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-        
+    
+    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
+        taskEntity = task;
+        [self.tableView reloadData];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
+    
     deviceArr = [[NSMutableArray alloc] init];
     selectedDevicesDic = [[NSMutableDictionary alloc] init];
     selectedChargesDic = [[NSMutableDictionary alloc] init];
@@ -318,7 +334,7 @@
     if (section == 0) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
-        titleLabel.text = @"PM00000001";
+        titleLabel.text = taskEntity.Code;
         [header addSubview:titleLabel];
         return header;
     }
@@ -436,25 +452,25 @@
         UILabel *valueLabel = [cell viewWithTag:2];
         if (row==0) {
             keyLabel.text = @"申请人";
-            valueLabel.text = @"叶雨";
+            valueLabel.text = taskEntity.Applyer;
         } else if (row==1) {
             keyLabel.text = @"创建时间";
-            valueLabel.text = @"13888888888";
+            valueLabel.text = taskEntity.CreateDate;
         } else if (row==2) {
             keyLabel.text = @"部门";
-            valueLabel.text = @"";
+            valueLabel.text = @"";  //接口中没有。。。。。
         } else if (row==3) {
             keyLabel.text = @"位置";
-            valueLabel.text = @"";
+            valueLabel.text = taskEntity.Location;
         } else if (row==4) {
             keyLabel.text = @"服务类型";
-            valueLabel.text = @"";
+            valueLabel.text = taskEntity.ServiceType;
         } else if (row==5) {
             keyLabel.text = @"工单类型";
-            valueLabel.text = @"";
+            valueLabel.text = self.ShortTitle;
         } else if (row==6) {
             keyLabel.text = @"优先级";
-            valueLabel.text = @"";
+            valueLabel.text = taskEntity.ServiceType;
         }
     } else if (section == 1) {
         DeviceListEntity *device = deviceArr[row];

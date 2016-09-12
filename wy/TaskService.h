@@ -18,6 +18,6 @@
 
 - (NSMutableArray *)getTaskListEntityArr:(NSMutableDictionary *)filterDic success:(void (^)())success failure:(void (^)(NSString *message))failure;
 
-- (TaskEntity *)getTaskEntity:(NSString *)code;
+- (TaskEntity *)getTaskEntity:(NSString *)code success:(void (^)(TaskEntity *taskEntity))success failure:(void (^)(NSString *message))failure;
 
 @end
