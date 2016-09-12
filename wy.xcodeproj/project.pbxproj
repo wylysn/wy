@@ -129,6 +129,8 @@
 		88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11501D7552E90073EDBB /* DeviceDBService.m */; };
 		88FF11541D7556D70073EDBB /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11531D7556D70073EDBB /* DBManager.m */; };
 		88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */; };
+		D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */; };
+		D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24644B31D86E843007E5028 /* WorkOrderSiftView.m */; };
 		D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */; };
 		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
@@ -394,6 +396,9 @@
 		88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDeviceViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
+		D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderSiftView.xib; sourceTree = "<group>"; };
+		D24644B21D86E843007E5028 /* WorkOrderSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSiftView.h; sourceTree = "<group>"; };
+		D24644B31D86E843007E5028 /* WorkOrderSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderSiftView.m; sourceTree = "<group>"; };
 		D27C15671D733DDF003651A4 /* TaskBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBaseInfoViewController.h; sourceTree = "<group>"; };
 		D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskBaseInfoViewController.m; sourceTree = "<group>"; };
 		D28AD5551D726CEC0033ADB6 /* TaskStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskStatusView.h; sourceTree = "<group>"; };
@@ -769,6 +774,7 @@
 				88A893CE1D33931F0050D9F3 /* view */,
 				88B6FD9B1D66D61C00418972 /* Feature.storyboard */,
 				8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */,
+				D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */,
 			);
 			name = features;
 			sourceTree = "<group>";
@@ -782,6 +788,8 @@
 				88F140D01D6C21C400B8BCCC /* InspectTaskTableViewCell.m */,
 				8876FCF41D867D4400767C3F /* InspectTaskSiftView.h */,
 				8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */,
+				D24644B21D86E843007E5028 /* WorkOrderSiftView.h */,
+				D24644B31D86E843007E5028 /* WorkOrderSiftView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1155,6 +1163,7 @@
 				88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */,
 				889BA2D01D64181300BC5413 /* camera-flash-off.png in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
+				D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */,
 				889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */,
 				889BA2C41D64159600BC5413 /* ELCAssetPicker.xib in Resources */,
 				880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */,
@@ -1314,6 +1323,7 @@
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */,
+				D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,

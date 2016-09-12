@@ -417,14 +417,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
          */
         NSString *PositionStatus = filterDic[@"PositionStatus"];
         NSArray *positionStatusArr = [PositionStatus componentsSeparatedByString:@","];
-        for (int i=0; i<siftView.listData.count; i++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            UITableViewCell *cell = [siftView.siftTableView cellForRowAtIndexPath:indexPath];
-            if (!positionStatusArr || [positionStatusArr indexOfObject:siftView.listData[i]]==NSNotFound) {
-                [siftView.siftTableView deselectRowAtIndexPath:indexPath animated:NO];  //不能触发diddeselect代理方法，操蛋
-                cell.selected = FALSE;
-            }
-        }
         siftView.positionStatusArr = positionStatusArr;
         [siftView.siftTableView reloadData];
     }

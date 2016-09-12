@@ -1,14 +1,14 @@
 //
-//  inspectTaskSiftView.m
+//  WorkOrderSiftView.m
 //  wy
 //
-//  Created by wangyilu on 16/9/12.
+//  Created by 王益禄 on 16/9/12.
 //  Copyright © 2016年 ___PURANG___. All rights reserved.
 //
 
-#import "InspectTaskSiftView.h"
+#import "WorkOrderSiftView.h"
 
-@implementation InspectTaskSiftView
+@implementation WorkOrderSiftView
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -27,23 +27,34 @@
     }
     [self.contentView addSubview:self.siftTableView];
     
-    self.listData = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil];
+    self.priorityListData = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil];
+    self.taskStatusListData = [NSArray arrayWithObjects:@"4",@"5",@"6",@"7", nil];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.listData count];
+    if (section == 0) {
+        return self.taskStatusListData.count;
+    } else {
+        return [self.priorityListData count];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, (44-21)/2, 100, 21)];
-    titleLabel.text = @"点位状态";
+    NSString *title;
+    if (section==0) {
+        title = @"工单状态";
+    } else if (section==1) {
+        title = @"优先级";
+    }
+    titleLabel.text = title;
     titleLabel.textColor = [UIColor colorFromHexCode:@"555555"];
     [header addSubview:titleLabel];
     return header;
@@ -60,11 +71,25 @@
             [(UIView*)[cell.contentView.subviews lastObject]removeFromSuperview];
         }
     }
+    NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
     UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.frame];
     label.tag = 1;
     label.textAlignment = NSTextAlignmentCenter;
-    if (!self.positionStatusArr || self.positionStatusArr.count<1 || [self.positionStatusArr indexOfObject:self.listData[row]]==NSNotFound) {
+    label.font = [UIFont systemFontOfSize:16];
+    NSArray *tempArr;
+    NSArray *tempListData;
+    NSString *text;
+    if (section==0) {
+        tempArr = self.taskStatusArr;
+        tempListData = self.taskStatusListData;
+        text = taskStatusDic[self.taskStatusListData[row]];
+    } else if (section==1) {
+        tempArr = self.priorityArr;
+        tempListData = self.priorityListData;
+        text = priorityDic[self.priorityListData[row]];
+    }
+    if (!tempArr || tempArr.count<1 || [tempArr indexOfObject:tempListData[row]]==NSNotFound) {
         cell.selected = NO;
         [self.siftTableView deselectRowAtIndexPath:indexPath animated:NO];
         cell.backgroundColor = [UIColor clearColor];
@@ -75,8 +100,8 @@
         cell.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
         label.textColor = [UIColor whiteColor];
     }
-    label.font = [UIFont systemFontOfSize:16];
-    label.text = statusDic[self.listData[row]];
+    label.text = text;
+    
     [cell.contentView addSubview:label];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

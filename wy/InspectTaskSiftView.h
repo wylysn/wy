@@ -16,9 +16,7 @@
 @property (weak, nonatomic) IBOutlet PRButton *confirmButton;
 
 @property (strong,nonatomic) NSArray *listData;
-@property (strong,nonatomic) NSArray *listLabelData;
 @property (strong,nonatomic) UITableView *siftTableView;
-@property (strong,nonatomic) UITableViewCell *tableViewCell;
 
 @property (strong,nonatomic) NSArray *positionStatusArr;
 

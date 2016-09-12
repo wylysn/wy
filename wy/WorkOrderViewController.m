@@ -15,6 +15,7 @@
 #import "PRButton.h"
 #import <MJRefresh.h>
 #import "TaskTableViewController.h"
+#import "WorkOrderSiftView.h"
 
 #define CELLID @"WORKORDERENTIFIER_CELL"
 
@@ -37,6 +38,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     UIWindow *window;
     UIWindow *filterWindow;
     UIView *filterView;
+    WorkOrderSiftView *siftView;
     NSDate *defaultDate;
     UIView *priorityView;
     UIView *orderStatusView;
@@ -77,12 +79,20 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     if (filterWindow) {
         filterWindow.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+        /*
+        [UIView animateWithDuration:0.2 animations:^{
             CGRect newFrame = filterView.frame;
             newFrame.origin.x = px;
             filterView.frame = newFrame;
         } completion:^(BOOL finished) {
             
-        }];
+        }];*/
     } else {
         filterWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         filterWindow.rootViewController = self;
@@ -97,6 +107,24 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         [backView addGestureRecognizer:gesture];
         [backView setUserInteractionEnabled:YES];
         
+        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WorkOrderSiftView" owner:nil options:nil];
+        siftView = views[0];
+        
+        siftView.frame = CGRectMake(SCREEN_WIDTH, 0, pwidth, SCREEN_HEIGHT);
+        [filterWindow addSubview:siftView];
+        
+        [siftView.cancelButton addTarget:self action:@selector(filterCancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [siftView.confirmButton addTarget:self action:@selector(filterConfirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        /*
         float bottomHeight = 66;
         filterView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, pwidth, SCREEN_HEIGHT)];
         filterView.backgroundColor = [UIColor whiteColor];
@@ -290,7 +318,8 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         } completion:^(BOOL finished) {
             
         }];
-    }
+         */
+    }         
 }
 
 - (IBAction)conditionBtnClick:(id)sender
@@ -313,6 +342,24 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (IBAction)filterConfirmBtnClick:(id)sender
 {
     [self filterViewHideWithTye:FilterViewHideByConfirm];
+    NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [siftView.siftTableView indexPathsForSelectedRows];
+    NSMutableArray *taskStatusArr = [[NSMutableArray alloc] init];
+    NSMutableArray *priorityArr = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
+        if (indexPath.section==0) {
+            NSString *status = siftView.taskStatusListData[indexPath.row];
+            [taskStatusArr addObject:status];
+        } else if (indexPath.section==1) {
+            NSString *status = siftView.priorityListData[indexPath.row];
+            [priorityArr addObject:status];
+        }
+    }
+    [filterDic setObject:[taskStatusArr componentsJoinedByString:@","] forKey:@"TaskStatus"];
+    [filterDic setObject:[priorityArr componentsJoinedByString:@","] forKey:@"Priority"];
+    taskListViewController.filterDic = filterDic;
+    [taskListViewController.tableView.mj_header beginRefreshing];
+    
+    /*
     NSMutableArray *priorityArr = [[NSMutableArray alloc] init];
     NSMutableArray *orderStatusArr = [[NSMutableArray alloc] init];
     for (UIButton *btn in priorityView.subviews) {
@@ -330,7 +377,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     
     NSLog(@"筛选条件：%@", filterDic);
     taskListViewController.filterDic = filterDic;
-    [taskListViewController.tableView.mj_header beginRefreshing];
+    [taskListViewController.tableView.mj_header beginRefreshing];*/
 }
 
 - (void)hideFilterView:(UITapGestureRecognizer *)recognizer {
@@ -340,6 +387,15 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 - (void)filterViewHideWithTye:(FilterViewHideType) type {
     if (type == FilterViewHideByCancel) {
         //重置筛选条件
+        NSString *TaskStatus = filterDic[@"TaskStatus"];
+        NSArray *taskStatusArr = [TaskStatus componentsSeparatedByString:@","];
+        siftView.taskStatusArr = taskStatusArr;
+        NSString *Priority = filterDic[@"Priority"];
+        NSArray *priorityArr = [Priority componentsSeparatedByString:@","];
+        siftView.priorityArr = priorityArr;
+        [siftView.siftTableView reloadData];
+        
+        /*
         for (UIButton *btn in priorityView.subviews) {
             NSArray *pArr = filterDic[@"prioritys"];
             if (!pArr) {
@@ -364,13 +420,21 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
                     [btn setBackgroundColor:[UIColor whiteColor]];
                 }
             }
-        }
+        }*/
     }
-    
+    /*
     [UIView animateWithDuration:0.2 animations:^{
         CGRect newFrame = filterView.frame;
         newFrame.origin.x = SCREEN_WIDTH;
         filterView.frame = newFrame;
+    } completion:^(BOOL finished) {
+        filterWindow.hidden = YES;
+    }];*/
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect newFrame = siftView.frame;
+        newFrame.origin.x = SCREEN_WIDTH;
+        siftView.frame = newFrame;
     } completion:^(BOOL finished) {
         filterWindow.hidden = YES;
     }];
