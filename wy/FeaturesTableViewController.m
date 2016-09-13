@@ -78,46 +78,41 @@
         NSString *title;
         if (row==0) {
             title = @"待处理工单";
+            taskTableViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"1", @"TaskStatus":@"1"}];
         } else if (row==1) {
             title = @"待派工工单";
+            taskTableViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"1", @"TaskStatus":@"2"}];
         } else if (row==2) {
             title = @"待审批工单";
+            taskTableViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"1", @"TaskStatus":@"4"}];
         }
         [taskTableViewController setTitle:title];
         taskTableViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskTableViewController animated:YES];
-    }
-    if (section==0 && row==3) {
+    } else if (section==0 && row==3) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         WorkOrderViewController *workOrderViewController = [mainSB instantiateViewControllerWithIdentifier:@"WORKORDER"];
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"工单查询";
         [workOrderViewController setTitle:title];
         [self.navigationController pushViewController:workOrderViewController animated:YES];
-    }
-    
-    if (section==1 && row==0) {
+    } else if (section==1 && row==0) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         TaskTableViewController *taskListViewController = [mainSB instantiateViewControllerWithIdentifier:@"TASK_LIST"];
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"巡检任务";
         [taskListViewController setTitle:title];
-        NSDictionary *filterDic = @{@"ShortTitle":@"2"};
-        taskListViewController.filterDic = filterDic;
+        taskListViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"2"}];
         taskListViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskListViewController animated:YES];
-    }
-    
-    if (section==1 && row==1) {
+    } else if (section==1 && row==1) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         InspectTaskListViewController *inspectTaskViewController = [mainSB instantiateViewControllerWithIdentifier:@"INSPECT_TASKLIST"];
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"巡检查询";
         [inspectTaskViewController setTitle:title];
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];
-    }
-    
-    if (section==4 && row==0) {
+    } else if (section==4 && row==0) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         KnowledgeViewController *knowledgeViewController = [mainSB instantiateViewControllerWithIdentifier:@"KNOWLEDGESEARCH"];
         self.navigationItem.backBarButtonItem = backButton;

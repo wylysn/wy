@@ -17,7 +17,8 @@
     self.siftTableView.delegate=self;
     self.siftTableView.dataSource=self;
     self.siftTableView.backgroundColor = [UIColor whiteColor];
-    self.siftTableView.scrollEnabled = FALSE;
+    self.siftTableView.scrollEnabled = YES;
+    self.siftTableView.bounces = NO;
     self.siftTableView.allowsMultipleSelection = YES;
     if ([self.siftTableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.siftTableView setSeparatorInset:UIEdgeInsetsZero];

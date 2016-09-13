@@ -479,8 +479,8 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     // Pass the selected object to the new view controller.
     if ([@"EMBED_TASKLIST" isEqualToString:segue.identifier]) {
         taskListViewController = segue.destinationViewController;
-        NSDictionary *dic = @{};
-        taskListViewController.filterDic = dic;
+        NSDictionary *dic = @{@"ShortTitle":@"1", @"TaskStatus":@"4,5,6,7"};
+        taskListViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:dic];
     }
 }
 
