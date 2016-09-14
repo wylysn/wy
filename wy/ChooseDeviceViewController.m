@@ -61,12 +61,14 @@
     UIImage *image;
     if (self.selectedDevicesDic[device.Code]) {
         image = [UIImage imageNamed:@"checkbox-checked"];
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
-//    else {
-//        image = [UIImage imageNamed:@"checkbox-unchecked"];
-//    }
+    else {
+        image = [UIImage imageNamed:@"checkbox-unchecked"];
+//        cell.selected = FALSE;
+    }
     [checkImageView setImage:image];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
     
     return cell;
 }
