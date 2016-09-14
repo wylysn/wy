@@ -52,12 +52,12 @@
         [condition setObject:@"gettasklist" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
         [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-        [condition setObject:@"" forKey:@"username"];   //后续补上
+        [condition setObject:@"admin" forKey:@"username"];   //后续补上
         [condition setObject:filterDic forKey:@"filter"];
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if ([responseObject[@"success"] isEqualToString:@"true"]) {
+            if (responseObject[@"success"]) {
                 NSArray* response = responseObject[@"data"];
                 [self.taskList removeAllObjects];
                 for (NSDictionary *obj in response) {

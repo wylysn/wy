@@ -14,8 +14,8 @@
 
 @property (nonatomic, copy, readonly) NSString *Code;
 @property (nonatomic, copy, readonly) NSString *Name;
-@property (nonatomic, copy, readonly) NSString *QRCode;
-@property (nonatomic, copy, readonly) NSString *Class;
+//@property (nonatomic, copy, readonly) NSString *QRCode;
+//@property (nonatomic, copy, readonly) NSString *Class;
 @property (nonatomic, copy, readonly) NSString *Model;
 @property (nonatomic, copy, readonly) NSString *Brand;
 @property (nonatomic, copy, readonly) NSString *Xlhao;
@@ -25,7 +25,7 @@
 @property (nonatomic, copy, readonly) NSString *Pos;
 @property (nonatomic, copy, readonly) NSString *Description;
 @property (nonatomic, copy, readonly) NSString *Patrol_Tpl;
-@property (nonatomic, readonly) int Status;
+@property (nonatomic, copy, readonly) NSString *Status;
 @property (nonatomic, copy, readonly) NSString *Picture;
 @property (nonatomic, copy, readonly) NSString *Attachment;
 @property (nonatomic, copy, readonly) NSString *Organizationid;

@@ -8,7 +8,7 @@
 
 #import "ChooseDeviceViewController.h"
 #import "DeviceDBService.h"
-#import "DeviceListEntity.h"
+#import "DeviceEntity.h"
 
 #define CELLID @"DEVICEIDENTIFIER"
 
@@ -35,7 +35,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    deviceList = [[DeviceDBService getSharedInstance] findAllDeviceLists];
+    deviceList = [[DeviceDBService getSharedInstance] findAllDevices];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,18 +51,22 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
-    DeviceListEntity *device = deviceList[indexPath.row];
+    DeviceEntity *device = deviceList[indexPath.row];
     UILabel *nameLabel = [cell viewWithTag:1];
     UILabel *codeLabel = [cell viewWithTag:2];
     UIImageView *checkImageView = [cell viewWithTag:3];
     nameLabel.text = device.Name;
     codeLabel.text = device.Code;
 
+    UIImage *image;
     if (self.selectedDevicesDic[device.Code]) {
-        UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
-        [checkImageView setImage:image];
-        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        image = [UIImage imageNamed:@"checkbox-checked"];
     }
+//    else {
+//        image = [UIImage imageNamed:@"checkbox-unchecked"];
+//    }
+    [checkImageView setImage:image];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     
     return cell;
 }
@@ -97,7 +101,7 @@
     NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
     NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
-        DeviceListEntity *device = deviceList[indexPath.row];
+        DeviceEntity *device = deviceList[indexPath.row];
         [deviceArr addObject:device];
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -108,7 +112,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    deviceList = [[DeviceDBService getSharedInstance] findDeviceListsByName:textField.text];
+    deviceList = [[DeviceDBService getSharedInstance] findDevicesByName:textField.text];
     [self.searchField resignFirstResponder];
     [self.tableView reloadData];
     return YES;

@@ -36,21 +36,8 @@
     }
     
     //创建打开数据库
+    /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        PersonDBService *dbService1 = [PersonDBService getSharedInstance];
-        PersonEntity *person1 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00001", @"EmployeeName":@"张三", @"DepartName":@"运维1部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
-        [dbService1 saveData:person1];
-        PersonEntity *person2 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00002", @"EmployeeName":@"李四", @"DepartName":@"运维2部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
-        [dbService1 saveData:person2];
-        PersonEntity *person3 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00003", @"EmployeeName":@"王五", @"DepartName":@"运维3部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
-        [dbService1 saveData:person3];
-        PersonEntity *person4 = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":@"00004", @"EmployeeName":@"周六", @"DepartName":@"运维4部", @"SortIndex":[NSString stringWithFormat:@"%d", 1], @"Phone":@"60610000", @"Mobile":@"13800000000"}];
-        [dbService1 saveData:person4];
-        
-        PersonEntity *person = [dbService1 findByAppUserName:@"00001"];
-        NSLog(@"从数据库中找出人员数据：%@", person);
-        
         
         DeviceDBService *dbService = [DeviceDBService getSharedInstance];
         DeviceListEntity *deviceList1 = [[DeviceListEntity alloc] initWithDictionary:@{@"Code":@"0001",@"Name":@"冷却塔",@"Class":@"",@"Location":@"上海科技馆",@"KeyId":@""}];
@@ -77,7 +64,7 @@
         [positionService savePosition:p6];
         [positionService savePosition:p7];
     });
-    
+    */
     
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;

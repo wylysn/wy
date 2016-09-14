@@ -49,7 +49,7 @@ static sqlite3_stmt *statement = nil;
 
 - (void) createPersonTable {
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Person (AppUserName text primary key, EmployeeName text, DepartName text, SortIndex integer, Phone text, Mobile text)";
+    NSString *sql_stmt =@"create table if not exists Person (AppUserName text primary key, EmployeeId integer, EmployeeName text,DepartmentId integer, DepartName text, SortIndex integer, Phone text, Mobile text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -63,7 +63,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into Person (AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile) values (\"%@\",\"%@\", \"%@\", \"%ld\", \"%@\", \"%@\")",person.AppUserName, person.EmployeeName, person.DepartName, person.SortIndex, person.Phone, person.Mobile];
+        NSString *insertSQL = [NSString stringWithFormat:@"insert into Person (AppUserName, EmployeeId, EmployeeName, DepartmentId, DepartName, SortIndex, Phone, Mobile) values (\"%@\",\"%ld\",\"%@\",\"%ld\", \"%@\", \"%ld\", \"%@\", \"%@\")",person.AppUserName, person.EmployeeId, person.EmployeeName, person.DepartmentId, person.DepartName, person.SortIndex, person.Phone, person.Mobile];
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -88,7 +88,7 @@ static sqlite3_stmt *statement = nil;
     PersonEntity *person;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person where AppUserName=\"%@\"",AppUserName];
+        NSString *querySQL = [NSString stringWithFormat: @"select AppUserName, EmployeeId, EmployeeName, DepartmentId, DepartName, SortIndex, Phone, Mobile from Person where AppUserName=\"%@\"",AppUserName];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -96,12 +96,14 @@ static sqlite3_stmt *statement = nil;
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
                 NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
-                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSInteger SortIndex = sqlite3_column_int(statement, 3);
-                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
-                person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
+                NSInteger EmployeeId = sqlite3_column_int(statement, 1);
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger DepartmentId = sqlite3_column_int(statement, 3);
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 5);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeId":[NSString stringWithFormat:@"%ld", EmployeeId], @"EmployeeName":EmployeeName, @"DepartmentId":[NSString stringWithFormat:@"%ld", DepartmentId], @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
             }
             else{
                 NSLog(@"没有找到username为%@的人员......", AppUserName);
@@ -118,7 +120,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *resultArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = @"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person order by SortIndex";
+        NSString *querySQL = @"select AppUserName, EmployeeId, EmployeeName, DepartmentId, DepartName, SortIndex, Phone, Mobile from Person order by SortIndex";
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -126,12 +128,14 @@ static sqlite3_stmt *statement = nil;
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
-                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSInteger SortIndex = sqlite3_column_int(statement, 3);
-                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
-                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
+                NSInteger EmployeeId = sqlite3_column_int(statement, 1);
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger DepartmentId = sqlite3_column_int(statement, 3);
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 5);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeId":[NSString stringWithFormat:@"%ld", EmployeeId], @"EmployeeName":EmployeeName, @"DepartmentId":[NSString stringWithFormat:@"%ld", DepartmentId], @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
                 [resultArr addObject:person];
             }
         } else {
@@ -146,7 +150,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *resultArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat:@"select AppUserName, EmployeeName, DepartName, SortIndex, Phone, Mobile from Person where EmployeeName like '%%%@%%' order by SortIndex", AppUserName];
+        NSString *querySQL = [NSString stringWithFormat:@"select AppUserName, EmployeeId, EmployeeName, DepartmentId, DepartName, SortIndex, Phone, Mobile from Person where EmployeeName like '%%%@%%' order by SortIndex", AppUserName];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -154,12 +158,14 @@ static sqlite3_stmt *statement = nil;
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 NSString *AppUserName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
-                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSInteger SortIndex = sqlite3_column_int(statement, 3);
-                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
-                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeName":EmployeeName, @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
+                NSInteger EmployeeId = sqlite3_column_int(statement, 1);
+                NSString *EmployeeName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSInteger DepartmentId = sqlite3_column_int(statement, 3);
+                NSString *DepartName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSInteger SortIndex = sqlite3_column_int(statement, 5);
+                NSString *Phone = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Mobile = [[NSString alloc]initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:@{@"AppUserName":AppUserName, @"EmployeeId":[NSString stringWithFormat:@"%ld", EmployeeId], @"EmployeeName":EmployeeName, @"DepartmentId":[NSString stringWithFormat:@"%ld", DepartmentId], @"DepartName":DepartName, @"SortIndex":[NSString stringWithFormat:@"%ld", SortIndex], @"Phone":Phone, @"Mobile":Mobile}];
                 [resultArr addObject:person];
             }
         } else {

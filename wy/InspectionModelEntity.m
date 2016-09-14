@@ -18,12 +18,6 @@
         _Name = dictionary[@"Name"];
         _CompayCode = dictionary[@"CompayCode"];
         _Memo = dictionary[@"Memo"];
-        _ItemName = dictionary[@"ItemName"];
-        _ItemType = (int)[dictionary[@"ItemType"] integerValue];
-        _InputMax = [dictionary[@"InputMax"] floatValue];
-        _InputMin = [dictionary[@"InputMin"] floatValue];
-        _ItemValues = dictionary[@"ItemValues"];
-        _UnitName = dictionary[@"UnitName"];
     }
     return self;
 }

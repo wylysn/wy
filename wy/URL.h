@@ -16,7 +16,7 @@
 //#define URL_PATH @"http://10.10.29.6:8080"
 //#define URL_PATH @"http://10.10.96.144:8088"//测试环境
 //#define URL_PATH @"https://mobile.purang.com"
-#define URL_PATH @"http://10.1.110.21:8088"
+#define URL_PATH @"http://d.bm21.com.cn:30002/mobile/usereq.aspx"
 #define URL_HEAD(url) [URL_PATH stringByAppendingString:url]
 //#define URL_HEAD(url) [NSString stringWithFormat:@"https://m3.purang.com:8050%@",url]
 //#define URL_HEAD(url) [NSString stringWithFormat:@"http://10.10.96.144:8088%@",url]//测试环境

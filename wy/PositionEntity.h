@@ -12,14 +12,14 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, readonly) int id;
+@property (nonatomic, readonly) NSInteger ID;
 @property (nonatomic, copy, readonly) NSString *Code;
 @property (nonatomic, copy, readonly) NSString *Name;
 @property (nonatomic, copy, readonly) NSString *FullName;
-@property (nonatomic, readonly) NSInteger Sort;
-@property (nonatomic, readonly) NSInteger Status;
+@property (nonatomic, readonly) NSString *Sort;
+@property (nonatomic, readonly) NSString *Status;
 @property (nonatomic, copy, readonly) NSString *Description;
-@property (nonatomic, readonly) int ParentID;
+@property (nonatomic, readonly) NSInteger ParentID;
 @property (nonatomic, copy, readonly) NSString *Prj_Code;
 
 /*扩展属性*/

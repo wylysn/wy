@@ -16,7 +16,9 @@
     if (self) {
         _id = dictionary[@"id"];
         _AppUserName = dictionary[@"AppUserName"];
+        _EmployeeId = [(NSString *)dictionary[@"EmployeeId"] integerValue];
         _EmployeeName = dictionary[@"EmployeeName"];
+        _DepartmentId = [(NSString *)dictionary[@"DepartmentId"] integerValue];
         _DepartName = dictionary[@"DepartName"];
         _SortIndex = [(NSString *)dictionary[@"SortIndex"] integerValue];
         _Phone = dictionary[@"Phone"];

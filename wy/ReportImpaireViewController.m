@@ -8,7 +8,7 @@
 
 #import "ReportImpaireViewController.h"
 #import "PRPlaceHolderTextView.h"
-#import "DeviceListEntity.h"
+#import "DeviceEntity.h"
 #import "AAPLCameraViewController.h"
 #import "SkimPhotoViewController.h"
 #import "ELCImagePickerController.h"
@@ -229,7 +229,7 @@
     deviceArr = [[NSMutableArray alloc] initWithArray:deviceArray];
     [selectedDevicesDic removeAllObjects];
     for (unsigned i = 0; i < deviceArr.count; i++) {
-        DeviceListEntity *device = (DeviceListEntity *)deviceArr[i];
+        DeviceEntity *device = (DeviceEntity *)deviceArr[i];
         [selectedDevicesDic setObject:device forKey:device.Code];
     }
     [self.tableView reloadData];
@@ -394,7 +394,7 @@
             }
         }
     } else if (section == 1) {
-        DeviceListEntity *device = deviceArr[row];
+        DeviceEntity *device = deviceArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = device.Name;
         UIImageView *deleteView = [cell viewWithTag:2];

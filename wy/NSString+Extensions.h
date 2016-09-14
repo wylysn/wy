@@ -21,6 +21,10 @@
 
 - (NSDictionary *)json_StringToDictionary;
 
+//uuid
 + (NSString *)getDeviceId;
+
+//文件大小转换值
++ (NSString *)getFileSizeString:(NSNumber *)size;
 
 @end

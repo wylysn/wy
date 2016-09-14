@@ -49,7 +49,7 @@
     for (NSDictionary *objDic in enumeratorObject) {
         cacheSize += [objDic[@"size"] doubleValue];
     }
-    self.cacheSizeLabel.text = [NSString stringWithFormat:@"%.1fMB",cacheSize];
+    self.cacheSizeLabel.text = [NSString getFileSizeString:[NSNumber numberWithDouble:cacheSize]];
 }
 
 #pragma mark - Table view data source

@@ -42,7 +42,7 @@
     for (PositionEntity *position in positionList) {
         position.level = 1;
         NSMutableArray *childArr = [[NSMutableArray alloc] initWithObjects:position, nil];
-        [positionDics setObject:childArr forKey:@(position.id)];
+        [positionDics setObject:childArr forKey:@(position.ID)];
     }
 }
 
@@ -70,7 +70,7 @@
     PositionEntity *headPosition = positionList[section];
     NSRange range = NSMakeRange(row+1, [newPositionList count]);
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-    [(NSMutableArray *)positionDics[@(headPosition.id)] insertObjects:newPositionList atIndexes:indexSet];
+    [(NSMutableArray *)positionDics[@(headPosition.ID)] insertObjects:newPositionList atIndexes:indexSet];
     
     [self.tableView reloadData];
 }
@@ -79,7 +79,7 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     PositionEntity *headPosition = positionList[section];
-    NSMutableArray *allChilds = (NSMutableArray *)positionDics[@(headPosition.id)];
+    NSMutableArray *allChilds = (NSMutableArray *)positionDics[@(headPosition.ID)];
 
     NSInteger length=0;
     for (NSInteger i = row+1; i<allChilds.count; i++) {
@@ -101,7 +101,7 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     PositionEntity *headPosition = positionList[section];
-    NSArray *childPositions = (NSArray *)positionDics[@(headPosition.id)];
+    NSArray *childPositions = (NSArray *)positionDics[@(headPosition.ID)];
     PositionEntity *position = childPositions[row];
     return position;
 }
@@ -119,7 +119,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     PositionEntity *position = positionList[section];
-    NSArray *childPositions = (NSArray *)positionDics[@(position.id)];
+    NSArray *childPositions = (NSArray *)positionDics[@(position.ID)];
     return childPositions.count;
 }
 

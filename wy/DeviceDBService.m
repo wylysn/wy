@@ -66,7 +66,7 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createDeviceTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Device (Code text primary key, Name text, QRCode text, Class text, Model text, Brand text, Xlhao text, Pro_Date text, Weight text, Des_Life text, Pos text, Description text, Patrol_Tpl text, Status integer, Picture text, Attachment text, Organizationid text)";
+    NSString *sql_stmt =@"create table if not exists Device (Code text primary key, Name text, Model text, Brand text, Xlhao text, Pro_Date text, Weight text, Des_Life text, Pos text, Description text, Patrol_Tpl text, Status integer, Picture text, Attachment text, Organizationid text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -187,11 +187,30 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into Device (Code, Name, QRCode, Class, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment, Organizationid) values (\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%d\", \"%@\", \"%@\", \"%@\")", device.Code, device.Name, device.QRCode, device.Class, device.Model, device.Brand, device.Xlhao, device.Pro_Date, device.Weight, device.Des_Life, device.Pos, device.Description, device.Patrol_Tpl, device.Status, device.Picture, device.Attachment, device.Organizationid];
+    NSString *insertSQL = @"insert into Device (Code, Name, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment, Organizationid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         const char *insert_stmt = [insertSQL UTF8String];
+        
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
         if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [device.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [device.Name UTF8String], -1, SQLITE_TRANSIENT);
+//            sqlite3_bind_text(statement, 3, [device.QRCode UTF8String], -1, SQLITE_TRANSIENT);
+//            sqlite3_bind_text(statement, 4, [device.Class UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [device.Model UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [device.Brand UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [device.Xlhao UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 6, [device.Pro_Date UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 7, [device.Weight UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 8, [device.Des_Life UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 9, [device.Pos UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 10, [device.Description UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 11, [device.Patrol_Tpl UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 12, [device.Status UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 13, [device.Picture UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 14, [device.Attachment UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 15, [device.Organizationid UTF8String], -1, SQLITE_TRANSIENT);
+            
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
                 NSLog(@"插入成功。。。。。");
@@ -200,18 +219,90 @@ static sqlite3_stmt *statement = nil;
                 NSLog(@"插入失败:%s", sqlite3_errmsg(database));
             }
         } else {
-            NSLog(@"语法不通过 ");
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
         }
         sqlite3_finalize(statement);
     }
     return isSuccess;
 }
 
+- (NSArray *)findAllDevices {
+    NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Name, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment from Device"];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *Model = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *Brand = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *Xlhao = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Pro_Date = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *Weight = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Des_Life = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                NSString *Pos = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
+                NSString *Description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
+                NSString *Patrol_Tpl = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
+                NSString *Status = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
+                NSString *Picture = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
+                NSString *Attachment = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
+//                NSString *Organizationid = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
+                DeviceEntity *device = [[DeviceEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Model":Model, @"Brand":Brand, @"Xlhao":Xlhao, @"Pro_Date":Pro_Date, @"Weight":Weight, @"Des_Life":Des_Life, @"Pos":Pos, @"Description":Description, @"Patrol_Tpl":Patrol_Tpl, @"Status":Status, @"Picture":Picture, @"Attachment":Attachment}];
+                [deviceArr addObject:device];
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    }
+    sqlite3_finalize(statement);
+    return deviceArr;
+}
+
+- (NSArray *) findDevicesByName:(NSString*)name {
+    NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Name, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment, Organizationid from Device where Name like '%%%@%%'",  [NSString stringWithCString:[name UTF8String] encoding:NSUTF8StringEncoding]];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *Model = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *Brand = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *Xlhao = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Pro_Date = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *Weight = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Des_Life = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                NSString *Pos = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
+                NSString *Description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
+                NSString *Patrol_Tpl = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
+                NSString *Status = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
+                NSString *Picture = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
+                NSString *Attachment = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
+                NSString *Organizationid = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
+                DeviceEntity *device = [[DeviceEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Model":Model, @"Brand":Brand, @"Xlhao":Xlhao, @"Pro_Date":Pro_Date, @"Weight":Weight, @"Des_Life":Des_Life, @"Pos":Pos, @"Description":Description, @"Patrol_Tpl":Patrol_Tpl, @"Status":Status, @"Picture":Picture, @"Attachment":Attachment, @"Organizationid":Organizationid}];
+                [deviceArr addObject:device];
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    } else {
+        NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    return deviceArr;
+}
+
 - (DeviceEntity *)findDeviceByCode:(NSString *)Code {
     DeviceEntity *device;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, Name, QRCode, Class, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment, Organizationid from Device where Code=\"%@\"",Code];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Name, Model, Brand, Xlhao, Pro_Date, Weight, Des_Life, Pos, Description, Patrol_Tpl, Status, Picture, Attachment, Organizationid from Device where Code=\"%@\"",Code];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -220,25 +311,23 @@ static sqlite3_stmt *statement = nil;
             {
                 NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
-                NSString *QRCode = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSString *Class = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
-                NSString *Model = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
-                NSString *Brand = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
-                NSString *Xlhao = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
-                NSString *Pro_Date = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
-                NSString *Weight = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
-                NSString *Des_Life = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
-                NSString *Pos = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
-                NSString *Description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
-                NSString *Patrol_Tpl = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
-                int Status = sqlite3_column_int(statement, 13);
-                NSString *Picture = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
-                NSString *Attachment = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 15)];
-                NSString *Organizationid = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 16)];
-                device = [[DeviceEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"QRCode":QRCode, @"Class":Class, @"Model":Model, @"Brand":Brand, @"Xlhao":Xlhao, @"Pro_Date":Pro_Date, @"Weight":Weight, @"Des_Life":Des_Life, @"Pos":Pos, @"Description":Description, @"Patrol_Tpl":Patrol_Tpl, @"Status":[NSString stringWithFormat:@"%d",Status], @"Picture":Picture, @"Attachment":Attachment, @"Organizationid":Organizationid}];
+                NSString *Model = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *Brand = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *Xlhao = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *Pro_Date = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *Weight = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *Des_Life = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                NSString *Pos = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
+                NSString *Description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
+                NSString *Patrol_Tpl = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
+                NSString *Status = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
+                NSString *Picture = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
+                NSString *Attachment = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
+                NSString *Organizationid = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
+                device = [[DeviceEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Model":Model, @"Brand":Brand, @"Xlhao":Xlhao, @"Pro_Date":Pro_Date, @"Weight":Weight, @"Des_Life":Des_Life, @"Pos":Pos, @"Description":Description, @"Patrol_Tpl":Patrol_Tpl, @"Status":Status, @"Picture":Picture, @"Attachment":Attachment, @"Organizationid":Organizationid}];
             }
             else{
-                NSLog(@"没有找到code为%@的人员......", Code);
+                NSLog(@"没有找到code为%@的设备......", Code);
             }
         } else {
             NSLog(@"查找失败:%s", sqlite3_errmsg(database));

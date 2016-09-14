@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "InspectionModelEntity.h"
+#import "InspectionChildModelEntity.h"
 
 @interface InspectionModelDBService : NSObject
 
 + (InspectionModelDBService*) getSharedInstance;
 
 - (BOOL) saveInspectionModel:(InspectionModelEntity *)inspection;
+
+- (BOOL) saveInspectionChildModel:(InspectionChildModelEntity *)inspectionChild;
+
 - (InspectionModelEntity *) findInspectionModelByCode:(NSString*)Code;
+
+- (InspectionChildModelEntity *) findInspectionChildModelByCode:(NSString*)ParentCode;
 
 @end

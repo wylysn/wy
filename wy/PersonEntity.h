@@ -13,7 +13,9 @@
 
 @property (nonatomic, copy, readonly) NSString *id;
 @property (nonatomic, copy, readonly) NSString *AppUserName;
+@property (nonatomic, readonly) NSInteger EmployeeId;
 @property (nonatomic, copy, readonly) NSString *EmployeeName;
+@property (nonatomic, readonly) NSInteger DepartmentId;
 @property (nonatomic, copy, readonly) NSString *DepartName;
 @property (nonatomic, readonly) NSInteger SortIndex;
 @property (nonatomic, copy, readonly) NSString *Phone;

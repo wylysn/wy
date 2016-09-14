@@ -16,11 +16,5 @@
 @property (nonatomic, copy) NSString *Name;
 @property (nonatomic, copy) NSString *CompayCode;
 @property (nonatomic, copy) NSString *Memo;
-@property (nonatomic, copy) NSString *ItemName;
-@property (nonatomic) int ItemType;
-@property (nonatomic) float InputMax;
-@property (nonatomic) float InputMin;
-@property (nonatomic, copy) NSString *ItemValues;
-@property (nonatomic, copy) NSString *UnitName;
 
 @end

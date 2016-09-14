@@ -65,18 +65,23 @@
         NSInteger row = indexPath.row;
         [idxSet addIndex:row];
         NSDictionary *objDic = cacheArray[row];
-        NSString *keyId = objDic[@"KeyId"];
+        NSString *templateid = objDic[@"templateid"];
+        NSString *dbName = objDic[@"dbName"];
         
-        //后面要补上删除缓存的真实代码
+        //删除缓存表
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *filePath = [docsDir stringByAppendingPathComponent:dbName];
+        NSURL *docsDirURL = [NSURL fileURLWithPath:filePath];
+        [fileManager removeItemAtURL:docsDirURL error:NULL];
         
+        //修改存储信息
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSDictionary *downloadDic = [userDefaults objectForKey:@"downloads"];
         NSMutableDictionary *newDic = [[NSMutableDictionary alloc] initWithDictionary:downloadDic];
-        [newDic removeObjectForKey:keyId];
+        [newDic removeObjectForKey:templateid];
         [userDefaults setObject:newDic forKey:@"downloads"];
         [userDefaults synchronize];
-        
-        NSLog(@"删除缓存后：%@", [userDefaults objectForKey:@"downloads"]);
     }
     [cacheArray removeObjectsAtIndexes:idxSet];
     [self.tableView reloadData];
@@ -117,7 +122,7 @@
     nameLabel.text = info[@"Name"];
     
     UILabel *sizeLabel = [cell viewWithTag:2];
-    sizeLabel.text = [NSString stringWithFormat:@"%.1fMB", [info[@"size"] doubleValue]];
+    sizeLabel.text = [NSString getFileSizeString:info[@"size"]];
     
     UIButton *check = [cell viewWithTag:3];
     check.selected = NO;

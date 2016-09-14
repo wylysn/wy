@@ -14,7 +14,7 @@
 {
     self = super.init;
     if (self) {
-        _KeyId = dictionary[@"KeyId"];
+        _templateid = dictionary[@"templateid"];
         _Name = dictionary[@"Name"];
     }
     return self;

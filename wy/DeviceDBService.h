@@ -21,6 +21,8 @@
 - (NSArray *) findDeviceListsByName:(NSString*)name;
 
 - (BOOL) saveDevice:(DeviceEntity *)device;
+- (NSArray *)findAllDevices;
+- (NSArray *) findDevicesByName:(NSString*)name;
 - (DeviceEntity *) findDeviceByCode:(NSString*)Code;
 
 @end

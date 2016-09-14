@@ -16,8 +16,8 @@
     if (self) {
         _Code = dictionary[@"Code"];
         _Name = dictionary[@"Name"];
-        _Class = dictionary[@"Class"];
-        _QRCode = dictionary[@"QRCode"];
+//        _Class = dictionary[@"Class"];
+//        _QRCode = dictionary[@"QRCode"];
         _Model = dictionary[@"Model"];
         
         _Brand = dictionary[@"Brand"];
@@ -28,7 +28,7 @@
         _Pos = dictionary[@"Pos"];
         _Description = dictionary[@"Description"];
         _Patrol_Tpl = dictionary[@"Patrol_Tpl"];
-        _Status = [dictionary[@"Status"] integerValue];
+        _Status = dictionary[@"Status"];
         _Picture = dictionary[@"Picture"];
         _Attachment = dictionary[@"Attachment"];
         _Organizationid = dictionary[@"Organizationid"];

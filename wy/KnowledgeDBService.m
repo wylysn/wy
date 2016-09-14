@@ -66,12 +66,16 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into Knowledge (Code, Content, Lyxm, createPerson, createTime) values (\"%@\", \"%@\", \"%@\",\"%@\", \"%@\")", knowledge.Code, knowledge.Content, knowledge.Lyxm, knowledge.createPerson, knowledge.createTime];
+        NSString *insertSQL = @"insert into Knowledge (Code, Content, Lyxm, createPerson, createTime) values (?,?,?,?,?)";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
         if (result == SQLITE_OK) { // 语法通过
-            // 执行插入语句
+            sqlite3_bind_text(statement, 1, [knowledge.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [knowledge.Content UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [knowledge.Lyxm UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [knowledge.createPerson UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [knowledge.createTime UTF8String], -1, SQLITE_TRANSIENT);
             if (sqlite3_step(statement) == SQLITE_DONE) {
                 NSLog(@"插入成功。。。。。");
                 isSuccess = TRUE;

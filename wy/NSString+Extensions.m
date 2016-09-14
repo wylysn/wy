@@ -245,4 +245,18 @@
     return token;
 }
 
++ (NSString *)getFileSizeString:(NSNumber *)size {
+    NSString *sizeText;
+    if ([size doubleValue] >= 1024.0*1024.0*1024.0) { // size >= 1GB
+        sizeText = [NSString stringWithFormat:@"%.2fGB", [size doubleValue] / 1024.0*1024.0*1024.0];
+    } else if ([size doubleValue] >= 1024.0*1024.0) { // 1GB > size >= 1MB
+        sizeText = [NSString stringWithFormat:@"%.2fMB", [size doubleValue] / 1024.0*1024.0];
+    } else if ([size doubleValue] >= 1024.0) { // 1MB > size >= 1KB
+        sizeText = [NSString stringWithFormat:@"%.2fKB", [size doubleValue] / 1024.0];
+    } else { // 1KB > size
+        sizeText = [NSString stringWithFormat:@"%.2fdB", [size doubleValue]];
+    }
+    return sizeText;
+}
+
 @end

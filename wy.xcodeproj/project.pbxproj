@@ -13,6 +13,7 @@
 		880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880787C81D61B45200BA6F05 /* PersonEntity.m */; };
 		880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CA1D61C53800BA6F05 /* checked@2x.png */; };
 		880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 880787CC1D61C55900BA6F05 /* checked_filled@2x.png */; };
+		880BDB851D88F683001DACF5 /* InspectionChildModelEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880BDB841D88F683001DACF5 /* InspectionChildModelEntity.m */; };
 		880CFDCF1D7FA1290017F84F /* BaseInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */; };
 		880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880CFDD21D8011F40017F84F /* ClearCacheViewController.m */; };
 		8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8811E7A21D77D6EF00CE7CE2 /* PositionDBservice.m */; };
@@ -178,6 +179,8 @@
 		880787C81D61B45200BA6F05 /* PersonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonEntity.m; sourceTree = "<group>"; };
 		880787CA1D61C53800BA6F05 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
 		880787CC1D61C55900BA6F05 /* checked_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked_filled@2x.png"; sourceTree = "<group>"; };
+		880BDB831D88F683001DACF5 /* InspectionChildModelEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionChildModelEntity.h; sourceTree = "<group>"; };
+		880BDB841D88F683001DACF5 /* InspectionChildModelEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionChildModelEntity.m; sourceTree = "<group>"; };
 		880CFDCD1D7FA1290017F84F /* BaseInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseInfoEntity.h; sourceTree = "<group>"; };
 		880CFDCE1D7FA1290017F84F /* BaseInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseInfoEntity.m; sourceTree = "<group>"; };
 		880CFDD11D8011F40017F84F /* ClearCacheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearCacheViewController.h; sourceTree = "<group>"; };
@@ -1010,6 +1013,8 @@
 				88ABE1DD1D7D59D50035D39F /* TaskDBService.m */,
 				88ABE1DF1D7D66090035D39F /* InspectionModelEntity.h */,
 				88ABE1E01D7D66090035D39F /* InspectionModelEntity.m */,
+				880BDB831D88F683001DACF5 /* InspectionChildModelEntity.h */,
+				880BDB841D88F683001DACF5 /* InspectionChildModelEntity.m */,
 				88ABE1E21D7D67E60035D39F /* InspectionModelDBService.h */,
 				88ABE1E31D7D67E60035D39F /* InspectionModelDBService.m */,
 			);
@@ -1301,6 +1306,7 @@
 				88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */,
 				8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */,
 				889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */,
+				880BDB851D88F683001DACF5 /* InspectionChildModelEntity.m in Sources */,
 				8841D4781D73DEA1003E4495 /* TaskDevicesService.m in Sources */,
 				88ABE1DE1D7D59D50035D39F /* TaskDBService.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,

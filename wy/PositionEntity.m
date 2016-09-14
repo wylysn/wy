@@ -14,14 +14,14 @@
 {
     self = super.init;
     if (self) {
-        _id = (int)[dictionary[@"id"] integerValue];
+        _ID = [dictionary[@"ID"] integerValue];
         _Code = dictionary[@"Code"];
         _Name = dictionary[@"Name"];
         _FullName = dictionary[@"FullName"];
-        _Sort = [dictionary[@"Sort"] integerValue];
-        _Status = [dictionary[@"Status"] integerValue];
+        _Sort = dictionary[@"Sort"];
+        _Status = dictionary[@"Status"];
         _Description = dictionary[@"Description"];
-        _ParentID = (int)[dictionary[@"ParentID"] integerValue];
+        _ParentID = (NSNull *)dictionary[@"ParentID"] == [NSNull null]?0:[dictionary[@"ParentID"] integerValue];
         _Prj_Code = dictionary[@"Prj_Code"];
     }
     return self;
