@@ -32,7 +32,7 @@
 
 - (IBAction)login:(id)sender {
     LoginService *loginService = [[LoginService alloc] init];
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *userName = self.userNameField.text;
     NSString *password = self.passwordField.text;
     [loginService loginWithUserName:userName password:password success:^{
