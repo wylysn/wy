@@ -965,7 +965,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSQ-0F-d7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="578.5" y="3841"/>
+            <point key="canvasLocation" x="676" y="3840"/>
         </scene>
         <!--Inspect Task List View Controller-->
         <scene sceneID="Z4m-z0-T5U">
@@ -1220,12 +1220,12 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="lFJ-YI-W1A"/>
-                                                    <exclude reference="z8r-Yt-8CW"/>
                                                     <exclude reference="0nb-RK-f5T"/>
                                                     <exclude reference="Nso-w5-PcF"/>
                                                     <exclude reference="lpY-p6-Ipg"/>
                                                     <exclude reference="sb5-vI-Z6d"/>
+                                                    <exclude reference="z8r-Yt-8CW"/>
+                                                    <exclude reference="lFJ-YI-W1A"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

@@ -446,9 +446,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="7kD-99-jbP"/>
                                 <exclude reference="OCb-wd-Azy"/>
                                 <exclude reference="TQu-Ou-Dme"/>
-                                <exclude reference="7kD-99-jbP"/>
                             </mask>
                         </variation>
                     </view>
@@ -469,7 +469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlP-IB-Q4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60.5" y="1025"/>
+            <point key="canvasLocation" x="31" y="899"/>
         </scene>
         <!--Task Chuli1 View Controller-->
         <scene sceneID="7s1-3H-VBq">
@@ -942,10 +942,10 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="FSg-dl-lJ4"/>
+                                        <exclude reference="8O6-v5-zyj"/>
                                         <exclude reference="Kir-tH-htA"/>
                                         <exclude reference="gm2-pB-h19"/>
-                                        <exclude reference="8O6-v5-zyj"/>
-                                        <exclude reference="FSg-dl-lJ4"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -1027,8 +1027,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="IaV-xQ-Fhv"/>
                                 <exclude reference="fnx-gX-IYk"/>
+                                <exclude reference="IaV-xQ-Fhv"/>
                             </mask>
                         </variation>
                     </view>
@@ -1051,7 +1051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KNU-Xp-4ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60.5" y="1721"/>
+            <point key="canvasLocation" x="31" y="1528"/>
         </scene>
         <!--Task Xunjian View Controller-->
         <scene sceneID="9Dm-e5-G0z">
@@ -1202,7 +1202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXj-Z2-lXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.5" y="2513"/>
+            <point key="canvasLocation" x="30" y="2144"/>
         </scene>
         <!--Task Xunjian Base Info Table View Controller-->
         <scene sceneID="1sL-Mr-hc3">
@@ -1399,7 +1399,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWE-Ux-2Z9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="544.5" y="2513"/>
+            <point key="canvasLocation" x="740" y="2143"/>
         </scene>
         <!--Task Xunjian Base Info2 Table View Controller-->
         <scene sceneID="WNI-11-WYm">
@@ -1668,7 +1668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjO-V4-MHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="544.5" y="3207"/>
+            <point key="canvasLocation" x="740" y="2728"/>
         </scene>
         <!--Task Xunjian Device Table View Controller-->
         <scene sceneID="kOW-eb-NNR">
@@ -1724,7 +1724,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9B-iq-R6g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013.5" y="2513"/>
+            <point key="canvasLocation" x="1453" y="2142"/>
         </scene>
         <!--Task Chuli2 View Controller-->
         <scene sceneID="HGC-Db-tnd">
@@ -2558,7 +2558,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSu-Bg-FYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="508.5" y="1721"/>
+            <point key="canvasLocation" x="740" y="1528"/>
         </scene>
         <!--Task Pai Gong View Controller-->
         <scene sceneID="UWU-QP-ExD">
@@ -3215,10 +3215,10 @@
                                     <mask key="constraints">
                                         <exclude reference="EV2-ey-9sK"/>
                                         <exclude reference="Mjm-QG-Rg6"/>
+                                        <exclude reference="b4m-XB-U6W"/>
                                         <exclude reference="Vmq-QC-uJM"/>
                                         <exclude reference="rN9-Rw-FeU"/>
                                         <exclude reference="tiT-I5-jhI"/>
-                                        <exclude reference="b4m-XB-U6W"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -3665,7 +3665,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAj-RF-MAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.5" y="3207"/>
+            <point key="canvasLocation" x="30" y="2728"/>
         </scene>
     </scenes>
     <resources>
