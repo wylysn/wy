@@ -48,11 +48,13 @@
     Reachability *reach = [Reachability reachabilityForInternetConnection];
     if (reach.isReachable) {
         PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *userName = [userDefaults objectForKey:@"userName"];
         NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
         [condition setObject:@"gettasklist" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
         [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-        [condition setObject:@"admin" forKey:@"username"];   //后续补上
+        [condition setObject:userName?userName:@"" forKey:@"username"];   //后续补上
         [condition setObject:filterDic forKey:@"filter"];
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             

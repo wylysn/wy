@@ -17,5 +17,7 @@
 
 @property (strong, nonatomic) DownloadViewController *downloadViewController;
 
+@property (nonatomic, assign) BOOL isLogin;
+
 @end
 

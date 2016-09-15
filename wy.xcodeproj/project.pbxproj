@@ -148,6 +148,7 @@
 		D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
+		D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FD92251D8A214D0090FEC8 /* LoginService.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
 
@@ -434,6 +435,8 @@
 		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D2CF2E741D7BDABA0020759A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D2FD92241D8A214D0090FEC8 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
+		D2FD92251D8A214D0090FEC8 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -759,6 +762,7 @@
 		88A893CC1D3392BD0050D9F3 /* my */ = {
 			isa = PBXGroup;
 			children = (
+				D2FD92231D8A21340090FEC8 /* service */,
 				880CFDD01D7FA1590017F84F /* model */,
 				D2997DC21D7AFE410022D8BD /* view */,
 				88D5CB281D6FCEA60041C9A1 /* controller */,
@@ -1039,6 +1043,15 @@
 			name = SSKeychain;
 			sourceTree = "<group>";
 		};
+		D2FD92231D8A21340090FEC8 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				D2FD92241D8A214D0090FEC8 /* LoginService.h */,
+				D2FD92251D8A214D0090FEC8 /* LoginService.m */,
+			);
+			name = service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1309,6 +1322,7 @@
 				880BDB851D88F683001DACF5 /* InspectionChildModelEntity.m in Sources */,
 				8841D4781D73DEA1003E4495 /* TaskDevicesService.m in Sources */,
 				88ABE1DE1D7D59D50035D39F /* TaskDBService.m in Sources */,
+				D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,

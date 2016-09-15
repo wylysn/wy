@@ -7,8 +7,14 @@
 //
 
 #import "LoginViewController.h"
+#import "LoginService.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *rememberBtn;
 
 @end
 
@@ -25,7 +31,26 @@
 }
 
 - (IBAction)login:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    LoginService *loginService = [[LoginService alloc] init];
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    NSString *userName = self.userNameField.text;
+    NSString *password = self.passwordField.text;
+    [loginService loginWithUserName:userName password:password success:^{
+        app.isLogin = YES;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:userName forKey:@"userName"];
+        if (self.rememberBtn.isSelected) {
+            [userDefaults setObject:password forKey:@"password"];
+        }
+        [userDefaults synchronize];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(NSString *message) {
+        app.isLogin = NO;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"登陆失败" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (IBAction)serverSet:(id)sender {
@@ -49,6 +74,10 @@
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (IBAction)rememberBtnClick:(id)sender {
+    self.rememberBtn.selected = !self.rememberBtn.selected;
 }
 
 /*
