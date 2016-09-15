@@ -14,10 +14,10 @@
 
 @property (nonatomic, readonly) int id;
 @property (nonatomic, copy, readonly) NSString *Code;
-@property (nonatomic, copy, readonly) NSString *KeyWord;
+@property (nonatomic, copy, readonly) NSString *Keyword;
 @property (nonatomic, copy, readonly) NSString *Content;
 @property (nonatomic, copy, readonly) NSString *Lyxm;
-@property (nonatomic, copy, readonly) NSString *createPerson;
-@property (nonatomic, copy, readonly) NSString *createTime;
+//@property (nonatomic, copy, readonly) NSString *createPerson;
+//@property (nonatomic, copy, readonly) NSString *createTime;
 
 @end

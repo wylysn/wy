@@ -37,7 +37,7 @@
     if (section==0) {
         return 1;
     }
-    return 4;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,10 +73,10 @@
                 valueLabel.text = _knowlwdge.Lyxm;
             } else if(row==2) {
                 keyLabel.text = @"录入人";
-                valueLabel.text = _knowlwdge.createPerson;
+//                valueLabel.text = _knowlwdge.createPerson;
             } else if(row==3) {
                 keyLabel.text = @"录入时间";
-                valueLabel.text = _knowlwdge.createTime;
+//                valueLabel.text = _knowlwdge.createTime;
             }
             
         }

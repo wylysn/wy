@@ -16,10 +16,11 @@
     if (self) {
         _id = (int)[dictionary[@"id"] integerValue];
         _Code = dictionary[@"Code"];
+        _Keyword = dictionary[@"Keyword"];
         _Content = dictionary[@"Content"];
         _Lyxm = dictionary[@"Lyxm"];
-        _createPerson = dictionary[@"createPerson"];
-        _createTime = dictionary[@"createTime"];
+//        _createPerson = dictionary[@"createPerson"];
+//        _createTime = dictionary[@"createTime"];
     }
     return self;
 }
