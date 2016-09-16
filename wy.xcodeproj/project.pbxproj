@@ -146,6 +146,7 @@
 		D299B55C1D8461130073C360 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = D299B55B1D8461130073C360 /* SSKeychain.m */; };
 		D2AAA61C1D7C07E200A40FF1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */; };
 		D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */; };
+		D2CADE821D8B7152008A8CFD /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
 		D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FD92251D8A214D0090FEC8 /* LoginService.m */; };
@@ -431,6 +432,8 @@
 		D2AAA61B1D7C07E200A40FF1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		D2AAA61D1D7C086200A40FF1 /* AboutChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutChildTableViewController.h; sourceTree = "<group>"; };
 		D2AAA61E1D7C086200A40FF1 /* AboutChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutChildTableViewController.m; sourceTree = "<group>"; };
+		D2CADE801D8B7152008A8CFD /* QRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanViewController.h; sourceTree = "<group>"; };
+		D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanViewController.m; sourceTree = "<group>"; };
 		D2CF2E701D7BB29E0020759A /* PRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRView.h; sourceTree = "<group>"; };
 		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
 				8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */,
 				8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */,
+				D2CADE801D8B7152008A8CFD /* QRCodeScanViewController.h */,
+				D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1288,6 +1293,7 @@
 				88821E621D5C458300C72DA3 /* MainViewController.m in Sources */,
 				88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */,
 				8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */,
+				D2CADE821D8B7152008A8CFD /* QRCodeScanViewController.m in Sources */,
 				889BA29C1D64124E00BC5413 /* PhotoViewController.m in Sources */,
 				88F140D41D6C258200B8BCCC /* InspectTaskEntity.m in Sources */,
 				88E927F51D5DBC8400152BBF /* PRActionSheetPickerView.m in Sources */,

@@ -17,6 +17,7 @@
 #import "TaskHandleViewController.h"
 #import "TaskXunjianViewController.h"
 #import "TaskXunjian2ViewController.h"
+#import "QRCodeScanViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -203,6 +204,15 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
 //    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (IBAction)scanQRCode:(id)sender {
+    QRCodeScanViewController *viewController = [[QRCodeScanViewController alloc] init];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [viewController setTitle:@"二维码/条码"];
+    viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
