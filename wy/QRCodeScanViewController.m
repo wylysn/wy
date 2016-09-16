@@ -60,14 +60,21 @@
         }];
         
         UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
             //ios10只能这样打开
             NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
                 NSLog(@"设置成功！");
             }];
-//            dispatch_after(0.2, dispatch_get_main_queue(), ^{//添加多线程消除错误
-//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"]];//隐私设置
-//            });
+        #else
+            dispatch_after(0.2, dispatch_get_main_queue(), ^{//添加多线程消除错误
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"]];//隐私设置
+            });
+        #endif
+            
+            
+            
+
         }];
         
         [alertVC addAction:action];
