@@ -19,7 +19,9 @@
 
 @end
 
-@implementation QRCodeScanViewController
+@implementation QRCodeScanViewController {
+    UIImageView *scanLineImageView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -110,6 +112,37 @@
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = path.CGPath;//将路径交给layer绘制
     [maskView.layer setMask:shapeLayer];//设置遮罩层
+    
+    //设置边框等
+    UIView *scanView = [[UIView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame)-BOXWIDTH)/2.0, (CGRectGetHeight(self.view.frame)-BOXHEIGHT)/2.0, BOXWIDTH, BOXHEIGHT)];
+    UIImageView *borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BOXWIDTH, BOXHEIGHT)];
+    borderImageView.image = [UIImage imageNamed:@"qrcode_border"];
+    scanLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BOXWIDTH, 2)];
+    scanLineImageView.image = [UIImage imageNamed:@"qrcode_scanline"];
+    [scanView addSubview:borderImageView];
+    [scanView addSubview:scanLineImageView];
+    [self.view addSubview:scanView];
+    
+    [self changeScanLineFrame];
+}
+
+- (void)changeScanLineFrame {
+    [UIView beginAnimations:@"FrameAni" context:nil];
+    [UIView setAnimationDuration:4.0];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationWillStartSelector:@selector(startAni:)];
+    [UIView setAnimationDidStopSelector:@selector(stopAni:)];
+    [UIView setAnimationRepeatCount:MAXFLOAT];
+    scanLineImageView.frame = CGRectMake(0, BOXHEIGHT, BOXWIDTH, 2);
+    [UIView commitAnimations];
+}
+
+- (void)startAni:(NSString *)aniID {
+    NSLog(@"%@ start",aniID);
+}
+
+- (void)stopAni:(NSString *)aniID {
+    NSLog(@"%@ stop",aniID);
 }
 
 #pragma mark - 设置扫描说明
