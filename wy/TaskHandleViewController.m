@@ -51,6 +51,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    /*接口暂时不对
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
         [self.tableView reloadData];
@@ -60,6 +61,7 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+     */
     
     deviceArr = [[NSMutableArray alloc] init];
     selectedDevicesDic = [[NSMutableDictionary alloc] init];
