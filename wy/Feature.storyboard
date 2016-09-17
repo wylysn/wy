@@ -22,8 +22,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-uo-Wy5">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNg-cM-gwz" customClass="PRButton">
-                                        <state key="normal" title="上一月">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNg-cM-gwz" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="P9y-QO-Vud"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-btn-left">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -37,9 +40,15 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="preDateClick:" destination="InY-He-dDc" eventType="touchUpInside" id="gV9-DY-8IY"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-wj-9o6" customClass="PRButton">
-                                        <state key="normal" title="下一月">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-wj-9o6" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="FEb-Yl-ofp"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-btn-right">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -53,8 +62,14 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nextDateClick:" destination="InY-He-dDc" eventType="touchUpInside" id="IkP-xT-PcZ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-FB-CDg" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="oAj-to-mrr"/>
+                                        </constraints>
                                         <state key="normal" title="2016年6月">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -630,7 +645,7 @@
         <!--Inspect Task List View Controller-->
         <scene sceneID="z0e-7V-dBX">
             <objects>
-                <viewController storyboardIdentifier="INSPECT_TASKLIST" id="AGx-0k-7pA" customClass="InspectTaskListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="INSPECT_TASKLIST" hidesBottomBarWhenPushed="YES" id="AGx-0k-7pA" customClass="InspectTaskListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VCV-yy-QaH"/>
                         <viewControllerLayoutGuide type="bottom" id="yxD-55-c60"/>
@@ -641,8 +656,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW9-H8-kqe">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH8-Vl-ks7" customClass="PRButton">
-                                        <state key="normal" title="上一月">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH8-Vl-ks7" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="iP9-Hk-vzD"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-btn-left">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -656,9 +674,15 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="preDateClick:" destination="AGx-0k-7pA" eventType="touchUpInside" id="AhT-Fk-OSN"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIs-fC-QjS" customClass="PRButton">
-                                        <state key="normal" title="下一月">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIs-fC-QjS" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Fi0-l3-XoH"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-btn-right">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -672,8 +696,14 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nextDateClick:" destination="AGx-0k-7pA" eventType="touchUpInside" id="ANH-Bj-aDf"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rL3-gx-S3y" customClass="PRButton">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="bDV-gu-JmL"/>
+                                        </constraints>
                                         <state key="normal" title="2016年6月">
                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -723,11 +753,11 @@
                         <constraints>
                             <constraint firstItem="95U-QU-huJ" firstAttribute="top" secondItem="nW9-H8-kqe" secondAttribute="bottom" id="5Zv-S4-XkJ"/>
                             <constraint firstItem="nW9-H8-kqe" firstAttribute="centerX" secondItem="SW4-mS-0lC" secondAttribute="centerX" id="FzH-tx-K0m"/>
+                            <constraint firstAttribute="bottom" secondItem="95U-QU-huJ" secondAttribute="bottom" id="JGc-XL-llQ"/>
                             <constraint firstItem="nW9-H8-kqe" firstAttribute="top" secondItem="VCV-yy-QaH" secondAttribute="bottom" id="S9r-vQ-Jhf"/>
                             <constraint firstItem="95U-QU-huJ" firstAttribute="centerX" secondItem="SW4-mS-0lC" secondAttribute="centerX" id="UEr-FC-pXB"/>
                             <constraint firstItem="nW9-H8-kqe" firstAttribute="width" secondItem="SW4-mS-0lC" secondAttribute="width" id="bzs-w1-dqu"/>
                             <constraint firstItem="95U-QU-huJ" firstAttribute="width" secondItem="SW4-mS-0lC" secondAttribute="width" id="fma-Zr-Q7k"/>
-                            <constraint firstItem="yxD-55-c60" firstAttribute="top" secondItem="95U-QU-huJ" secondAttribute="bottom" id="hYh-ak-8Ph"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1265,6 +1295,10 @@
             <point key="canvasLocation" x="676.5" y="3145"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow-btn-left" width="7" height="13"/>
+        <image name="arrow-btn-right" width="7" height="13"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fw4-Eq-vLT"/>
     </inferredMetricsTieBreakers>

@@ -20,4 +20,7 @@
 
 + (NSString *)getCurrentTimestamp;
 
+#pragma mark - 获取月最后一天
++ (NSString *)getLastDateOfMonth:(NSDate *)date;
+
 @end

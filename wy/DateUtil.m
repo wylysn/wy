@@ -49,4 +49,12 @@
     return timeString;
 }
 
++ (NSString *)getLastDateOfMonth:(NSDate *)date {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];//[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    NSUInteger numberOfDaysInMonth = range.length;
+    NSString *lastDate = [DateUtil formatDateString:date withFormatter:[NSString stringWithFormat:@"yyyy-MM-%ld", numberOfDaysInMonth]];
+    return lastDate;
+}
+
 @end
