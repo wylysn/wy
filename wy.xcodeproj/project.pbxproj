@@ -1525,6 +1525,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DE538Y3UT9;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1554,6 +1555,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DE538Y3UT9;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

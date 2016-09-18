@@ -109,7 +109,7 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if (responseObject[@"success"]) {
-                NSDictionary *response = responseObject[@"data"];
+                NSDictionary *response = responseObject[@"data"][0];
                 taskEntity = [[TaskEntity alloc] initWithDictionary:response];
                 //离线存储
                 dispatch_async(dispatch_get_main_queue(), ^{

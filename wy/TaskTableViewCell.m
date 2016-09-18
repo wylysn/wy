@@ -45,23 +45,23 @@
         self.ShortTitleLabel.text = @"";
     }
     if (![entity.TaskStatus isBlankString]) {
-        self.TaskStatusLabel.text = [taskStatusShowDic objectForKey:entity.TaskStatus];
+        self.TaskStatusLabel.text = entity.TaskStatus;//[taskStatusShowDic objectForKey:entity.TaskStatus];
         NSString *color = @"ffffff";
-        if ([@"0" isEqualToString:entity.TaskStatus]) {
+        if ([@"0" isEqualToString:entity.TaskStatus] || [@"接单" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_ORANGE_COLOR;
-        } else if ([@"1" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"1" isEqualToString:entity.TaskStatus] || [@"待处理" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_RED_COLOR;
-        } else if ([@"2" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"2" isEqualToString:entity.TaskStatus] || [@"待派工" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_GREEN_COLOR;
-        } else if ([@"3" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"3" isEqualToString:entity.TaskStatus] || [@"待审批" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_BLUE_COLOR;
-        } else if ([@"4" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"4" isEqualToString:entity.TaskStatus] || [@"终止" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_DARKGRAY_COLOR;
-        } else if ([@"5" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"5" isEqualToString:entity.TaskStatus] || [@"完成" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_DARKGRAY_COLOR;
-        } else if ([@"6" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"6" isEqualToString:entity.TaskStatus] || [@"已验证" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_DARKGRAY_COLOR;
-        } else if ([@"7" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"7" isEqualToString:entity.TaskStatus] || [@"已存档" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_DARKGRAY_COLOR;
         }
         self.taskStatusView.bgColor = color;

@@ -24,6 +24,22 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillLayoutSubviews {
+    NSArray<NSIndexPath *> *indexPaths = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in indexPaths) {
+        NSInteger section = indexPath.section;
+        if (section == 2) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            UILabel *statusLabel = [cell viewWithTag:2];
+            UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:statusLabel.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:CGSizeMake(17.0, 17.0)];
+            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+            maskLayer.frame = statusLabel.bounds;
+            maskLayer.path  = maskPath.CGPath;
+            statusLabel.layer.mask = maskLayer;
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -117,11 +133,12 @@
         UILabel *statusLabel = [cell viewWithTag:2];
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"FF6F55"];   //报修：009EDA 漏检：FF6F55 异常：F53D5A
         statusLabel.text = @"漏检";
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:statusLabel.bounds byRoundingCorners:( UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:CGSizeMake(17.0, 17.0)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = statusLabel.bounds;
-        maskLayer.path  = maskPath.CGPath;
-        statusLabel.layer.mask = maskLayer;
+        //必须在viewWillLayoutSubviews中去设置，否则不准
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:statusLabel.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:CGSizeMake(17.0, 17.0)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//        maskLayer.frame = statusLabel.bounds;
+//        maskLayer.path  = maskPath.CGPath;
+//        statusLabel.layer.mask = maskLayer;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

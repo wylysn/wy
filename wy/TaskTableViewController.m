@@ -160,7 +160,7 @@
     UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
     UIViewController *viewController;
     UIBarButtonItem *backButton;
-    if ([@"1" isEqualToString:entity.ShortTitle]) {
+    if ([@"2" isEqualToString:entity.ShortTitle]) {
         /*
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail"];
         ((TaskXunjianViewController *)viewController).code = entity.Code;
