@@ -79,6 +79,7 @@
 		889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CD1D64181300BC5413 /* camera-flash-off@2x.png */; };
 		889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CE1D64181300BC5413 /* camera-flash-on.png */; };
 		889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */; };
+		88A1CB3B1D8F859F00C0B230 /* DeviceStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */; };
 		88A893971D332B260050D9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893961D332B260050D9F3 /* main.m */; };
 		88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893991D332B260050D9F3 /* AppDelegate.m */; };
 		88A893A31D332B260050D9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A11D332B260050D9F3 /* Main.storyboard */; };
@@ -302,6 +303,8 @@
 		889BA2CD1D64181300BC5413 /* camera-flash-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-off@2x.png"; sourceTree = "<group>"; };
 		889BA2CE1D64181300BC5413 /* camera-flash-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-on.png"; sourceTree = "<group>"; };
 		889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash-on@2x.png"; sourceTree = "<group>"; };
+		88A1CB391D8F859F00C0B230 /* DeviceStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatusViewController.h; sourceTree = "<group>"; };
+		88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatusViewController.m; sourceTree = "<group>"; };
 		88A893921D332B260050D9F3 /* wy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A893961D332B260050D9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A893981D332B260050D9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -893,6 +896,8 @@
 				887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */,
 				8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */,
 				8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */,
+				88A1CB391D8F859F00C0B230 /* DeviceStatusViewController.h */,
+				88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1282,6 +1287,7 @@
 				88D5CB301D6FDECC0041C9A1 /* ModifyMobileViewController.m in Sources */,
 				889B52001D76B00E001A542A /* KnowledgeDBService.m in Sources */,
 				889BA2951D64124E00BC5413 /* AAPLCameraNavController.m in Sources */,
+				88A1CB3B1D8F859F00C0B230 /* DeviceStatusViewController.m in Sources */,
 				8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */,
 				8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,

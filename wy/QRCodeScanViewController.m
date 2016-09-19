@@ -9,6 +9,11 @@
 #import "QRCodeScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#import "InspectionChildModelEntity.h"
+#import "InspectionModelEntity.h"
+#import "InspectionModelDBService.h"
+#import "DeviceStatusViewController.h"
+
 #define BOXWIDTH  300 //扫描范围宽度
 #define BOXHEIGHT 300 //扫描范围高度
 
@@ -208,17 +213,34 @@
         NSLog(@"%@",[metadataObj stringValue]);
         [_captureSession stopRunning];//停止运行
         
+        /**暂时先写死，测试用**/
+        //dispatch_async(dispatch_get_main_queue()这样就快了好多，不然会卡很久
+        dispatch_async(dispatch_get_main_queue(), ^{
+            InspectionModelDBService *dbService = [InspectionModelDBService getSharedInstance];
+            InspectionModelEntity *model = [dbService findInspectionModelByCode:@"XJMB20160908001"];
+            NSArray *childModels = [dbService findInspectionChildModelByCode:@"XJMB20160908001"];
+            UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+            DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
+            viewController.inspectionModel = model;
+            viewController.childModelsArray = childModels;
+            viewController.num = 0;
+            UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+            self.navigationItem.backBarButtonItem = backButton;
+            [self.navigationController pushViewController:viewController animated:YES];
+        });
+        
+        /*
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"显示" message:[metadataObj stringValue] preferredStyle:UIAlertControllerStyleAlert];
             __weak typeof(self) weakSelf = self;
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//                [weakSelf.captureSession startRunning];
+                //[weakSelf.captureSession startRunning];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }];
             [alert addAction:action1];
             [self presentViewController:alert animated:YES completion:nil];
         });
-        
+        */
     }
 }
 

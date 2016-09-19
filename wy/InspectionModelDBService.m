@@ -159,17 +159,15 @@ static sqlite3_stmt *statement = nil;
     return inspection;
 }
 
-- (InspectionChildModelEntity *) findInspectionChildModelByCode:(NSString*)ParentCode {
-    InspectionChildModelEntity *inspection;
+- (NSArray *) findInspectionChildModelByCode:(NSString*)ParentCode {
+    NSMutableArray *childModels = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         NSString *querySQL = [NSString stringWithFormat: @"select ParentCode, ItemName, ItemType, InputMax, InputMin, ItemValues, UnitName from InspectionChild where ParentCode=\"%@\"",ParentCode];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-            //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSString *ParentCode = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 NSString *ItemName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
                 int ItemType = sqlite3_column_int(statement, 2);
@@ -177,7 +175,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *InputMin = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 NSString *ItemValues = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
                 NSString *UnitName = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
-                inspection = [[InspectionChildModelEntity alloc] init];
+                InspectionChildModelEntity *inspection = [[InspectionChildModelEntity alloc] init];
                 inspection.ParentCode = ParentCode;
                 inspection.ItemName = ItemName;
                 inspection.ItemType = ItemType;
@@ -185,16 +183,15 @@ static sqlite3_stmt *statement = nil;
                 inspection.InputMin = InputMin;
                 inspection.ItemValues = ItemValues;
                 inspection.UnitName = UnitName;
-            }
-            else{
-                NSLog(@"没有找到code为%@的模板子项目......", ParentCode);
+                
+                [childModels addObject:inspection];
             }
         } else {
             NSLog(@"查找失败:%s", sqlite3_errmsg(database));
         }
     }
     sqlite3_finalize(statement);
-    return inspection;
+    return childModels;
 }
 
 @end

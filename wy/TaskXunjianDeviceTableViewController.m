@@ -9,6 +9,7 @@
 #import "TaskXunjianDeviceTableViewController.h"
 #import "TaskDevicesService.h"
 #import "DeviceListEntity.h"
+#import "QRCodeScanViewController.h"
 
 @interface TaskXunjianDeviceTableViewController ()
 
@@ -81,7 +82,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    QRCodeScanViewController *viewController = [[QRCodeScanViewController alloc] init];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [viewController setTitle:@"二维码/条码"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 /*

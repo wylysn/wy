@@ -20,6 +20,6 @@
 
 - (InspectionModelEntity *) findInspectionModelByCode:(NSString*)Code;
 
-- (InspectionChildModelEntity *) findInspectionChildModelByCode:(NSString*)ParentCode;
+- (NSArray *) findInspectionChildModelByCode:(NSString*)ParentCode;
 
 @end
