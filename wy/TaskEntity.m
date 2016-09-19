@@ -34,7 +34,7 @@
         _AWorkHours = dictionary[@"AWorkHours"];
         _WorkContent = dictionary[@"WorkContent"];
         _EditFields = dictionary[@"EditFields"];
-        _IsLocalSave = dictionary[@"IsLocalSave"];
+        _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
     }
     return self;
 }

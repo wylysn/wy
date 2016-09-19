@@ -23,7 +23,7 @@
         _ServiceType = dictionary[@"ServiceType"];
         _Priority = dictionary[@"Priority"];
         _Position = dictionary[@"Position"];
-        _IsLocalSave = dictionary[@"IsLocalSave"];
+        _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
     }
     return self;
 }
