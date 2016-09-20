@@ -9,17 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "TaskListEntity.h"
 #import "TaskEntity.h"
+#import "TaskDeviceEntity.h"
 
 @interface TaskDBService : NSObject
 
-+ (TaskDBService*) getSharedInstance;
++ (TaskDBService*)getSharedInstance;
 
-- (BOOL) saveTaskList:(TaskListEntity *)taskList;
+- (BOOL)saveTaskList:(TaskListEntity *)taskList;
 
-- (NSArray *) findTaskLists:(NSDictionary *)condition;
+- (NSArray *)findTaskLists:(NSDictionary *)condition;
 
-- (BOOL) saveTask:(TaskEntity *)device;
+- (BOOL)saveTask:(TaskEntity *)device;
 
-- (TaskEntity *) findTaskByCode:(NSString*)Code;
+- (TaskEntity *)findTaskByCode:(NSString*)Code;
+
+- (BOOL)saveTaskDevice:(TaskDeviceEntity *)taskDevice;
+
+- (NSArray *)findTaskDevices:code;
 
 @end

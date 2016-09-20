@@ -7,7 +7,6 @@
 //
 
 #import "WorkOrderViewController.h"
-#import "WorkOrderService.h"
 #import "WorkOrderTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
 #import "PRActionSheetPickerView.h"
@@ -34,7 +33,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 @implementation WorkOrderViewController {
     TaskTableViewController *taskListViewController;
     
-    WorkOrderService *workOrderService;
     UIWindow *window;
     UIWindow *filterWindow;
     UIView *filterView;
@@ -57,8 +55,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]
                                     initWithCustomView:filterImageView];
     self.navigationItem.rightBarButtonItem = filterItem;
-    
-    workOrderService = [[WorkOrderService alloc] init];
     
     [self changeDateBtnText];
 }

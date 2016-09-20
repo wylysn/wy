@@ -21,6 +21,7 @@
 @property (nonatomic, copy, readonly) NSString *Description;
 @property (nonatomic, copy, readonly) NSString *CreateDate;
 @property (nonatomic, copy, readonly) NSString *Creator;
+@property (nonatomic, copy, readonly) NSString *Department;
 
 @property (nonatomic, copy, readonly) NSString *Executors;
 @property (nonatomic, copy, readonly) NSString *Leader;
@@ -33,4 +34,7 @@
 @property (nonatomic, copy, readonly) NSString *WorkContent;
 @property (nonatomic, copy, readonly) NSString *EditFields;
 @property (nonatomic, readonly) BOOL IsLocalSave;
+
+@property (nonatomic, copy, readonly) NSString *TaskNotice;
+@property (nonatomic, copy, readonly) NSString *TaskAction;
 @end

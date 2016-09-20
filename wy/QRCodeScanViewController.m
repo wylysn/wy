@@ -219,14 +219,26 @@
             InspectionModelDBService *dbService = [InspectionModelDBService getSharedInstance];
             InspectionModelEntity *model = [dbService findInspectionModelByCode:@"XJMB20160908001"];
             NSArray *childModels = [dbService findInspectionChildModelByCode:@"XJMB20160908001"];
-            UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-            DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
-            viewController.inspectionModel = model;
-            viewController.childModelsArray = childModels;
-            viewController.num = 0;
-            UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-            self.navigationItem.backBarButtonItem = backButton;
-            [self.navigationController pushViewController:viewController animated:YES];
+            if (childModels && childModels.count>0) {
+                UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+                DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
+                viewController.inspectionModel = model;
+                viewController.childModelsArray = childModels;
+                viewController.num = 0;
+                UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+                self.navigationItem.backBarButtonItem = backButton;
+                [self.navigationController pushViewController:viewController animated:YES];
+            } else {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有找到模板" preferredStyle:UIAlertControllerStyleAlert];
+                __weak typeof(self) weakSelf = self;
+                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [weakSelf.captureSession startRunning];
+//                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                }];
+                [alert addAction:action1];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            
         });
         
         /*

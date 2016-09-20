@@ -7,8 +7,8 @@
 //
 
 #import "TaskXunjianDeviceTableViewController.h"
-#import "TaskDevicesService.h"
-#import "DeviceListEntity.h"
+#import "TaskService.h"
+#import "TaskDeviceEntity.h"
 #import "QRCodeScanViewController.h"
 
 @interface TaskXunjianDeviceTableViewController ()
@@ -16,20 +16,24 @@
 @end
 
 @implementation TaskXunjianDeviceTableViewController {
-    TaskDevicesService *deviceService;
+    TaskService *taskService;
+    NSArray *taskDeviceArray;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    deviceService = [[TaskDevicesService alloc] init];
-    
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
+    taskDeviceArray = [[NSArray alloc] init];
+    taskService = [[TaskService alloc] init];
+    [taskService getTaskDevices:self.code success:^(NSArray *taskDevices) {
+        taskDeviceArray = taskDevices;
+        [self.tableView reloadData];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +44,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return deviceService.taskDevicesList.count;
+    return taskDeviceArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -66,7 +70,7 @@
     NSInteger row = indexPath.row;
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
-    DeviceListEntity *device = (DeviceListEntity *)deviceService.taskDevicesList[section];
+    TaskDeviceEntity *device = (TaskDeviceEntity *)taskDeviceArray[section];
     if (row == 0) {
         keyLabel.text = @"设备编码";
         valueLabel.text = device.Code;
@@ -75,7 +79,7 @@
         valueLabel.text = device.Name;
     } else if (row == 2) {
         keyLabel.text = @"巡检点位";
-        valueLabel.text = device.Location;
+        valueLabel.text = device.Position;
     }
     
     return cell;

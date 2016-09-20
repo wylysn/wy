@@ -41,7 +41,9 @@
     
     UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
     TaskXunjianBaseInfo2TableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo2"];
+    taskXunjianBaseInfoController.code = self.code;
     TaskXunjianDeviceTableViewController *taskDevicesBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianDevices"];
+    taskDevicesBaseInfoController.code = self.code;
     [self addChildViewController:taskXunjianBaseInfoController];
     [self addChildViewController:taskDevicesBaseInfoController];
     

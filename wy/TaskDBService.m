@@ -43,6 +43,7 @@ static sqlite3_stmt *statement = nil;
         NSLog(@"数据库打开成功。。。。。。");
         [sharedInstance createTaskListTable];
         [sharedInstance createTaskTable];
+        [sharedInstance createTaskDeviceTable];
     }
     else {
         NSLog(@"数据库打开失败。。。。。。");
@@ -67,12 +68,27 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createTaskTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text)";
+    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, Department text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text, IsLocalSave bool, TaskNotice text, TaskAction text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
             isSuccess = FALSE;
-            NSLog(@"创建设备表失败。。。。。%s", errMsg);
+            NSLog(@"创建任务基本信息表失败。。。。。%s", errMsg);
+        }
+    }
+    sqlite3_close(database);
+    return isSuccess;
+}
+
+- (BOOL) createTaskDeviceTable {
+    BOOL isSuccess = TRUE;
+    char *errMsg;
+    NSString *sql_stmt =@"create table if not exists TaskDevice (Code text primary key, ParentID text, Name text, Position text, PatrolTemplateCode text, IsLocalSave bool)";
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+            isSuccess = FALSE;
+            NSLog(@"创建任务设备表失败。。。。。%s", errMsg);
         }
     }
     sqlite3_close(database);
@@ -107,11 +123,35 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields) values (\"%@\",\"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\")", task.Code, task.Applyer, task.ApplyerTel, task.ServiceType, task.Priority, task.Location, task.Description, task.CreateDate, task.Creator, task.Executors, task.Leader, task.EStartTime, task.EEndTime, task.EWorkHours, task.AStartTime, task.AEndTime, task.AWorkHours, task.WorkContent, task.EditFields];
+        NSString *insertSQL = @"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
         if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [task.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [task.Applyer UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [task.ApplyerTel UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [task.ServiceType UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [task.Priority UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 6, [task.Location UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 7, [task.Description UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 8, [task.CreateDate UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 9, [task.Creator UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 10, [task.Executors UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 11, [task.Leader UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 12, [task.Department UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 13, [task.EStartTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 14, [task.EEndTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 15, [task.EWorkHours UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 16, [task.AStartTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 17, [task.AEndTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 18, [task.AWorkHours UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 19, [task.WorkContent UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 20, [task.EditFields UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_int(statement, 21, task.IsLocalSave);
+            sqlite3_bind_text(statement, 22, [task.TaskNotice UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 23, [task.TaskAction UTF8String], -1, SQLITE_TRANSIENT);
+            
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
                 NSLog(@"插入成功。。。。。");
@@ -120,7 +160,38 @@ static sqlite3_stmt *statement = nil;
                 NSLog(@"插入失败:%s", sqlite3_errmsg(database));
             }
         } else {
-            NSLog(@"语法不通过 ");
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
+- (BOOL) saveTaskDevice:(TaskDeviceEntity *)taskDevice {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"insert into TaskDevice (Code, ParentID, Name, Position, PatrolTemplateCode, IsLocalSave) values (?,?,?,?,?,?)";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [taskDevice.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [taskDevice.ParentID UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [taskDevice.Name UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [taskDevice.Position UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [taskDevice.PatrolTemplateCode UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_int(statement, 6, taskDevice.IsLocalSave);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"插入成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"插入失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
         }
         sqlite3_finalize(statement);
     }
@@ -184,7 +255,7 @@ static sqlite3_stmt *statement = nil;
     TaskEntity *task;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields from Device where Code=\"%@\"",Code];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction from Task where Code=\"%@\"",Code];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -202,15 +273,19 @@ static sqlite3_stmt *statement = nil;
                 NSString *Creator = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
                 NSString *Executors = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
                 NSString *Leader = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
-                NSString *EStartTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
-                NSString *EEndTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
-                NSString * EWorkHours = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
-                NSString *AStartTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
-                NSString *AEndTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 15)];
-                NSString *AWorkHours = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 16)];
-                NSString *WorkContent = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 17)];
-                NSString *EditFields = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 18)];
-                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields}];
+                NSString *Department = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
+                NSString *EStartTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
+                NSString *EEndTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
+                NSString * EWorkHours = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];
+                NSString *AStartTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 15)];
+                NSString *AEndTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 16)];
+                NSString *AWorkHours = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 17)];
+                NSString *WorkContent = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 18)];
+                NSString *EditFields = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 19)];
+                BOOL IsLocalSave = (BOOL)sqlite3_column_int(statement, 20);
+                NSString *TaskNotice = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 21)];
+                NSString *TaskAction = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 22)];
+                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction}];
             }
             else{
                 NSLog(@"没有找到code为%@的人员......", Code);
@@ -221,6 +296,32 @@ static sqlite3_stmt *statement = nil;
     }
     sqlite3_finalize(statement);
     return task;
+}
+
+- (NSArray *)findTaskDevices:code {
+    NSMutableArray *taskDeviceArr = [[NSMutableArray alloc] init];
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, ParentID, Name, Position, PatrolTemplateCode, IsLocalSave from TaskDevice where Code=\"%@\"",code];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *ParentID = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *Position = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *PatrolTemplateCode = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                BOOL IsLocalSave = (BOOL)sqlite3_column_int(statement, 5);
+                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:@{@"Code":Code, @"ParentID":ParentID, @"Name":Name, @"Position":Position, @"PatrolTemplateCode":PatrolTemplateCode, @"IsLocalSave":IsLocalSave?@"1":@"0"}];
+                [taskDeviceArr addObject:device];
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    }
+    sqlite3_finalize(statement);
+    return taskDeviceArr;
 }
 
 @end

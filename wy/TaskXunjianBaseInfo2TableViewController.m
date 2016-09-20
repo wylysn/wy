@@ -7,8 +7,13 @@
 //
 
 #import "TaskXunjianBaseInfo2TableViewController.h"
+#import "TaskService.h"
+#import "TaskEntity.h"
 
-@interface TaskXunjianBaseInfo2TableViewController ()
+@interface TaskXunjianBaseInfo2TableViewController () {
+    TaskService *taskService;
+    TaskEntity *taskEntity;
+}
 
 @end
 
@@ -17,11 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    taskService = [[TaskService alloc] init];
+    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
+        taskEntity = task;
+        [self.tableView reloadData];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -111,6 +121,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
     NSString *CELLID;
     if (section == 0) {
         CELLID = @"TITLEIDENTITY";
@@ -129,16 +140,36 @@
         [self drawDashLine:dashLine1];
         UIView *dashLine2 = [cell viewWithTag:12];
         [self drawDashLine:dashLine2];
+    } else if (section == 1) {
+        UILabel *descLabel = [cell viewWithTag:1];
+        UILabel *valueLabel = [cell viewWithTag:2];
+        if (row == 0) {
+            descLabel.text = @"巡检人员";
+            valueLabel.text = @"叶雨";
+        } else if (row == 1) {
+            descLabel.text = @"巡检周期";
+            valueLabel.text = @"1天";
+        } else if (row == 2) {
+            descLabel.text = @"计划时间";
+            valueLabel.text = @"2016-09-20 12:00:00 - 2016-09-21 12:00:00";
+        } else if (row == 3) {
+            descLabel.text = @"实际实际";
+            valueLabel.text = @"2016-09-20 12:00:00 - 2016-09-21 12:00:00";
+        }
     } else if (section == 2) {
+        UILabel *nameLabel = [cell viewWithTag:1];
+        nameLabel.text = @"#1锅炉机组(00001)";
         UILabel *statusLabel = [cell viewWithTag:2];
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"FF6F55"];   //报修：009EDA 漏检：FF6F55 异常：F53D5A
         statusLabel.text = @"漏检";
         //必须在viewWillLayoutSubviews中去设置，否则不准
-//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:statusLabel.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:CGSizeMake(17.0, 17.0)];
-//        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-//        maskLayer.frame = statusLabel.bounds;
-//        maskLayer.path  = maskPath.CGPath;
-//        statusLabel.layer.mask = maskLayer;
+        /*
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:statusLabel.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:CGSizeMake(17.0, 17.0)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = statusLabel.bounds;
+        maskLayer.path  = maskPath.CGPath;
+        statusLabel.layer.mask = maskLayer;
+         */
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

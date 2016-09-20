@@ -10,4 +10,6 @@
 
 @interface TaskXunjianDeviceTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *code;
+
 @end

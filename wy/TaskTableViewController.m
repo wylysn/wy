@@ -175,6 +175,7 @@
     } else {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
         ((TaskHandleViewController *)viewController).code = entity.Code;
+        ((TaskHandleViewController *)viewController).ShortTitle = entity.ShortTitle;
         ((TaskHandleViewController *)viewController).taskStatus = entity.TaskStatus;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
         /*

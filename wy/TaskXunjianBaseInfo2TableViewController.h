@@ -10,4 +10,6 @@
 
 @interface TaskXunjianBaseInfo2TableViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *code;
+
 @end

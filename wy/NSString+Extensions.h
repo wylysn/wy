@@ -27,4 +27,7 @@
 //文件大小转换值
 + (NSString *)getFileSizeString:(NSNumber *)size;
 
+//字典数组转string
++ (NSString *)convertArrayToString:(NSArray *)array;
+
 @end

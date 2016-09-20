@@ -51,7 +51,6 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    /*接口暂时不对
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
         [self.tableView reloadData];
@@ -61,7 +60,6 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
-     */
     
     deviceArr = [[NSMutableArray alloc] init];
     selectedDevicesDic = [[NSMutableDictionary alloc] init];
@@ -460,7 +458,7 @@
             valueLabel.text = taskEntity.CreateDate;
         } else if (row==2) {
             keyLabel.text = @"部门";
-            valueLabel.text = @"";  //接口中没有。。。。。
+            valueLabel.text = taskEntity.Department;
         } else if (row==3) {
             keyLabel.text = @"位置";
             valueLabel.text = taskEntity.Location;
@@ -472,7 +470,7 @@
             valueLabel.text = self.ShortTitle;
         } else if (row==6) {
             keyLabel.text = @"优先级";
-            valueLabel.text = taskEntity.ServiceType;
+            valueLabel.text = taskEntity.Priority;
         }
     } else if (section == 1) {
         DeviceListEntity *device = deviceArr[row];

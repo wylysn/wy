@@ -23,6 +23,7 @@
         _Description = dictionary[@"Description"];
         _CreateDate = dictionary[@"CreateDate"];
         _Creator = dictionary[@"Creator"];
+        _Department = dictionary[@"Department"];
         _Executors = dictionary[@"Executors"];
         _Leader = dictionary[@"Leader"];
         _EStartTime = dictionary[@"EStartTime"];
@@ -35,6 +36,10 @@
         _WorkContent = dictionary[@"WorkContent"];
         _EditFields = dictionary[@"EditFields"];
         _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
+        
+//        NSString *notice = [NSString convertArrayToString:dictionary[@"TaskNotice"]];
+        _TaskNotice = [NSString convertArrayToString:dictionary[@"TaskNotice"]];//dictionary[@"TaskNotice"];
+        _TaskAction = [NSString convertArrayToString:dictionary[@"TaskAction"]];//dictionary[@"TaskAction"];
     }
     return self;
 }

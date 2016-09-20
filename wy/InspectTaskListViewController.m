@@ -7,7 +7,6 @@
 //
 
 #import "InspectTaskListViewController.h"
-#import "InspectTaskService.h"
 #import "InspectTaskTableViewCell.h"
 #import <UITableView+FDTemplateLayoutCell.h>
 #import "PRActionSheetPickerView.h"
@@ -35,7 +34,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 @implementation InspectTaskListViewController {
     TaskTableViewController *taskListViewController;
     
-    InspectTaskService *inspectTaskService;
     UIWindow *window;
     UIWindow *filterWindow;
     UIView *filterView;
@@ -58,8 +56,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]
                                    initWithCustomView:filterImageView];
     self.navigationItem.rightBarButtonItem = filterItem;
-    
-    inspectTaskService = [[InspectTaskService alloc] init];
     
     [self changeDateBtnText];
 }
