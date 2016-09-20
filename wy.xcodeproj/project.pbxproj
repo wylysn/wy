@@ -1125,7 +1125,8 @@
 				TargetAttributes = {
 					88A893911D332B260050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = DE538Y3UT9;
+						DevelopmentTeam = GX678VULA7;
+						ProvisioningStyle = Automatic;
 					};
 					88A893AD1D332B270050D9F3 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1519,7 +1520,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DE538Y3UT9;
+				DEVELOPMENT_TEAM = GX678VULA7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1535,9 +1536,10 @@
 					"\"${PODS_ROOT}/UITableView+FDTemplateLayoutCell\"",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bm21.beos-wyl";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1549,7 +1551,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DE538Y3UT9;
+				DEVELOPMENT_TEAM = GX678VULA7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/wy/PrefixHeader.pch";
 				INFOPLIST_FILE = wy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1565,9 +1567,10 @@
 					"\"${PODS_ROOT}/UITableView+FDTemplateLayoutCell\"",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.purang.wy;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bm21.beos-wyl";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
