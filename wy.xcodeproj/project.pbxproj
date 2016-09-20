@@ -377,7 +377,6 @@
 		88E928021D5DC13A00152BBF /* PRHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHTTPSessionManager.h; sourceTree = "<group>"; };
 		88E928031D5DC13A00152BBF /* PRHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHTTPSessionManager.m; sourceTree = "<group>"; };
 		88E928051D5DC14B00152BBF /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
-		88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通20160814.docx"; sourceTree = "<group>"; };
 		88F140CC1D6C1A6D00B8BCCC /* InspectTaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskListViewController.h; sourceTree = "<group>"; };
 		88F140CD1D6C1A6D00B8BCCC /* InspectTaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskListViewController.m; sourceTree = "<group>"; };
 		88F140CF1D6C21C400B8BCCC /* InspectTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskTableViewCell.h; sourceTree = "<group>"; };
@@ -414,8 +413,6 @@
 		D28AD55C1D7289440033ADB6 /* PriorityWrapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityWrapView.m; sourceTree = "<group>"; };
 		D28AD55E1D72DC570033ADB6 /* TaskChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChildTableViewController.h; sourceTree = "<group>"; };
 		D28AD55F1D72DC570033ADB6 /* TaskChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChildTableViewController.m; sourceTree = "<group>"; };
-		D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义.docx"; sourceTree = "<group>"; };
-		D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS运管通_APP_第1版.docx"; sourceTree = "<group>"; };
 		D297AAA61D770020004612BA /* KnowledgeDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowledgeDetailTableViewController.h; sourceTree = "<group>"; };
 		D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowledgeDetailTableViewController.m; sourceTree = "<group>"; };
 		D2997DB61D7A900E0022D8BD /* TaskListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListEntity.h; sourceTree = "<group>"; };
@@ -992,9 +989,6 @@
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
 				8811E7A81D77E93300CE7CE2 /* 问题列表.docx */,
 				8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */,
-				D28AD5611D73171D0033ADB6 /* BEOS接口定义.docx */,
-				D28AD5621D73171D0033ADB6 /* BEOS运管通_APP_第1版.docx */,
-				88EB3A1B1D6ECE1D00807899 /* BEOS运管通20160814.docx */,
 			);
 			name = doc;
 			sourceTree = "<group>";
