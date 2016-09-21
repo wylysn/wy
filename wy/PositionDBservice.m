@@ -111,7 +111,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
                 int parentId = sqlite3_column_int(statement, 7);
                 NSString *prj_Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
-                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":sort, @"Status":status, @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
+                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"ID":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":sort, @"Status":status, @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
                 [positionArr addObject:position];
             }
         } else {
@@ -143,7 +143,7 @@ static sqlite3_stmt *statement = nil;
                 int parentId = sqlite3_column_int(statement, 7);
                 NSString *prj_Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
                 int childnum = sqlite3_column_int(statement, 9);
-                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"id":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":sort, @"Status":status, @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
+                PositionEntity *position = [[PositionEntity alloc] initWithDictionary:@{@"ID":[NSString stringWithFormat:@"%d", id], @"Code":code, @"Name":name, @"FullName":fullName, @"Sort":sort, @"Status":status, @"Description":description, @"ParentID":[NSString stringWithFormat:@"%d", parentId], @"Prj_Code":prj_Code}];
                 position.childNum = childnum;
                 position.level = parent.level+1;
                 [positionArr addObject:position];

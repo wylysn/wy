@@ -189,7 +189,7 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UILabel *nameLabel = [cell viewWithTag:1];
-    NSString *color = @"5555555";
+    NSString *color = @"555555";
     if (indexPath.row!=0) {
         color = @"999999";
     }
