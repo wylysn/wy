@@ -124,6 +124,7 @@
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
+		88FD49511D938A0B007065CE /* 关于页面处理按钮的摆放.doc in Resources */ = {isa = PBXBuildFile; fileRef = 88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */; };
 		88FF11481D7510CA0073EDBB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FF11471D7510CA0073EDBB /* libsqlite3.tbd */; };
 		88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF114D1D751C1E0073EDBB /* PersonDBService.m */; };
 		88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11501D7552E90073EDBB /* DeviceDBService.m */; };
@@ -388,6 +389,7 @@
 		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
 		88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskJiedanViewController.h; sourceTree = "<group>"; };
 		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
+		88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "关于页面处理按钮的摆放.doc"; sourceTree = "<group>"; };
 		88FF11411D750F860073EDBB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		88FF11471D7510CA0073EDBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		88FF114C1D751C1E0073EDBB /* PersonDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDBService.h; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */,
 				D2C090A51D915ED9001D94CF /* 3.p12 */,
 				D2C090A61D915ED9001D94CF /* axx.mobileprovision */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
@@ -1171,6 +1174,7 @@
 				889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */,
 				889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */,
 				88B6FD9A1D66AE6400418972 /* phone@2x.png in Resources */,
+				88FD49511D938A0B007065CE /* 关于页面处理按钮的摆放.doc in Resources */,
 				8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */,
 				889BA2C11D64159600BC5413 /* ELCAlbumPickerController.xib in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,

@@ -17,18 +17,31 @@
 #import "ChooseDeviceViewController.h"
 #import "ChoosePersonViewController.h"
 #import "TaskService.h"
+#import "PRActionSheetPickerView.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 5
 #define PICS_PER_LINE 4
 
-@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePersonViewDelegate>
+static NSString *startTimeBtnPlaceholder = @"请输入到场时间";
+static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
+
+@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePersonViewDelegate, PRActionSheetPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
+
+@property (strong, nonatomic) UIButton *startTimeBtn;
+@property (strong, nonatomic) UIButton *endTimeBtn;
+@property (strong, nonatomic) UILabel *timeDiffLabel;
 
 @end
 
 @implementation TaskHandleViewController {
+    UIWindow *window;
+    NSInteger btnTag;
+    
     NSMutableArray *deviceArr;
     NSInteger PIC_WIDTH_HEIGHT;
     UITableViewCell *picCell;
@@ -41,6 +54,15 @@
     
     TaskService *taskService;
     TaskEntity *taskEntity;
+    NSArray *editFieldsArray;
+    
+    BOOL isDescriptionEditable;
+    BOOL isWorkContentEditable;
+    BOOL isLeaderEditable;
+    BOOL isExecutorsEditable;
+    BOOL isEStartTimeEditable;
+    BOOL isEEndTimeEditable;
+    BOOL isEWorkHoursEditable;
 }
 
 - (void)viewDidLoad {
@@ -50,9 +72,30 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.estimatedRowHeight = 44;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
+        
+        //判断是否有操作，生成操作按钮
+        if (taskEntity.TaskAction) {
+            NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
+            NSMutableArray *actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
+            if (actionsMutableArr && actionsMutableArr.count>0) {
+                self.bottomViewConstraint.constant = 0;
+                
+            }
+        }
+        
+        editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+        isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
+        isWorkContentEditable = !([editFieldsArray indexOfObject:@"WorkContent"]==NSNotFound);
+        isLeaderEditable = !([editFieldsArray indexOfObject:@"Leader"]==NSNotFound);
+        isExecutorsEditable = !([editFieldsArray indexOfObject:@"Executors"]==NSNotFound);
+        isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
+        isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
+        isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
         [self.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -307,7 +350,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -315,16 +358,20 @@
         return 7;
     } else if (section == 1) {
         return deviceArr.count;
-    } else if (section == 2) {
+    }
+//    else if (section == 2) {  //图片暂时不加
+//        return 1;
+//    }
+    else if (section == 2) {
         return 1;
     } else if (section == 3) {
         return 1;
     } else if (section == 4) {
-        return 1;
-    } else if (section == 5) {
         return chargePersonArr.count;
-    } else if (section == 6) {
+    } else if (section == 5) {
         return excutePersonArr.count;
+    } else if (section == 6) {
+        return 2;
     }
     return 0;
 }
@@ -337,8 +384,7 @@
         titleLabel.text = taskEntity.Code;
         [header addSubview:titleLabel];
         return header;
-    }
-    if (section == 1) {
+    } else if (section == 1) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"故障设备";
@@ -351,55 +397,83 @@
         [header addSubview:plusImageView];
         return header;
     }
-    if (section == 2) {
+    /*
+    else if (section == 2) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"图片(问题截图)";
         [header addSubview:titleLabel];
         return header;
     }
-    if (section == 3) {
+     */
+    else if (section == 2) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"问题描述";
         [header addSubview:titleLabel];
         return header;
-    }
-    if (section == 4) {
+    } else if (section == 3) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"工作内容";
         [header addSubview:titleLabel];
         return header;
-    }
-    if (section == 5) {
+    } else if (section == 4) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"负责人";
         [header addSubview:titleLabel];
         
-        UIButton *addChargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
-        [addChargeBtn setTitle:@"添加" forState:UIControlStateNormal];
-        [addChargeBtn addTarget:self action:@selector(addPersonInCharge:) forControlEvents:UIControlEventTouchUpInside];
-        addChargeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        addChargeBtn.tintColor = [UIColor whiteColor];
-        addChargeBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
-        addChargeBtn.layer.cornerRadius = 3;
-        [header addSubview:addChargeBtn];
+        if (isLeaderEditable) {
+            UIButton *addChargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
+            [addChargeBtn setTitle:@"添加" forState:UIControlStateNormal];
+            [addChargeBtn addTarget:self action:@selector(addPersonInCharge:) forControlEvents:UIControlEventTouchUpInside];
+            addChargeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+            addChargeBtn.tintColor = [UIColor whiteColor];
+            addChargeBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+            addChargeBtn.layer.cornerRadius = 3;
+            [header addSubview:addChargeBtn];
+        }
         
         return header;
-    }
-    if (section == 6) {
+    } else if (section == 5) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"执行人";
         [header addSubview:titleLabel];
         
-        UIButton *addExcuteBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
-        [addExcuteBtn setTitle:@"添加" forState:UIControlStateNormal];
-        [addExcuteBtn addTarget:self action:@selector(addPersonInExcute:) forControlEvents:UIControlEventTouchUpInside];
-        addExcuteBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        addExcuteBtn.tintColor = [UIColor whiteColor];
-        addExcuteBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
-        addExcuteBtn.layer.cornerRadius = 3;
-        [header addSubview:addExcuteBtn];
+        if (isExecutorsEditable) {
+            UIButton *addExcuteBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, (44-25)/2, 50, 25)];
+            [addExcuteBtn setTitle:@"添加" forState:UIControlStateNormal];
+            [addExcuteBtn addTarget:self action:@selector(addPersonInExcute:) forControlEvents:UIControlEventTouchUpInside];
+            addExcuteBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+            addExcuteBtn.tintColor = [UIColor whiteColor];
+            addExcuteBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+            addExcuteBtn.layer.cornerRadius = 3;
+            [header addSubview:addExcuteBtn];
+        }
+        
+        return header;
+    } else if (section == 6) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
+        titleLabel.text = @"预估工作时间";
+        [header addSubview:titleLabel];
+        
+        return header;
+    } else if (section == 7) {
+        header.backgroundColor = [UIColor whiteColor];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
+        titleLabel.text = @"耗时";
+        [header addSubview:titleLabel];
+        
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40-40-2, (44-21)/2, 40, 21)];
+        timeLabel.text = taskEntity.EWorkHours;
+        timeLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        timeLabel.textAlignment = NSTextAlignmentRight;
+        self.timeDiffLabel = timeLabel;
+        UILabel *unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40-2, (44-21)/2, 40, 21)];
+        unitLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+        unitLabel.text = @"小时";
+        
+        [header addSubview:timeLabel];
+        [header addSubview:unitLabel];
         
         return header;
     }
@@ -411,7 +485,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0 || section == 3 || section == 4 || section == 5) {
+    if (section == 0 || section == 2 || section == 3 || section == 4 || section == 6) {
         return 6;
     }
     return CGFLOAT_MIN;
@@ -419,11 +493,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
+    /*
     if (section == 2) {
         return (self.imageArray.count/PICS_PER_LINE+1)*PIC_WIDTH_HEIGHT+(self.imageArray.count/PICS_PER_LINE+1+1)*10;
-    }
-    if (section == 3 || section == 4) {
-        return 96;
+    } else
+     */
+    if (section == 2) {
+        if (isDescriptionEditable) {
+            return 96;
+        } else {
+            return UITableViewAutomaticDimension;
+        }
+    } else if (section == 3) {
+        if (isWorkContentEditable) {
+            return 96;
+        } else {
+            return UITableViewAutomaticDimension;
+        }
     }
     return 44;
 }
@@ -434,14 +520,28 @@
     NSInteger row = indexPath.row;
     if (section == 0) {
         CELLID = @"BASEINFOCELL";
-    } else if (section == 1 || section == 5 || section == 6) {
+    } else if (section == 1 || section == 4 || section == 5) {
         CELLID = @"DEVICECELL";
-    } else if (section == 2) {
+    }
+    /*
+    else if (section == 2) {
         CELLID = @"PICCELL";
+    }
+     */
+    else if (section == 2) {
+        if (isDescriptionEditable) {
+            CELLID = @"DESCCELL";
+        } else {
+            CELLID = @"DESCCELL2";
+        }
     } else if (section == 3) {
-        CELLID = @"DESCCELL";
-    } else if (section == 4) {
-        CELLID = @"PROBLEMCELL";
+        if (isDescriptionEditable) {
+            CELLID = @"PROBLEMCELL";
+        } else {
+            CELLID = @"PROBLEMCELL2";
+        }
+    } else if (section == 6) {
+        CELLID = @"ESTIMATECELL";
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     if (cell == nil) {
@@ -467,7 +567,7 @@
             valueLabel.text = taskEntity.ServiceType;
         } else if (row==5) {
             keyLabel.text = @"工单类型";
-            valueLabel.text = self.ShortTitle;
+            valueLabel.text = shortTitleDic[self.ShortTitle];
         } else if (row==6) {
             keyLabel.text = @"优先级";
             valueLabel.text = taskEntity.Priority;
@@ -480,16 +580,36 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDevice:)];
         [deleteView addGestureRecognizer:gesture];
         [deleteView setUserInteractionEnabled:YES];
-    } else if (section == 2) {
+    }
+    /*
+    else if (section == 2) {
         picCell = cell;
         [self showAddImageView];
+    }
+     */
+    else if (section == 2) {
+        PRPlaceHolderTextView *textView = [cell viewWithTag:1];
+        if ([editFieldsArray indexOfObject:@"Description"] == NSNotFound) {
+            textView.text = taskEntity.Description;
+        } else {
+            if ([@"" isEqualToString:taskEntity.Description]) {
+                textView.placeholder = @"请简要描述";
+            } else {
+                textView.text = taskEntity.Description;
+            }
+        }
     } else if (section == 3) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
-        textView.placeholder = @"请简要描述";
+        if ([editFieldsArray indexOfObject:@"WorkContent"] == NSNotFound) {
+            textView.text = taskEntity.WorkContent;
+        } else {
+            if ([@"" isEqualToString:taskEntity.WorkContent]) {
+                textView.placeholder = @"请简要填写工作内容";
+            } else {
+                textView.text = taskEntity.WorkContent;
+            }
+        }
     } else if (section == 4) {
-        PRPlaceHolderTextView *textView = [cell viewWithTag:1];
-        textView.placeholder = @"请简要填写工作内容";
-    } else if (section == 5) {
         PersonEntity *person = chargePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
@@ -497,7 +617,7 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteChargePerson:)];
         [deleteView addGestureRecognizer:gesture];
         [deleteView setUserInteractionEnabled:YES];
-    } else if (section == 6) {
+    } else if (section == 5) {
         PersonEntity *person = excutePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
@@ -505,9 +625,77 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExcutePerson:)];
         [deleteView addGestureRecognizer:gesture];
         [deleteView setUserInteractionEnabled:YES];
+    } else if (section == 6) {
+        UILabel *keyLabel = [cell viewWithTag:1];
+        UIButton *timeBtn = [cell viewWithTag:2];
+        if (row == 0) {
+            self.startTimeBtn = timeBtn;
+            timeBtn.tag = 10;
+            keyLabel.text = @"到场时间";
+            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EStartTime]?startTimeBtnPlaceholder:taskEntity.EStartTime;
+            [timeBtn setTitle:title forState:UIControlStateNormal];
+            if (isEStartTimeEditable) {
+                [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        } else {
+            self.endTimeBtn = timeBtn;
+            timeBtn.tag = 11;
+            keyLabel.text = @"结束时间";
+            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EEndTime]?endTimeBtnPlaceholder:taskEntity.EEndTime;
+            [timeBtn setTitle:title forState:UIControlStateNormal];
+            if (isEEndTimeEditable) {
+                [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
     }
     
     return cell;
+}
+
+- (IBAction)dateBtnClick:(id)sender {
+    window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    window.rootViewController = self;
+    window.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    [window makeKeyAndVisible];
+    
+    UIButton *btn = (UIButton *)sender;
+    btnTag = btn.tag;
+    
+    PRActionSheetPickerView *pickerView = [[PRActionSheetPickerView alloc] init];
+    pickerView.delegate = self;
+    if (![btn.titleLabel.text isEqualToString:startTimeBtnPlaceholder] && ![btn.titleLabel.text isEqualToString:endTimeBtnPlaceholder]) {
+        pickerView.defaultDate = btn.titleLabel.text;
+    }
+    [pickerView showDatePickerInView:window withType:UIDatePickerModeDateAndTime withBackId:1];
+}
+
+- (void)getDateWithDate:(NSDate *)date andId:(NSInteger)idNum {
+    [self disMissBackView];
+    NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
+    if (btnTag == 10) {
+        [self.startTimeBtn setTitle:title forState:UIControlStateNormal];
+        [self calculateTimeDiffrence:title toTheTime:self.endTimeBtn.titleLabel.text];
+    } else if(btnTag == 11) {
+        [self.endTimeBtn setTitle:title forState:UIControlStateNormal];
+        [self calculateTimeDiffrence:self.startTimeBtn.titleLabel.text toTheTime:title];
+    }
+}
+
+- (void)disMissBackView {
+    window.hidden = YES;
+    window.rootViewController = nil;
+    window = nil;
+}
+
+- (void)calculateTimeDiffrence:(NSString *)fromTime toTheTime:(NSString *)toTime {
+    if (![fromTime isEqualToString:startTimeBtnPlaceholder] && ![toTime isEqualToString:endTimeBtnPlaceholder]) {
+        NSDate *startD = [DateUtil dateFromString:fromTime withFormatter:@"yyyy-MM-dd HH:mm:00"];
+        NSDate *endD = [DateUtil dateFromString:toTime withFormatter:@"yyyy-MM-dd HH:mm:00"];
+        NSInteger df = [DateUtil intervalFromLastDate:startD toTheDate:endD];
+        NSString *hours = [NSString stringWithFormat:@"%ld", (long)df];
+        self.timeDiffLabel.text = hours;
+        taskEntity.EWorkHours = hours;
+    }
 }
 
 @end

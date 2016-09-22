@@ -271,4 +271,11 @@
     return[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
++ (NSArray *)convertStringToArray:(NSString *)jsonString {
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *e = nil;
+    NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
+    return json;
+}
+
 @end

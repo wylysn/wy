@@ -30,4 +30,7 @@
 //字典数组转string
 + (NSString *)convertArrayToString:(NSArray *)array;
 
+//string转字典数组
++ (NSArray *)convertStringToArray:(NSString *)jsonString;
+
 @end

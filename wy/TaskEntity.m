@@ -37,9 +37,13 @@
         _EditFields = dictionary[@"EditFields"];
         _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
         
-//        NSString *notice = [NSString convertArrayToString:dictionary[@"TaskNotice"]];
         _TaskNotice = [NSString convertArrayToString:dictionary[@"TaskNotice"]];//dictionary[@"TaskNotice"];
         _TaskAction = [NSString convertArrayToString:dictionary[@"TaskAction"]];//dictionary[@"TaskAction"];
+        _SBList = dictionary[@"SBList"];
+        _PicContent1 = dictionary[@"PicContent1"];
+        _PicContent2 = dictionary[@"PicContent2"];
+        _PicContent3 = dictionary[@"PicContent3"];
+        _PicContent4 = dictionary[@"PicContent4"];
     }
     return self;
 }

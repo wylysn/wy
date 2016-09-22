@@ -27,7 +27,7 @@
 @property (nonatomic, copy, readonly) NSString *Leader;
 @property (nonatomic, copy, readonly) NSString *EStartTime;
 @property (nonatomic, copy, readonly) NSString *EEndTime;
-@property (nonatomic, copy, readonly) NSString *EWorkHours;
+@property (nonatomic, copy) NSString *EWorkHours;
 @property (nonatomic, copy, readonly) NSString *AStartTime;
 @property (nonatomic, copy, readonly) NSString *AEndTime;
 @property (nonatomic, copy, readonly) NSString *AWorkHours;
@@ -37,4 +37,10 @@
 
 @property (nonatomic, copy, readonly) NSString *TaskNotice;
 @property (nonatomic, copy, readonly) NSString *TaskAction;
+
+@property (nonatomic, copy, readonly) NSString *SBList;
+@property (nonatomic, copy, readonly) NSString *PicContent1;
+@property (nonatomic, copy, readonly) NSString *PicContent2;
+@property (nonatomic, copy, readonly) NSString *PicContent3;
+@property (nonatomic, copy, readonly) NSString *PicContent4;
 @end
