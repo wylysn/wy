@@ -63,6 +63,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     BOOL isEStartTimeEditable;
     BOOL isEEndTimeEditable;
     BOOL isEWorkHoursEditable;
+    BOOL isSBListEditable;
 }
 
 - (void)viewDidLoad {
@@ -75,16 +76,82 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    deviceArr = [[NSMutableArray alloc] init];
+    selectedDevicesDic = [[NSMutableDictionary alloc] init];
+    selectedChargesDic = [[NSMutableDictionary alloc] init];
+    chargePersonArr = [[NSMutableArray alloc] init];
+    selectedExcutesDic = [[NSMutableDictionary alloc] init];
+    excutePersonArr = [[NSMutableArray alloc] init];
+    
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
+        
+        /*暂定这种格式*/
+        if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
+            NSArray *deviceNameArr = [NSString convertStringToArray:taskEntity.TaskAction];
+            for (NSString *deviceName in deviceNameArr) {
+                DeviceListEntity *device = [[DeviceListEntity alloc] initWithDictionary:@{@"Name":deviceName}];
+                [deviceArr addObject:device];
+            }
+        }
         
         //判断是否有操作，生成操作按钮
         if (taskEntity.TaskAction) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
             NSMutableArray *actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
+            if (taskEntity.IsLocalSave) {
+                NSDictionary *saveDic = [[NSDictionary alloc] initWithObjectsAndKeys:@{@"EventName":@"FormSave",@"DisplayName":@"保存", @"flag":@100}, nil];
+                [actionsMutableArr insertObject:saveDic atIndex:0];
+            }
             if (actionsMutableArr && actionsMutableArr.count>0) {
                 self.bottomViewConstraint.constant = 0;
+                NSInteger actionNum = actionsMutableArr.count;
+                float btnWidth;
+                float space = 15;
+                btnWidth = (SCREEN_WIDTH-space*(actionNum>=3?3:actionNum+1))/actionNum;
+                float btnHeight = 30;
+                float y = (55-btnHeight)/2;
                 
+                if (actionsMutableArr.count>3) {
+                    UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
+                    moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    moreBtn.layer.cornerRadius = 5;
+                    [self.bottomView addSubview:moreBtn];
+                } else if (actionsMutableArr.count==3) {
+                    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn3 setTitle:actionsArr[2][@"DisplayName"] forState:UIControlStateNormal];
+                    btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    btn3.layer.cornerRadius = 5;
+                    [self.bottomView addSubview:btn3];
+                }
+                if (actionsMutableArr.count>=3) {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    [self.bottomView addSubview:btn1];
+                    
+                    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
+                    [btn2 setTitle:actionsArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                    btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                    btn2.layer.cornerRadius = 5;
+                    [self.bottomView addSubview:btn2];
+                } else {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    [self.bottomView addSubview:btn1];
+                    
+                    if (actionsMutableArr.count==2) {
+                        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                        [btn2 setTitle:actionsArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                        btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                        btn2.layer.cornerRadius = 5;
+                        [self.bottomView addSubview:btn2];
+                    }
+                }
             }
         }
         
@@ -96,6 +163,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
         isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
         isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
+        isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
         [self.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -103,13 +171,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
-    
-    deviceArr = [[NSMutableArray alloc] init];
-    selectedDevicesDic = [[NSMutableDictionary alloc] init];
-    selectedChargesDic = [[NSMutableDictionary alloc] init];
-    chargePersonArr = [[NSMutableArray alloc] init];
-    selectedExcutesDic = [[NSMutableDictionary alloc] init];
-    excutePersonArr = [[NSMutableArray alloc] init];
     
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
@@ -389,12 +450,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"故障设备";
         [header addSubview:titleLabel];
-        UIImageView *plusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-35, (44-25)/2, 25, 25)];
-        plusImageView.image = [UIImage imageNamed:@"plus50"];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addDevice:)];
-        [plusImageView addGestureRecognizer:gesture];
-        [plusImageView setUserInteractionEnabled:YES];
-        [header addSubview:plusImageView];
+        if (isSBListEditable) {
+            UIImageView *plusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-35, (44-25)/2, 25, 25)];
+            plusImageView.image = [UIImage imageNamed:@"plus50"];
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addDevice:)];
+            [plusImageView addGestureRecognizer:gesture];
+            [plusImageView setUserInteractionEnabled:YES];
+            [header addSubview:plusImageView];
+        }
         return header;
     }
     /*
@@ -577,9 +640,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = device.Name;
         UIImageView *deleteView = [cell viewWithTag:2];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDevice:)];
-        [deleteView addGestureRecognizer:gesture];
-        [deleteView setUserInteractionEnabled:YES];
+        if (isSBListEditable) {
+            deleteView.hidden = NO;
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteDevice:)];
+            [deleteView addGestureRecognizer:gesture];
+            [deleteView setUserInteractionEnabled:YES];
+        } else {
+            deleteView.hidden = YES;
+        }
     }
     /*
     else if (section == 2) {

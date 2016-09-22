@@ -39,7 +39,7 @@
         
         _TaskNotice = [NSString convertArrayToString:dictionary[@"TaskNotice"]];//dictionary[@"TaskNotice"];
         _TaskAction = [NSString convertArrayToString:dictionary[@"TaskAction"]];//dictionary[@"TaskAction"];
-        _SBList = dictionary[@"SBList"];
+        _SBList = [NSString convertArrayToString:dictionary[@"SBList"]];
         _PicContent1 = dictionary[@"PicContent1"];
         _PicContent2 = dictionary[@"PicContent2"];
         _PicContent3 = dictionary[@"PicContent3"];

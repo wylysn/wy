@@ -265,10 +265,12 @@
     //options=0转换成不带格式的字符串
     
     //options=NSJSONWritingPrettyPrinted格式化输出
+    if (![array isKindOfClass:[NSNull class]]) {
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&parseError];
+        return[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
     
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&parseError];
-    
-    return[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return @"";
 }
 
 + (NSArray *)convertStringToArray:(NSString *)jsonString {
