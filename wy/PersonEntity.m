@@ -14,7 +14,7 @@
 {
     self = super.init;
     if (self) {
-        _id = dictionary[@"id"];
+//        _id = dictionary[@"id"];
         _AppUserName = dictionary[@"AppUserName"];
         _EmployeeId = [(NSString *)dictionary[@"EmployeeId"] integerValue];
         _EmployeeName = dictionary[@"EmployeeName"];

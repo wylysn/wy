@@ -80,7 +80,7 @@
     [chargePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [chargePersonDics setObject:person forKey:person.id];
+        [chargePersonDics setObject:person forKey:person.AppUserName];
     }
     
 //    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
@@ -100,7 +100,7 @@
     [excutePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [excutePersonDics setObject:person forKey:person.id];
+        [excutePersonDics setObject:person forKey:person.AppUserName];
     }
     
 //    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];

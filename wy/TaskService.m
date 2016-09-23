@@ -119,7 +119,6 @@
     Reachability *reach = [Reachability reachabilityForInternetConnection];
     if (reach.isReachable) {
         PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
         [condition setObject:@"gettaskdetail" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
@@ -154,6 +153,26 @@
         NSArray *taskDevicesArr = [dbService findTaskDevices:code];
         success(taskDevicesArr);
     }
+}
+
+- (void)submitAction:(NSMutableDictionary *)dataDic withEntity:(TaskEntity *)taskEntity success:(void (^)())success failure:(void (^)(NSString *message))failure {
+    PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+    NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
+    NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], taskEntity.Code, dataDic[@"eventname"]];
+    [condition setObject:dataDic[@"data"] forKey:@"SubmitData"];
+    [manager POST:url parameters:condition constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (responseObject[@"success"]) {
+            success();
+        } else {
+            failure(responseObject[@"message"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error.description.localizedLowercaseString);
+    }];
 }
 
 @end

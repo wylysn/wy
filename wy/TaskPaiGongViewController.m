@@ -201,7 +201,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [chargePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [chargePersonDics setObject:person forKey:person.id];
+        [chargePersonDics setObject:person forKey:person.AppUserName];
     }
     
     for(UIView *subView in [chargePersonsView subviews])
@@ -268,7 +268,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [excutePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [excutePersonDics setObject:person forKey:person.id];
+        [excutePersonDics setObject:person forKey:person.AppUserName];
     }
     
     for(UIView *subView in [excutePersonsView subviews])

@@ -84,7 +84,7 @@
     cell.phoneLabel.text = person.Mobile;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //已选中样式设置
-    if (self.selectedPersonsDic[person.id]) {
+    if (self.selectedPersonsDic[person.AppUserName]) {
         UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         [cell.checkImageView setImage:image];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];

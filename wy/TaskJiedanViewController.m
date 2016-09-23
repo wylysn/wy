@@ -80,7 +80,7 @@
     [excutePersonDics removeAllObjects];
     for (unsigned i = 0; i < persons.count; i++) {
         PersonEntity *person = (PersonEntity*)persons[i];
-        [excutePersonDics setObject:person forKey:person.id];
+        [excutePersonDics setObject:person forKey:person.AppUserName];
     }
     
     for(UIView *subView in [excutePersonsView subviews])

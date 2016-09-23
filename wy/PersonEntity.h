@@ -11,7 +11,7 @@
 @interface PersonEntity : NSObject
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, copy, readonly) NSString *id;
+//@property (nonatomic, copy, readonly) NSString *id;
 @property (nonatomic, copy, readonly) NSString *AppUserName;
 @property (nonatomic, readonly) NSInteger EmployeeId;
 @property (nonatomic, copy, readonly) NSString *EmployeeName;

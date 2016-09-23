@@ -32,6 +32,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
 
+@property (strong, nonatomic) UITextView *descriptionTextView;
+@property (strong, nonatomic) UITextView *workContentTextView;
 @property (strong, nonatomic) UIButton *startTimeBtn;
 @property (strong, nonatomic) UIButton *endTimeBtn;
 @property (strong, nonatomic) UILabel *timeDiffLabel;
@@ -55,6 +57,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     TaskService *taskService;
     TaskEntity *taskEntity;
     NSArray *editFieldsArray;
+    
+    NSMutableArray *actionsMutableArr;
     
     BOOL isDescriptionEditable;
     BOOL isWorkContentEditable;
@@ -88,7 +92,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         
         /*暂定这种格式*/
         if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
-            NSArray *deviceNameArr = [NSString convertStringToArray:taskEntity.TaskAction];
+            NSArray *deviceNameArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSString *deviceName in deviceNameArr) {
                 DeviceListEntity *device = [[DeviceListEntity alloc] initWithDictionary:@{@"Name":deviceName}];
                 [deviceArr addObject:device];
@@ -98,17 +102,22 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         //判断是否有操作，生成操作按钮
         if (taskEntity.TaskAction) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
-            NSMutableArray *actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
+            actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
             if (taskEntity.IsLocalSave) {
-                NSDictionary *saveDic = [[NSDictionary alloc] initWithObjectsAndKeys:@{@"EventName":@"FormSave",@"DisplayName":@"保存", @"flag":@100}, nil];
+                NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
+                [saveDic setValue:@"FormSave" forKey:@"EventName"];
+                [saveDic setValue:@"保存" forKey:@"DisplayName"];
+                [saveDic setValue:@100 forKey:@"flag"];
+                [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
                 [actionsMutableArr insertObject:saveDic atIndex:0];
             }
+            
             if (actionsMutableArr && actionsMutableArr.count>0) {
                 self.bottomViewConstraint.constant = 0;
                 NSInteger actionNum = actionsMutableArr.count;
                 float btnWidth;
                 float space = 15;
-                btnWidth = (SCREEN_WIDTH-space*(actionNum>=3?3:actionNum+1))/actionNum;
+                btnWidth = (SCREEN_WIDTH-space*((actionNum>=3?3:actionNum)+1))/(actionNum>=3?3:actionNum);
                 float btnHeight = 30;
                 float y = (55-btnHeight)/2;
                 
@@ -117,38 +126,50 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                     [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
                     moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
                     moreBtn.layer.cornerRadius = 5;
+                    moreBtn.tag = 2;
+                    [moreBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [self.bottomView addSubview:moreBtn];
                 } else if (actionsMutableArr.count==3) {
                     UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
-                    [btn3 setTitle:actionsArr[2][@"DisplayName"] forState:UIControlStateNormal];
+                    [btn3 setTitle:actionsMutableArr[2][@"DisplayName"] forState:UIControlStateNormal];
                     btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
                     btn3.layer.cornerRadius = 5;
+                    btn3.tag = 2;
+                    [btn3 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [self.bottomView addSubview:btn3];
                 }
                 if (actionsMutableArr.count>=3) {
                     UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
-                    [btn1 setTitle:actionsArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
                     btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
                     btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [self.bottomView addSubview:btn1];
                     
                     UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
-                    [btn2 setTitle:actionsArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                    [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
                     btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
                     btn2.layer.cornerRadius = 5;
+                    btn2.tag = 1;
+                    [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [self.bottomView addSubview:btn2];
                 } else {
                     UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
-                    [btn1 setTitle:actionsArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
                     btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
                     btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [self.bottomView addSubview:btn1];
                     
                     if (actionsMutableArr.count==2) {
                         UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
-                        [btn2 setTitle:actionsArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                        [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
                         btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
                         btn2.layer.cornerRadius = 5;
+                        btn2.tag = 1;
+                        [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                         [self.bottomView addSubview:btn2];
                     }
                 }
@@ -181,6 +202,115 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)actionBtnClick:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    NSInteger tag = btn.tag;
+    if (tag == 2 && actionsMutableArr.count>3) {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        for (int i=2; i<actionsMutableArr.count; i++) {
+            [actionSheet addButtonWithTitle:actionsMutableArr[i][@"DisplayName"]];
+        }
+        [actionSheet addButtonWithTitle:@"取消"];
+        actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
+        actionSheet.tag = 2;
+        [actionSheet showInView:self.view];
+    } else {
+        [self doAction:tag];
+    }
+}
+
+- (void)doAction:(NSInteger)tag {
+    NSDictionary *actionDic = actionsMutableArr[tag];
+    NSString *eventname = actionDic[@"EventName"];
+    NSArray *submitField = [[[actionDic[@"SubmitFields"] stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+    NSMutableDictionary *submitDic = [[NSMutableDictionary alloc] init];
+    [submitDic setObject:eventname forKey:@"eventname"];
+    NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+    for (NSString *fieldStr in submitField) {
+        if ([@"Leader" isEqualToString:fieldStr]) {
+            NSMutableString *leaderStr = [[NSMutableString alloc] init];
+            for (int i=0; i<chargePersonArr.count; i++) {
+                PersonEntity *person = chargePersonArr[i];
+                [leaderStr appendString:person.AppUserName];
+                if (i!=chargePersonArr.count-1) {
+                    [leaderStr appendString:@","];
+                }
+            }
+            [dataDic setObject:leaderStr forKey:fieldStr];
+            if (leaderStr.length<1) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有添加负责人" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+                return;
+            }
+        } else if ([@"Executors" isEqualToString:fieldStr]) {
+            NSMutableString *ExecutorsStr = [[NSMutableString alloc] init];
+            for (int i=0; i<excutePersonArr.count; i++) {
+                PersonEntity *person = excutePersonArr[i];
+                [ExecutorsStr appendString:person.AppUserName];
+                if (i!=excutePersonArr.count-1) {
+                    [ExecutorsStr appendString:@","];
+                }
+            }
+            [dataDic setObject:ExecutorsStr forKey:fieldStr];
+            if (ExecutorsStr.length<1) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有添加执行人" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+                return;
+            }
+        } else if ([@"EStartTime" isEqualToString:fieldStr]) {
+            if ([@"" isEqualToString:self.startTimeBtn.titleLabel.text] || [startTimeBtnPlaceholder isEqualToString:self.startTimeBtn.titleLabel.text]) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有预估开始时间" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+                return;
+            }
+            [dataDic setObject:self.startTimeBtn.titleLabel.text forKey:fieldStr];
+        } else if ([@"EEndTime" isEqualToString:fieldStr]) {
+            if ([@"" isEqualToString:self.endTimeBtn.titleLabel.text] || [endTimeBtnPlaceholder isEqualToString:self.endTimeBtn.titleLabel.text]) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有预估结束时间" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+                return;
+            }
+            [dataDic setObject:self.endTimeBtn.titleLabel.text forKey:fieldStr];
+        } else if ([@"EWorkHours" isEqualToString:fieldStr]) {
+            [dataDic setObject:self.timeDiffLabel.text forKey:fieldStr];
+        } else if ([@"WorkContent" isEqualToString:fieldStr]) {
+            [dataDic setObject:self.workContentTextView.text forKey:fieldStr];
+        } else if ([@"Description" isEqualToString:fieldStr]) {
+            [dataDic setObject:self.descriptionTextView.text forKey:fieldStr];
+        } else if ([@"SBList" isEqualToString:fieldStr]) {
+            /* 不知道具体格式，后面再补上
+            for (int i=0; i<deviceArr.count; i++) {
+                
+            }
+            [dataDic setObject: forKey:fieldStr];
+             */
+        }
+    }
+    NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
+    [submitDic setObject:dataArr forKey:@"data"];
+    [taskService submitAction:submitDic withEntity:taskEntity success:^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)showAddImageView {
@@ -219,27 +349,31 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 #pragma mark - actionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
-    {
-        
-        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
-        
-        AAPLCameraViewController* cameraViewController = [mainSB instantiateViewControllerWithIdentifier:@"camera"];
-        
-        [self presentViewController:cameraViewController animated:YES completion:nil];
-    }
-    else if (buttonIndex == 1)
-    {
-        ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-        elcPicker.maximumImagesCount = 5 - self.imageArray.count; //Set the maximum number of images to select to 100
-        elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
-        elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-        elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
-        elcPicker.isTrim = YES;
-        elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
-        elcPicker.imagePickerDelegate = self;
-        
-        [self presentViewController:elcPicker animated:YES completion:nil];
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0)
+        {
+            
+            UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
+            
+            AAPLCameraViewController* cameraViewController = [mainSB instantiateViewControllerWithIdentifier:@"camera"];
+            
+            [self presentViewController:cameraViewController animated:YES completion:nil];
+        }
+        else if (buttonIndex == 1)
+        {
+            ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+            elcPicker.maximumImagesCount = 5 - self.imageArray.count; //Set the maximum number of images to select to 100
+            elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
+            elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+            elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
+            elcPicker.isTrim = YES;
+            elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
+            elcPicker.imagePickerDelegate = self;
+            
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
+    } else if (actionSheet.tag == 2) {
+        [self doAction:buttonIndex+2];
     }
 }
 
@@ -359,7 +493,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     if (type==1) {
         choosePersonViewController.selectedPersonsDic = selectedChargesDic;
     } else {
-        choosePersonViewController.selectedPersonsDic = selectedChargesDic;
+        choosePersonViewController.selectedPersonsDic = selectedExcutesDic;
     }
     [self.navigationController pushViewController:choosePersonViewController animated:YES];
 }
@@ -375,10 +509,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [self.tableView reloadData];
     } else {
         excutePersonArr = [[NSMutableArray alloc] initWithArray:persons];
-        [selectedChargesDic removeAllObjects];
+        [selectedExcutesDic removeAllObjects];
         for (unsigned i = 0; i < excutePersonArr.count; i++) {
             PersonEntity *person = (PersonEntity *)excutePersonArr[i];
-            [selectedChargesDic setObject:person forKey:person.AppUserName];
+            [selectedExcutesDic setObject:person forKey:person.AppUserName];
         }
         [self.tableView reloadData];
     }
@@ -657,6 +791,9 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
      */
     else if (section == 2) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
+        if (!self.descriptionTextView) {
+            self.descriptionTextView = textView;
+        }
         if ([editFieldsArray indexOfObject:@"Description"] == NSNotFound) {
             textView.text = taskEntity.Description;
         } else {
@@ -668,6 +805,9 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
     } else if (section == 3) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
+        if (!self.workContentTextView) {
+            self.workContentTextView = textView;
+        }
         if ([editFieldsArray indexOfObject:@"WorkContent"] == NSNotFound) {
             textView.text = taskEntity.WorkContent;
         } else {
@@ -697,8 +837,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UILabel *keyLabel = [cell viewWithTag:1];
         UIButton *timeBtn = [cell viewWithTag:2];
         if (row == 0) {
-            self.startTimeBtn = timeBtn;
-            timeBtn.tag = 10;
+            if (!self.startTimeBtn) {
+                self.startTimeBtn = timeBtn;
+                timeBtn.tag = 10;
+            }
             keyLabel.text = @"到场时间";
             NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EStartTime]?startTimeBtnPlaceholder:taskEntity.EStartTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
@@ -706,8 +848,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             }
         } else {
-            self.endTimeBtn = timeBtn;
-            timeBtn.tag = 11;
+            if (!self.endTimeBtn) {
+                self.endTimeBtn = timeBtn;
+                timeBtn.tag = 11;
+            }
             keyLabel.text = @"结束时间";
             NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EEndTime]?endTimeBtnPlaceholder:taskEntity.EEndTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
