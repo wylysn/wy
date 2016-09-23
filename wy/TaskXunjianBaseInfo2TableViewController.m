@@ -7,12 +7,10 @@
 //
 
 #import "TaskXunjianBaseInfo2TableViewController.h"
-#import "TaskService.h"
-#import "TaskEntity.h"
 
-@interface TaskXunjianBaseInfo2TableViewController () {
-    TaskService *taskService;
-    TaskEntity *taskEntity;
+@interface TaskXunjianBaseInfo2TableViewController ()
+{
+    
 }
 
 @end
@@ -21,17 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    taskService = [[TaskService alloc] init];
-    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
-        taskEntity = task;
-        [self.tableView reloadData];
-    } failure:^(NSString *message) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
 }
 
 - (void)viewWillLayoutSubviews {

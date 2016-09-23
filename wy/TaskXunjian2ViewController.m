@@ -10,12 +10,17 @@
 #import "TaskXunjianBaseInfoTableViewController.h"
 #import "TaskXunjianDeviceTableViewController.h"
 #import "TaskXunjianBaseInfo2TableViewController.h"
+#import "TaskService.h"
+#import "TaskEntity.h"
 
-@interface TaskXunjian2ViewController ()<UIScrollViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UIView *titleView;
-@property (weak, nonatomic) IBOutlet UIView *buttonSrollView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollBackView;
+@interface TaskXunjian2ViewController ()<UIScrollViewDelegate, UIActionSheetDelegate> {
+    TaskService *taskService;
+    TaskEntity *taskEntity;
+    
+    NSArray *editFieldsArray;
+    
+    NSMutableArray *actionsMutableArr;
+}
 
 @end
 
@@ -49,6 +54,149 @@
     
     taskXunjianBaseInfoController.view.frame = self.scrollBackView.bounds;
     [self.scrollBackView addSubview:taskXunjianBaseInfoController.view];
+    
+    
+    taskService = [[TaskService alloc] init];
+    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
+        taskEntity = task;
+        
+        //判断是否有操作，生成操作按钮
+        if (taskEntity.TaskAction) {
+            NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
+            actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
+            if (taskEntity.IsLocalSave) {
+                NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
+                [saveDic setValue:@"FormSave" forKey:@"EventName"];
+                [saveDic setValue:@"保存" forKey:@"DisplayName"];
+                [saveDic setValue:@100 forKey:@"flag"];
+                [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
+                [actionsMutableArr insertObject:saveDic atIndex:0];
+            }
+            
+            if (actionsMutableArr && actionsMutableArr.count>0) {
+                self.bottomViewConstraint.constant = 0;
+                NSInteger actionNum = actionsMutableArr.count;
+                float btnWidth;
+                float space = 15;
+                btnWidth = (SCREEN_WIDTH-space*((actionNum>=3?3:actionNum)+1))/(actionNum>=3?3:actionNum);
+                float btnHeight = 30;
+                float y = (55-btnHeight)/2;
+                
+                if (actionsMutableArr.count>3) {
+                    UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
+                    moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    moreBtn.layer.cornerRadius = 5;
+                    moreBtn.tag = 2;
+                    [moreBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:moreBtn];
+                } else if (actionsMutableArr.count==3) {
+                    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn3 setTitle:actionsMutableArr[2][@"DisplayName"] forState:UIControlStateNormal];
+                    btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    btn3.layer.cornerRadius = 5;
+                    btn3.tag = 2;
+                    [btn3 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn3];
+                }
+                if (actionsMutableArr.count>=3) {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn1];
+                    
+                    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
+                    [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                    btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                    btn2.layer.cornerRadius = 5;
+                    btn2.tag = 1;
+                    [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn2];
+                } else {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn1];
+                    
+                    if (actionsMutableArr.count==2) {
+                        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                        [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                        btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                        btn2.layer.cornerRadius = 5;
+                        btn2.tag = 1;
+                        [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:btn2];
+                    }
+                }
+            }
+        }
+        
+        taskXunjianBaseInfoController.taskEntity = taskEntity;
+        [taskXunjianBaseInfoController.tableView reloadData];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
+}
+
+- (void)actionBtnClick:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    NSInteger tag = btn.tag;
+    if (tag == 2 && actionsMutableArr.count>3) {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        for (int i=2; i<actionsMutableArr.count; i++) {
+            [actionSheet addButtonWithTitle:actionsMutableArr[i][@"DisplayName"]];
+        }
+        [actionSheet addButtonWithTitle:@"取消"];
+        actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
+        actionSheet.tag = 2;
+        [actionSheet showInView:self.view];
+    } else {
+        [self doAction:tag];
+    }
+}
+
+- (void)doAction:(NSInteger)tag {
+    NSDictionary *actionDic = actionsMutableArr[tag];
+    NSString *eventname = actionDic[@"EventName"];
+    NSArray *submitField = [[[actionDic[@"SubmitFields"] stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+    NSMutableDictionary *submitDic = [[NSMutableDictionary alloc] init];
+    [submitDic setObject:eventname forKey:@"eventname"];
+    NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+    //    for (NSString *fieldStr in submitField) {
+    //
+    //    }
+    NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
+    [submitDic setObject:dataArr forKey:@"data"];
+    [taskService submitAction:submitDic withEntity:taskEntity success:^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
+}
+
+#pragma mark - actionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 2) {
+        [self doAction:buttonIndex+2];
+    }
 }
 
 - (IBAction)titleBtnClick:(id)sender {

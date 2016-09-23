@@ -91,7 +91,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
         
-        /*暂定这种格式*/
         if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
             NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSDictionary *deviceDic in deviceDicArr) {

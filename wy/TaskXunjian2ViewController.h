@@ -10,6 +10,12 @@
 
 @interface TaskXunjian2ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (weak, nonatomic) IBOutlet UIView *buttonSrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollBackView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
+
 @property (nonatomic, strong) NSString *code;
 @property (nonatomic, strong) NSString *taskStatus;
 
