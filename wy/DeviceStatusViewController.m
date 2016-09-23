@@ -7,8 +7,11 @@
 //
 
 #import "DeviceStatusViewController.h"
+#import "TaskXunjian2ViewController.h"
 
-@interface DeviceStatusViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIActionSheetDelegate>
+@interface DeviceStatusViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIActionSheetDelegate> {
+    TaskXunjian2ViewController *scanRootViewController;
+}
 
 @property (nonatomic, strong) InspectionChildModelEntity *inspectionChildModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    scanRootViewController = [self.navigationController.viewControllers objectAtIndex:1];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -98,7 +103,7 @@
 
 - (void)doneClick:(id)sender {
     /*其它操作，后续要加上*/
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    [self.navigationController popToViewController:scanRootViewController animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

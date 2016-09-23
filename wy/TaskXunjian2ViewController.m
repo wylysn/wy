@@ -12,6 +12,7 @@
 #import "TaskXunjianBaseInfo2TableViewController.h"
 #import "TaskService.h"
 #import "TaskEntity.h"
+#import "TaskDeviceEntity.h"
 
 @interface TaskXunjian2ViewController ()<UIScrollViewDelegate, UIActionSheetDelegate> {
     TaskService *taskService;
@@ -59,6 +60,16 @@
     taskService = [[TaskService alloc] init];
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
+        taskXunjianBaseInfoController.taskEntity = taskEntity;
+        [taskXunjianBaseInfoController.tableView reloadData];
+        
+        NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
+        NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+        for (NSDictionary *deviceDic in deviceDicArr) {
+            TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+            [deviceArr addObject:device];
+        }
+        taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
         
         //判断是否有操作，生成操作按钮
         if (taskEntity.TaskAction) {
@@ -136,9 +147,6 @@
                 }
             }
         }
-        
-        taskXunjianBaseInfoController.taskEntity = taskEntity;
-        [taskXunjianBaseInfoController.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];

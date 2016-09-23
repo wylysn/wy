@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSString *code;
 
+@property (nonatomic, strong) NSArray *taskDeviceArray;
+
 @end

@@ -298,7 +298,7 @@ static sqlite3_stmt *statement = nil;
                 task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4}];
             }
             else{
-                NSLog(@"没有找到code为%@的人员......", Code);
+                NSLog(@"没有找到code为%@的任务......", Code);
             }
         } else {
             NSLog(@"查找失败:%s", sqlite3_errmsg(database));

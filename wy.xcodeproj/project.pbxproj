@@ -520,8 +520,6 @@
 				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
 				8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */,
 				8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */,
-				D2CADE801D8B7152008A8CFD /* QRCodeScanViewController.h */,
-				D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -885,14 +883,16 @@
 				8841D46D1D73CCF5003E4495 /* TaskXunjianViewController.m */,
 				8841D46F1D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.h */,
 				8841D4701D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m */,
-				8841D4721D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.h */,
-				8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */,
 				889B51F51D7663D8001A542A /* TaskHandleViewController.h */,
 				889B51F61D7663D8001A542A /* TaskHandleViewController.m */,
 				887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */,
 				887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */,
 				8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */,
 				8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */,
+				8841D4721D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.h */,
+				8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */,
+				D2CADE801D8B7152008A8CFD /* QRCodeScanViewController.h */,
+				D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */,
 				88A1CB391D8F859F00C0B230 /* DeviceStatusViewController.h */,
 				88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */,
 			);

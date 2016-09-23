@@ -17,12 +17,13 @@
 
 @implementation TaskXunjianDeviceTableViewController {
     TaskService *taskService;
-    NSArray *taskDeviceArray;
+//    NSArray *taskDeviceArray;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /*
     taskDeviceArray = [[NSArray alloc] init];
     taskService = [[TaskService alloc] init];
     [taskService getTaskDevices:self.code success:^(NSArray *taskDevices) {
@@ -34,6 +35,7 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +46,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return taskDeviceArray.count;
+    return self.taskDeviceArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -70,7 +72,7 @@
     NSInteger row = indexPath.row;
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
-    TaskDeviceEntity *device = (TaskDeviceEntity *)taskDeviceArray[section];
+    TaskDeviceEntity *device = (TaskDeviceEntity *)self.taskDeviceArray[section];
     if (row == 0) {
         keyLabel.text = @"设备编码";
         valueLabel.text = device.Code;

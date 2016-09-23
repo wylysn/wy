@@ -91,6 +91,17 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [taskService getTaskEntity:self.code success:^(TaskEntity *task){
         taskEntity = task;
         
+        editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+        isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
+        isWorkContentEditable = !([editFieldsArray indexOfObject:@"WorkContent"]==NSNotFound);
+        isLeaderEditable = !([editFieldsArray indexOfObject:@"Leader"]==NSNotFound);
+        isExecutorsEditable = !([editFieldsArray indexOfObject:@"Executors"]==NSNotFound);
+        isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
+        isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
+        isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
+        isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
+        [self.tableView reloadData];
+        
         if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
             NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSDictionary *deviceDic in deviceDicArr) {
@@ -175,17 +186,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 }
             }
         }
-        
-        editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
-        isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
-        isWorkContentEditable = !([editFieldsArray indexOfObject:@"WorkContent"]==NSNotFound);
-        isLeaderEditable = !([editFieldsArray indexOfObject:@"Leader"]==NSNotFound);
-        isExecutorsEditable = !([editFieldsArray indexOfObject:@"Executors"]==NSNotFound);
-        isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
-        isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
-        isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
-        isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
-        [self.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
