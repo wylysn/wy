@@ -8,7 +8,8 @@
 
 #import "TaskHandleViewController.h"
 #import "PRPlaceHolderTextView.h"
-#import "DeviceListEntity.h"
+//#import "DeviceListEntity.h"
+#import "TaskDeviceEntity.h"
 #import "PersonEntity.h"
 #import "AAPLCameraViewController.h"
 #import "SkimPhotoViewController.h"
@@ -92,9 +93,9 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         
         /*暂定这种格式*/
         if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
-            NSArray *deviceNameArr = [NSString convertStringToArray:taskEntity.SBList];
-            for (NSString *deviceName in deviceNameArr) {
-                DeviceListEntity *device = [[DeviceListEntity alloc] initWithDictionary:@{@"Name":deviceName}];
+            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+            for (NSDictionary *deviceDic in deviceDicArr) {
+                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
                 [deviceArr addObject:device];
             }
         }
@@ -288,12 +289,12 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         } else if ([@"Description" isEqualToString:fieldStr]) {
             [dataDic setObject:self.descriptionTextView.text forKey:fieldStr];
         } else if ([@"SBList" isEqualToString:fieldStr]) {
-            /* 不知道具体格式，后面再补上
-            for (int i=0; i<deviceArr.count; i++) {
-                
+            NSMutableArray *sbListArr = [[NSMutableArray alloc] init];
+            for (TaskDeviceEntity *taskDevice in deviceArr) {
+                NSDictionary *deviceDic = [taskDevice jsonObject];
+                [sbListArr addObject:deviceDic];
             }
-            [dataDic setObject: forKey:fieldStr];
-             */
+            [dataDic setObject:sbListArr forKey:fieldStr];
         }
     }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
@@ -473,7 +474,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     deviceArr = [[NSMutableArray alloc] initWithArray:deviceArray];
     [selectedDevicesDic removeAllObjects];
     for (unsigned i = 0; i < deviceArr.count; i++) {
-        DeviceListEntity *device = (DeviceListEntity *)deviceArr[i];
+        TaskDeviceEntity *device = (TaskDeviceEntity *)deviceArr[i];
         [selectedDevicesDic setObject:device forKey:device.Code];
     }
     [self.tableView reloadData];
@@ -770,7 +771,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             valueLabel.text = taskEntity.Priority;
         }
     } else if (section == 1) {
-        DeviceListEntity *device = deviceArr[row];
+        TaskDeviceEntity *device = deviceArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = device.Name;
         UIImageView *deleteView = [cell viewWithTag:2];
