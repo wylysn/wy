@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaskEntity.h"
 
 @interface TaskXunjianDeviceTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSString *code;
 
+@property (nonatomic, strong) TaskEntity *taskEntity;
+
 @property (nonatomic, strong) NSArray *taskDeviceArray;
+
+
 
 @end

@@ -13,6 +13,7 @@
 #import "TaskService.h"
 #import "TaskEntity.h"
 #import "TaskDeviceEntity.h"
+#import "InspectionChildModelEntity.h"
 
 @interface TaskXunjian2ViewController ()<UIScrollViewDelegate, UIActionSheetDelegate> {
     TaskService *taskService;
@@ -33,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.deviceCheckInfoDic = [[NSMutableDictionary alloc] init];
+    
     selectedIndex = 0;
     selectedBtn = [self.titleView viewWithTag:1];
     selectedBtn.selected = TRUE;
@@ -46,8 +49,12 @@
     self.scrollBackView.scrollsToTop = NO;
     
     UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-    TaskXunjianBaseInfo2TableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo2"];
+//    TaskXunjianBaseInfo2TableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo2"];
+//    taskXunjianBaseInfoController.code = self.code;
+    TaskXunjianBaseInfoTableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo"];
     taskXunjianBaseInfoController.code = self.code;
+    taskXunjianBaseInfoController.ShortTitle = self.ShortTitle;
+
     TaskXunjianDeviceTableViewController *taskDevicesBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianDevices"];
     taskDevicesBaseInfoController.code = self.code;
     [self addChildViewController:taskXunjianBaseInfoController];
@@ -69,7 +76,9 @@
             TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
             [deviceArr addObject:device];
         }
+        taskDevicesBaseInfoController.taskEntity = taskEntity;
         taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
+        [taskDevicesBaseInfoController.tableView reloadData];
         
         //判断是否有操作，生成操作按钮
         if (taskEntity.TaskAction) {
@@ -179,11 +188,31 @@
     NSMutableDictionary *submitDic = [[NSMutableDictionary alloc] init];
     [submitDic setObject:eventname forKey:@"eventname"];
     NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
-    //    for (NSString *fieldStr in submitField) {
-    //
-    //    }
+    for (NSString *fieldStr in submitField) {
+        if ([@"SBCheckList" isEqualToString:fieldStr]) {
+            NSMutableArray *sbCheckListArr = [[NSMutableArray alloc] init];
+            NSArray *values = self.deviceCheckInfoDic.allValues;
+            for (NSDictionary *infoDic in values) {
+                NSArray *values2 = infoDic.allValues;
+                for (InspectionChildModelEntity *insChildEntity in values2) {
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                    [dic setObject:insChildEntity.ParentCode forKey:@"Code"];
+                    [dic setObject:insChildEntity.ItemName forKey:@"ItemName"];
+                    if (insChildEntity.ItemValue && insChildEntity.ItemValue!=nil) {
+                        [dic setObject:insChildEntity.ItemValue forKey:@"ItemValue"];
+                    }
+                    if (insChildEntity.DataValid && insChildEntity.DataValid!=nil) {
+                        [dic setObject:insChildEntity.DataValid forKey:@"DataValid"];
+                    }
+                    [sbCheckListArr addObject:dic];
+                }
+            }
+            [dataDic setObject:sbCheckListArr forKey:fieldStr];
+        }
+    }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
+    
     [taskService submitAction:submitDic withEntity:taskEntity success:^{
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

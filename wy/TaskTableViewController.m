@@ -167,10 +167,12 @@
         ((TaskXunjianViewController *)viewController).taskStatus = entity.TaskStatus;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
          */
+        
         //巡检任务查询详情
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TaskXunjianDetail2"];
         ((TaskXunjian2ViewController *)viewController).code = entity.Code;
         ((TaskXunjian2ViewController *)viewController).taskStatus = entity.TaskStatus;
+        ((TaskXunjian2ViewController *)viewController).ShortTitle = entity.ShortTitle;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     } else {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];

@@ -84,6 +84,13 @@
         [nextBtn addTarget:self action:@selector(nextStep:) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomView addSubview:nextBtn];
     }
+    
+    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.inspectionChildModel.ParentCode]) {
+        NSDictionary *infoDic = scanRootViewController.deviceCheckInfoDic[self.inspectionChildModel.ParentCode];
+        if (infoDic && infoDic[self.inspectionChildModel.ItemName]) {
+            self.inspectionChildModel = infoDic[self.inspectionChildModel.ItemName];
+        }
+    }
 }
 
 - (void)nextStep:(id)sender {
@@ -95,6 +102,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [self.navigationController pushViewController:viewController animated:YES];
+    
+    [self savaData];
 }
 
 - (void)preStep:(id)sender {
@@ -102,8 +111,42 @@
 }
 
 - (void)doneClick:(id)sender {
+    [self savaData];
+    
     /*其它操作，后续要加上*/
     [self.navigationController popToViewController:scanRootViewController animated:YES];
+}
+
+- (void)savaData {
+    /*保存数据*/
+//    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    NSString *ItemValue;
+    NSString *DataValid;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (self.inspectionChildModel.ItemType == 0) {
+        UITextField *textField = [cell viewWithTag:1];
+        ItemValue = textField.text;
+    } else {
+        UILabel *label = [cell viewWithTag:1];
+        ItemValue = label.text;
+    }
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    if (selectedIndexPath.row==0) {
+        DataValid = @"正常";
+    } else {
+        DataValid = @"异常";
+    }
+    self.inspectionChildModel.ItemValue = ItemValue;
+    self.inspectionChildModel.DataValid = DataValid;
+    NSMutableDictionary *infoDic;
+    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.inspectionChildModel.ParentCode]) {
+        infoDic = scanRootViewController.deviceCheckInfoDic[self.inspectionChildModel.ParentCode];
+    } else {
+        infoDic = [[NSMutableDictionary alloc] init];
+        [scanRootViewController.deviceCheckInfoDic setObject:infoDic forKey:self.inspectionChildModel.ParentCode];
+    }
+    [infoDic setObject:self.inspectionChildModel forKey:self.inspectionChildModel.ItemName];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -159,11 +202,10 @@
             textView.keyboardType = UIKeyboardTypeDecimalPad;
             textView.autocorrectionType = UITextAutocorrectionTypeNo;
             textView.delegate = self;
+            textView.text = self.inspectionChildModel.ItemValue;
         } else {
             UILabel *label = [cell viewWithTag:1];
-            NSString *itemValues = self.inspectionChildModel.ItemValues;
-            NSArray *itemArray = [itemValues componentsSeparatedByString:@"|"];
-            label.text = itemArray[0];
+            label.text = self.inspectionChildModel.ItemValue;
             UIButton *openBtn = [cell viewWithTag:2];
             [openBtn addTarget:self action:@selector(popActionSheet) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -200,6 +242,7 @@
     NSInteger row = indexPath.row;
     if (section==0 && row==0 && self.inspectionChildModel.ItemType==1) {
         [self popActionSheet];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     } else if (section==1) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         UIButton *radioBtn = [cell viewWithTag:1];

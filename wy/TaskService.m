@@ -191,10 +191,8 @@
     PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
     NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], taskEntity.Code, dataDic[@"eventname"]];
-    [condition setObject:dataDic[@"data"] forKey:@"SubmitData"];
-    [manager POST:url parameters:condition constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    [condition setObject:[NSString convertArrayToString:dataDic[@"data"]] forKey:@"SubmitData"];
+    [manager POST:url parameters:condition progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject[@"success"]) {

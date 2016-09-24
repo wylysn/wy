@@ -19,5 +19,7 @@
 @property (nonatomic, copy) NSString *InputMin;
 @property (nonatomic, copy) NSString *ItemValues;
 @property (nonatomic, copy) NSString *UnitName;
+@property (nonatomic, copy) NSString *ItemValue;
+@property (nonatomic, copy) NSString *DataValid;
 
 @end

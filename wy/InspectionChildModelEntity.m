@@ -21,6 +21,8 @@
         _InputMin = dictionary[@"InputMin"];
         _ItemValues = dictionary[@"ItemValues"];
         _UnitName = dictionary[@"UnitName"];
+        _ItemValue = dictionary[@"ItemValue"];
+        _DataValid = dictionary[@"DataValid"];
     }
     return self;
 }

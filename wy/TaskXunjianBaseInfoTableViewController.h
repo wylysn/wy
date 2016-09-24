@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaskEntity.h"
 
 @interface TaskXunjianBaseInfoTableViewController : UITableViewController
+
+@property (nonatomic, strong) NSString *code;
+
+@property (nonatomic, strong) NSString *ShortTitle; //工单类型，列表传过来
+
+@property (nonatomic, strong) TaskEntity *taskEntity;
 
 @end

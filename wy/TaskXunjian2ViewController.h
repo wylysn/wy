@@ -18,5 +18,8 @@
 
 @property (nonatomic, strong) NSString *code;
 @property (nonatomic, strong) NSString *taskStatus;
+@property (nonatomic, strong) NSString *ShortTitle; //工单类型，列表传过来
+
+@property (nonatomic, strong) NSMutableDictionary *deviceCheckInfoDic;
 
 @end
