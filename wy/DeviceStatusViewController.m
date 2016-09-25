@@ -147,6 +147,7 @@
         DataValid = @"异常";
     }
     
+    self.inspectionChildModel.taskDeviceCode = self.taskDeviceCode;
     self.inspectionChildModel.ItemValue = ItemValue;
     self.inspectionChildModel.DataValid = DataValid;
     NSMutableDictionary *infoDic;

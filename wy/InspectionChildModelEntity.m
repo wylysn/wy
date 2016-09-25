@@ -23,6 +23,7 @@
         _UnitName = dictionary[@"UnitName"];
         _ItemValue = dictionary[@"ItemValue"];
         _DataValid = dictionary[@"DataValid"];
+        _taskDeviceCode = dictionary[@"taskDeviceCode"];
     }
     return self;
 }

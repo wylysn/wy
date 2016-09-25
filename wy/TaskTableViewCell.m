@@ -49,11 +49,11 @@
         NSString *color = @"ffffff";
         if ([@"0" isEqualToString:entity.TaskStatus] || [@"接单" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_ORANGE_COLOR;
-        } else if ([@"1" isEqualToString:entity.TaskStatus] || [@"待处理" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"1" isEqualToString:entity.TaskStatus] || [@"处理" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_RED_COLOR;
-        } else if ([@"2" isEqualToString:entity.TaskStatus] || [@"待派工" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"2" isEqualToString:entity.TaskStatus] || [@"派工" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_GREEN_COLOR;
-        } else if ([@"3" isEqualToString:entity.TaskStatus] || [@"待审批" isEqualToString:entity.TaskStatus]) {
+        } else if ([@"3" isEqualToString:entity.TaskStatus] || [@"审批" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_BLUE_COLOR;
         } else if ([@"4" isEqualToString:entity.TaskStatus] || [@"终止" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_DARKGRAY_COLOR;

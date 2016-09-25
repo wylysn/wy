@@ -19,7 +19,10 @@
 @property (nonatomic, copy) NSString *InputMin;
 @property (nonatomic, copy) NSString *ItemValues;
 @property (nonatomic, copy) NSString *UnitName;
+
+//扩展熟悉
 @property (nonatomic, copy) NSString *ItemValue;
 @property (nonatomic, copy) NSString *DataValid;
+@property (nonatomic, copy) NSString *taskDeviceCode;
 
 @end

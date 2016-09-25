@@ -215,7 +215,7 @@
                 NSArray *values2 = infoDic.allValues;
                 for (InspectionChildModelEntity *insChildEntity in values2) {
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-                    [dic setObject:insChildEntity.ParentCode forKey:@"Code"];
+                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"Code"];
                     [dic setObject:insChildEntity.ItemName forKey:@"ItemName"];
                     if (insChildEntity.ItemValue && insChildEntity.ItemValue!=nil) {
                         [dic setObject:insChildEntity.ItemValue forKey:@"ItemValue"];
