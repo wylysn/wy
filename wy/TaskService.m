@@ -205,4 +205,8 @@
     }];
 }
 
+- (void) updateLocalTaskEntity:(TaskEntity *)taskEntity {
+    [dbService updateTaskEntity:taskEntity];
+}
+
 @end

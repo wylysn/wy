@@ -238,13 +238,16 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                     [leaderStr appendString:@","];
                 }
             }
-            [dataDic setObject:leaderStr forKey:fieldStr];
+            
             if (leaderStr.length<1) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有添加负责人" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
+            } else {
+                [dataDic setObject:leaderStr forKey:fieldStr];
+                taskEntity.Leader = leaderStr;
             }
         } else if ([@"Executors" isEqualToString:fieldStr]) {
             NSMutableString *ExecutorsStr = [[NSMutableString alloc] init];
@@ -255,13 +258,16 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                     [ExecutorsStr appendString:@","];
                 }
             }
-            [dataDic setObject:ExecutorsStr forKey:fieldStr];
+            
             if (ExecutorsStr.length<1) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有添加执行人" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
+            } else {
+                [dataDic setObject:ExecutorsStr forKey:fieldStr];
+                taskEntity.Executors = ExecutorsStr;
             }
         } else if ([@"EStartTime" isEqualToString:fieldStr]) {
             if ([@"" isEqualToString:self.startTimeBtn.titleLabel.text] || [startTimeBtnPlaceholder isEqualToString:self.startTimeBtn.titleLabel.text]) {
@@ -272,6 +278,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 return;
             }
             [dataDic setObject:self.startTimeBtn.titleLabel.text forKey:fieldStr];
+            taskEntity.EStartTime = self.startTimeBtn.titleLabel.text;
         } else if ([@"EEndTime" isEqualToString:fieldStr]) {
             if ([@"" isEqualToString:self.endTimeBtn.titleLabel.text] || [endTimeBtnPlaceholder isEqualToString:self.endTimeBtn.titleLabel.text]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有预估结束时间" preferredStyle:UIAlertControllerStyleAlert];
@@ -281,12 +288,16 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 return;
             }
             [dataDic setObject:self.endTimeBtn.titleLabel.text forKey:fieldStr];
+            taskEntity.EStartTime = self.endTimeBtn.titleLabel.text;
         } else if ([@"EWorkHours" isEqualToString:fieldStr]) {
             [dataDic setObject:self.timeDiffLabel.text forKey:fieldStr];
+            taskEntity.EWorkHours = self.timeDiffLabel.text;
         } else if ([@"WorkContent" isEqualToString:fieldStr]) {
             [dataDic setObject:self.workContentTextView.text forKey:fieldStr];
+            taskEntity.WorkContent = self.workContentTextView.text;
         } else if ([@"Description" isEqualToString:fieldStr]) {
             [dataDic setObject:self.descriptionTextView.text forKey:fieldStr];
+            taskEntity.Description = self.descriptionTextView.text;
         } else if ([@"SBList" isEqualToString:fieldStr]) {
             NSMutableArray *sbListArr = [[NSMutableArray alloc] init];
             for (TaskDeviceEntity *taskDevice in deviceArr) {
@@ -294,23 +305,30 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 [sbListArr addObject:deviceDic];
             }
             [dataDic setObject:sbListArr forKey:fieldStr];
+            if (sbListArr.count>0) {
+                taskEntity.SBList = [NSString convertArrayToString:sbListArr];
+            }
         }
     }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
-    [taskService submitAction:submitDic withEntity:taskEntity success:^{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController popViewControllerAnimated:YES];
+    if (taskEntity.IsLocalSave && tag==0) { //保存按钮点击
+        [taskService updateLocalTaskEntity:taskEntity];
+    } else {
+        [taskService submitAction:submitDic withEntity:taskEntity success:^{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } failure:^(NSString *message) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
         }];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    } failure:^(NSString *message) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
+    }
 }
 
 - (void)showAddImageView {

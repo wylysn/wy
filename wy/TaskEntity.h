@@ -11,36 +11,36 @@
 @interface TaskEntity : NSObject
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, copy, readonly) NSString *identifier;
-@property (nonatomic, copy, readonly) NSString *Code;
-@property (nonatomic, copy, readonly) NSString *Applyer;
-@property (nonatomic, copy, readonly) NSString *ApplyerTel;
-@property (nonatomic, copy, readonly) NSString *ServiceType;
-@property (nonatomic, copy, readonly) NSString *Priority;
-@property (nonatomic, copy, readonly) NSString *Location;
-@property (nonatomic, copy, readonly) NSString *Description;
-@property (nonatomic, copy, readonly) NSString *CreateDate;
-@property (nonatomic, copy, readonly) NSString *Creator;
-@property (nonatomic, copy, readonly) NSString *Department;
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, copy) NSString *Code;
+@property (nonatomic, copy) NSString *Applyer;
+@property (nonatomic, copy) NSString *ApplyerTel;
+@property (nonatomic, copy) NSString *ServiceType;
+@property (nonatomic, copy) NSString *Priority;
+@property (nonatomic, copy) NSString *Location;
+@property (nonatomic, copy) NSString *Description;
+@property (nonatomic, copy) NSString *CreateDate;
+@property (nonatomic, copy) NSString *Creator;
+@property (nonatomic, copy) NSString *Department;
 
-@property (nonatomic, copy, readonly) NSString *Executors;
-@property (nonatomic, copy, readonly) NSString *Leader;
-@property (nonatomic, copy, readonly) NSString *EStartTime;
-@property (nonatomic, copy, readonly) NSString *EEndTime;
+@property (nonatomic, copy) NSString *Executors;
+@property (nonatomic, copy) NSString *Leader;
+@property (nonatomic, copy) NSString *EStartTime;
+@property (nonatomic, copy) NSString *EEndTime;
 @property (nonatomic, copy) NSString *EWorkHours;
-@property (nonatomic, copy, readonly) NSString *AStartTime;
-@property (nonatomic, copy, readonly) NSString *AEndTime;
-@property (nonatomic, copy, readonly) NSString *AWorkHours;
-@property (nonatomic, copy, readonly) NSString *WorkContent;
-@property (nonatomic, copy, readonly) NSString *EditFields;
-@property (nonatomic, readonly) BOOL IsLocalSave;
+@property (nonatomic, copy) NSString *AStartTime;
+@property (nonatomic, copy) NSString *AEndTime;
+@property (nonatomic, copy) NSString *AWorkHours;
+@property (nonatomic, copy) NSString *WorkContent;
+@property (nonatomic, copy) NSString *EditFields;
+@property (nonatomic) BOOL IsLocalSave;
 
-@property (nonatomic, copy, readonly) NSString *TaskNotice;
-@property (nonatomic, copy, readonly) NSString *TaskAction;
+@property (nonatomic, copy) NSString *TaskNotice;
+@property (nonatomic, copy) NSString *TaskAction;
 
-@property (nonatomic, copy, readonly) NSString *SBList;
-@property (nonatomic, copy, readonly) NSString *PicContent1;
-@property (nonatomic, copy, readonly) NSString *PicContent2;
-@property (nonatomic, copy, readonly) NSString *PicContent3;
-@property (nonatomic, copy, readonly) NSString *PicContent4;
+@property (nonatomic, copy) NSString *SBList;
+@property (nonatomic, copy) NSString *PicContent1;
+@property (nonatomic, copy) NSString *PicContent2;
+@property (nonatomic, copy) NSString *PicContent3;
+@property (nonatomic, copy) NSString *PicContent4;
 @end

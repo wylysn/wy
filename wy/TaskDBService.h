@@ -19,7 +19,8 @@
 
 - (NSArray *)findTaskLists:(NSDictionary *)condition;
 
-- (BOOL)saveTask:(TaskEntity *)device;
+- (BOOL)saveTask:(TaskEntity *)taskEntity;
+- (BOOL)updateTaskEntity:(TaskEntity *)taskEntity;
 
 - (TaskEntity *)findTaskByCode:(NSString*)Code;
 

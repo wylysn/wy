@@ -24,4 +24,6 @@
 
 - (void)submitAction:(NSMutableDictionary *)dataDic withEntity:(TaskEntity *)taskEntity success:(void (^)())success failure:(void (^)(NSString *message))failure;
 
+- (void) updateLocalTaskEntity:(TaskEntity *)taskEntity;
+
 @end

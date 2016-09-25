@@ -172,6 +172,44 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 
+- (BOOL)updateTaskEntity:(TaskEntity *)taskEntity {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"update Task set Location=? and Description=? and Executors=? and Leader=? and EStartTime=? and EEndTime=? and EWorkHours=? and WorkContent=? and SBList=? and PicContent1=? and PicContent2=? and PicContent3=? and PicContent4=? where Code=?";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [taskEntity.Location UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [taskEntity.Description UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [taskEntity.Executors UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [taskEntity.Leader UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [taskEntity.EStartTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 6, [taskEntity.EEndTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 7, [taskEntity.EWorkHours UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 8, [taskEntity.WorkContent UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 9, [taskEntity.SBList UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 10, [taskEntity.PicContent1 UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 11, [taskEntity.PicContent2 UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 12, [taskEntity.PicContent3 UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 13, [taskEntity.PicContent4 UTF8String], -1, SQLITE_TRANSIENT);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"更新成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"更新失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
 - (BOOL) saveTaskDevice:(TaskDeviceEntity *)taskDevice {
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
@@ -278,7 +316,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *Creator = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
                 NSString *Executors = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
                 NSString *Leader = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
-                NSString *Department = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)];
+                NSString *Department = (const char *) sqlite3_column_text(statement, 11)?[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 11)]:@"";
                 NSString *EStartTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 12)];
                 NSString *EEndTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 13)];
                 NSString * EWorkHours = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 14)];

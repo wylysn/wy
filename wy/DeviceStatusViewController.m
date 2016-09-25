@@ -131,12 +131,19 @@
         UILabel *label = [cell viewWithTag:1];
         ItemValue = label.text;
     }
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    if (selectedIndexPath.row==0) {
+    NSIndexPath *r1IndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSIndexPath *r2IndexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    UITableViewCell *r1Cell = [self.tableView cellForRowAtIndexPath:r1IndexPath];
+    UITableViewCell *r2Cell = [self.tableView cellForRowAtIndexPath:r2IndexPath];
+    UIButton *r1Btn = [r1Cell viewWithTag:1];
+    UIButton *r2Btn = [r2Cell viewWithTag:1];
+    if (r1Btn.selected) {
         DataValid = @"正常";
-    } else {
+    }
+    if (r2Btn.selected) {
         DataValid = @"异常";
     }
+    
     self.inspectionChildModel.ItemValue = ItemValue;
     self.inspectionChildModel.DataValid = DataValid;
     NSMutableDictionary *infoDic;
@@ -210,11 +217,18 @@
             [openBtn addTarget:self action:@selector(popActionSheet) forControlEvents:UIControlEventTouchUpInside];
         }
     } else if(section==1) {
+        UIButton *radioBtn = [cell viewWithTag:1];
         UILabel *label = [cell viewWithTag:2];
         if (row == 0) {
             label.text = @"正常";
+            if([@"正常" isEqualToString:self.inspectionChildModel.DataValid]) {
+                radioBtn.selected = YES;
+            }
         } else {
-            label.text = @"不正常";
+            label.text = @"异常";
+            if([@"异常" isEqualToString:self.inspectionChildModel.DataValid]) {
+                radioBtn.selected = YES;
+            }
         }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
