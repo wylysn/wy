@@ -68,7 +68,7 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createTaskTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, Department text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text, IsLocalSave bool, TaskNotice text, TaskAction text, SBList text, PicContent1 text, PicContent2 text, PicContent3 text, PicContent4 text)";
+    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, Department text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text, IsLocalSave bool, TaskNotice text, TaskAction text, SBList text, PicContent1 text, PicContent2 text, PicContent3 text, PicContent4 text, SBCheckList text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -123,7 +123,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = @"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        NSString *insertSQL = @"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, SBCheckList) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -156,6 +156,7 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 26, [task.PicContent2 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 27, [task.PicContent3 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 28, [task.PicContent4 UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 29, [task.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
             
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -176,7 +177,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = @"update Task set Location=? and Description=? and Executors=? and Leader=? and EStartTime=? and EEndTime=? and EWorkHours=? and WorkContent=? and SBList=? and PicContent1=? and PicContent2=? and PicContent3=? and PicContent4=? where Code=?";
+        NSString *insertSQL = @"update Task set Location=?, Description=?, Executors=?, Leader=?, EStartTime=?, EEndTime=?, EWorkHours=?, WorkContent=?, SBList=?, PicContent1=?, PicContent2=?, PicContent3=?, PicContent4=?, SBCheckList=? where Code=?";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -194,6 +195,8 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 11, [taskEntity.PicContent2 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 12, [taskEntity.PicContent3 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 13, [taskEntity.PicContent4 UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 14, [taskEntity.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 15, [taskEntity.Code UTF8String], -1, SQLITE_TRANSIENT);
             
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -201,6 +204,32 @@ static sqlite3_stmt *statement = nil;
                 isSuccess = TRUE;
             } else {
                 NSLog(@"更新失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
+- (BOOL)deleteTaskEntity:(NSString *)code {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"delete from Task where Code=?";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [code UTF8String], -1, SQLITE_TRANSIENT);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"删除成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"删除失败:%s", sqlite3_errmsg(database));
             }
         } else {
             NSLog(@"语法不通过:%s", sqlite3_errmsg(database));

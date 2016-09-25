@@ -108,7 +108,7 @@
             [self presentViewController:alertController animated:YES completion:nil];
         }];
     }];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
     
 //    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
 //        [self.tableView.mj_footer endRefreshing];
@@ -118,6 +118,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.tabBarController.tabBar.hidden = NO;
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,6 +144,7 @@
     
     [self configureCell:cell atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
@@ -173,12 +175,14 @@
         ((TaskXunjian2ViewController *)viewController).code = entity.Code;
         ((TaskXunjian2ViewController *)viewController).taskStatus = entity.TaskStatus;
         ((TaskXunjian2ViewController *)viewController).ShortTitle = entity.ShortTitle;
+        ((TaskXunjian2ViewController *)viewController).isLocalSave = entity.IsLocalSave;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     } else {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
         ((TaskHandleViewController *)viewController).code = entity.Code;
         ((TaskHandleViewController *)viewController).ShortTitle = entity.ShortTitle;
         ((TaskHandleViewController *)viewController).taskStatus = entity.TaskStatus;
+        ((TaskHandleViewController *)viewController).isLocalSave = entity.IsLocalSave;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
         /*
         if ([@"1" isEqualToString:entity.TaskStatus]) {

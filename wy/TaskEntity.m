@@ -24,8 +24,16 @@
         _CreateDate = dictionary[@"CreateDate"];
         _Creator = dictionary[@"Creator"];
         _Department = dictionary[@"Department"];
-        _Executors = dictionary[@"Executors"];
-        _Leader = dictionary[@"Leader"];
+        if ((NSNull *)dictionary[@"Executors"]==[NSNull null]) {
+            _Executors = @"";
+        } else {
+            _Executors = [dictionary[@"Executors"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"Executors"]]:dictionary[@"Executors"];
+        }
+        if ((NSNull *)dictionary[@"Leader"]==[NSNull null]) {
+            _Leader = @"";
+        } else {
+            _Leader = [dictionary[@"Leader"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"Leader"]]:dictionary[@"Leader"];
+        }
         _EStartTime = dictionary[@"EStartTime"];
         _EEndTime = dictionary[@"EEndTime"];
         _EEndTime = dictionary[@"EEndTime"];
@@ -37,13 +45,30 @@
         _EditFields = dictionary[@"EditFields"];
         _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
         
-        _TaskNotice = [dictionary[@"TaskNotice"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"TaskNotice"]]:dictionary[@"TaskNotice"];
-        _TaskAction = [dictionary[@"TaskAction"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"TaskAction"]]:dictionary[@"TaskAction"];
-        _SBList = [dictionary[@"SBList"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"SBList"]]:dictionary[@"SBList"];
+        if ((NSNull *)dictionary[@"TaskNotice"]==[NSNull null]) {
+            _TaskNotice = @"";
+        } else {
+            _TaskNotice = [dictionary[@"TaskNotice"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"TaskNotice"]]:dictionary[@"TaskNotice"];
+        }
+        if ((NSNull *)dictionary[@"SBList"]==[NSNull null]) {
+            _SBList = @"";
+        } else {
+            _SBList = [dictionary[@"SBList"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"SBList"]]:dictionary[@"SBList"];
+        }
+        if ((NSNull *)dictionary[@"TaskAction"]==[NSNull null]) {
+            _TaskAction = @"";
+        } else {
+            _TaskAction = [dictionary[@"TaskAction"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"TaskAction"]]:dictionary[@"TaskAction"];
+        }
         _PicContent1 = dictionary[@"PicContent1"];
         _PicContent2 = dictionary[@"PicContent2"];
         _PicContent3 = dictionary[@"PicContent3"];
         _PicContent4 = dictionary[@"PicContent4"];
+        if ((NSNull *)dictionary[@"SBCheckLists"]==[NSNull null]) {
+            _SBCheckList = @"";
+        } else {
+            _SBCheckList = [dictionary[@"SBCheckLists"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"SBCheckLists"]]:dictionary[@"SBCheckLists"];
+        }
     }
     return self;
 }

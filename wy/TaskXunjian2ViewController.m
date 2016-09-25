@@ -65,23 +65,42 @@
     
     
     taskService = [[TaskService alloc] init];
-    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
+    [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
+        
+        if (taskEntity.SBCheckList && (NSNull *)taskEntity.SBCheckList!=[NSNull null] && ![@"" isEqualToString:taskEntity.SBCheckList]) {
+            NSArray *sbCheckDicArr = [NSString convertStringToArray:taskEntity.SBCheckList];
+            for (NSDictionary *sbCheckDic in sbCheckDicArr) {
+                InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];
+                NSMutableDictionary *infoDic;
+                if ([self.deviceCheckInfoDic.allKeys containsObject:sbCheck.ParentCode]) {
+                    infoDic = self.deviceCheckInfoDic[sbCheck.ParentCode];
+                } else {
+                    infoDic = [[NSMutableDictionary alloc] init];
+                    [self.deviceCheckInfoDic setObject:infoDic forKey:sbCheck.ParentCode];
+                }
+                [infoDic setObject:sbCheck forKey:sbCheck.ItemName];
+            }
+        }
+        
         taskXunjianBaseInfoController.taskEntity = taskEntity;
         [taskXunjianBaseInfoController.tableView reloadData];
         
         NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
-        NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
-        for (NSDictionary *deviceDic in deviceDicArr) {
-            TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
-            [deviceArr addObject:device];
+        if (taskEntity.SBList && (NSNull *)taskEntity.SBList!=[NSNull null] && ![@"" isEqualToString:taskEntity.SBList]) {
+            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+            for (NSDictionary *deviceDic in deviceDicArr) {
+                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+                [deviceArr addObject:device];
+            }
         }
+        
         taskDevicesBaseInfoController.taskEntity = taskEntity;
         taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
         [taskDevicesBaseInfoController.tableView reloadData];
         
         //判断是否有操作，生成操作按钮
-        if (taskEntity.TaskAction) {
+        if (taskEntity.TaskAction && (NSNull *)taskEntity.TaskAction!=[NSNull null]) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
             actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
             if (taskEntity.IsLocalSave) {
@@ -208,24 +227,35 @@
                 }
             }
             [dataDic setObject:sbCheckListArr forKey:fieldStr];
+            taskEntity.SBCheckList = [NSString convertArrayToString:sbCheckListArr];
         }
     }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
     
-    [taskService submitAction:submitDic withEntity:taskEntity success:^{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+    if (taskEntity.IsLocalSave && tag==0) { //保存按钮点击
+        bool success = [taskService updateLocalTaskEntity:taskEntity];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
-    } failure:^(NSString *message) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
+    } else {
+        [taskService submitAction:submitDic withEntity:taskEntity success:^{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } failure:^(NSString *message) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
+    }
 }
 
 #pragma mark - actionSheetDelegate

@@ -35,13 +35,16 @@
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *userName = self.userNameField.text;
     NSString *password = self.passwordField.text;
-    [loginService loginWithUserName:userName password:password success:^{
+    [loginService loginWithUserName:userName password:password success:^(NSDictionary *userDic){
         app.isLogin = YES;
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:userName forKey:@"userName"];
         if (self.rememberBtn.isSelected) {
             [userDefaults setObject:password forKey:@"password"];
         }
+        [userDefaults setObject:userDic[@"Name"] forKey:@"Name"];
+        [userDefaults setObject:userDic[@"Department"] forKey:@"Department"];
+        [userDefaults setObject:userDic[@"Mobile"] forKey:@"Mobile"];
         [userDefaults synchronize];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *message) {

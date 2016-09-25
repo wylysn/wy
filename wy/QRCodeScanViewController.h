@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaskDeviceEntity.h"
 
 @interface QRCodeScanViewController : UIViewController
+
+@property (nonatomic, strong) TaskDeviceEntity *taskDeviceEntity;
 
 @end

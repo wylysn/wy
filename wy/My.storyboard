@@ -569,8 +569,8 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-banner" translatesAutoresizingMaskIntoConstraints="NO" id="RZI-lc-eP5">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="77" id="Y0W-ez-eSW"/>
-                                    <constraint firstAttribute="width" constant="215" id="lXp-Lt-rmx"/>
+                                    <constraint firstAttribute="height" constant="102" id="Y0W-ez-eSW"/>
+                                    <constraint firstAttribute="width" constant="193" id="lXp-Lt-rmx"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoH-fT-Ze7">
@@ -776,7 +776,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pal-mi-u7R" id="IwB-34-Fsl">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wy-ep-ZXk">
@@ -814,9 +814,9 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3s-f1-xNZ">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="EYU-Eb-dlN"/>
-                                                        <constraint firstAttribute="width" constant="60" id="aqa-we-1ET"/>
+                                                        <constraint firstAttribute="width" constant="100" id="aqa-we-1ET"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -912,8 +912,8 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-banner" translatesAutoresizingMaskIntoConstraints="NO" id="8v5-G9-dG4">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="215" id="em5-I3-vFm"/>
-                                            <constraint firstAttribute="height" constant="77" id="ytD-mT-uPl"/>
+                                            <constraint firstAttribute="width" constant="153" id="em5-I3-vFm"/>
+                                            <constraint firstAttribute="height" constant="81" id="ytD-mT-uPl"/>
                                         </constraints>
                                     </imageView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCR-Au-CXM">
@@ -1437,7 +1437,7 @@
         <image name="checkbox-pass-checked" width="20" height="20"/>
         <image name="checkbox-pass-normal" width="20" height="20"/>
         <image name="checkbox-unchecked" width="16" height="16"/>
-        <image name="login-banner" width="215" height="76"/>
+        <image name="login-banner" width="193" height="102"/>
         <image name="login-password" width="20" height="26"/>
         <image name="set" width="20" height="20"/>
         <image name="user" width="20" height="26"/>

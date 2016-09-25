@@ -21,6 +21,7 @@
 
 - (BOOL)saveTask:(TaskEntity *)taskEntity;
 - (BOOL)updateTaskEntity:(TaskEntity *)taskEntity;
+- (BOOL)deleteTaskEntity:(NSString *)code;
 
 - (TaskEntity *)findTaskByCode:(NSString*)Code;
 

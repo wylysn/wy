@@ -28,6 +28,8 @@
 @implementation DownloadViewController {
     NSMutableArray *filesArray;
     NSMutableArray *templateidArray;
+    
+    NSMutableDictionary *downloadResultDic;
 }
 
 - (void)viewDidLoad {
@@ -60,6 +62,8 @@
         }
     }
     /*end*/
+    
+    downloadResultDic = [[NSMutableDictionary alloc] init];
     
     ((AppDelegate *)[[UIApplication sharedApplication] delegate]).downloadViewController = self;
     self.completionHandlerDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -205,6 +209,8 @@
             NSData *data=[NSData dataWithContentsOfFile:filePath];
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+//            NSDictionary *json = @{@"success":@0,@"message":@""};
+            BOOL success = [(NSNumber *)json[@"success"] boolValue];
             if (error) {
                 NSLog(@"解析失败--%@", error);
                 NSInteger index = [templateidArray indexOfObject:templateid];
@@ -213,7 +219,8 @@
                 UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
                 UILabel *progressLabel = [cell viewWithTag:3];
                 progressLabel.text = @"解析失败";
-            } else if (!json[@"success"]) {
+                [downloadResultDic setObject:@"0" forKey:templateid];
+            } else if (!success) {
                 NSLog(@"请求失败--%@", json[@"message"]);
                 NSInteger index = [templateidArray indexOfObject:templateid];
                 //获取对应cell
@@ -221,6 +228,7 @@
                 UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
                 UILabel *progressLabel = [cell viewWithTag:3];
                 progressLabel.text = @"请求失败";
+                [downloadResultDic setObject:@"0" forKey:templateid];
             } else {
                 unsigned long long size = (double)[[manager attributesOfItemAtPath:filePath error:nil] fileSize];
                 //记录文件下载情况及文件大小
@@ -280,9 +288,11 @@
                         [dbService savePosition:position];
                     }
                 }
+                [downloadResultDic setObject:@"1" forKey:templateid];
             }
             
             [fileManager removeItemAtURL:docsDirURL error:NULL];
+            
         }
     }
     else
@@ -321,7 +331,7 @@
     //获取对应cell
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    if (error == nil) {
+    if (error == nil && [@"1" isEqualToString:downloadResultDic[templateid]]) {
         UILabel *progressLabel = [cell viewWithTag:3];
         progressLabel.text = @"";//[NSString stringWithFormat:@"100.0%%"];
         UIButton *button = [cell viewWithTag:2];

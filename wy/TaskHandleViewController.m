@@ -88,8 +88,23 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     selectedExcutesDic = [[NSMutableDictionary alloc] init];
     excutePersonArr = [[NSMutableArray alloc] init];
     
-    [taskService getTaskEntity:self.code success:^(TaskEntity *task){
+    [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
+        
+        if (taskEntity.Leader && (NSNull *)taskEntity.Leader!=[NSNull null]) {
+            NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Leader];
+            for (NSDictionary *personDic in personDicArr) {
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
+                [chargePersonArr addObject:person];
+            }
+        }
+        if (taskEntity.Executors && (NSNull *)taskEntity.Executors!=[NSNull null]) {
+            NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Executors];
+            for (NSDictionary *personDic in personDicArr) {
+                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
+                [excutePersonArr addObject:person];
+            }
+        }
         
         editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
         isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
@@ -102,7 +117,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
         [self.tableView reloadData];
         
-        if (taskEntity.SBList && ![@"" isEqualToString:taskEntity.SBList]) {
+        if (taskEntity.SBList && (NSNull *)taskEntity.SBList!=[NSNull null]) {
             NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSDictionary *deviceDic in deviceDicArr) {
                 TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
@@ -111,7 +126,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
         
         //判断是否有操作，生成操作按钮
-        if (taskEntity.TaskAction) {
+        if (taskEntity.TaskAction && (NSNull *)taskEntity.TaskAction!=[NSNull null]) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
             actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
             if (taskEntity.IsLocalSave) {
@@ -313,7 +328,13 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
     if (taskEntity.IsLocalSave && tag==0) { //保存按钮点击
-        [taskService updateLocalTaskEntity:taskEntity];
+        bool success = [taskService updateLocalTaskEntity:taskEntity];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     } else {
         [taskService submitAction:submitDic withEntity:taskEntity success:^{
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
@@ -750,7 +771,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             CELLID = @"DESCCELL2";
         }
     } else if (section == 3) {
-        if (isDescriptionEditable) {
+        if (isWorkContentEditable) {
             CELLID = @"PROBLEMCELL";
         } else {
             CELLID = @"PROBLEMCELL2";
@@ -840,17 +861,25 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
         UIImageView *deleteView = [cell viewWithTag:2];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteChargePerson:)];
-        [deleteView addGestureRecognizer:gesture];
-        [deleteView setUserInteractionEnabled:YES];
+        if (isLeaderEditable) {
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteChargePerson:)];
+            [deleteView addGestureRecognizer:gesture];
+            [deleteView setUserInteractionEnabled:YES];
+        } else {
+            deleteView.hidden = YES;
+        }
     } else if (section == 5) {
         PersonEntity *person = excutePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
         UIImageView *deleteView = [cell viewWithTag:2];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExcutePerson:)];
-        [deleteView addGestureRecognizer:gesture];
-        [deleteView setUserInteractionEnabled:YES];
+        if (isExecutorsEditable) {
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExcutePerson:)];
+            [deleteView addGestureRecognizer:gesture];
+            [deleteView setUserInteractionEnabled:YES];
+        } else {
+            deleteView.hidden = YES;
+        }
     } else if (section == 6) {
         UILabel *keyLabel = [cell viewWithTag:1];
         UIButton *timeBtn = [cell viewWithTag:2];

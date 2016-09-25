@@ -43,4 +43,6 @@
 @property (nonatomic, copy) NSString *PicContent2;
 @property (nonatomic, copy) NSString *PicContent3;
 @property (nonatomic, copy) NSString *PicContent4;
+
+@property (nonatomic, copy) NSString *SBCheckList;//扩展字段 巡检任务设备检测保存字段
 @end

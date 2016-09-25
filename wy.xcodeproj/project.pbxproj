@@ -132,6 +132,7 @@
 		88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */; };
 		D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */; };
 		D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24644B31D86E843007E5028 /* WorkOrderSiftView.m */; };
+		D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */ = {isa = PBXBuildFile; fileRef = D274232C1D97D0DA00850210 /* ReportImpaireService.m */; };
 		D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */; };
 		D28AD5571D726CEC0033ADB6 /* TaskStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5561D726CEC0033ADB6 /* TaskStatusView.m */; };
 		D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D28AD5591D727F410033ADB6 /* PriorityLabel.m */; };
@@ -405,6 +406,8 @@
 		D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderSiftView.xib; sourceTree = "<group>"; };
 		D24644B21D86E843007E5028 /* WorkOrderSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSiftView.h; sourceTree = "<group>"; };
 		D24644B31D86E843007E5028 /* WorkOrderSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderSiftView.m; sourceTree = "<group>"; };
+		D274232B1D97D0DA00850210 /* ReportImpaireService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportImpaireService.h; sourceTree = "<group>"; };
+		D274232C1D97D0DA00850210 /* ReportImpaireService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportImpaireService.m; sourceTree = "<group>"; };
 		D27C15671D733DDF003651A4 /* TaskBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBaseInfoViewController.h; sourceTree = "<group>"; };
 		D27C15681D733DDF003651A4 /* TaskBaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskBaseInfoViewController.m; sourceTree = "<group>"; };
 		D28AD5551D726CEC0033ADB6 /* TaskStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskStatusView.h; sourceTree = "<group>"; };
@@ -504,6 +507,7 @@
 		8811E7A91D77FB9F00CE7CE2 /* public */ = {
 			isa = PBXGroup;
 			children = (
+				D274232A1D97D0B400850210 /* service */,
 				8811E7AA1D77FBAE00CE7CE2 /* controller */,
 			);
 			name = public;
@@ -1031,6 +1035,15 @@
 			name = sqlite;
 			sourceTree = "<group>";
 		};
+		D274232A1D97D0B400850210 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				D274232B1D97D0DA00850210 /* ReportImpaireService.h */,
+				D274232C1D97D0DA00850210 /* ReportImpaireService.m */,
+			);
+			name = service;
+			sourceTree = "<group>";
+		};
 		D2997DC21D7AFE410022D8BD /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1342,6 +1355,7 @@
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
+				D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */,
 				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,

@@ -19,7 +19,9 @@
 
 @end
 
-@implementation DeviceStatusViewController
+@implementation DeviceStatusViewController {
+    UILabel *selectLabel;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,8 +87,8 @@
         [self.bottomView addSubview:nextBtn];
     }
     
-    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.inspectionChildModel.ParentCode]) {
-        NSDictionary *infoDic = scanRootViewController.deviceCheckInfoDic[self.inspectionChildModel.ParentCode];
+    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.taskDeviceCode]) {
+        NSDictionary *infoDic = scanRootViewController.deviceCheckInfoDic[self.taskDeviceCode];
         if (infoDic && infoDic[self.inspectionChildModel.ItemName]) {
             self.inspectionChildModel = infoDic[self.inspectionChildModel.ItemName];
         }
@@ -98,6 +100,7 @@
     DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
     viewController.inspectionModel = self.inspectionModel;
     viewController.childModelsArray = self.childModelsArray;
+    viewController.taskDeviceCode = self.taskDeviceCode;
     viewController.num = self.num+1;
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -147,11 +150,11 @@
     self.inspectionChildModel.ItemValue = ItemValue;
     self.inspectionChildModel.DataValid = DataValid;
     NSMutableDictionary *infoDic;
-    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.inspectionChildModel.ParentCode]) {
-        infoDic = scanRootViewController.deviceCheckInfoDic[self.inspectionChildModel.ParentCode];
+    if ([scanRootViewController.deviceCheckInfoDic.allKeys containsObject:self.taskDeviceCode]) {
+        infoDic = scanRootViewController.deviceCheckInfoDic[self.taskDeviceCode];
     } else {
         infoDic = [[NSMutableDictionary alloc] init];
-        [scanRootViewController.deviceCheckInfoDic setObject:infoDic forKey:self.inspectionChildModel.ParentCode];
+        [scanRootViewController.deviceCheckInfoDic setObject:infoDic forKey:self.taskDeviceCode];
     }
     [infoDic setObject:self.inspectionChildModel forKey:self.inspectionChildModel.ItemName];
 }
@@ -211,8 +214,8 @@
             textView.delegate = self;
             textView.text = self.inspectionChildModel.ItemValue;
         } else {
-            UILabel *label = [cell viewWithTag:1];
-            label.text = self.inspectionChildModel.ItemValue;
+            selectLabel = [cell viewWithTag:1];
+            selectLabel.text = self.inspectionChildModel.ItemValue;
             UIButton *openBtn = [cell viewWithTag:2];
             [openBtn addTarget:self action:@selector(popActionSheet) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -291,7 +294,9 @@
 #pragma mark - actionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    NSString *itemValues = self.inspectionChildModel.ItemValues;
+    NSArray *itemArray = [itemValues componentsSeparatedByString:@"|"];
+    selectLabel.text = itemArray[buttonIndex];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -16,9 +16,10 @@
 #import "ChooseDeviceViewController.h"
 #import "ChoosePositionViewController.h"
 #import "AppDelegate.h"
+#import "ReportImpaireService.h"
 
 #define IMAGESPLIT_WIDTH 10
-#define MAX_IMAGES_NUM 5
+#define MAX_IMAGES_NUM 4
 #define PICS_PER_LINE 4
 
 @interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePositionViewDelegate>
@@ -36,10 +37,22 @@
     PositionEntity *position;
     NSInteger serviceType;
     NSInteger priority;
+    ReportImpaireService *reportImpaireService;
+    PRPlaceHolderTextView *descTextView;
+    NSString *username;
+    NSString *name;
+    NSString *mobile;
+    NSString *department;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    name = [userDefaults objectForKey:@"Name"];
+    username = [userDefaults objectForKey:@"userName"];
+    mobile = [userDefaults objectForKey:@"Mobile"];
+    department = [userDefaults objectForKey:@"Department"];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -50,6 +63,8 @@
     self.imageArray = [[NSMutableArray alloc] init];
     self.imageViewArray = [[NSMutableArray alloc] init];
     PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-10)/PICS_PER_LINE;
+    
+    reportImpaireService = [[ReportImpaireService alloc] init];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"addPhotos" object:nil];
 }
@@ -78,7 +93,7 @@
 
 - (void)addImage:(UITapGestureRecognizer *)recognizer
 {
-    if (self.imageArray.count>=5) {
+    if (self.imageArray.count>=MAX_IMAGES_NUM) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message: [NSString stringWithFormat:@"最多上传%d张照片",MAX_IMAGES_NUM] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
@@ -107,7 +122,7 @@
         else if (buttonIndex == 1)
         {
             ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-            elcPicker.maximumImagesCount = 5 - self.imageArray.count; //Set the maximum number of images to select to 100
+            elcPicker.maximumImagesCount = MAX_IMAGES_NUM - self.imageArray.count; //Set the maximum number of images to select to 100
             elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
             elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
             elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
@@ -340,13 +355,13 @@
         UILabel *valueLabel = [cell viewWithTag:2];
         if (row==0) {
             keyLabel.text = @"申请人";
-            valueLabel.text = @"叶雨";
+            valueLabel.text = name;
         } else if (row==1) {
             keyLabel.text = @"联系电话";
-            valueLabel.text = @"叶雨";
+            valueLabel.text = mobile;
         } else if (row==2) {
             keyLabel.text = @"部门";
-            valueLabel.text = @"";
+            valueLabel.text = department;
         } else if (row==3) {
             keyLabel.text = @"服务类型";
 //            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypeDic;
@@ -405,8 +420,8 @@
         picCell = cell;
         [self showAddImageView];
     } else if (section == 3) {
-        PRPlaceHolderTextView *textView = [cell viewWithTag:1];
-        textView.placeholder = @"请简要描述";
+        descTextView = [cell viewWithTag:1];
+        descTextView.placeholder = @"请简要描述";
     }
     
     return cell;
@@ -431,6 +446,41 @@
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (IBAction)releaseImpaire:(id)sender {
+    NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+    
+    [dataDic setObject:username  forKey:@"Applyer"];
+    [dataDic setObject:mobile?@"":mobile  forKey:@"ApplyerTel"];
+    [dataDic setObject:[NSString stringWithFormat:@"%ld", serviceType] forKey:@"ServiceType"];
+    [dataDic setObject:[NSString stringWithFormat:@"%ld", priority] forKey:@"Priority"];
+    [dataDic setObject:position.Code forKey:@"Location"];
+    [dataDic setObject:descTextView.text forKey:@"Description"];
+    NSMutableString *deviceCodesStr = [[NSMutableString alloc] init];
+    for (int i=0; i<deviceArr.count; i++) {
+        DeviceEntity *device = (DeviceEntity *)deviceArr[i];
+        [deviceCodesStr appendString:device.Code];
+        if (i!=deviceArr.count-1) {
+            [deviceCodesStr appendString:@","];
+        }
+    }
+    [dataDic setObject:deviceCodesStr forKey:@"SBName"];
+    [reportImpaireService submitImpaire:dataDic withImage:self.imageArray success:^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"报障数据提交成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"报障数据提交失败！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 @end

@@ -89,14 +89,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *editFieldArr = [[[self.taskEntity.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
-//    if ([editFieldArr containsObject:@"SBCheckList"]) {
+    if ([editFieldArr containsObject:@"SBCheckList"]) {
         QRCodeScanViewController *viewController = [[QRCodeScanViewController alloc] init];
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.navigationItem.backBarButtonItem = backButton;
         [viewController setTitle:@"二维码/条码"];
         viewController.hidesBottomBarWhenPushed = YES;
+        NSInteger section = [indexPath section];
+        viewController.taskDeviceEntity = ((TaskDeviceEntity *)self.taskDeviceArray[section]);
         [self.navigationController pushViewController:viewController animated:YES];
-//    }
+    }
 }
 
 /*

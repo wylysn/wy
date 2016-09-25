@@ -77,9 +77,14 @@
     return taskEntityArr;
 }
 
-- (TaskEntity *)getTaskEntity:(NSString *)code success:(void (^)(TaskEntity *taskEntity))success failure:(void (^)(NSString *message))failure {
+- (TaskEntity *)getTaskEntity:(NSString *)code fromLocal:(BOOL)isLocal success:(void (^)(TaskEntity *taskEntity))success failure:(void (^)(NSString *message))failure {
     __block TaskEntity *taskEntity;
-    taskEntity = [dbService findTaskByCode:code];
+    if (isLocal) {
+        taskEntity = [dbService findTaskByCode:code];
+    } else {
+        //从本地移除
+        [dbService deleteTaskEntity:code];
+    }
     if (taskEntity) {
         success(taskEntity);
     } else {
@@ -189,8 +194,10 @@
 
 - (void)submitAction:(NSMutableDictionary *)dataDic withEntity:(TaskEntity *)taskEntity success:(void (^)())success failure:(void (^)(NSString *message))failure {
     PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefaults objectForKey:@"userName"];
     NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], taskEntity.Code, dataDic[@"eventname"]];
+    NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@&username=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], taskEntity.Code, dataDic[@"eventname"], userName];
     [condition setObject:[NSString convertArrayToString:dataDic[@"data"]] forKey:@"SubmitData"];
     [manager POST:url parameters:condition progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -201,12 +208,12 @@
             failure(responseObject[@"message"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(error.description.localizedLowercaseString);
+        failure(error.localizedDescription);
     }];
 }
 
-- (void) updateLocalTaskEntity:(TaskEntity *)taskEntity {
-    [dbService updateTaskEntity:taskEntity];
+- (BOOL) updateLocalTaskEntity:(TaskEntity *)taskEntity {
+    return [dbService updateTaskEntity:taskEntity];
 }
 
 @end

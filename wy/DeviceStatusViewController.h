@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) InspectionModelEntity *inspectionModel;
 @property (nonatomic, strong) NSArray *childModelsArray;
+@property (nonatomic, strong) NSString *taskDeviceCode;
+
 
 @property (nonatomic, assign) NSInteger num;
 

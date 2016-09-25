@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *code;
 @property (nonatomic, strong) NSString *ShortTitle; //工单类型，列表传过来
 @property (nonatomic, strong) NSString *taskStatus;
+@property (nonatomic, assign) BOOL isLocalSave; //本地存储，列表传过来
 
 @property (nonatomic,strong) NSMutableArray * imageArray;
 @property (nonatomic,strong) NSMutableArray * imageViewArray;

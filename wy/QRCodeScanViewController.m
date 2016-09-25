@@ -208,37 +208,48 @@
     
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject * metadataObj = [metadataObjects objectAtIndex:0];
-        //在这里获取解析出来的值
-        //打印扫描出来的字符串
-        NSLog(@"%@",[metadataObj stringValue]);
         [_captureSession stopRunning];//停止运行
         
         /**暂时先写死，测试用**/
         //dispatch_async(dispatch_get_main_queue()这样就快了好多，不然会卡很久
         dispatch_async(dispatch_get_main_queue(), ^{
-            InspectionModelDBService *dbService = [InspectionModelDBService getSharedInstance];
-            InspectionModelEntity *model = [dbService findInspectionModelByCode:@"XJMB20160908001"];
-            NSArray *childModels = [dbService findInspectionChildModelByCode:@"XJMB20160908001"];
-            if (childModels && childModels.count>0) {
-                UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
-                DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
-                viewController.inspectionModel = model;
-                viewController.childModelsArray = childModels;
-                viewController.num = 0;
-                UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-                self.navigationItem.backBarButtonItem = backButton;
-                [self.navigationController pushViewController:viewController animated:YES];
-            } else {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有找到模板" preferredStyle:UIAlertControllerStyleAlert];
+            //在这里获取解析出来的值
+            //打印扫描出来的字符串
+            NSString *scanStr = [metadataObj stringValue];
+            NSString *scanCode = [scanStr componentsSeparatedByString:@"#"][0];
+            if (![self.taskDeviceEntity.Code isEqualToString:scanCode]) {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请扫描正确的设备" preferredStyle:UIAlertControllerStyleAlert];
                 __weak typeof(self) weakSelf = self;
                 UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     [weakSelf.captureSession startRunning];
-//                    [weakSelf.navigationController popViewControllerAnimated:YES];
                 }];
                 [alert addAction:action1];
                 [self presentViewController:alert animated:YES completion:nil];
+            } else {
+                InspectionModelDBService *dbService = [InspectionModelDBService getSharedInstance];
+                InspectionModelEntity *model = [dbService findInspectionModelByCode:self.taskDeviceEntity.PatrolTemplateCode];
+                NSArray *childModels = [dbService findInspectionChildModelByCode:self.taskDeviceEntity.PatrolTemplateCode];
+                if (childModels && childModels.count>0) {
+                    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
+                    DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
+                    viewController.inspectionModel = model;
+                    viewController.childModelsArray = childModels;
+                    viewController.taskDeviceCode = self.taskDeviceEntity.Code;
+                    viewController.num = 0;
+                    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+                    self.navigationItem.backBarButtonItem = backButton;
+                    [self.navigationController pushViewController:viewController animated:YES];
+                } else {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有找到模板" preferredStyle:UIAlertControllerStyleAlert];
+                    __weak typeof(self) weakSelf = self;
+                    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                        [weakSelf.captureSession startRunning];
+                        //                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                    }];
+                    [alert addAction:action1];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
             }
-            
         });
         
         /*

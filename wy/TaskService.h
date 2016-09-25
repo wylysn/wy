@@ -18,12 +18,12 @@
 
 - (NSMutableArray *)getTaskListEntityArr:(NSMutableDictionary *)filterDic success:(void (^)())success failure:(void (^)(NSString *message))failure;
 
-- (TaskEntity *)getTaskEntity:(NSString *)code success:(void (^)(TaskEntity *taskEntity))success failure:(void (^)(NSString *message))failure;
+- (TaskEntity *)getTaskEntity:(NSString *)code fromLocal:(BOOL)isLocal success:(void (^)(TaskEntity *taskEntity))success failure:(void (^)(NSString *message))failure;
 
 - (void)getTaskDevices:(NSString *)code success:(void (^)(NSArray *taskDevices))success failure:(void (^)(NSString *message))failure;
 
 - (void)submitAction:(NSMutableDictionary *)dataDic withEntity:(TaskEntity *)taskEntity success:(void (^)())success failure:(void (^)(NSString *message))failure;
 
-- (void) updateLocalTaskEntity:(TaskEntity *)taskEntity;
+- (BOOL) updateLocalTaskEntity:(TaskEntity *)taskEntity;
 
 @end

@@ -10,6 +10,6 @@
 
 @interface LoginService : NSObject
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password success:(void (^)())success failure:(void (^)(NSString *message))failure;
+- (void)loginWithUserName:(NSString *)userName password:(NSString *)password success:(void (^)(NSDictionary *userDic))success failure:(void (^)(NSString *message))failure;
 
 @end
