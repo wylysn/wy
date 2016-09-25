@@ -125,7 +125,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *knowledgeArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, Keyword, Content, Lyxm, createPerson, createTime from Knowledge where Keyword like '%%%@%%'",  [NSString stringWithCString:[keyword UTF8String] encoding:NSUTF8StringEncoding]];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Keyword, Content, Lyxm, createPerson, createTime from Knowledge where Keyword like '%%%@%%' or Content like '%%%@%%'", [NSString stringWithCString:[keyword UTF8String] encoding:NSUTF8StringEncoding], [NSString stringWithCString:[keyword UTF8String] encoding:NSUTF8StringEncoding]];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
