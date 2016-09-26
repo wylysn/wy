@@ -20,7 +20,7 @@
 @property (nonatomic, copy, readonly) NSString *TaskStatus;
 @property (nonatomic, copy, readonly) NSString *ServiceType;
 @property (nonatomic, copy, readonly) NSString *Priority;
-@property (nonatomic, copy, readonly) NSString *Position;
+@property (nonatomic, copy, readonly) NSString *Location;
 @property (nonatomic, readonly) BOOL IsLocalSave;
 
 @end

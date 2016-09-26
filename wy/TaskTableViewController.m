@@ -68,7 +68,6 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [taskService getTaskListEntityArr:self.filterDic success:^{
             [self.tableView.mj_header endRefreshing];
-//            self.tableView.mj_footer.hidden = NO;
             taskListArray = taskService.taskList;
             
             if (taskListArray.count<1) {
@@ -100,7 +99,6 @@
             [self.tableView reloadData];
         } failure:^(NSString *message) {
             [self.tableView.mj_header endRefreshing];
-//            self.tableView.mj_footer.hidden = YES;
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
@@ -108,17 +106,13 @@
             [self presentViewController:alertController animated:YES completion:nil];
         }];
     }];
-//    [self.tableView.mj_header beginRefreshing];
-    
-//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        [self.tableView.mj_footer endRefreshing];
-//    }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.tabBarController.tabBar.hidden = NO;
-    [self.tableView.mj_header beginRefreshing];
+    if (!self.tableView.mj_header.isRefreshing) {
+        [self.tableView.mj_header beginRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

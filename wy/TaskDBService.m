@@ -53,7 +53,7 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createTaskListTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists TaskList (Code text primary key, ShortTitle text, Subject text, ReceiveTime text, TaskStatus text, ServiceType text, Priority text, Position text)";
+    NSString *sql_stmt =@"create table if not exists TaskList (Code text primary key, ShortTitle text, Subject text, ReceiveTime text, TaskStatus text, ServiceType text, Priority text, Location text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -99,7 +99,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into TaskList (Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Position) values (\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", taskList.Code, taskList.ShortTitle, taskList.Subject, taskList.ReceiveTime, taskList.TaskStatus, taskList.ServiceType, taskList.Priority, taskList.Position];
+        NSString *insertSQL = [NSString stringWithFormat:@"insert into TaskList (Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Location) values (\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", taskList.Code, taskList.ShortTitle, taskList.Subject, taskList.ReceiveTime, taskList.TaskStatus, taskList.ServiceType, taskList.Priority, taskList.Location];
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -145,8 +145,8 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 15, [task.EWorkHours UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 16, [task.AStartTime UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 17, [task.AEndTime UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 18, [task.AWorkHours UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 19, [task.WorkContent UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 18, [[task.AWorkHours isEqual:[NSNull null]]?@"":task.AWorkHours UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 19, [[task.WorkContent isEqual:[NSNull null]]?@"":task.WorkContent UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 20, [task.EditFields UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_int(statement, 21, task.IsLocalSave);
             sqlite3_bind_text(statement, 22, [task.TaskNotice UTF8String], -1, SQLITE_TRANSIENT);
@@ -274,7 +274,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *taskArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Position from TaskList where 1=1"];
+        NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Location from TaskList where 1=1"];
         NSEnumerator *keyIterater = condition.keyEnumerator;
         for (NSString *key in keyIterater) {
             if (![key isBlankString] || ![@"ServiceType" isEqualToString:key] || ![@"Priority" isEqualToString:key] || ![@"ShortTitle" isEqualToString:key] || ![@"TaskStatus" isEqualToString:key]) {
@@ -311,8 +311,8 @@ static sqlite3_stmt *statement = nil;
                 NSString *TaskStatus = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 NSString *ServiceType = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
                 NSString *Priority = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
-                NSString *Position = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
-                TaskListEntity *device = [[TaskListEntity alloc] initWithDictionary:@{@"Code":Code, @"ShortTitle":ShortTitle, @"Subject":Subject, @"ReceiveTime":ReceiveTime, @"TaskStatus":TaskStatus, @"ServiceType":ServiceType, @"Priority":Priority, @"Position":Position}];
+                NSString *Location = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                TaskListEntity *device = [[TaskListEntity alloc] initWithDictionary:@{@"Code":Code, @"ShortTitle":ShortTitle, @"Subject":Subject, @"ReceiveTime":ReceiveTime, @"TaskStatus":TaskStatus, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location}];
                 [taskArr addObject:device];
             }
         } else {

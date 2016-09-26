@@ -20,6 +20,9 @@
 @interface MyTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *cacheSizeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
 
 @end
 
@@ -50,6 +53,13 @@
         cacheSize += [objDic[@"size"] doubleValue];
     }
     self.cacheSizeLabel.text = [NSString getFileSizeString:[NSNumber numberWithDouble:cacheSize]];
+    
+    NSString *name = [userDefaults objectForKey:@"Name"];
+    NSString *department = [userDefaults objectForKey:@"Department"];
+    NSString *phone = [userDefaults objectForKey:@"Mobile"];
+    self.nameLabel.text = name;
+    self.departmentLabel.text = department;
+    self.phoneLabel.text = phone;
 }
 
 #pragma mark - Table view data source

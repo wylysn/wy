@@ -97,8 +97,8 @@
         self.SubjectLabel.text = @"";
     }
     
-    if (![entity.Position isBlankString]) {
-        self.PositionLabel.text = entity.Position;
+    if (![entity.Location isBlankString]) {
+        self.PositionLabel.text = entity.Location;
     } else {
         self.PositionLabel.text = @"";
     }

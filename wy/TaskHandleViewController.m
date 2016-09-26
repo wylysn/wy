@@ -116,7 +116,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
         isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
         isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
-        isPicContentEditable = YES;//!([editFieldsArray indexOfObject:@"PicContent"]==NSNotFound);
+        isPicContentEditable = !([editFieldsArray indexOfObject:@"PicContent"]==NSNotFound);
         [self.tableView reloadData];
         
         //刷新后展示图片
@@ -764,7 +764,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [header addSubview:titleLabel];
         
         UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40-40-2, (44-21)/2, 40, 21)];
-        timeLabel.text = taskEntity.EWorkHours;
+        timeLabel.text = [taskEntity.EWorkHours isEqual:[NSNull null]]?@"":taskEntity.EWorkHours;
         timeLabel.textColor = [UIColor colorFromHexCode:@"555555"];
         timeLabel.textAlignment = NSTextAlignmentRight;
         self.timeDiffLabel = timeLabel;
@@ -893,13 +893,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if (!self.descriptionTextView) {
             self.descriptionTextView = textView;
         }
+        NSString *Description = [taskEntity.Description isEqual:[NSNull null]]?@"":taskEntity.Description;
         if ([editFieldsArray indexOfObject:@"Description"] == NSNotFound) {
-            textView.text = taskEntity.Description;
+            textView.text = Description;
         } else {
-            if ([@"" isEqualToString:taskEntity.Description]) {
+            if ([@"" isEqualToString:Description]) {
                 textView.placeholder = @"请简要描述";
             } else {
-                textView.text = taskEntity.Description;
+                textView.text = Description;
             }
         }
     } else if (section == 4) {
@@ -907,13 +908,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if (!self.workContentTextView) {
             self.workContentTextView = textView;
         }
+        NSString *workContent = [taskEntity.WorkContent isEqual:[NSNull null]]?@"":taskEntity.WorkContent;
         if ([editFieldsArray indexOfObject:@"WorkContent"] == NSNotFound) {
-            textView.text = taskEntity.WorkContent;
+            textView.text = workContent;
         } else {
-            if ([@"" isEqualToString:taskEntity.WorkContent]) {
+            if ([@"" isEqualToString:workContent]) {
                 textView.placeholder = @"请简要填写工作内容";
             } else {
-                textView.text = taskEntity.WorkContent;
+                textView.text = workContent;
             }
         }
     } else if (section == 5) {
@@ -949,7 +951,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 timeBtn.tag = 10;
             }
             keyLabel.text = @"到场时间";
-            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EStartTime]?startTimeBtnPlaceholder:taskEntity.EStartTime;
+            NSString *estartTime = [taskEntity.EStartTime isEqual:[NSNull null]]?@"":taskEntity.EStartTime;
+            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:estartTime]?startTimeBtnPlaceholder:estartTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEStartTimeEditable) {
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -960,7 +963,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 timeBtn.tag = 11;
             }
             keyLabel.text = @"结束时间";
-            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:taskEntity.EEndTime]?endTimeBtnPlaceholder:taskEntity.EEndTime;
+            NSString *eendTime = [taskEntity.EEndTime isEqual:[NSNull null]]?@"":taskEntity.EEndTime;
+            NSString *title = isEEndTimeEditable&&[@"" isEqualToString:eendTime]?endTimeBtnPlaceholder:eendTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEEndTimeEditable) {
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
