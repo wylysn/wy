@@ -110,6 +110,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     if (!self.tableView.mj_header.isRefreshing) {
         [self.tableView.mj_header beginRefreshing];
     }
