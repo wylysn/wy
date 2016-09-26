@@ -92,14 +92,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
         
-        if (taskEntity.Leader && (NSNull *)taskEntity.Leader!=[NSNull null]) {
+        if (![taskEntity.Leader isBlankString]) {
             NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Leader];
             for (NSDictionary *personDic in personDicArr) {
                 PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
                 [chargePersonArr addObject:person];
             }
         }
-        if (taskEntity.Executors && (NSNull *)taskEntity.Executors!=[NSNull null]) {
+        if (![taskEntity.Executors isBlankString]) {
             NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Executors];
             for (NSDictionary *personDic in personDicArr) {
                 PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
@@ -141,7 +141,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             [self showImageWithImage:pic];
         }
         
-        if (taskEntity.SBList && (NSNull *)taskEntity.SBList!=[NSNull null]) {
+        if (![taskEntity.SBList isBlankString]) {
             NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSDictionary *deviceDic in deviceDicArr) {
                 TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
@@ -150,7 +150,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
         
         //判断是否有操作，生成操作按钮
-        if (taskEntity.TaskAction && (NSNull *)taskEntity.TaskAction!=[NSNull null]) {
+        if (![taskEntity.TaskAction isBlankString]) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
             actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
             if (taskEntity.IsLocalSave) {
@@ -764,7 +764,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [header addSubview:titleLabel];
         
         UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40-40-2, (44-21)/2, 40, 21)];
-        timeLabel.text = [taskEntity.EWorkHours isEqual:[NSNull null]]?@"":taskEntity.EWorkHours;
+        timeLabel.text = [taskEntity.EWorkHours isBlankString]?@"":taskEntity.EWorkHours;
         timeLabel.textColor = [UIColor colorFromHexCode:@"555555"];
         timeLabel.textAlignment = NSTextAlignmentRight;
         self.timeDiffLabel = timeLabel;
@@ -893,7 +893,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if (!self.descriptionTextView) {
             self.descriptionTextView = textView;
         }
-        NSString *Description = [taskEntity.Description isEqual:[NSNull null]]?@"":taskEntity.Description;
+        NSString *Description = [taskEntity.Description isBlankString]?@"":taskEntity.Description;
         if ([editFieldsArray indexOfObject:@"Description"] == NSNotFound) {
             textView.text = Description;
         } else {
@@ -908,7 +908,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if (!self.workContentTextView) {
             self.workContentTextView = textView;
         }
-        NSString *workContent = [taskEntity.WorkContent isEqual:[NSNull null]]?@"":taskEntity.WorkContent;
+        NSString *workContent = [taskEntity.WorkContent isBlankString]?@"":taskEntity.WorkContent;
         if ([editFieldsArray indexOfObject:@"WorkContent"] == NSNotFound) {
             textView.text = workContent;
         } else {
@@ -951,7 +951,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 timeBtn.tag = 10;
             }
             keyLabel.text = @"到场时间";
-            NSString *estartTime = [taskEntity.EStartTime isEqual:[NSNull null]]?@"":taskEntity.EStartTime;
+            NSString *estartTime = [taskEntity.EStartTime isBlankString]?@"":taskEntity.EStartTime;
             NSString *title = isEStartTimeEditable&&[@"" isEqualToString:estartTime]?startTimeBtnPlaceholder:estartTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEStartTimeEditable) {
@@ -963,7 +963,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 timeBtn.tag = 11;
             }
             keyLabel.text = @"结束时间";
-            NSString *eendTime = [taskEntity.EEndTime isEqual:[NSNull null]]?@"":taskEntity.EEndTime;
+            NSString *eendTime = [taskEntity.EEndTime isBlankString]?@"":taskEntity.EEndTime;
             NSString *title = isEEndTimeEditable&&[@"" isEqualToString:eendTime]?endTimeBtnPlaceholder:eendTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEEndTimeEditable) {

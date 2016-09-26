@@ -39,14 +39,16 @@
 }
 
 - (void)creatUI{
+    if (self.scrollView) {
+        [self.scrollView removeFromSuperview];
+    }
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     [self.view addSubview:self.scrollView];
     
     for (int i = 0; i<self.imageArray.count; i++) {
-        UIImageView * photoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*i, 10, SCREEN_WIDTH, SCREEN_HEIGHT-74-64)];
-        photoImage.image = [self.imageArray[i] imageScaledToSize3:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-74-64)];
+        UIImageView * photoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        photoImage.image = [self.imageArray[i] imageScaledToSize3:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64)];
         [self.scrollView addSubview:photoImage];
-        
     }
     
     self.scrollView.pagingEnabled = YES;

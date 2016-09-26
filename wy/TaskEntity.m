@@ -20,7 +20,7 @@
         _ServiceType = dictionary[@"ServiceType"];
         _Priority = dictionary[@"Priority"];
         _Location = dictionary[@"Location"];
-        _Description = [dictionary[@"Description"] isEqual:[NSNull null]]?@"":dictionary[@"Description"];
+        _Description = [dictionary[@"Description"] isBlankString]?@"":dictionary[@"Description"];
         _CreateDate = dictionary[@"CreateDate"];
         _Creator = dictionary[@"Creator"];
         _Department = dictionary[@"Department"];
@@ -37,11 +37,11 @@
         _EStartTime = dictionary[@"EStartTime"];
         _EEndTime = dictionary[@"EEndTime"];
         _EEndTime = dictionary[@"EEndTime"];
-        _EWorkHours = [dictionary[@"EWorkHours"] isEqual:[NSNull null]]?@"":dictionary[@"EWorkHours"];
+        _EWorkHours = [dictionary[@"EWorkHours"] isBlankString]?@"":dictionary[@"EWorkHours"];
         _AStartTime = dictionary[@"AStartTime"];
         _AEndTime = dictionary[@"AEndTime"];
-        _AWorkHours = [dictionary[@"AWorkHours"] isEqual:[NSNull null]]?@"":dictionary[@"AWorkHours"];
-        _WorkContent = [dictionary[@"WorkContent"] isEqual:[NSNull null]]?@"":dictionary[@"WorkContent"];
+        _AWorkHours = [dictionary[@"AWorkHours"] isBlankString]?@"":dictionary[@"AWorkHours"];
+        _WorkContent = [dictionary[@"WorkContent"] isBlankString]?@"":dictionary[@"WorkContent"];
         _EditFields = dictionary[@"EditFields"];
         _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
         

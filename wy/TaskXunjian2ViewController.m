@@ -68,7 +68,7 @@
     [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
         
-        if (taskEntity.SBCheckList && (NSNull *)taskEntity.SBCheckList!=[NSNull null] && ![@"" isEqualToString:taskEntity.SBCheckList]) {
+        if (![taskEntity.SBCheckList isBlankString]) {
             NSArray *sbCheckDicArr = [NSString convertStringToArray:taskEntity.SBCheckList];
             for (NSDictionary *sbCheckDic in sbCheckDicArr) {
                 InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];
@@ -87,7 +87,7 @@
         [taskXunjianBaseInfoController.tableView reloadData];
         
         NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
-        if (taskEntity.SBList && (NSNull *)taskEntity.SBList!=[NSNull null] && ![@"" isEqualToString:taskEntity.SBList]) {
+        if (![taskEntity.SBList isBlankString]) {
             NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
             for (NSDictionary *deviceDic in deviceDicArr) {
                 TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
@@ -100,7 +100,7 @@
         [taskDevicesBaseInfoController.tableView reloadData];
         
         //判断是否有操作，生成操作按钮
-        if (taskEntity.TaskAction && (NSNull *)taskEntity.TaskAction!=[NSNull null]) {
+        if (![taskEntity.TaskAction isBlankString]) {
             NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
             actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
             if (taskEntity.IsLocalSave) {
