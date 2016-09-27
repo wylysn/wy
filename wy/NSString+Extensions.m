@@ -174,7 +174,7 @@
 }
 
 - (BOOL) isBlankString {
-    if (self == nil || self == NULL) {
+    if (self == nil || self == NULL || [@"nil" isEqualToString:self]) {
         return YES;
     }
     if ([self isKindOfClass:[NSNull class]]) {

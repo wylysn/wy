@@ -16,6 +16,7 @@
 + (TaskDBService*)getSharedInstance;
 
 - (BOOL)saveTaskList:(TaskListEntity *)taskList;
+- (BOOL)deleteTaskList:(TaskListEntity *)taskList;
 
 - (NSArray *)findTaskLists:(NSDictionary *)condition;
 

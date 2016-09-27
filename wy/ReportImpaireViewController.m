@@ -36,7 +36,9 @@
     NSMutableDictionary *selectedDevicesDic;
     PositionEntity *position;
     NSInteger serviceType;
+    NSString *serviceTypeText;
     NSInteger priority;
+    NSString *priorityText;
     ReportImpaireService *reportImpaireService;
     PRPlaceHolderTextView *descTextView;
     NSString *username;
@@ -364,8 +366,7 @@
             valueLabel.text = department;
         } else if (row==3) {
             keyLabel.text = @"服务类型";
-//            NSDictionary *dic = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypeDic;
-            NSString *serviceTypeText = [serviceTypeDic objectForKey:[NSString stringWithFormat:@"%ld", serviceType]];
+            serviceTypeText = [serviceTypeDic objectForKey:[NSString stringWithFormat:@"%ld", serviceType]];
             if (serviceTypeText) {
                 valueLabel.text = serviceTypeText;
             } else {
@@ -382,7 +383,7 @@
             valueLabel.text = @"工单任务";
         } else if (row==5) {
             keyLabel.text = @"优先级";
-            NSString *priorityText = [priorityDic objectForKey:[NSString stringWithFormat:@"%ld", priority]];
+            priorityText = [priorityDic objectForKey:[NSString stringWithFormat:@"%ld", priority]];
             if (priorityText) {
                 valueLabel.text = priorityText;
             } else {
@@ -453,9 +454,32 @@
     
     [dataDic setObject:username  forKey:@"Applyer"];
     [dataDic setObject:mobile?@"":mobile  forKey:@"ApplyerTel"];
-    [dataDic setObject:[NSString stringWithFormat:@"%ld", serviceType] forKey:@"ServiceType"];
-    [dataDic setObject:[NSString stringWithFormat:@"%ld", priority] forKey:@"Priority"];
-    [dataDic setObject:position.Code forKey:@"Location"];
+    if (!serviceTypeText || [serviceTypeText isBlankString]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择服务类型" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [dataDic setObject:serviceTypeText forKey:@"ServiceType"];
+    
+    if (!priorityText || [priorityText isBlankString]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择优先级" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [dataDic setObject:priorityText forKey:@"Priority"];
+    
+    if (!position || [position.Code isBlankString]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择位置" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [dataDic setObject:position?position.Code:@"" forKey:@"Location"];
     [dataDic setObject:descTextView.text forKey:@"Description"];
     NSMutableString *deviceCodesStr = [[NSMutableString alloc] init];
     for (int i=0; i<deviceArr.count; i++) {

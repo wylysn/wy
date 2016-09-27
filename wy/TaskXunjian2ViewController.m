@@ -68,7 +68,7 @@
     [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
         
-        if (![taskEntity.SBCheckList isBlankString]) {
+        if (taskEntity.SBCheckList && ![taskEntity.SBCheckList isBlankString] ) {
             NSArray *sbCheckDicArr = [NSString convertStringToArray:taskEntity.SBCheckList];
             for (NSDictionary *sbCheckDic in sbCheckDicArr) {
                 InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];

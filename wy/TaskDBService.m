@@ -119,6 +119,32 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 
+- (BOOL)deleteTaskList:(TaskListEntity *)taskList {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"delete from TaskList where Code=?";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [taskList.Code UTF8String], -1, SQLITE_TRANSIENT);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"删除成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"删除失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
 - (BOOL) saveTask:(TaskEntity *)task {
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
@@ -313,6 +339,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *Priority = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
                 NSString *Location = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
                 TaskListEntity *device = [[TaskListEntity alloc] initWithDictionary:@{@"Code":Code, @"ShortTitle":ShortTitle, @"Subject":Subject, @"ReceiveTime":ReceiveTime, @"TaskStatus":TaskStatus, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location}];
+                device.IsLocalSave = YES;//本地数据库没存，导致后面进入详细页面有问题,代码冲突，所以这里补上
                 [taskArr addObject:device];
             }
         } else {

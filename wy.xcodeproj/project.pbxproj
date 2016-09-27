@@ -100,6 +100,12 @@
 		88B6FD9C1D66D61C00418972 /* Feature.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B6FD9B1D66D61C00418972 /* Feature.storyboard */; };
 		88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD9E1D66D6DA00418972 /* WorkOrderViewController.m */; };
 		88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */; };
+		88BCFE741D9A18890016207B /* AssetsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE731D9A18890016207B /* AssetsDetailViewController.m */; };
+		88BCFE771D9A3F4C0016207B /* AssetsBaseInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE761D9A3F4C0016207B /* AssetsBaseInfoTableViewController.m */; };
+		88BCFE7A1D9A53760016207B /* AssetsProducerInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE791D9A53760016207B /* AssetsProducerInfoTableViewController.m */; };
+		88BCFE7D1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */; };
+		88BCFE801D9A63200016207B /* AssetsMaintainRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */; };
+		88BCFE821D9A763F0016207B /* BEOS接口定义_20160927.docx in Resources */ = {isa = PBXBuildFile; fileRef = 88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */; };
 		88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2D71D7E4AB800F2FFBD /* URLManager.m */; };
 		88CDD2DB1D7EA6A200F2FFBD /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */; };
 		88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */; };
@@ -110,6 +116,7 @@
 		88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB3B1D70126F0041C9A1 /* ModifyPasswordChildViewController.m */; };
 		88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */; };
 		88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */; };
+		88D6DDE71D99F89900C7E769 /* AssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D6DDE61D99F89900C7E769 /* AssetsViewController.m */; };
 		88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E927E91D5D55A800152BBF /* Task.storyboard */; };
 		88E927ED1D5D588900152BBF /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EC1D5D588900152BBF /* PRButton.m */; };
 		88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E927EF1D5D681600152BBF /* TaskPaiGongViewController.m */; };
@@ -344,6 +351,17 @@
 		88B6FD9E1D66D6DA00418972 /* WorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderViewController.m; sourceTree = "<group>"; };
 		88B6FDA01D66E74800418972 /* WorkOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderTableViewCell.h; sourceTree = "<group>"; };
 		88B6FDA11D66E74800418972 /* WorkOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderTableViewCell.m; sourceTree = "<group>"; };
+		88BCFE721D9A18890016207B /* AssetsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsDetailViewController.h; sourceTree = "<group>"; };
+		88BCFE731D9A18890016207B /* AssetsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsDetailViewController.m; sourceTree = "<group>"; };
+		88BCFE751D9A3F4C0016207B /* AssetsBaseInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsBaseInfoTableViewController.h; sourceTree = "<group>"; };
+		88BCFE761D9A3F4C0016207B /* AssetsBaseInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsBaseInfoTableViewController.m; sourceTree = "<group>"; };
+		88BCFE781D9A53760016207B /* AssetsProducerInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsProducerInfoTableViewController.h; sourceTree = "<group>"; };
+		88BCFE791D9A53760016207B /* AssetsProducerInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsProducerInfoTableViewController.m; sourceTree = "<group>"; };
+		88BCFE7B1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsRepaireRecordTableViewController.h; sourceTree = "<group>"; };
+		88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsRepaireRecordTableViewController.m; sourceTree = "<group>"; };
+		88BCFE7E1D9A63200016207B /* AssetsMaintainRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsMaintainRecordTableViewController.h; sourceTree = "<group>"; };
+		88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsMaintainRecordTableViewController.m; sourceTree = "<group>"; };
+		88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20160927.docx"; sourceTree = "<group>"; };
 		88CDD2D61D7E4AB800F2FFBD /* URLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
 		88CDD2D71D7E4AB800F2FFBD /* URLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
 		88CDD2D91D7EA6A200F2FFBD /* DownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
@@ -363,6 +381,8 @@
 		88D5CB3E1D7022920041C9A1 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		88D5CB401D7022CA0041C9A1 /* FeedbackChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChildTableViewController.h; sourceTree = "<group>"; };
 		88D5CB411D7022CA0041C9A1 /* FeedbackChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChildTableViewController.m; sourceTree = "<group>"; };
+		88D6DDE51D99F89900C7E769 /* AssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsViewController.h; sourceTree = "<group>"; };
+		88D6DDE61D99F89900C7E769 /* AssetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsViewController.m; sourceTree = "<group>"; };
 		88E927E91D5D55A800152BBF /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		88E927EB1D5D588900152BBF /* PRButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRButton.h; sourceTree = "<group>"; };
 		88E927EC1D5D588900152BBF /* PRButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRButton.m; sourceTree = "<group>"; };
@@ -834,6 +854,18 @@
 				889B51F91D76A9BC001A542A /* KnowledgeViewController.m */,
 				D297AAA61D770020004612BA /* KnowledgeDetailTableViewController.h */,
 				D297AAA71D770020004612BA /* KnowledgeDetailTableViewController.m */,
+				88D6DDE51D99F89900C7E769 /* AssetsViewController.h */,
+				88D6DDE61D99F89900C7E769 /* AssetsViewController.m */,
+				88BCFE721D9A18890016207B /* AssetsDetailViewController.h */,
+				88BCFE731D9A18890016207B /* AssetsDetailViewController.m */,
+				88BCFE751D9A3F4C0016207B /* AssetsBaseInfoTableViewController.h */,
+				88BCFE761D9A3F4C0016207B /* AssetsBaseInfoTableViewController.m */,
+				88BCFE781D9A53760016207B /* AssetsProducerInfoTableViewController.h */,
+				88BCFE791D9A53760016207B /* AssetsProducerInfoTableViewController.m */,
+				88BCFE7B1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.h */,
+				88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */,
+				88BCFE7E1D9A63200016207B /* AssetsMaintainRecordTableViewController.h */,
+				88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -992,6 +1024,7 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
 				88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */,
 				D2C090A51D915ED9001D94CF /* 3.p12 */,
@@ -1188,6 +1221,7 @@
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
 				889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */,
+				88BCFE821D9A763F0016207B /* BEOS接口定义_20160927.docx in Resources */,
 				889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */,
 				D2E20F1A1D994408000C1472 /* 资产管理.jpg in Resources */,
 				88B6FD9A1D66AE6400418972 /* phone@2x.png in Resources */,
@@ -1325,9 +1359,12 @@
 				D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
+				88BCFE7A1D9A53760016207B /* AssetsProducerInfoTableViewController.m in Sources */,
 				8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */,
+				88BCFE7D1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m in Sources */,
 				88A893D61D33940D0050D9F3 /* FeaturesTableViewController.m in Sources */,
 				88E928041D5DC13A00152BBF /* PRHTTPSessionManager.m in Sources */,
+				88BCFE771D9A3F4C0016207B /* AssetsBaseInfoTableViewController.m in Sources */,
 				88E927ED1D5D588900152BBF /* PRButton.m in Sources */,
 				889BA2A01D64141900BC5413 /* UIImage+Resolution.m in Sources */,
 				D2997DC11D7AFE3B0022D8BD /* WarningView.m in Sources */,
@@ -1359,6 +1396,7 @@
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
+				88BCFE741D9A18890016207B /* AssetsDetailViewController.m in Sources */,
 				D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */,
 				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
@@ -1374,6 +1412,7 @@
 				D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
+				88D6DDE71D99F89900C7E769 /* AssetsViewController.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
 				88CDD2DB1D7EA6A200F2FFBD /* DownloadViewController.m in Sources */,
 				889BA2C91D64159600BC5413 /* ELCOverlayImageView.m in Sources */,
@@ -1381,6 +1420,7 @@
 				88D5CB3C1D70126F0041C9A1 /* ModifyPasswordChildViewController.m in Sources */,
 				880787BF1D61A2BD00BA6F05 /* ChoosePersonViewController.m in Sources */,
 				889B51FA1D76A9BC001A542A /* KnowledgeViewController.m in Sources */,
+				88BCFE801D9A63200016207B /* AssetsMaintainRecordTableViewController.m in Sources */,
 				D27C15691D733DDF003651A4 /* TaskBaseInfoViewController.m in Sources */,
 				88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */,
 				889B51F71D7663D8001A542A /* TaskHandleViewController.m in Sources */,

@@ -11,6 +11,7 @@
 #import "WorkOrderViewController.h"
 #import "InspectTaskListViewController.h"
 #import "KnowledgeViewController.h"
+#import "AssetsViewController.h"
 
 @interface FeaturesTableViewController ()
 
@@ -21,12 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
-//    }
-//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
-//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,10,0,0)];
-//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,23 +33,9 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 3;
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return 3;
-//    } else if (section == 1) {
-//        return 2;
-//    }
-//    return 0;
-//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
@@ -112,6 +93,13 @@
         NSString *title = @"巡检查询";
         [inspectTaskViewController setTitle:title];
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];
+    } else if (section==3 && row==0) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        AssetsViewController *assetsViewController = [mainSB instantiateViewControllerWithIdentifier:@"ASSETSSEARCH"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"资产管理";
+        [assetsViewController setTitle:title];
+        [self.navigationController pushViewController:assetsViewController animated:YES];
     } else if (section==4 && row==0) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         KnowledgeViewController *knowledgeViewController = [mainSB instantiateViewControllerWithIdentifier:@"KNOWLEDGESEARCH"];
