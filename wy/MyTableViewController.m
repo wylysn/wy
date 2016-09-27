@@ -165,20 +165,37 @@
     if (view.tag == 4) {
         window.hidden = YES;
     } else {
-        NSString *tel;
-        if (view.tag == 1) {
-            tel = @"tel:119";
-        } else if (view.tag == 2) {
-            tel = @"tel:110";
-        } else if (view.tag == 3) {
-            tel = @"tel:110";
-        }
-        if (!callWebview) {
-            callWebview =[[UIWebView alloc] init];
-            [self.view addSubview:callWebview];
-        }
-        NSURL *telURL =[NSURL URLWithString:tel];
-        [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+        PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *userName = [userDefaults objectForKey:@"userName"];
+        NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
+        [condition setObject:@"putappnotice" forKey:@"action"];
+        [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
+        [condition setObject:[NSString getDeviceId] forKey:@"imei"];
+        [condition setObject:userName?userName:@"" forKey:@"username"];
+        [condition setObject:[NSString stringWithFormat:@"%ld", view.tag] forKey:@"type"];
+        [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            window.hidden = YES;
+            if (responseObject[@"success"]) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"报警成功" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            } else {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:responseObject[@"message"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            window.hidden = YES;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"网络错误" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
     }
     
 }
