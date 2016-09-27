@@ -28,7 +28,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.repairList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -44,6 +44,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     NSString *CELLID = @"REPAIRECELL";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
@@ -55,10 +56,10 @@
     UILabel *valueLabel = [cell viewWithTag:2];
     if (row==0) {
         keyLabel.text = @"维修日期";
-        valueLabel.text = @"2016-09-27 16:00:00";
+        valueLabel.text = self.repairList[section][@"Work_Date"];
     } else if (row==1) {
         keyLabel.text = @"维修单位";
-        valueLabel.text = @"德国伯来米";
+        valueLabel.text = self.repairList[section][@"Maintain_Org"];
     }
     
     return cell;

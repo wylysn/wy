@@ -36,7 +36,7 @@
     if (section==0) {
         return 4;
     } else if (section==1) {
-        return 1;
+        return self.paramList.count;
     }
     return 0;
 }
@@ -86,13 +86,27 @@
         UILabel *valueLabel = [cell viewWithTag:2];
         if (row==0) {
             keyLabel.text = @"设备编号";
+            valueLabel.text = self.assetsDic[@"Code"];
         } else if (row==1) {
             keyLabel.text = @"设备名称";
+            valueLabel.text = self.assetsDic[@"Name"];
         } else if (row==2) {
             keyLabel.text = @"系统分类";
+            valueLabel.text = self.assetsDic[@"ClassName"];
         } else if (row==3) {
             keyLabel.text = @"设备状态";
+            valueLabel.text = self.assetsDic[@"Status"];
         }
+    } else if (section == 1) {
+        NSDictionary *param = self.paramList[row];
+        UILabel *nameLabel = [cell viewWithTag:1];
+        UILabel *defaultValueLabel = [cell viewWithTag:2];
+        UILabel *unitLabel = [cell viewWithTag:3];
+        UILabel *descLabel = [cell viewWithTag:4];
+        nameLabel.text = param[@"Name"];
+        defaultValueLabel.text = param[@"Value"];
+        unitLabel.text = param[@"Range"];
+        descLabel.text = @"";//param[@"Range"];
     }
     
     return cell;

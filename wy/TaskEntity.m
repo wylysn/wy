@@ -64,10 +64,10 @@
         _PicContent2 = dictionary[@"PicContent2"];
         _PicContent3 = dictionary[@"PicContent3"];
         _PicContent4 = dictionary[@"PicContent4"];
-        if ((NSNull *)dictionary[@"SBCheckLists"]==[NSNull null]) {
+        if ((NSNull *)dictionary[@"SBCheckList"]==[NSNull null]) {
             _SBCheckList = @"";
         } else {
-            _SBCheckList = [dictionary[@"SBCheckLists"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"SBCheckLists"]]:dictionary[@"SBCheckLists"];
+            _SBCheckList = [dictionary[@"SBCheckList"] isKindOfClass:[NSArray class]]?[NSString convertArrayToString:dictionary[@"SBCheckList"]]:dictionary[@"SBCheckList"];
         }
     }
     return self;

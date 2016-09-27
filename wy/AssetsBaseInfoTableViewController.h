@@ -10,4 +10,7 @@
 
 @interface AssetsBaseInfoTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSDictionary *assetsDic;
+@property (nonatomic, strong) NSArray *paramList;
+
 @end

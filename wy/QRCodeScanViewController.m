@@ -36,6 +36,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
     //要在页面完全显示之后执行
     [self lazyExcute];
 }

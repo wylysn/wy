@@ -11,6 +11,7 @@
 #import "AssetsProducerInfoTableViewController.h"
 #import "AssetsRepaireRecordTableViewController.h"
 #import "AssetsMaintainRecordTableViewController.h"
+#import "AssetsService.h"
 
 @interface AssetsDetailViewController () <UIScrollViewDelegate>
 
@@ -90,6 +91,27 @@
     
     AssetsMaintainRecordTableViewController *assetsMaintainRecordViewController = [featureSB instantiateViewControllerWithIdentifier:@"AssetsMaintainRecord"];
     [self addChildViewController:assetsMaintainRecordViewController];
+    
+    AssetsService *assetsService = [[AssetsService alloc] init];
+    [assetsService getAssets:self.Code success:^(NSDictionary *assetsDic) {
+        baseInfoViewController.assetsDic = assetsDic;
+        baseInfoViewController.paramList = assetsDic[@"ParamList"];
+        [baseInfoViewController.tableView reloadData];
+        
+        producerinfoViewController.producerList = assetsDic[@"FactoryList"];
+        [producerinfoViewController.tableView reloadData];
+        
+        assetsRepaireRecordViewController.repairList = assetsDic[@"MaintainList"];
+        [assetsRepaireRecordViewController.tableView reloadData];
+        
+        assetsMaintainRecordViewController.maintainList = assetsDic[@"WBList"];
+        [assetsMaintainRecordViewController.tableView reloadData];
+    } failure:^(NSString *message) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)titlebtnClick:(id)sender {

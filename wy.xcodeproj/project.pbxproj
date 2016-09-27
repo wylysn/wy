@@ -137,6 +137,7 @@
 		88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11501D7552E90073EDBB /* DeviceDBService.m */; };
 		88FF11541D7556D70073EDBB /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11531D7556D70073EDBB /* DBManager.m */; };
 		88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */; };
+		D22597881D9AA42D00500EB7 /* AssetsService.m in Sources */ = {isa = PBXBuildFile; fileRef = D22597871D9AA42D00500EB7 /* AssetsService.m */; };
 		D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */; };
 		D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24644B31D86E843007E5028 /* WorkOrderSiftView.m */; };
 		D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */ = {isa = PBXBuildFile; fileRef = D274232C1D97D0DA00850210 /* ReportImpaireService.m */; };
@@ -424,6 +425,8 @@
 		88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDeviceViewController.m; sourceTree = "<group>"; };
 		B3319D88501D496DD566B807 /* libPods-wy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
+		D22597861D9AA42D00500EB7 /* AssetsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsService.h; sourceTree = "<group>"; };
+		D22597871D9AA42D00500EB7 /* AssetsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsService.m; sourceTree = "<group>"; };
 		D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderSiftView.xib; sourceTree = "<group>"; };
 		D24644B21D86E843007E5028 /* WorkOrderSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSiftView.h; sourceTree = "<group>"; };
 		D24644B31D86E843007E5028 /* WorkOrderSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderSiftView.m; sourceTree = "<group>"; };
@@ -940,6 +943,8 @@
 		88B6FDA31D66E97900418972 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				D22597861D9AA42D00500EB7 /* AssetsService.h */,
+				D22597871D9AA42D00500EB7 /* AssetsService.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1397,6 +1402,7 @@
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
 				88BCFE741D9A18890016207B /* AssetsDetailViewController.m in Sources */,
+				D22597881D9AA42D00500EB7 /* AssetsService.m in Sources */,
 				D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */,
 				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,

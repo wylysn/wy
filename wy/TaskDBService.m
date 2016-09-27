@@ -300,7 +300,7 @@ static sqlite3_stmt *statement = nil;
     NSMutableArray *taskArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Location from TaskList where 1=1"];
+        NSMutableString *querySQL = [[NSMutableString alloc] initWithString:@"select Code, ShortTitle, Subject, ReceiveTime, TaskStatus, ServiceType, Priority, Location from TaskList where 1=1 order by ReceiveTime desc"];
         NSEnumerator *keyIterater = condition.keyEnumerator;
         for (NSString *key in keyIterater) {
             if (![key isBlankString] || ![@"ServiceType" isEqualToString:key] || ![@"Priority" isEqualToString:key] || ![@"ShortTitle" isEqualToString:key] || ![@"TaskStatus" isEqualToString:key]) {
@@ -354,7 +354,7 @@ static sqlite3_stmt *statement = nil;
     TaskEntity *task;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4 from Task where Code=\"%@\"",Code];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, SBCheckList from Task where Code=\"%@\"",Code];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -389,7 +389,8 @@ static sqlite3_stmt *statement = nil;
                 NSString *PicContent2 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 25)];
                 NSString *PicContent3 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 26)];
                 NSString *PicContent4 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 27)];
-                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4}];
+                NSString *SBCheckList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 28)];
+                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4, @"SBCheckList":SBCheckList}];
             }
             else{
                 NSLog(@"没有找到code为%@的任务......", Code);

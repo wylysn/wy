@@ -10,4 +10,6 @@
 
 @interface AssetsRepaireRecordTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSArray *repairList;
+
 @end

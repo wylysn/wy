@@ -10,4 +10,6 @@
 
 @interface AssetsMaintainRecordTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSArray *maintainList;
+
 @end

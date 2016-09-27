@@ -73,11 +73,11 @@
             for (NSDictionary *sbCheckDic in sbCheckDicArr) {
                 InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];
                 NSMutableDictionary *infoDic;
-                if ([self.deviceCheckInfoDic.allKeys containsObject:sbCheck.ParentCode]) {
-                    infoDic = self.deviceCheckInfoDic[sbCheck.ParentCode];
+                if ([self.deviceCheckInfoDic.allKeys containsObject:sbCheckDic[@"Code"]]) {
+                    infoDic = self.deviceCheckInfoDic[sbCheckDic[@"Code"]];
                 } else {
                     infoDic = [[NSMutableDictionary alloc] init];
-                    [self.deviceCheckInfoDic setObject:infoDic forKey:sbCheck.ParentCode];
+                    [self.deviceCheckInfoDic setObject:infoDic forKey:sbCheckDic[@"Code"]];
                 }
                 [infoDic setObject:sbCheck forKey:sbCheck.ItemName];
             }

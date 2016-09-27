@@ -10,4 +10,6 @@
 
 @interface AssetsProducerInfoTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSArray *producerList;
+
 @end
