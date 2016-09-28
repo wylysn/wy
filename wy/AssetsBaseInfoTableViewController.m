@@ -101,12 +101,10 @@
         NSDictionary *param = self.paramList[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         UILabel *defaultValueLabel = [cell viewWithTag:2];
-        UILabel *unitLabel = [cell viewWithTag:3];
-        UILabel *descLabel = [cell viewWithTag:4];
+        UILabel *rangeLabel = [cell viewWithTag:3];
         nameLabel.text = param[@"Name"];
         defaultValueLabel.text = param[@"Value"];
-        unitLabel.text = param[@"Range"];
-        descLabel.text = @"";//param[@"Range"];
+        rangeLabel.text = param[@"Range"];
     }
     
     return cell;
