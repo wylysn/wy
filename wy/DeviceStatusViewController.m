@@ -297,6 +297,9 @@
 {
     NSString *itemValues = self.inspectionChildModel.ItemValues;
     NSArray *itemArray = [itemValues componentsSeparatedByString:@"|"];
+    if (buttonIndex>=itemArray.count) {
+        return;
+    }
     selectLabel.text = itemArray[buttonIndex];
 }
 

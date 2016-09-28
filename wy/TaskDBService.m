@@ -389,7 +389,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *PicContent2 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 25)];
                 NSString *PicContent3 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 26)];
                 NSString *PicContent4 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 27)];
-                NSString *SBCheckList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 28)];
+                NSString *SBCheckList = (const char *) sqlite3_column_text(statement, 28)?[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 28)]:@"";
                 task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4, @"SBCheckList":SBCheckList}];
             }
             else{

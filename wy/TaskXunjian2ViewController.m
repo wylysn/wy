@@ -216,7 +216,13 @@
                 for (InspectionChildModelEntity *insChildEntity in values2) {
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                     [dic setObject:insChildEntity.taskDeviceCode forKey:@"Code"];
+                    [dic setObject:[NSString stringWithFormat:@"%ld", insChildEntity.ItemType] forKey:@"ItemType"];
+                    [dic setObject:!insChildEntity.InputMax||[insChildEntity.InputMax isBlankString]?@"":insChildEntity.InputMax forKey:@"InputMax"];
+                    [dic setObject:!insChildEntity.InputMin||[insChildEntity.InputMin isBlankString]?@"":insChildEntity.InputMin forKey:@"InputMin"];
+                    [dic setObject:!insChildEntity.UnitName||[insChildEntity.UnitName isBlankString]?@"":insChildEntity.UnitName forKey:@"UnitName"];
+                    [dic setObject:insChildEntity.ItemValues forKey:@"ItemValues"];
                     [dic setObject:insChildEntity.ItemName forKey:@"ItemName"];
+                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"taskDeviceCode"];
                     if (insChildEntity.ItemValue && insChildEntity.ItemValue!=nil) {
                         [dic setObject:insChildEntity.ItemValue forKey:@"ItemValue"];
                     }
