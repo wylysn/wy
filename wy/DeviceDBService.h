@@ -14,6 +14,7 @@
 @interface DeviceDBService : NSObject
 
 + (DeviceDBService*) getSharedInstance;
+- (void)setSharedInstanceNull;
 
 - (BOOL) saveDeviceList:(DeviceListEntity *)deviceList;
 - (DeviceListEntity *) findDeviceListByCode:(NSString*)Code;

@@ -13,6 +13,7 @@
 @interface PositionDBservice : NSObject
 
 + (PositionDBservice*) getSharedInstance;
+- (void)setSharedInstanceNull;
 - (BOOL) savePosition:(PositionEntity *)position;
 - (NSArray *) findAllPositions;
 - (NSArray *) findPositionsByParent:(PositionEntity *)parent;

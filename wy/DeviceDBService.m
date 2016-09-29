@@ -24,6 +24,10 @@ static sqlite3_stmt *statement = nil;
     return sharedInstance;
 }
 
+- (void)setSharedInstanceNull {
+    sharedInstance = nil;
+}
+
 - (void)createDB {
     NSString *docsDir;
     NSArray *dirPaths;

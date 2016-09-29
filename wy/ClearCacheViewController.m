@@ -8,6 +8,11 @@
 
 #import "ClearCacheViewController.h"
 #import "BaseInfoEntity.h"
+#import "PersonDBService.h"
+#import "PositionDBservice.h"
+#import "KnowledgeDBService.h"
+#import "InspectionModelDBService.h"
+#import "DeviceDBService.h"
 
 @interface ClearCacheViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -82,6 +87,19 @@
         [newDic removeObjectForKey:templateid];
         [userDefaults setObject:newDic forKey:@"downloads"];
         [userDefaults synchronize];
+        
+        //清除dbservice单例
+        if ([@"2" isEqualToString:templateid]) {
+            [[PersonDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"3" isEqualToString:templateid]) {
+            [[DeviceDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"4" isEqualToString:templateid]) {
+            [[InspectionModelDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"5" isEqualToString:templateid]) {
+            [[KnowledgeDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"6" isEqualToString:templateid]) {
+            [[PositionDBservice getSharedInstance] setSharedInstanceNull];
+        }
     }
     [cacheArray removeObjectsAtIndexes:idxSet];
     [self.tableView reloadData];

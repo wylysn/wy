@@ -13,6 +13,7 @@
 @interface PersonDBService : NSObject
 
 + (PersonDBService*) getSharedInstance;
+- (void)setSharedInstanceNull;
 - (BOOL) saveData:(PersonEntity *)person;
 - (PersonEntity *) findByAppUserName:(NSString*)AppUserName;
 - (NSArray *) findAllPersons;

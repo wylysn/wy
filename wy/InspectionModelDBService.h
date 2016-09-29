@@ -13,6 +13,7 @@
 @interface InspectionModelDBService : NSObject
 
 + (InspectionModelDBService*) getSharedInstance;
+- (void)setSharedInstanceNull;
 
 - (BOOL) saveInspectionModel:(InspectionModelEntity *)inspection;
 

@@ -12,7 +12,9 @@
 
 @interface KnowledgeDBService : NSObject
 
+- (void)setSharedInstanceNull;
 + (KnowledgeDBService*) getSharedInstance;
+- (void) createDB;
 - (BOOL) saveKnowledge:(KnowledgeEntity *)knowledge;
 - (KnowledgeEntity *) findKnowledgeByCode:(NSString *)Code;
 - (NSArray *) findKnowledgeByKeyword:(NSString*)keyword;

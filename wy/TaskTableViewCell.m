@@ -34,7 +34,7 @@
     
     
     if (![entity.ServiceType isBlankString]) {
-        self.ServiceTypeLabel.text = [serviceTypeDic objectForKey:entity.ShortTitle];
+        self.ServiceTypeLabel.text = [serviceTypeDic objectForKey:entity.ServiceType];
     } else {
         self.ServiceTypeLabel.text = @"";
     }
