@@ -162,6 +162,7 @@
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
 		D2E20F1A1D994408000C1472 /* 资产管理.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2E20F191D994408000C1472 /* 资产管理.jpg */; };
+		D2E9CF891DA6A24A004351D7 /* ScanDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */; };
 		D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FD92251D8A214D0090FEC8 /* LoginService.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
@@ -468,6 +469,8 @@
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D2CF2E741D7BDABA0020759A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D2E20F191D994408000C1472 /* 资产管理.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "资产管理.jpg"; sourceTree = "<group>"; };
+		D2E9CF871DA6A24A004351D7 /* ScanDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanDeviceViewController.h; sourceTree = "<group>"; };
+		D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanDeviceViewController.m; sourceTree = "<group>"; };
 		D2FD92241D8A214D0090FEC8 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		D2FD92251D8A214D0090FEC8 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -869,6 +872,8 @@
 				88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */,
 				88BCFE7E1D9A63200016207B /* AssetsMaintainRecordTableViewController.h */,
 				88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */,
+				D2E9CF871DA6A24A004351D7 /* ScanDeviceViewController.h */,
+				D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1436,6 +1441,7 @@
 				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
 				889BA29D1D64124E00BC5413 /* SkimPhotoViewController.m in Sources */,
+				D2E9CF891DA6A24A004351D7 /* ScanDeviceViewController.m in Sources */,
 				D28AD5601D72DC570033ADB6 /* TaskChildTableViewController.m in Sources */,
 				88E927F01D5D681600152BBF /* TaskPaiGongViewController.m in Sources */,
 				88ABE1E41D7D67E60035D39F /* InspectionModelDBService.m in Sources */,

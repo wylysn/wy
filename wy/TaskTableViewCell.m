@@ -48,7 +48,7 @@
         self.TaskStatusLabel.text = entity.TaskStatus;//[taskStatusShowDic objectForKey:entity.TaskStatus];
         NSString *color = @"ffffff";
         if ([@"接单" isEqualToString:entity.TaskStatus]) {
-            color = BUTTON_ORANGE_COLOR;
+            color = @"ff881f";
         } else if ([@"处理" isEqualToString:entity.TaskStatus]) {
             color = BUTTON_RED_COLOR;
         } else if ([@"派工" isEqualToString:entity.TaskStatus]) {

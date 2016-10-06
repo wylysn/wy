@@ -10,6 +10,7 @@
 #import "DeviceEntity.h"
 #import "DeviceDBService.h"
 #import "AssetsDetailViewController.h"
+#import "ScanDeviceViewController.h"
 
 @interface AssetsViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -39,6 +40,24 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     asstesList = [[NSArray alloc] init];
+    
+    UIImageView *scanImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    scanImageView.image = [UIImage imageNamed:@"scan"];
+    UITapGestureRecognizer *scangesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scanDevice:)];
+    [scanImageView addGestureRecognizer:scangesture];
+    [scanImageView setUserInteractionEnabled:YES];
+    UIBarButtonItem *scanItem = [[UIBarButtonItem alloc]
+                                   initWithCustomView:scanImageView];
+    
+    UIImageView *filterImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    filterImageView.image = [UIImage imageNamed:@"filter"];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(filterAssets:)];
+    [filterImageView addGestureRecognizer:gesture];
+    [filterImageView setUserInteractionEnabled:YES];
+    UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]
+                                   initWithCustomView:filterImageView];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:filterItem, scanItem, nil];;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -64,6 +83,19 @@
         
         [self.view addSubview:noDataView];
     }
+}
+
+- (void)scanDevice:(UITapGestureRecognizer *)recognizer {
+    ScanDeviceViewController *viewController = [[ScanDeviceViewController alloc] init];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [viewController setTitle:@"二维码/条码"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)filterAssets:(UITapGestureRecognizer *)recognizer {
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

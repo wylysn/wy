@@ -83,7 +83,7 @@
         self.navigationItem.backBarButtonItem = backButton;
         NSString *title = @"巡检任务";
         [taskListViewController setTitle:title];
-        taskListViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"2"}];
+        taskListViewController.filterDic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ShortTitle":@"2",@"TaskStatus":@"1"}];
         taskListViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:taskListViewController animated:YES];
     } else if (section==1 && row==1) {
