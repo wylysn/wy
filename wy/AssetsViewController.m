@@ -11,6 +11,13 @@
 #import "DeviceDBService.h"
 #import "AssetsDetailViewController.h"
 #import "ScanDeviceViewController.h"
+#import "AssetsSiftView.h"
+#import "PositionEntity.h"
+
+typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
+    FilterViewHideByCancel       = 0,
+    FilterViewHideByConfirm      = 1 << 0
+};
 
 @interface AssetsViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -20,9 +27,14 @@
 @end
 
 @implementation AssetsViewController {
+    UIWindow *filterWindow;
+    AssetsSiftView *siftView;
+    
     NSArray *asstesList;
     NSString *keyWord;
     UIView *noDataView;
+    
+    NSMutableDictionary *filterDic;
 }
 
 - (void)viewDidLoad {
@@ -57,7 +69,9 @@
     UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]
                                    initWithCustomView:filterImageView];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:filterItem, scanItem, nil];;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:filterItem, scanItem, nil];
+    
+    filterDic = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -94,8 +108,110 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)filterAssets:(UITapGestureRecognizer *)recognizer {
+-(void)filterAssets:(UITapGestureRecognizer *)recognizer
+{
+    float px;
+    if (SCREEN_WIDTH<=320) {
+        px = 50;
+    } else if (SCREEN_WIDTH<=375) {
+        px = 80;
+    } else {
+        px = 100;
+    }
+    float pwidth = SCREEN_WIDTH-px;
+    if (filterWindow) {
+        filterWindow.hidden = NO;
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        filterWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        filterWindow.rootViewController = self;
+        filterWindow.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        [filterWindow makeKeyAndVisible];
+        
+        UIView *backView = [[UIView alloc] initWithFrame:filterWindow.frame];
+        backView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        [filterWindow addSubview:backView];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideFilterView:)];
+        [backView addGestureRecognizer:gesture];
+        [backView setUserInteractionEnabled:YES];
+        
+        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"AssetsSiftView" owner:nil options:nil];
+        siftView = views[0];
+        
+        siftView.frame = CGRectMake(SCREEN_WIDTH, 0, pwidth, SCREEN_HEIGHT);
+        [filterWindow addSubview:siftView];
+        
+        [siftView.cancelButton addTarget:self action:@selector(filterCancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [siftView.confirmButton addTarget:self action:@selector(filterConfirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect newFrame = siftView.frame;
+            newFrame.origin.x = px;
+            siftView.frame = newFrame;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+- (IBAction)filterCancelBtnClick:(id)sender
+{
+    [self filterViewHideWithTye:FilterViewHideByCancel];
+}
+
+- (IBAction)filterConfirmBtnClick:(id)sender
+{
+    [self filterViewHideWithTye:FilterViewHideByConfirm];
     
+    NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [siftView.siftTableView indexPathsForSelectedRows];
+    NSMutableDictionary *locationDic = [[NSMutableDictionary alloc] init];
+    for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
+        if (indexPath.section==0) {
+            PositionEntity *position = siftView.positionList[indexPath.row];
+            [locationDic setObject:position forKey:position.Code];
+        } else if (indexPath.section==1) {
+            //后续加上分类筛选
+        }
+    }
+    [filterDic setObject:locationDic forKey:@"Location"];
+    
+    [self refreshDataByCondition];
+}
+
+- (void)hideFilterView:(UITapGestureRecognizer *)recognizer {
+    [self filterViewHideWithTye:FilterViewHideByCancel];
+}
+
+- (void)filterViewHideWithTye:(FilterViewHideType) type {
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect newFrame = siftView.frame;
+        newFrame.origin.x = SCREEN_WIDTH;
+        siftView.frame = newFrame;
+    } completion:^(BOOL finished) {
+        if (type == FilterViewHideByCancel) {
+            //重置筛选条件
+            if (filterDic[@"Location"]) {
+                siftView.selectedlocationDic = [[NSMutableDictionary alloc] initWithDictionary:filterDic[@"Location"]];
+            }
+            [siftView.siftTableView reloadData];
+        }
+        
+        filterWindow.hidden = YES;
+    }];
+}
+
+- (void)refreshDataByCondition {
+    //刷新列表
+    asstesList = [[DeviceDBService getSharedInstance] findAssetsByKeyword:filterDic[@"keyword"]?filterDic[@"keyword"]:@""];
+    noDataView.hidden = asstesList.count>0;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -175,10 +291,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     keyWord = textField.text;
-    asstesList = [[DeviceDBService getSharedInstance] findAssetsByKeyword:textField.text];
     [self.searchField resignFirstResponder];
-    noDataView.hidden = asstesList.count>0;
-    [self.tableView reloadData];
+    [filterDic setObject:keyWord forKey:@"keyword"];
+    [self refreshDataByCondition];
     return YES;
 }
 

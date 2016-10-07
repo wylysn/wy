@@ -112,18 +112,6 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     }         
 }
 
-- (IBAction)conditionBtnClick:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    if (!button.selected) {
-        [button setBackgroundColor:button.currentTitleColor];
-    } else {
-        [button setBackgroundColor:[UIColor whiteColor]];
-    }
-    button.selected = !button.selected;
-    
-}
-
 - (IBAction)filterCancelBtnClick:(id)sender
 {
     [self filterViewHideWithTye:FilterViewHideByCancel];

@@ -16,6 +16,6 @@
 - (void)setSharedInstanceNull;
 - (BOOL) savePosition:(PositionEntity *)position;
 - (NSArray *) findAllPositions;
-- (NSArray *) findPositionsByParent:(PositionEntity *)parent;
+- (NSMutableArray *) findPositionsByParent:(PositionEntity *)parent;
 
 @end

@@ -109,7 +109,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.tabBarController.tabBar.hidden = NO;
+//    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

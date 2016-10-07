@@ -128,7 +128,7 @@ static sqlite3_stmt *statement = nil;
     return positionArr;
 }
 
-- (NSArray *) findPositionsByParent:(PositionEntity *)parent {
+- (NSMutableArray *) findPositionsByParent:(PositionEntity *)parent {
     NSMutableArray *positionArr = [[NSMutableArray alloc] init];
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {

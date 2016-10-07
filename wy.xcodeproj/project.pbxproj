@@ -138,6 +138,9 @@
 		88FF11541D7556D70073EDBB /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11531D7556D70073EDBB /* DBManager.m */; };
 		88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11571D7571960073EDBB /* ChooseDeviceViewController.m */; };
 		D22597881D9AA42D00500EB7 /* AssetsService.m in Sources */ = {isa = PBXBuildFile; fileRef = D22597871D9AA42D00500EB7 /* AssetsService.m */; };
+		D22C85CB1DA74CC5000362DF /* AssetsSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22C85CA1DA74CC5000362DF /* AssetsSiftView.xib */; };
+		D22C85CE1DA74E85000362DF /* AssetsSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C85CD1DA74E85000362DF /* AssetsSiftView.m */; };
+		D22C85D01DA7E900000362DF /* 关于计划性维护工作.doc in Resources */ = {isa = PBXBuildFile; fileRef = D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */; };
 		D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */; };
 		D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24644B31D86E843007E5028 /* WorkOrderSiftView.m */; };
 		D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */ = {isa = PBXBuildFile; fileRef = D274232C1D97D0DA00850210 /* ReportImpaireService.m */; };
@@ -428,6 +431,10 @@
 		C318A26E117DDB32D6541656 /* Pods-wy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wy/Pods-wy.debug.xcconfig"; sourceTree = "<group>"; };
 		D22597861D9AA42D00500EB7 /* AssetsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsService.h; sourceTree = "<group>"; };
 		D22597871D9AA42D00500EB7 /* AssetsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsService.m; sourceTree = "<group>"; };
+		D22C85CA1DA74CC5000362DF /* AssetsSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetsSiftView.xib; sourceTree = "<group>"; };
+		D22C85CC1DA74E85000362DF /* AssetsSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsSiftView.h; sourceTree = "<group>"; };
+		D22C85CD1DA74E85000362DF /* AssetsSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsSiftView.m; sourceTree = "<group>"; };
+		D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "关于计划性维护工作.doc"; sourceTree = "<group>"; };
 		D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkOrderSiftView.xib; sourceTree = "<group>"; };
 		D24644B21D86E843007E5028 /* WorkOrderSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSiftView.h; sourceTree = "<group>"; };
 		D24644B31D86E843007E5028 /* WorkOrderSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderSiftView.m; sourceTree = "<group>"; };
@@ -817,6 +824,7 @@
 				88B6FD9B1D66D61C00418972 /* Feature.storyboard */,
 				8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */,
 				D24644B01D86E6D0007E5028 /* WorkOrderSiftView.xib */,
+				D22C85CA1DA74CC5000362DF /* AssetsSiftView.xib */,
 			);
 			name = features;
 			sourceTree = "<group>";
@@ -832,6 +840,8 @@
 				8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */,
 				D24644B21D86E843007E5028 /* WorkOrderSiftView.h */,
 				D24644B31D86E843007E5028 /* WorkOrderSiftView.m */,
+				D22C85CC1DA74E85000362DF /* AssetsSiftView.h */,
+				D22C85CD1DA74E85000362DF /* AssetsSiftView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1034,6 +1044,7 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
 				88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
 				88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */,
@@ -1241,10 +1252,12 @@
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
 				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
+				D22C85CB1DA74CC5000362DF /* AssetsSiftView.xib in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				D2C090A81D915ED9001D94CF /* axx.mobileprovision in Resources */,
 				88B6FD981D66A1C800418972 /* plus50@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
+				D22C85D01DA7E900000362DF /* 关于计划性维护工作.doc in Resources */,
 				889BA2C61D64159600BC5413 /* ELCAssetTablePicker.xib in Resources */,
 				D2A6CF741D8CD5470049B232 /* 信息接口.docx in Resources */,
 				889BA2821D64076300BC5413 /* add_image.png in Resources */,
@@ -1402,6 +1415,7 @@
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
+				D22C85CE1DA74E85000362DF /* AssetsSiftView.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
