@@ -10,6 +10,8 @@
 
 @interface DateUtil : NSObject
 
++(NSDate*)addDayDate:(NSDate*) now withDays:(NSInteger) days;
+
 + (NSDate*)addMonthDate:(NSDate*) now withMonths:(NSInteger) months;
 
 + (NSString *)formatDateString:(NSDate *)date withFormatter:(NSString *)formatter;
@@ -22,5 +24,11 @@
 
 #pragma mark - 获取月最后一天
 + (NSString *)getLastDateOfMonth:(NSDate *)date;
+
+#pragma mark - 根据日期获取是周几
++ (NSInteger)getWeekOfDay:(NSDate *)date;
+
+#pragma mark - 获取一个月都多少天
++ (NSInteger)getDaysOfMonth:(NSDate *)date;
 
 @end

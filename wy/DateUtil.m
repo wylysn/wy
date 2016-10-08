@@ -9,6 +9,14 @@
 #import "DateUtil.h"
 
 @implementation DateUtil
+
++(NSDate *)addDayDate:(NSDate *)now withDays:(NSInteger)days {
+    NSDateComponents *dayBeforeDateComponents = [[NSDateComponents alloc] init];
+    dayBeforeDateComponents.day = days;
+    NSDate *rsDate = [[NSCalendar currentCalendar]dateByAddingComponents:dayBeforeDateComponents toDate:now options:0];
+    return rsDate;
+}
+
 + (NSDate *)addMonthDate:(NSDate *)now withMonths:(NSInteger)months {
     NSDateComponents *monthBeforeDateComponents = [[NSDateComponents
                                                    alloc] init];
@@ -55,6 +63,19 @@
     NSUInteger numberOfDaysInMonth = range.length;
     NSString *lastDate = [DateUtil formatDateString:date withFormatter:[NSString stringWithFormat:@"yyyy-MM-%ld", numberOfDaysInMonth]];
     return lastDate;
+}
+
++ (NSInteger)getWeekOfDay:(NSDate *)date {
+    NSDateComponents *componets = [[NSCalendar autoupdatingCurrentCalendar] components:NSCalendarUnitWeekday fromDate:date];
+    NSInteger weekday = [componets weekday];
+    return weekday;
+}
+
++ (NSInteger)getDaysOfMonth:(NSDate *)date {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    NSUInteger numberOfDaysInMonth = range.length;
+    return numberOfDaysInMonth;
 }
 
 @end

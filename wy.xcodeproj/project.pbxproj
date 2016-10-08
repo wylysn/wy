@@ -27,6 +27,8 @@
 		8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */; };
 		8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D47A1D73DF14003E4495 /* DeviceListEntity.m */; };
 		8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4801D741807003E4495 /* ReportImpaireViewController.m */; };
+		8851F4381DA88FB00022FBD9 /* PlanTaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */; };
+		8851F43B1DA8A29E0022FBD9 /* PlanListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */; };
 		885FEAFF1D9107AD00EC5A81 /* TaskDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */; };
 		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
 		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
@@ -227,6 +229,10 @@
 		8841D47A1D73DF14003E4495 /* DeviceListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListEntity.m; sourceTree = "<group>"; };
 		8841D47F1D741807003E4495 /* ReportImpaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportImpaireViewController.h; sourceTree = "<group>"; };
 		8841D4801D741807003E4495 /* ReportImpaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportImpaireViewController.m; sourceTree = "<group>"; };
+		8851F4361DA88FB00022FBD9 /* PlanTaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanTaskListViewController.h; sourceTree = "<group>"; };
+		8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanTaskListViewController.m; sourceTree = "<group>"; };
+		8851F4391DA8A29E0022FBD9 /* PlanListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanListEntity.h; sourceTree = "<group>"; };
+		8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanListEntity.m; sourceTree = "<group>"; };
 		885FEAFD1D9107AD00EC5A81 /* TaskDeviceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDeviceEntity.h; sourceTree = "<group>"; };
 		885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDeviceEntity.m; sourceTree = "<group>"; };
 		887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjian2ViewController.h; sourceTree = "<group>"; };
@@ -851,6 +857,8 @@
 			children = (
 				88F140D21D6C258200B8BCCC /* InspectTaskEntity.h */,
 				88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */,
+				8851F4391DA8A29E0022FBD9 /* PlanListEntity.h */,
+				8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -884,6 +892,8 @@
 				88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */,
 				D2E9CF871DA6A24A004351D7 /* ScanDeviceViewController.h */,
 				D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */,
+				8851F4361DA88FB00022FBD9 /* PlanTaskListViewController.h */,
+				8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1417,6 +1427,7 @@
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
 				D22C85CE1DA74E85000362DF /* AssetsSiftView.m in Sources */,
 				88821E891D5C6F1D00C72DA3 /* NSString+Extensions.m in Sources */,
+				8851F43B1DA8A29E0022FBD9 /* PlanListEntity.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
@@ -1434,6 +1445,7 @@
 				88B6FD9F1D66D6DA00418972 /* WorkOrderViewController.m in Sources */,
 				880787C61D61B42300BA6F05 /* ChoosePersonService.m in Sources */,
 				D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */,
+				8851F4381DA88FB00022FBD9 /* PlanTaskListViewController.m in Sources */,
 				D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,

@@ -12,6 +12,7 @@
 #import "InspectTaskListViewController.h"
 #import "KnowledgeViewController.h"
 #import "AssetsViewController.h"
+#import "PlanTaskListViewController.h"
 
 @interface FeaturesTableViewController ()
 
@@ -93,6 +94,13 @@
         NSString *title = @"巡检查询";
         [inspectTaskViewController setTitle:title];
         [self.navigationController pushViewController:inspectTaskViewController animated:YES];
+    } else if (section==2 && row==0) {
+        UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        PlanTaskListViewController *planViewController = [mainSB instantiateViewControllerWithIdentifier:@"PLAN_TASKLIST"];
+        self.navigationItem.backBarButtonItem = backButton;
+        NSString *title = @"计划性维护";
+        [planViewController setTitle:title];
+        [self.navigationController pushViewController:planViewController animated:YES];
     } else if (section==3 && row==0) {
         UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
         AssetsViewController *assetsViewController = [mainSB instantiateViewControllerWithIdentifier:@"ASSETSSEARCH"];
