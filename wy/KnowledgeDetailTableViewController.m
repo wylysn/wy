@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //卧槽，这个太屌，ios8以上支持，折磨简单就解决以前很复杂的问题，帅气
+    //卧槽，这个太屌，ios8以上支持，这么简单就解决以前很复杂的问题，帅气
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }

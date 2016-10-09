@@ -9,6 +9,7 @@
 #import "PlanTaskListViewController.h"
 #import "PRActionSheetPickerView.h"
 #import "PlanListEntity.h"
+#import "PlanDetailViewController.h"
 
 @interface PlanTaskListViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PRActionSheetPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -145,6 +146,14 @@
     }
     [self.collectionView reloadData];
     
+    [self changeStatusView];
+    
+    self.tableViewheightConstraint.constant = 44*planListArr.count;
+    [self.tableView reloadData];
+}
+
+//更改状态
+- (void)changeStatusView {
     planStatusDic = [[NSMutableDictionary alloc] init];
     for (PlanListEntity *plan in planListArr) {
         if (planStatusDic[plan.TaskStatus]) {
@@ -159,9 +168,6 @@
     [self.unProgressBtn setTitle:[NSString stringWithFormat:@"未处理(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"0"]).count] forState:UIControlStateNormal];
     [self.progressBtn setTitle:[NSString stringWithFormat:@"已处理(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"1"]).count] forState:UIControlStateNormal];
     [self.doneBtn setTitle:[NSString stringWithFormat:@"已完成(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"2"]).count] forState:UIControlStateNormal];
-    
-    self.tableViewheightConstraint.constant = 44*planListArr.count;
-    [self.tableView reloadData];
 }
 
 - (void)getDateWithDate:(NSDate *)date andId:(NSInteger)idNum {
@@ -233,7 +239,20 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger row = indexPath.row;
+    planListArr = planListDic[daysArr[row]];
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorFromHexCode:@"f1f1f1"];
     
+    [self changeStatusView];
+    
+    self.tableViewheightConstraint.constant = 44*planListArr.count;
+    [self.tableView reloadData];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -247,7 +266,6 @@
 //定义每个UICollectionView 的 margin
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    //    return UIEdgeInsetsMake(0.1, 0.1, 0.1, 0.1);
     return UIEdgeInsetsMake(CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN);
 }
 
@@ -260,6 +278,8 @@
 {
     return 1;
 }
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -276,6 +296,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     PlanListEntity *plan = planListArr[row];
     UILabel *nameLabel = [cell viewWithTag:1];
@@ -293,7 +314,7 @@
         statusLabel.text = @"未开始";
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"ee5162"];
     } else if ([@"1" isEqualToString:plan.TaskStatus]) {
-        statusLabel.text = @"已处理";
+        statusLabel.text = @"处理中";
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"3dace1"];
     } else if ([@"2" isEqualToString:plan.TaskStatus]) {
         statusLabel.text = @"已完成";
@@ -306,12 +327,13 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    PlanListEntity *plan = planListArr[row];
+    UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+    PlanDetailViewController *planDetailViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANDETAIL"];
+    planDetailViewController.Code = plan.Code;
+    [self.navigationController pushViewController:planDetailViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

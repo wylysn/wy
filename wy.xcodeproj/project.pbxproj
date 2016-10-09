@@ -22,6 +22,9 @@
 		8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCB1D6A9D8A00E04B49 /* NTMonthYearPicker.m */; };
 		8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */; };
 		8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8819BCD21D6AE1D900E04B49 /* filter@2x.png */; };
+		882D1E861DA9E118002C5BC9 /* PlanDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E851DA9E118002C5BC9 /* PlanDetailViewController.m */; };
+		882D1E891DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E881DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m */; };
+		882D1E8C1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */; };
 		8841D46E1D73CCF5003E4495 /* TaskXunjianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D46D1D73CCF5003E4495 /* TaskXunjianViewController.m */; };
 		8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4701D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m */; };
 		8841D4741D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4731D73DC8F003E4495 /* TaskXunjianDeviceTableViewController.m */; };
@@ -219,6 +222,12 @@
 		8819BCCD1D6ADF0C00E04B49 /* SiftWorkOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiftWorkOrderViewController.h; sourceTree = "<group>"; };
 		8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiftWorkOrderViewController.m; sourceTree = "<group>"; };
 		8819BCD21D6AE1D900E04B49 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
+		882D1E841DA9E118002C5BC9 /* PlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailViewController.h; sourceTree = "<group>"; };
+		882D1E851DA9E118002C5BC9 /* PlanDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanDetailViewController.m; sourceTree = "<group>"; };
+		882D1E871DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanMaintainContentTableViewController.h; sourceTree = "<group>"; };
+		882D1E881DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanMaintainContentTableViewController.m; sourceTree = "<group>"; };
+		882D1E8A1DAA0CE8002C5BC9 /* PlanObjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanObjectTableViewController.h; sourceTree = "<group>"; };
+		882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanObjectTableViewController.m; sourceTree = "<group>"; };
 		8841D46C1D73CCF5003E4495 /* TaskXunjianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianViewController.h; sourceTree = "<group>"; };
 		8841D46D1D73CCF5003E4495 /* TaskXunjianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjianViewController.m; sourceTree = "<group>"; };
 		8841D46F1D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianBaseInfoTableViewController.h; sourceTree = "<group>"; };
@@ -894,6 +903,12 @@
 				D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */,
 				8851F4361DA88FB00022FBD9 /* PlanTaskListViewController.h */,
 				8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */,
+				882D1E841DA9E118002C5BC9 /* PlanDetailViewController.h */,
+				882D1E851DA9E118002C5BC9 /* PlanDetailViewController.m */,
+				882D1E871DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.h */,
+				882D1E881DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m */,
+				882D1E8A1DAA0CE8002C5BC9 /* PlanObjectTableViewController.h */,
+				882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1421,6 +1436,7 @@
 				880BDB851D88F683001DACF5 /* InspectionChildModelEntity.m in Sources */,
 				88ABE1DE1D7D59D50035D39F /* TaskDBService.m in Sources */,
 				D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */,
+				882D1E861DA9E118002C5BC9 /* PlanDetailViewController.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,
@@ -1462,7 +1478,9 @@
 				88D5CB361D7011FE0041C9A1 /* ModifyPasswordViewController.m in Sources */,
 				889B51F71D7663D8001A542A /* TaskHandleViewController.m in Sources */,
 				88A893971D332B260050D9F3 /* main.m in Sources */,
+				882D1E891DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m in Sources */,
 				88F140D11D6C21C400B8BCCC /* InspectTaskTableViewCell.m in Sources */,
+				882D1E8C1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m in Sources */,
 				D2997DB81D7A900E0022D8BD /* TaskListEntity.m in Sources */,
 				88D5CB3F1D7022920041C9A1 /* FeedbackViewController.m in Sources */,
 				889BA2C51D64159600BC5413 /* ELCAssetTablePicker.m in Sources */,
