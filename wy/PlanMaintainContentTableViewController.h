@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlanDetailEntity.h"
 
 @interface PlanMaintainContentTableViewController : UITableViewController
+
+@property (nonatomic, strong) PlanDetailEntity *planDetail;
 
 @end

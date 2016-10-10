@@ -22,6 +22,8 @@
 		8819BCCC1D6A9D8A00E04B49 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCB1D6A9D8A00E04B49 /* NTMonthYearPicker.m */; };
 		8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */; };
 		8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8819BCD21D6AE1D900E04B49 /* filter@2x.png */; };
+		8824005B1DAB1CFF003D5CC1 /* PlanService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824005A1DAB1CFF003D5CC1 /* PlanService.m */; };
+		8824005E1DAB1D39003D5CC1 /* PlanDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824005D1DAB1D39003D5CC1 /* PlanDetailEntity.m */; };
 		882D1E861DA9E118002C5BC9 /* PlanDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E851DA9E118002C5BC9 /* PlanDetailViewController.m */; };
 		882D1E891DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E881DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m */; };
 		882D1E8C1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */; };
@@ -222,6 +224,10 @@
 		8819BCCD1D6ADF0C00E04B49 /* SiftWorkOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiftWorkOrderViewController.h; sourceTree = "<group>"; };
 		8819BCCE1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiftWorkOrderViewController.m; sourceTree = "<group>"; };
 		8819BCD21D6AE1D900E04B49 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
+		882400591DAB1CFF003D5CC1 /* PlanService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanService.h; sourceTree = "<group>"; };
+		8824005A1DAB1CFF003D5CC1 /* PlanService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanService.m; sourceTree = "<group>"; };
+		8824005C1DAB1D39003D5CC1 /* PlanDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailEntity.h; sourceTree = "<group>"; };
+		8824005D1DAB1D39003D5CC1 /* PlanDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanDetailEntity.m; sourceTree = "<group>"; };
 		882D1E841DA9E118002C5BC9 /* PlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailViewController.h; sourceTree = "<group>"; };
 		882D1E851DA9E118002C5BC9 /* PlanDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanDetailViewController.m; sourceTree = "<group>"; };
 		882D1E871DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanMaintainContentTableViewController.h; sourceTree = "<group>"; };
@@ -868,6 +874,8 @@
 				88F140D31D6C258200B8BCCC /* InspectTaskEntity.m */,
 				8851F4391DA8A29E0022FBD9 /* PlanListEntity.h */,
 				8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */,
+				8824005C1DAB1D39003D5CC1 /* PlanDetailEntity.h */,
+				8824005D1DAB1D39003D5CC1 /* PlanDetailEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -985,6 +993,8 @@
 			children = (
 				D22597861D9AA42D00500EB7 /* AssetsService.h */,
 				D22597871D9AA42D00500EB7 /* AssetsService.m */,
+				882400591DAB1CFF003D5CC1 /* PlanService.h */,
+				8824005A1DAB1CFF003D5CC1 /* PlanService.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1405,6 +1415,7 @@
 				889BA2C01D64159600BC5413 /* ELCAlbumPickerController.m in Sources */,
 				D28AD55D1D7289440033ADB6 /* PriorityWrapView.m in Sources */,
 				D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */,
+				8824005B1DAB1CFF003D5CC1 /* PlanService.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
 				88BCFE7A1D9A53760016207B /* AssetsProducerInfoTableViewController.m in Sources */,
@@ -1452,6 +1463,7 @@
 				D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */,
 				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
+				8824005E1DAB1D39003D5CC1 /* PlanDetailEntity.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
 				D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */,
 				88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */,

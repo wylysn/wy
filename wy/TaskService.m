@@ -37,7 +37,7 @@
         [condition setObject:@"gettasklist" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
         [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-        [condition setObject:userName?userName:@"" forKey:@"username"];   //后续补上userName?userName:@""    @"baojie"
+        [condition setObject:userName?userName:@"" forKey:@"username"];
         [condition addEntriesFromDictionary:filterDic];
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             

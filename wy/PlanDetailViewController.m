@@ -9,6 +9,7 @@
 #import "PlanDetailViewController.h"
 #import "PlanMaintainContentTableViewController.h"
 #import "PlanObjectTableViewController.h"
+#import "PlanService.h"
 
 @interface PlanDetailViewController () <UIScrollViewDelegate>
 
@@ -83,37 +84,20 @@
     PlanObjectTableViewController *planObjectViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANOBJECT"];
     [self addChildViewController:planObjectViewController];
     
-    /*
-    AssetsProducerInfoTableViewController *producerinfoViewController = [featureSB instantiateViewControllerWithIdentifier:@"AssetsProducerInfo"];
-    [self addChildViewController:producerinfoViewController];
     
-    AssetsRepaireRecordTableViewController *assetsRepaireRecordViewController = [featureSB instantiateViewControllerWithIdentifier:@"AssetsRepaireRecord"];
-    [self addChildViewController:assetsRepaireRecordViewController];
-    
-    AssetsMaintainRecordTableViewController *assetsMaintainRecordViewController = [featureSB instantiateViewControllerWithIdentifier:@"AssetsMaintainRecord"];
-    [self addChildViewController:assetsMaintainRecordViewController];
-    
-    AssetsService *assetsService = [[AssetsService alloc] init];
-    [assetsService getAssets:self.Code success:^(NSDictionary *assetsDic) {
-        baseInfoViewController.assetsDic = assetsDic;
-        baseInfoViewController.paramList = assetsDic[@"ParamList"];
-        [baseInfoViewController.tableView reloadData];
+    PlanService *planService = [[PlanService alloc] init];
+    [planService getPlanDetail:self.Code success:^(PlanDetailEntity *planDetail) {
+        planMaintainContentViewController.planDetail = planDetail;
+        [planMaintainContentViewController.tableView reloadData];
         
-        producerinfoViewController.producerList = assetsDic[@"FactoryList"];
-        [producerinfoViewController.tableView reloadData];
-        
-        assetsRepaireRecordViewController.repairList = assetsDic[@"MaintainList"];
-        [assetsRepaireRecordViewController.tableView reloadData];
-        
-        assetsMaintainRecordViewController.maintainList = assetsDic[@"WBList"];
-        [assetsMaintainRecordViewController.tableView reloadData];
+        planObjectViewController.planDetail = planDetail;
+        [planObjectViewController.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
-     */
 }
 
 - (void)titlebtnClick:(id)sender {
