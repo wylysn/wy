@@ -87,6 +87,7 @@
 		889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CE1D64181300BC5413 /* camera-flash-on.png */; };
 		889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889BA2CF1D64181300BC5413 /* camera-flash-on@2x.png */; };
 		88A1CB3B1D8F859F00C0B230 /* DeviceStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */; };
+		88A5ED6D1DACC5D2007F0499 /* PlanOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A5ED6C1DACC5D2007F0499 /* PlanOrderTableViewController.m */; };
 		88A893971D332B260050D9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893961D332B260050D9F3 /* main.m */; };
 		88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A893991D332B260050D9F3 /* AppDelegate.m */; };
 		88A893A31D332B260050D9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A893A11D332B260050D9F3 /* Main.storyboard */; };
@@ -342,6 +343,8 @@
 		88A1CB391D8F859F00C0B230 /* DeviceStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatusViewController.h; sourceTree = "<group>"; };
 		88A1CB3A1D8F859F00C0B230 /* DeviceStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatusViewController.m; sourceTree = "<group>"; };
 		88A5ED661DAC72EB007F0499 /* wy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wy.entitlements; sourceTree = "<group>"; };
+		88A5ED6B1DACC5D2007F0499 /* PlanOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanOrderTableViewController.h; sourceTree = "<group>"; };
+		88A5ED6C1DACC5D2007F0499 /* PlanOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanOrderTableViewController.m; sourceTree = "<group>"; };
 		88A893921D332B260050D9F3 /* wy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A893961D332B260050D9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A893981D332B260050D9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -919,6 +922,8 @@
 				882D1E881DA9ED35002C5BC9 /* PlanMaintainContentTableViewController.m */,
 				882D1E8A1DAA0CE8002C5BC9 /* PlanObjectTableViewController.h */,
 				882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */,
+				88A5ED6B1DACC5D2007F0499 /* PlanOrderTableViewController.h */,
+				88A5ED6C1DACC5D2007F0499 /* PlanOrderTableViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1449,6 +1454,7 @@
 				D2CF2E721D7BB29E0020759A /* PRView.m in Sources */,
 				88FF11581D7571960073EDBB /* ChooseDeviceViewController.m in Sources */,
 				88D5CB421D7022CA0041C9A1 /* FeedbackChildTableViewController.m in Sources */,
+				88A5ED6D1DACC5D2007F0499 /* PlanOrderTableViewController.m in Sources */,
 				8841D4711D73D97D003E4495 /* TaskXunjianBaseInfoTableViewController.m in Sources */,
 				889BA2C81D64159600BC5413 /* ELCImagePickerController.m in Sources */,
 				880BDB851D88F683001DACF5 /* InspectionChildModelEntity.m in Sources */,

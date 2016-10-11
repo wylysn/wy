@@ -9,6 +9,7 @@
 #import "PlanDetailViewController.h"
 #import "PlanMaintainContentTableViewController.h"
 #import "PlanObjectTableViewController.h"
+#import "PlanOrderTableViewController.h"
 #import "PlanService.h"
 
 @interface PlanDetailViewController () <UIScrollViewDelegate>
@@ -84,6 +85,8 @@
     PlanObjectTableViewController *planObjectViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANOBJECT"];
     [self addChildViewController:planObjectViewController];
     
+    PlanOrderTableViewController *planOrderViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANORDER"];
+    [self addChildViewController:planOrderViewController];
     
     PlanService *planService = [[PlanService alloc] init];
     [planService getPlanDetail:self.Code success:^(PlanDetailEntity *planDetail) {
@@ -92,6 +95,9 @@
         
         planObjectViewController.planDetail = planDetail;
         [planObjectViewController.tableView reloadData];
+        
+        planOrderViewController.planDetail = planDetail;
+        [planOrderViewController.tableView reloadData];
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];

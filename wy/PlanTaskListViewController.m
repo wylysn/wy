@@ -333,6 +333,9 @@
     UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
     PlanDetailViewController *planDetailViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANDETAIL"];
     planDetailViewController.Code = plan.Code;
+    [planDetailViewController setTitle:plan.Name];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
     [self.navigationController pushViewController:planDetailViewController animated:YES];
 }
 

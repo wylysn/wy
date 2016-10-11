@@ -87,7 +87,7 @@
     UILabel *valueLabel = [cell viewWithTag:2];
     if (row == 0) {
         keyLabel.text = @"关键字";
-        valueLabel.text = keyWord;
+        valueLabel.text = knowledge.Keyword;
     } else if (row == 1) {
         keyLabel.text = @"内容";
         valueLabel.text = knowledge.Content;
