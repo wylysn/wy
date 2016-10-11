@@ -33,11 +33,16 @@
 - (IBAction)login:(id)sender {
     LoginService *loginService = [[LoginService alloc] init];
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
     NSString *userName = self.userNameField.text;
     NSString *password = self.passwordField.text;
-    [loginService loginWithUserName:userName password:password success:^(NSDictionary *userDic){
+    NSString *deviceToken = [userDefaults objectForKey:@"deviceToken"];
+    [userInfoDic setObject:userName forKey:@"userName"];
+    [userInfoDic setObject:password forKey:@"password"];
+    [userInfoDic setObject:deviceToken forKey:@"deviceToken"];
+    [loginService loginWithUserInfo:userInfoDic success:^(NSDictionary *userDic){
         app.isLogin = YES;
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:userName forKey:@"userName"];
         if (self.rememberBtn.isSelected) {
             [userDefaults setObject:password forKey:@"password"];

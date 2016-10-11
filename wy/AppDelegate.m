@@ -35,6 +35,7 @@
         [[URLManager getSharedInstance] setURL_PATH:server];
     }
     
+    //本地推送
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
@@ -44,7 +45,63 @@
         
     }
     
+    [self notifyWith:application];
+    
     return YES;
+}
+
+- (void)notifyWith:(UIApplication *)application
+{
+    //判断是否注册了远程通知
+    if (![application isRegisteredForRemoteNotifications]) {
+        UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+        [application registerUserNotificationSettings:uns];
+        //注册远程通知
+        [application registerForRemoteNotifications];
+    }else{
+        [self getDivceToken:application];
+    }
+}
+
+- (void)getDivceToken:(UIApplication *)application {
+    NSUserDefaults* defaluts =[NSUserDefaults standardUserDefaults];
+    NSString *deviceToken = [defaluts objectForKey:@"deviceToken"];
+    if ([deviceToken isBlankString]) {
+        BOOL isNotification = [self isAllowedNotification];
+        if (isNotification) {
+            UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+            [application registerUserNotificationSettings:uns];
+            //注册远程通知
+            [application registerForRemoteNotifications];
+        }
+    }
+}
+
+//判断app是否开启推送
+- (BOOL)isAllowedNotification {
+    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    if (UIUserNotificationTypeNone != setting.types) {
+        return YES;
+    }
+    return NO;
+}
+
+//注册成功，返回deviceToken
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    if (deviceToken) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString * newString  = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]                  stringByReplacingOccurrencesOfString: @">" withString: @""]                 stringByReplacingOccurrencesOfString: @" " withString: @""];
+        [userDefaults setObject:newString forKey:@"deviceToken"];
+        [userDefaults synchronize];
+    }
+    NSLog(@"deviceToken:%@", deviceToken);
+}
+
+//注册失败
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

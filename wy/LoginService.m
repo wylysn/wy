@@ -10,7 +10,7 @@
 
 @implementation LoginService
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password success:(void (^)(NSDictionary *userDic))success failure:(void (^)(NSString *message))failure {
+- (void)loginWithUserInfo:(NSDictionary *)userInfoDic success:(void (^)(NSDictionary *userDic))success failure:(void (^)(NSString *message))failure {
     Reachability *reach = [Reachability reachabilityForInternetConnection];
     if (reach.isReachable) {
         PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
@@ -18,8 +18,9 @@
         [condition setObject:@"checklogin" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
         [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-        [condition setObject:userName forKey:@"name"];
-        [condition setObject:password forKey:@"password"];
+        [condition setObject:userInfoDic[@"userName"] forKey:@"name"];
+        [condition setObject:userInfoDic[@"password"] forKey:@"password"];
+        [condition setObject:userInfoDic[@"deviceToken"] forKey:@"token"];
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
