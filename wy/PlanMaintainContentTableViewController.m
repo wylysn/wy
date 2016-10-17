@@ -119,7 +119,7 @@
             valueLabel.text = self.planDetail.Name;
         } else if (row == 1) {
             keyLabel.text = @"优先级";
-            valueLabel.text = priorityDic[self.planDetail.Priority];
+            valueLabel.text = self.planDetail.Priority;
         } else if (row == 2) {
             keyLabel.text = @"时间";
             valueLabel.text = self.planDetail.ExecuteTime;

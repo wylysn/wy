@@ -10,18 +10,55 @@
 
 @implementation PlanService
 
+- (void)getPlanList:(NSMutableDictionary *)condition success:(void (^)(NSArray *planListArr))success failure:(void (^)(NSString *message))failure {
+    PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefaults objectForKey:@"userName"];
+    [condition setObject:@"getschedulelist" forKey:@"action"];
+    [condition setObject:userName forKey:@"userName"];
+    [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
+    [condition setObject:[NSString getDeviceId] forKey:@"imei"];
+    [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (responseObject[@"success"]) {
+            NSArray* response = responseObject[@"data"];
+            NSMutableArray *planListArr = [[NSMutableArray alloc] init];
+            for (NSDictionary *obj in response) {
+                PlanListEntity *planListEntity = [[PlanListEntity alloc] initWithDictionary:obj];
+                [planListArr addObject:planListEntity];
+            }
+            success(planListArr);
+        } else {
+            failure(responseObject[@"message"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(@"网络请求错误");
+    }];
+}
+
 - (void)getPlanDetail:(NSString *)code success:(void (^)(PlanDetailEntity *planDetail))success failure:(void (^)(NSString *message))failure {
-    PlanDetailEntity *plan = [[PlanDetailEntity alloc] init];
-    plan.Name = @"冷水机组维护";
-    plan.Priority = @"1";
-    plan.ExecuteTime = @"2016-09-21 11:05:11";
-    plan.StepList = @[@{@"Code":@"1", @"Content":@"维护1"},@{@"Code":@"2", @"Content":@"维护2维护2维护2维护2维护2维护2维护2维护2，维护2"}];
-    plan.MaterialList = @[@{@"WzName":@"螺丝帽", @"Wzpinp":@"德国宝来", @"Wztype":@"X1-11", @"WzUnitName":@"个", @"Wznumber":@"21"},@{@"WzName":@"螺丝帽2", @"Wzpinp":@"德国宝来", @"Wztype":@"X1-11", @"WzUnitName":@"个", @"Wznumber":@"1"}];
-    plan.ToolList = @[@{@"GjName":@"螺丝刀", @"Gjtype":@"K-13", @"Gjnumber":@"2把"}, @{@"GjName":@"螺丝刀2", @"Gjtype":@"K-14", @"Gjnumber":@"1把"}];
-    plan.PositionList = @[@{@"Code":@"015", @"Name":@"上海国际旅游区能源站维保管理系统/能源站/设备系统/主设备间"},@{@"Code":@"016", @"Name":@"上海国际旅游区能源站维保管理系统/能源站/设备系统/主设备间"}];
-    plan.SBList = @[@{@"Code":@"000010", @"Name":@"冷却塔软水设备", @"CatalogName":@"非电力系统/化水/化水设备", @"Position":@"上海国际旅游区能源站维保管理系统/能源站/设备系统/主设备间"}, @{@"Code":@"000020", @"Name":@"冷却塔软水设备", @"CatalogName":@"非电力系统/化水/化水设备", @"Position":@"上海国际旅游区能源站维保管理系统/能源站/设备系统/主设备间"}];
-    plan.TaskInfo = @{@"Code":@"123456", @"ShortTitle":@"3", @"Subject":@"", @"Location":@""};
-    success(plan);
+    PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefaults objectForKey:@"userName"];
+    NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
+    [condition setObject:@"getscheduledata" forKey:@"action"];
+    [condition setObject:userName forKey:@"userName"];
+    [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
+    [condition setObject:[NSString getDeviceId] forKey:@"imei"];
+    [condition setObject:code forKey:@"code"];
+    [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (responseObject[@"success"]) {
+            PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0]];
+            success(planDetail);
+        } else {
+            failure(responseObject[@"message"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(@"网络请求错误");
+    }];
 }
 
 @end

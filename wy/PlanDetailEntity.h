@@ -20,6 +20,6 @@
 @property (nonatomic, copy) NSArray *ToolList;
 @property (nonatomic, copy) NSArray *PositionList;
 @property (nonatomic, copy) NSArray *SBList;
-@property (nonatomic, copy) NSDictionary *TaskInfo;
+@property (nonatomic, copy) NSArray *TaskInfo;
 
 @end

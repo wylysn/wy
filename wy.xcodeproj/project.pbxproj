@@ -34,6 +34,8 @@
 		8841D4811D741807003E4495 /* ReportImpaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8841D4801D741807003E4495 /* ReportImpaireViewController.m */; };
 		8851F4381DA88FB00022FBD9 /* PlanTaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */; };
 		8851F43B1DA8A29E0022FBD9 /* PlanListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */; };
+		885B28B71DB4CB5100FCAF6F /* PlanOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885B28B61DB4CB5100FCAF6F /* PlanOperateViewController.m */; };
+		885B28BA1DB4CE7200FCAF6F /* PlanOperateNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885B28B91DB4CE7200FCAF6F /* PlanOperateNaviViewController.m */; };
 		885FEAFF1D9107AD00EC5A81 /* TaskDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */; };
 		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
 		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
@@ -249,6 +251,10 @@
 		8851F4371DA88FB00022FBD9 /* PlanTaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanTaskListViewController.m; sourceTree = "<group>"; };
 		8851F4391DA8A29E0022FBD9 /* PlanListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanListEntity.h; sourceTree = "<group>"; };
 		8851F43A1DA8A29E0022FBD9 /* PlanListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanListEntity.m; sourceTree = "<group>"; };
+		885B28B51DB4CB5100FCAF6F /* PlanOperateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanOperateViewController.h; sourceTree = "<group>"; };
+		885B28B61DB4CB5100FCAF6F /* PlanOperateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanOperateViewController.m; sourceTree = "<group>"; };
+		885B28B81DB4CE7200FCAF6F /* PlanOperateNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanOperateNaviViewController.h; sourceTree = "<group>"; };
+		885B28B91DB4CE7200FCAF6F /* PlanOperateNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanOperateNaviViewController.m; sourceTree = "<group>"; };
 		885FEAFD1D9107AD00EC5A81 /* TaskDeviceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDeviceEntity.h; sourceTree = "<group>"; };
 		885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDeviceEntity.m; sourceTree = "<group>"; };
 		887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjian2ViewController.h; sourceTree = "<group>"; };
@@ -924,6 +930,10 @@
 				882D1E8B1DAA0CE8002C5BC9 /* PlanObjectTableViewController.m */,
 				88A5ED6B1DACC5D2007F0499 /* PlanOrderTableViewController.h */,
 				88A5ED6C1DACC5D2007F0499 /* PlanOrderTableViewController.m */,
+				885B28B81DB4CE7200FCAF6F /* PlanOperateNaviViewController.h */,
+				885B28B91DB4CE7200FCAF6F /* PlanOperateNaviViewController.m */,
+				885B28B51DB4CB5100FCAF6F /* PlanOperateViewController.h */,
+				885B28B61DB4CB5100FCAF6F /* PlanOperateViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1462,6 +1472,7 @@
 				D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */,
 				882D1E861DA9E118002C5BC9 /* PlanDetailViewController.m in Sources */,
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
+				885B28B71DB4CB5100FCAF6F /* PlanOperateViewController.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
 				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
@@ -1470,6 +1481,7 @@
 				8851F43B1DA8A29E0022FBD9 /* PlanListEntity.m in Sources */,
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
+				885B28BA1DB4CE7200FCAF6F /* PlanOperateNaviViewController.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
 				88BCFE741D9A18890016207B /* AssetsDetailViewController.m in Sources */,
 				D22597881D9AA42D00500EB7 /* AssetsService.m in Sources */,

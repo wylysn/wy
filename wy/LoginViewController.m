@@ -40,7 +40,7 @@
     NSString *deviceToken = [userDefaults objectForKey:@"deviceToken"];
     [userInfoDic setObject:userName forKey:@"userName"];
     [userInfoDic setObject:password forKey:@"password"];
-    [userInfoDic setObject:deviceToken forKey:@"deviceToken"];
+    [userInfoDic setObject:deviceToken?deviceToken:@"" forKey:@"deviceToken"];
     [loginService loginWithUserInfo:userInfoDic success:^(NSDictionary *userDic){
         app.isLogin = YES;
         [userDefaults setObject:userName forKey:@"userName"];

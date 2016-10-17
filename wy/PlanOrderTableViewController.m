@@ -7,6 +7,7 @@
 //
 
 #import "PlanOrderTableViewController.h"
+#import "PlanOperateNaviViewController.h"
 
 @interface PlanOrderTableViewController ()
 
@@ -55,22 +56,32 @@
     
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
-    NSDictionary *taskInfo = self.planDetail.TaskInfo;
+    NSDictionary *taskInfo = self.planDetail.TaskInfo[0];
     if (row == 0) {
         keyLabel.text = @"任务编码";
         valueLabel.text = taskInfo[@"Code"];
     } else if (row == 1) {
         keyLabel.text = @"任务类型";
-        valueLabel.text = shortTitleDic[taskInfo[@"ShortTitle"]];
+        valueLabel.text = taskInfo[@"ShortTitle"];
     } else if (row == 2) {
         keyLabel.text = @"描述";
-        valueLabel.text = taskInfo[@"Subject"];
+        valueLabel.text = (NSNull *)taskInfo[@"Subject"]==[NSNull null]?@"":taskInfo[@"Subject"];
     } else if (row == 3) {
         keyLabel.text = @"位置";
         valueLabel.text = taskInfo[@"Location"];
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+    
+    PlanOperateNaviViewController *planOperateViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANOPERATENAVI"];
+    
+    [self.navigationController presentViewController:planOperateViewController animated:YES completion:^{
+        
+    }];
 }
 
 @end

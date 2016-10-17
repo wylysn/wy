@@ -10,6 +10,7 @@
 #import "PRActionSheetPickerView.h"
 #import "PlanListEntity.h"
 #import "PlanDetailViewController.h"
+#import "PlanService.h"
 
 @interface PlanTaskListViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, PRActionSheetPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -25,12 +26,15 @@
 @end
 
 @implementation PlanTaskListViewController {
+    PlanService *planService;
+    
     float wh;
     UIWindow *window;
     NSDate *defaultDate;
     
-    NSMutableArray *daysArr;
+    NSMutableDictionary *condition;
     NSMutableArray *planListArr;
+    NSMutableArray *daysArr;
     NSMutableDictionary *planListDic;
     NSMutableDictionary *planStatusDic;
 }
@@ -46,6 +50,9 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    planService = [[PlanService alloc] init];
+    
+    condition = [[NSMutableDictionary alloc] init];
     planListArr = [[NSMutableArray alloc] init];
     daysArr = [[NSMutableArray alloc] init];
     defaultDate = [NSDate date];
@@ -120,36 +127,48 @@
     }
     [self.collectionView reloadData];
     
-    //测试数据，后续删除
-    [planListArr removeAllObjects];
-    PlanListEntity *plan1 = [[PlanListEntity alloc] initWithDictionary:@{@"Code":@"1",@"Name":@"#1锅炉机组(00001)",@"ExecuteTime":@"2016-10-01",@"TaskStatus":@"1",@"GDCode":@"1"}];
-    [planListArr addObject:plan1];
-    PlanListEntity *plan2 = [[PlanListEntity alloc] initWithDictionary:@{@"Code":@"2",@"Name":@"#1锅炉机组",@"ExecuteTime":@"2016-10-01",@"TaskStatus":@"0",@"GDCode":@""}];
-    [planListArr addObject:plan2];
-    PlanListEntity *plan3 = [[PlanListEntity alloc] initWithDictionary:@{@"Code":@"3",@"Name":@"#1锅炉机组",@"ExecuteTime":@"2016-10-20",@"TaskStatus":@"1",@"GDCode":@"3"}];
-    [planListArr addObject:plan3];
-    PlanListEntity *plan4 = [[PlanListEntity alloc] initWithDictionary:@{@"Code":@"4",@"Name":@"#1锅炉机组",@"ExecuteTime":@"2016-10-21",@"TaskStatus":@"2",@"GDCode":@"4"}];
-    [planListArr addObject:plan4];
-    PlanListEntity *plan5 = [[PlanListEntity alloc] initWithDictionary:@{@"Code":@"5",@"Name":@"#1锅炉机组",@"ExecuteTime":@"2016-10-21",@"TaskStatus":@"1",@"GDCode":@"5"}];
-    [planListArr addObject:plan5];
+    [condition setObject:startDateStr forKey:@"startdate"];
+    [condition setObject:endDateStr forKey:@"enddate"];
     
-    planListDic = [[NSMutableDictionary alloc] init];
-    for (PlanListEntity *plan in planListArr) {
-        if (planListDic[plan.ExecuteTime]) {
-            NSMutableArray *planArr = planListDic[plan.ExecuteTime];
-            [planArr addObject:plan];
-        } else {
-            NSMutableArray *planArr = [[NSMutableArray alloc] init];
-            [planArr addObject:plan];
-            [planListDic setObject:planArr forKey:plan.ExecuteTime];
+    [planService getPlanList:condition success:^(NSArray *planListArr1) {
+        planListDic = [[NSMutableDictionary alloc] init];
+        [planListArr removeAllObjects];
+        if (!planListArr) {
+            planListArr = [[NSMutableArray alloc] init];
         }
-    }
-    [self.collectionView reloadData];
+        [planListArr addObjectsFromArray:planListArr1];
+        for (PlanListEntity *plan in planListArr) {
+            if (planListDic[plan.ExecuteTime]) {
+                NSMutableArray *planArr = planListDic[plan.ExecuteTime];
+                [planArr addObject:plan];
+            } else {
+                NSMutableArray *planArr = [[NSMutableArray alloc] init];
+                [planArr addObject:plan];
+                [planListDic setObject:planArr forKey:plan.ExecuteTime];
+            }
+        }
+        
+        [self.collectionView reloadData];
+        [self changeStatusView];
+        self.tableViewheightConstraint.constant = 44*planListArr.count;
+        [self.tableView reloadData];
+    } failure:^(NSString *message) {
+        planListDic = [[NSMutableDictionary alloc] init];
+        planStatusDic = [[NSMutableDictionary alloc] init];
+        [planListArr removeAllObjects];
+        
+        [self.collectionView reloadData];
+        [self changeStatusView];
+        self.tableViewheightConstraint.constant = 44*planListArr.count;
+        [self.tableView reloadData];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
     
-    [self changeStatusView];
     
-    self.tableViewheightConstraint.constant = 44*planListArr.count;
-    [self.tableView reloadData];
 }
 
 //更改状态
@@ -165,9 +184,9 @@
             [planStatusDic setObject:planArr forKey:plan.TaskStatus];
         }
     }
-    [self.unProgressBtn setTitle:[NSString stringWithFormat:@"未处理(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"0"]).count] forState:UIControlStateNormal];
-    [self.progressBtn setTitle:[NSString stringWithFormat:@"已处理(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"1"]).count] forState:UIControlStateNormal];
-    [self.doneBtn setTitle:[NSString stringWithFormat:@"已完成(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"2"]).count] forState:UIControlStateNormal];
+    [self.unProgressBtn setTitle:[NSString stringWithFormat:@"未开始(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"未开始"]).count] forState:UIControlStateNormal];
+    [self.progressBtn setTitle:[NSString stringWithFormat:@"处理中(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"处理中"]).count] forState:UIControlStateNormal];
+    [self.doneBtn setTitle:[NSString stringWithFormat:@"已完成(%lu)", (unsigned long)((NSMutableArray *)planStatusDic[@"已完成"]).count] forState:UIControlStateNormal];
 }
 
 - (void)getDateWithDate:(NSDate *)date andId:(NSInteger)idNum {
@@ -208,6 +227,8 @@
     {
         cell = [[UICollectionViewCell alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
     }
+    
+    cell.backgroundColor = [UIColor whiteColor];
     
     UILabel *dayLabel = [cell viewWithTag:1];
     NSString *dateStr = daysArr[row];
@@ -310,14 +331,12 @@
     }
     
     UILabel *statusLabel = [cell viewWithTag:3];
-    if ([@"0" isEqualToString:plan.TaskStatus]) {
-        statusLabel.text = @"未开始";
+    statusLabel.text = plan.TaskStatus;
+    if ([@"未开始" isEqualToString:plan.TaskStatus]) {
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"ee5162"];
-    } else if ([@"1" isEqualToString:plan.TaskStatus]) {
-        statusLabel.text = @"处理中";
+    } else if ([@"处理中" isEqualToString:plan.TaskStatus]) {
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"3dace1"];
-    } else if ([@"2" isEqualToString:plan.TaskStatus]) {
-        statusLabel.text = @"已完成";
+    } else if ([@"已完成" isEqualToString:plan.TaskStatus]) {
         statusLabel.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
     }
     
