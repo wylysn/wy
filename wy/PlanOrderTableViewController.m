@@ -77,8 +77,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
     
+    NSDictionary *taskInfo = self.planDetail.TaskInfo[0];
     PlanOperateNaviViewController *planOperateViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANOPERATENAVI"];
-    
+    planOperateViewController.Code = taskInfo[@"Code"];
     [self.navigationController presentViewController:planOperateViewController animated:YES completion:^{
         
     }];

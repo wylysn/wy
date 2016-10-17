@@ -10,4 +10,6 @@
 
 @interface PlanOperateNaviViewController : UINavigationController
 
+@property (nonatomic,strong) NSString *Code;
+
 @end

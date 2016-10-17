@@ -11,6 +11,7 @@
 #import "PlanObjectTableViewController.h"
 #import "PlanOrderTableViewController.h"
 #import "PlanService.h"
+#import "PlanOperateNaviViewController.h"
 
 @interface PlanOperateViewController () <UIScrollViewDelegate>
 
@@ -86,9 +87,9 @@
     PlanOrderTableViewController *planOrderViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANORDER"];
     [self addChildViewController:planOrderViewController];
     
-    /*
     PlanService *planService = [[PlanService alloc] init];
-    [planService getPlanDetail:self.Code success:^(PlanDetailEntity *planDetail) {
+    PlanOperateNaviViewController *naviViewController = self.navigationController;
+    [planService getPlanTask:naviViewController.Code success:^(PlanDetailEntity *planDetail) {
         planMaintainContentViewController.planDetail = planDetail;
         [planMaintainContentViewController.tableView reloadData];
         
@@ -103,7 +104,6 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
-     */
 }
 
 - (void)titlebtnClick:(id)sender {
@@ -188,6 +188,12 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
+}
+
+- (IBAction)backclick:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
