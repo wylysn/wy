@@ -88,7 +88,7 @@
     [self addChildViewController:planOrderViewController];
     
     PlanService *planService = [[PlanService alloc] init];
-    PlanOperateNaviViewController *naviViewController = self.navigationController;
+    PlanOperateNaviViewController *naviViewController = (PlanOperateNaviViewController *)(self.navigationController);
     [planService getPlanTask:naviViewController.Code success:^(PlanDetailEntity *planDetail) {
         planMaintainContentViewController.planDetail = planDetail;
         [planMaintainContentViewController.tableView reloadData];
