@@ -56,7 +56,7 @@
     
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
-    NSDictionary *taskInfo = self.planDetail.TaskInfo[0];
+    NSDictionary *taskInfo = self.planDetail.TaskInfo;
     if (row == 0) {
         keyLabel.text = @"任务编码";
         valueLabel.text = taskInfo[@"Code"];
@@ -75,9 +75,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UIStoryboard* featureSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
     
-    NSDictionary *taskInfo = self.planDetail.TaskInfo[0];
+    NSDictionary *taskInfo = self.planDetail.TaskInfo;
+    if(!taskInfo || [taskInfo[@"Code"] isBlankString]) {
+        return;
+    }
     PlanOperateNaviViewController *planOperateViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANOPERATENAVI"];
     planOperateViewController.Code = taskInfo[@"Code"];
     [self.navigationController presentViewController:planOperateViewController animated:YES completion:^{
