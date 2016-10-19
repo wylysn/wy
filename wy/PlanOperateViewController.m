@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *titleScrollView;
 @property (strong, nonatomic) UIView *titleBottomView;
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
 
 @end
 
