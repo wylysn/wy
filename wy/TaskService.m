@@ -193,12 +193,12 @@
     }
 }
 
-- (void)submitAction:(NSMutableDictionary *)dataDic withEntity:(TaskEntity *)taskEntity success:(void (^)())success failure:(void (^)(NSString *message))failure {
+- (void)submitAction:(NSMutableDictionary *)dataDic withCode:(NSString *)Code success:(void (^)())success failure:(void (^)(NSString *message))failure {
     PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userName = [userDefaults objectForKey:@"userName"];
     NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@&username=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], taskEntity.Code, dataDic[@"eventname"], userName];
+    NSString *url = [NSString stringWithFormat:@"%@?action=processtask&tick=%@&imei=%@&code=%@&eventname=%@&username=%@", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], Code, dataDic[@"eventname"], userName];
     [condition setObject:[NSString convertArrayToString:dataDic[@"data"]] forKey:@"SubmitData"];
     [manager POST:url parameters:condition progress:^(NSProgress * _Nonnull uploadProgress) {
         

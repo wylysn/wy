@@ -383,10 +383,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        [taskService submitAction:submitDic withEntity:taskEntity success:^{
+        [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];

@@ -22,7 +22,10 @@
         _ToolList = dictionary[@"ToolList"];
         _PositionList = dictionary[@"PositionList"];
         _SBList = dictionary[@"SBList"];
+        _TaskAction = dictionary[@"TaskAction"];
         _TaskInfo = dictionary[@"TaskInfo"];
+        _EditSBMXFields = dictionary[@"EditSBMXFields"];
+        _EditWZXQFields = dictionary[@"EditWZXQFields"];
     }
     return self;
 }

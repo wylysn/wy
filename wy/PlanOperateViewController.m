@@ -12,8 +12,9 @@
 #import "PlanOrderTableViewController.h"
 #import "PlanService.h"
 #import "PlanOperateNaviViewController.h"
+#import "TaskService.h"
 
-@interface PlanOperateViewController () <UIScrollViewDelegate>
+@interface PlanOperateViewController () <UIScrollViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *titleScrollView;
 @property (strong, nonatomic) UIView *titleBottomView;
@@ -27,12 +28,18 @@
     NSInteger selectedIndex;
     UIButton *selectedBtn;
     float TITLEWIDTH;
+    
+    TaskService *taskService;
+    
+    NSMutableArray *actionsMutableArr;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     TITLEWIDTH = SCREEN_WIDTH/2;
+    
+    taskService = [[TaskService alloc] init];
     
     /* 标题滚动 */
     self.titleScrollView.delegate = self;
@@ -100,12 +107,186 @@
         
         planOrderViewController.planDetail = planDetail;
         [planOrderViewController.tableView reloadData];
+        
+        //判断是否有操作，生成操作按钮
+        
+        if (planDetail.TaskAction) {
+            actionsMutableArr = [[NSMutableArray alloc] initWithArray:planDetail.TaskAction];
+            /*
+            if (planDetail.IsLocalSave) {
+                NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
+                [saveDic setValue:@"FormSave" forKey:@"EventName"];
+                [saveDic setValue:@"保存" forKey:@"DisplayName"];
+                [saveDic setValue:@100 forKey:@"flag"];
+                [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
+                [actionsMutableArr insertObject:saveDic atIndex:0];
+            }
+            */
+            if (actionsMutableArr && actionsMutableArr.count>0) {
+                self.bottomViewConstraint.constant = 0;
+                NSInteger actionNum = actionsMutableArr.count;
+                float btnWidth;
+                float space = 15;
+                btnWidth = (SCREEN_WIDTH-space*((actionNum>=3?3:actionNum)+1))/(actionNum>=3?3:actionNum);
+                float btnHeight = 30;
+                float y = (55-btnHeight)/2;
+                
+                if (actionsMutableArr.count>3) {
+                    UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
+                    moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    moreBtn.layer.cornerRadius = 5;
+                    moreBtn.tag = 2;
+                    [moreBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:moreBtn];
+                } else if (actionsMutableArr.count==3) {
+                    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn3 setTitle:actionsMutableArr[2][@"DisplayName"] forState:UIControlStateNormal];
+                    btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                    btn3.layer.cornerRadius = 5;
+                    btn3.tag = 2;
+                    [btn3 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn3];
+                }
+                if (actionsMutableArr.count>=3) {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn1];
+                    
+                    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
+                    [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                    btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                    btn2.layer.cornerRadius = 5;
+                    btn2.tag = 1;
+                    [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn2];
+                } else {
+                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                    btn1.layer.cornerRadius = 5;
+                    btn1.tag = 0;
+                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.bottomView addSubview:btn1];
+                    
+                    if (actionsMutableArr.count==2) {
+                        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                        [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                        btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                        btn2.layer.cornerRadius = 5;
+                        btn2.tag = 1;
+                        [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:btn2];
+                    }
+                }
+            }
+        }
+        
     } failure:^(NSString *message) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+}
+
+- (void)actionBtnClick:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    NSInteger tag = btn.tag;
+    if (tag == 2 && actionsMutableArr.count>3) {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        for (int i=2; i<actionsMutableArr.count; i++) {
+            [actionSheet addButtonWithTitle:actionsMutableArr[i][@"DisplayName"]];
+        }
+        [actionSheet addButtonWithTitle:@"取消"];
+        actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
+        actionSheet.tag = 2;
+        [actionSheet showInView:self.view];
+    } else {
+        [self doAction:tag];
+    }
+}
+
+- (void)doAction:(NSInteger)tag {
+    NSDictionary *actionDic = actionsMutableArr[tag];
+    NSString *eventname = actionDic[@"EventName"];
+    NSArray *submitField = [[[actionDic[@"SubmitFields"] stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+    NSMutableDictionary *submitDic = [[NSMutableDictionary alloc] init];
+    [submitDic setObject:eventname forKey:@"eventname"];
+    NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
+    /*
+    for (NSString *fieldStr in submitField) {
+        if ([@"SBCheckList" isEqualToString:fieldStr]) {
+            NSMutableArray *sbCheckListArr = [[NSMutableArray alloc] init];
+            NSArray *values = self.deviceCheckInfoDic.allValues;
+            for (NSDictionary *infoDic in values) {
+                NSArray *values2 = infoDic.allValues;
+                for (InspectionChildModelEntity *insChildEntity in values2) {
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"Code"];
+                    [dic setObject:[NSString stringWithFormat:@"%ld", insChildEntity.ItemType] forKey:@"ItemType"];
+                    [dic setObject:!insChildEntity.InputMax||[insChildEntity.InputMax isBlankString]?@"":insChildEntity.InputMax forKey:@"InputMax"];
+                    [dic setObject:!insChildEntity.InputMin||[insChildEntity.InputMin isBlankString]?@"":insChildEntity.InputMin forKey:@"InputMin"];
+                    [dic setObject:!insChildEntity.UnitName||[insChildEntity.UnitName isBlankString]?@"":insChildEntity.UnitName forKey:@"UnitName"];
+                    [dic setObject:insChildEntity.ItemValues forKey:@"ItemValues"];
+                    [dic setObject:insChildEntity.ItemName forKey:@"ItemName"];
+                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"taskDeviceCode"];
+                    if (insChildEntity.ItemValue && insChildEntity.ItemValue!=nil) {
+                        [dic setObject:insChildEntity.ItemValue forKey:@"ItemValue"];
+                    }
+                    if (insChildEntity.DataValid && insChildEntity.DataValid!=nil) {
+                        [dic setObject:insChildEntity.DataValid forKey:@"DataValid"];
+                    }
+                    [sbCheckListArr addObject:dic];
+                }
+            }
+            [dataDic setObject:sbCheckListArr forKey:fieldStr];
+            taskEntity.SBCheckList = [NSString convertArrayToString:sbCheckListArr];
+        }
+    }
+     */
+    NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
+    [submitDic setObject:dataArr forKey:@"data"];
+    
+    /*
+    if (taskEntity.IsLocalSave && tag==0) { //保存按钮点击
+        bool success = [taskService updateLocalTaskEntity:taskEntity];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+     */
+        [taskService submitAction:submitDic withCode:self.Code success:^{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } failure:^(NSString *message) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
+    /*
+    }
+     */
+}
+
+#pragma mark - actionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 2) {
+        [self doAction:buttonIndex+2];
+    }
 }
 
 - (void)titlebtnClick:(id)sender {
