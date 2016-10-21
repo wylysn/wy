@@ -369,7 +369,18 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 taskEntity.SBList = [NSString convertArrayToString:sbListArr];
             }
         } else if ([@"PicContent" isEqualToString:fieldStr]) {
-            
+            for (int i=0; i<self.imageArray.count; i++) {
+                NSString *imageString = [UIImage image2String:self.imageArray[i]];
+                if (i==0) {
+                    taskEntity.PicContent1 = imageString;
+                } else if (i==1) {
+                    taskEntity.PicContent2 = imageString;
+                } else if (i==2) {
+                    taskEntity.PicContent3 = imageString;
+                } else if (i==3) {
+                    taskEntity.PicContent4 = imageString;
+                }
+            }
         }
     }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];

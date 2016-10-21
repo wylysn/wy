@@ -73,4 +73,10 @@
     
 }
 
++ (NSString *) image2String:(UIImage *)image {
+    NSData *pictureData = UIImageJPEGRepresentation(image, 1.0);
+    NSString *pictureDataString = [pictureData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return pictureDataString;
+}
+
 @end

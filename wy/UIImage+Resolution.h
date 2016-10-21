@@ -14,4 +14,6 @@
 -(UIImage*)imageScaledToSize2:(CGSize)newSize;
 -(UIImage*)imageScaledToSize3:(CGSize)newSize;
 
++ (NSString *) image2String:(UIImage *)image;
+
 @end
