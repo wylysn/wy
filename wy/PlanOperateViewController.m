@@ -316,14 +316,6 @@
     btn.selected = YES;
     selectedIndex = index-1;
     selectedBtn = btn;
-    /*
-     if (index==2 && self.titleScrollView.contentOffset.x<=0) {
-     CGFloat offsetX = 0.5 * TITLEWIDTH;
-     CGFloat offsetY = self.titleScrollView.contentOffset.y;
-     CGPoint offset = CGPointMake(offsetX, offsetY);
-     [self.titleScrollView setContentOffset:offset animated:YES];
-     }
-     */
     [UIView animateWithDuration:0.5 animations:^{
         CGPoint _center = self.titleBottomView.center;
         _center.x +=  (index-preTag)*self.titleBottomView.frame.size.width;
