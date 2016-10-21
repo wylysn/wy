@@ -7,7 +7,6 @@
 //
 
 #import "TaskDBService.h"
-#import <sqlite3.h>
 
 static TaskDBService *sharedInstance = nil;
 static sqlite3 *database = nil;
@@ -23,6 +22,50 @@ static sqlite3_stmt *statement = nil;
         [sharedInstance createDB];
     }
     return sharedInstance;
+}
+
+// 打开数据库
++ (sqlite3 *)open {
+    // 此方法的主要作用是打开数据库
+    // 返回值是一个数据库指针
+    // 因为这个数据库在很多的SQLite API（函数）中都会用到，我们声明一个类方法来获取，更加方便
+    
+    // 懒加载
+    if (database != nil) {
+        return database;
+    }
+    
+    NSString *docsDir;
+    NSArray *dirPaths;
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
+    // Build the path to the database file
+    NSString *databasePath = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: DBNAME]];
+    const char *dbpath = [databasePath UTF8String];
+    NSLog(@"数据库存储路径：%@", docsDir);
+    
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+    {
+        NSLog(@"数据库打开成功。。。。。。");
+    }
+    else {
+        NSLog(@"数据库打开失败。。。。。。");
+    }
+    
+    return database;
+}
+
++ (void)close {
+    
+    // 关闭数据库
+    sqlite3_close(database);
+    
+    // 将数据库的指针置空
+    database = nil;
+    NSLog(@"数据库关闭。。。。。。");
 }
 
 - (void)createDB {
@@ -114,6 +157,46 @@ static sqlite3_stmt *statement = nil;
         } else {
             NSLog(@"语法不通过 ");
         }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
+- (BOOL)deleteAllTaskList {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"delete from TaskList";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"清初成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"清初失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过 ");
+        }
+        
+//        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+//        
+//        if (result == SQLITE_OK) { // 语法通过
+//            sqlite3_bind_text(statement, 1, [taskList.Code UTF8String], -1, SQLITE_TRANSIENT);
+//            
+//            // 执行插入语句
+//            if (sqlite3_step(statement) == SQLITE_DONE) {
+//                NSLog(@"删除成功。。。。。");
+//                isSuccess = TRUE;
+//            } else {
+//                NSLog(@"删除失败:%s", sqlite3_errmsg(database));
+//            }
+//        } else {
+//            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+//        }
         sqlite3_finalize(statement);
     }
     return isSuccess;

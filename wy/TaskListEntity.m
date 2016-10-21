@@ -22,7 +22,7 @@
         _TaskStatus = dictionary[@"TaskStatus"];
         _ServiceType = dictionary[@"ServiceType"];
         _Priority = dictionary[@"Priority"];
-        _Location = dictionary[@"Location"];
+        _Location = (NSNull *)dictionary[@"Location"] == [NSNull null]?@"":dictionary[@"Location"];
         _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
     }
     return self;

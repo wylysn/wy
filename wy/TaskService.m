@@ -51,8 +51,9 @@
                 }
                 //离线存储
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [dbService deleteAllTaskList];
                     for (TaskListEntity *taskListEntity in self.taskList) {
-                        [dbService deleteTaskList:taskListEntity];
+//                        [dbService deleteTaskList:taskListEntity];
                         if (taskListEntity.IsLocalSave) {
                             [dbService saveTaskList:taskListEntity];
                         }

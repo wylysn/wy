@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sqlite3.h>
 #import "TaskListEntity.h"
 #import "TaskEntity.h"
 #import "TaskDeviceEntity.h"
@@ -15,8 +16,13 @@
 
 + (TaskDBService*)getSharedInstance;
 
++ (sqlite3 *)open;
+
++ (void)close;
+
 - (BOOL)saveTaskList:(TaskListEntity *)taskList;
 - (BOOL)deleteTaskList:(TaskListEntity *)taskList;
+- (BOOL)deleteAllTaskList;
 
 - (NSArray *)findTaskLists:(NSDictionary *)condition;
 
