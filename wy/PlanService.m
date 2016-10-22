@@ -15,7 +15,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userName = [userDefaults objectForKey:@"userName"];
     [condition setObject:@"getschedulelist" forKey:@"action"];
-    [condition setObject:userName forKey:@"userName"];
+    [condition setObject:userName?userName:@"" forKey:@"userName"];
     [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
     [condition setObject:[NSString getDeviceId] forKey:@"imei"];
     [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {

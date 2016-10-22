@@ -30,4 +30,9 @@
 @property (nonatomic, copy, readonly) NSString *Attachment;
 @property (nonatomic, copy, readonly) NSString *Organizationid;
 
+@property (nonatomic, copy, readonly) NSString *ClassName;
+
+@property (nonatomic, copy, readonly) NSString *PosID;
+@property (nonatomic, copy, readonly) NSString *ClassID;
+
 @end

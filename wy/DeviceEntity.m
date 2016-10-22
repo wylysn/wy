@@ -32,6 +32,10 @@
         _Picture = dictionary[@"Picture"];
         _Attachment = dictionary[@"Attachment"];
         _Organizationid = dictionary[@"Organizationid"];
+        
+        _ClassName = dictionary[@"ClassName"];
+        _PosID = dictionary[@"PosID"];
+        _ClassID = dictionary[@"ClassID"];
     }
     return self;
 }

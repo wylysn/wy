@@ -9,6 +9,8 @@
 #import "AssetsSiftView.h"
 #import "PositionEntity.h"
 #import "PositionDBservice.h"
+#import "DeviceClassEntity.h"
+#import "DeviceClassDBService.h"
 
 @implementation AssetsSiftView {
     
@@ -32,11 +34,14 @@
     
     PositionEntity *parent = [[PositionEntity alloc] initWithDictionary:@{@"id":@0}];
     parent.level = 0;
-    self.positionList = [[PositionDBservice getSharedInstance] findPositionsByParent:parent];;
+    self.positionList = [[PositionDBservice getSharedInstance] findPositionsByParent:parent];
     
     self.selectedlocationDic = [[NSMutableDictionary alloc] init];
+    self.selectedClassDic = [[NSMutableDictionary alloc] init];
     
-    self.classListData = [NSArray arrayWithObjects:@"4",@"5",@"6",@"7", nil];
+    DeviceClassEntity *classParent = [[DeviceClassEntity alloc] initWithDictionary:@{@"ID":@0}];
+    classParent.level = 0;
+    self.classList = [[DeviceClassDBService getSharedInstance] findDeviceClassByParent:classParent];
 }
 
 - (void)showPositionsWithParent:(PositionEntity *)parent andIndexPath:(NSIndexPath *)indexPath {
@@ -65,6 +70,32 @@
     return position;
 }
 
+- (void)showDeviceClassWithParent:(DeviceClassEntity *)parent andIndexPath:(NSIndexPath *)indexPath {
+    NSArray *newDeviceClassList = [[DeviceClassDBService getSharedInstance] findDeviceClassByParent:parent];
+    NSInteger row = indexPath.row;
+    NSRange range = NSMakeRange(row+1, [newDeviceClassList count]);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.classList insertObjects:newDeviceClassList atIndexes:indexSet];
+    
+    [self.siftTableView reloadData];
+}
+
+- (void)hideDeviceClassWithParent:(DeviceClassEntity *)parent andIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    DeviceClassEntity *headPosition = self.classList[row];
+    NSRange range = NSMakeRange(row+1, headPosition.childNum);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.classList removeObjectsAtIndexes:indexSet];
+    
+    [self.siftTableView reloadData];
+}
+
+- (DeviceClassEntity *)getDeviceClassByIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    DeviceClassEntity *deviceClass = self.classList[row];
+    return deviceClass;
+}
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -75,7 +106,7 @@
     if (section == 0) {
         return self.positionList.count;
     } else {
-        return [self.classListData count];
+        return [self.classList count];
     }
 }
 
@@ -112,8 +143,8 @@
     }
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
+    float siftViewWidth = self.frame.size.width;
     if (section == 0) {
-        float siftViewWidth = self.frame.size.width;
         PositionEntity *position = [self getPostionByIndexPath:indexPath];
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, (44-21)/2, siftViewWidth-20, 21)];
         nameLabel.tag = 1;
@@ -122,7 +153,7 @@
         for (int i=1; i<position.level; i++) {
             nameLabel.text = [NSString stringWithFormat:@"      %@", nameLabel.text];
         }
-        if (self.selectedlocationDic[position.Code]) {
+        if (self.selectedlocationDic[[NSString stringWithFormat:@"%ld", position.ID]]) {
             nameLabel.textColor = [UIColor whiteColor];
             cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
             [self.siftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -148,30 +179,39 @@
         }
         [cell.contentView addSubview:imageView];
     } else if(section == 1) {
-        UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.frame];
-        label.tag = 1;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:16];
-        NSArray *tempArr;
-        NSArray *tempListData;
-        NSString *text;
-        tempArr = self.classArr;
-        tempListData = self.classListData;
-        text = priorityDic[self.classListData[row]];
-        if (!tempArr || tempArr.count<1 || [tempArr indexOfObject:tempListData[row]]==NSNotFound) {
-            cell.selected = NO;
-            [self.siftTableView deselectRowAtIndexPath:indexPath animated:NO];
-            cell.backgroundColor = [UIColor clearColor];
-            label.textColor = [UIColor colorFromHexCode:@"999999"];
-        } else {
-            cell.selected = YES;
-            [self.siftTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            cell.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
-            label.textColor = [UIColor whiteColor];
+        DeviceClassEntity *deviceClass = [self getDeviceClassByIndexPath:indexPath];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, (44-21)/2, siftViewWidth-20, 21)];
+        nameLabel.tag = 1;
+        nameLabel.font = [UIFont systemFontOfSize:16];
+        nameLabel.text = deviceClass.Name;
+        for (int i=1; i<deviceClass.level; i++) {
+            nameLabel.text = [NSString stringWithFormat:@"      %@", nameLabel.text];
         }
-        label.text = text;
+        if (self.selectedClassDic[[NSString stringWithFormat:@"%ld", deviceClass.ID]]) {
+            nameLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
+            [self.siftTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        } else {
+            nameLabel.textColor = [UIColor colorFromHexCode:@"555555"];
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         
-        [cell.contentView addSubview:label];
+        [cell.contentView addSubview:nameLabel];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(siftViewWidth-17, (44-12)/2, 12, 12)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.tag = 2;
+        if (deviceClass.childNum<1) {
+            imageView.hidden = YES;
+        } else {
+            imageView.hidden = NO;
+            if (deviceClass.hasChildDisplay) {
+                imageView.image = [UIImage imageNamed:deviceClass.level>1?@"subarrow-down":@"arrow-down"];
+            } else {
+                imageView.image = [UIImage imageNamed:deviceClass.level>1?@"subarrow-left":@"arrow-right"];
+            }
+        }
+        [cell.contentView addSubview:imageView];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -225,17 +265,30 @@
             }
             [self.siftTableView deselectRowAtIndexPath:indexPath animated:NO];
         } else {
-            [self.selectedlocationDic setObject:position forKey:position.Code]; //非父节点才可以选中
+            [self.selectedlocationDic setObject:position forKey:[NSString stringWithFormat:@"%ld", position.ID]]; //非父节点才可以选中
             UILabel *nameLabel = [cell viewWithTag:1];
             
             nameLabel.textColor = [UIColor whiteColor];
             cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
         }
     } else {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        cell.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
-        UILabel *label = [cell viewWithTag:1];
-        label.textColor = [UIColor whiteColor];
+        DeviceClassEntity *deviceClass = [self getDeviceClassByIndexPath:indexPath];
+        if (deviceClass.childNum>0) {
+            if (deviceClass.hasChildDisplay) {
+                [self hideDeviceClassWithParent:deviceClass andIndexPath:indexPath];
+                deviceClass.hasChildDisplay = NO;
+            } else {
+                [self showDeviceClassWithParent:deviceClass andIndexPath:indexPath];
+                deviceClass.hasChildDisplay = YES;
+            }
+            [self.siftTableView deselectRowAtIndexPath:indexPath animated:NO];
+        } else {
+            [self.selectedClassDic setObject:deviceClass forKey:[NSString stringWithFormat:@"%ld", deviceClass.ID]]; //非父节点才可以选中
+            UILabel *nameLabel = [cell viewWithTag:1];
+            
+            nameLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor colorFromHexCode:@"8dc351"];
+        }
     }
     
 }
@@ -245,15 +298,18 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (section == 0) {
         PositionEntity *position = [self getPostionByIndexPath:indexPath];
-        [self.selectedlocationDic removeObjectForKey:position.Code];
+        [self.selectedlocationDic removeObjectForKey:[NSString stringWithFormat:@"%ld", position.ID]];
         UILabel *nameLabel = [cell viewWithTag:1];
         NSString *color = @"555555";
         nameLabel.textColor = [UIColor colorFromHexCode:color];
         cell.backgroundColor = [UIColor whiteColor];
     } else {
-        cell.backgroundColor = [UIColor clearColor];
-        UILabel *label = [cell viewWithTag:1];
-        label.textColor = [UIColor colorFromHexCode:@"999999"];
+        DeviceClassEntity *classDevice = [self getDeviceClassByIndexPath:indexPath];
+        [self.selectedClassDic removeObjectForKey:[NSString stringWithFormat:@"%ld", classDevice.ID]];
+        UILabel *nameLabel = [cell viewWithTag:1];
+        NSString *color = @"555555";
+        nameLabel.textColor = [UIColor colorFromHexCode:color];
+        cell.backgroundColor = [UIColor whiteColor];
     }
 }
 

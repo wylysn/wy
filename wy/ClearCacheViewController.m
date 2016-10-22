@@ -13,6 +13,9 @@
 #import "KnowledgeDBService.h"
 #import "InspectionModelDBService.h"
 #import "DeviceDBService.h"
+#import "DeviceClassDBService.h"
+#import "MaterialsDBService.h"
+#import "ToolsDBService.h"
 
 @interface ClearCacheViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -99,6 +102,12 @@
             [[KnowledgeDBService getSharedInstance] setSharedInstanceNull];
         } else if ([@"6" isEqualToString:templateid]) {
             [[PositionDBservice getSharedInstance] setSharedInstanceNull];
+        } else if ([@"7" isEqualToString:templateid]) {
+            [[DeviceClassDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"8" isEqualToString:templateid]) {
+            [[MaterialsDBService getSharedInstance] setSharedInstanceNull];
+        } else if ([@"9" isEqualToString:templateid]) {
+            [[ToolsDBService getSharedInstance] setSharedInstanceNull];
         }
     }
     [cacheArray removeObjectsAtIndexes:idxSet];

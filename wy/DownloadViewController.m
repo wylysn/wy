@@ -20,6 +20,12 @@
 #import "InspectionModelDBService.h"
 #import "PositionEntity.h"
 #import "PositionDBservice.h"
+#import "DeviceClassEntity.h"
+#import "DeviceClassDBService.h"
+#import "MaterialsEntity.h"
+#import "MaterialsDBService.h"
+#import "ToolsEntity.h"
+#import "ToolsDBService.h"
 
 @interface DownloadViewController ()<UITableViewDataSource,UITableViewDelegate, NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDownloadDelegate,UIDocumentInteractionControllerDelegate>
 
@@ -39,17 +45,22 @@
     self.tableView.delegate = self;
     
     filesArray = [[NSMutableArray alloc] init];
-    /*测试数据，后期删除*/
     BaseInfoEntity *file1 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"2",@"Name":@"人员信息"}];
     BaseInfoEntity *file2 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"3",@"Name":@"设备信息"}];
     BaseInfoEntity *file3 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"4",@"Name":@"巡检模版"}];
     BaseInfoEntity *file4 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"5",@"Name":@"知识库信息"}];
     BaseInfoEntity *file5 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"6",@"Name":@"位置信息"}];
+    BaseInfoEntity *file6 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"7",@"Name":@"设备分类信息"}];
+    BaseInfoEntity *file7 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"8",@"Name":@"物资信息"}];
+    BaseInfoEntity *file8 = [[BaseInfoEntity alloc] initWithDictionary:@{@"templateid":@"9",@"Name":@"工具信息"}];
     [filesArray addObject:file1];
     [filesArray addObject:file2];
     [filesArray addObject:file3];
     [filesArray addObject:file4];
     [filesArray addObject:file5];
+    [filesArray addObject:file6];
+    [filesArray addObject:file7];
+    [filesArray addObject:file8];
     
     templateidArray = [[NSMutableArray alloc] init];
     
@@ -148,8 +159,6 @@
     NSString *templateid = [foo lastObject];
     NSString *urlString = [NSString stringWithFormat:@"%@?action=getformdatalist&tick=%@&imei=%@&templateid=%ld&start=1&pagesize=1000", [[URLManager getSharedInstance] getURL:@""], [DateUtil getCurrentTimestamp], [NSString getDeviceId], [templateid integerValue]];
     NSURL * url = [NSURL URLWithString:urlString];
-    //http://down.sandai.net/xljiasu/XlaccSetup3.13.0.8950_jsqgw.exe
-    //@"http://down.sandai.net/xljiasu/XlaccSetup3.13.0.8950_jsqgw.exe"
     NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
     
     NSURLSession *backgroundSeesion = [NSURLSession sessionWithConfiguration: backgroundConfig delegate:self delegateQueue: [NSOperationQueue mainQueue]];
@@ -251,6 +260,12 @@
                     dbName = @"wy-knowledge.db";
                 } else if ([@"6" isEqualToString:templateid]) {
                     dbName = @"wy-position.db";
+                } else if ([@"7" isEqualToString:templateid]) {
+                    dbName = @"wy-deviceclass.db";
+                } else if ([@"8" isEqualToString:templateid]) {
+                    dbName = @"wy-materials.db";
+                } else if ([@"9" isEqualToString:templateid]) {
+                    dbName = @"wy-tools.db";
                 }
                 NSDictionary *objDic = @{@"templateid":info.templateid,@"Name":info.Name,@"size":[NSNumber numberWithDouble:size],@"dbName":dbName};
                 [newDic setObject:objDic forKey:templateid];
@@ -286,6 +301,18 @@
                         PositionEntity *position = [[PositionEntity alloc] initWithDictionary:dic];
                         PositionDBservice *dbService = [PositionDBservice getSharedInstance];
                         [dbService savePosition:position];
+                    } else if ([@"7" isEqualToString:templateid]) {
+                        DeviceClassEntity *deviceClass = [[DeviceClassEntity alloc] initWithDictionary:dic];
+                        DeviceClassDBService *dbService = [DeviceClassDBService getSharedInstance];
+                        [dbService saveDeviceClass:deviceClass];
+                    } else if ([@"8" isEqualToString:templateid]) {
+                        MaterialsEntity *material = [[MaterialsEntity alloc] initWithDictionary:dic];
+                        MaterialsDBService *dbService = [MaterialsDBService getSharedInstance];
+                        [dbService saveMaterial:material];
+                    } else if ([@"9" isEqualToString:templateid]) {
+                        ToolsEntity *tool = [[ToolsEntity alloc] initWithDictionary:dic];
+                        ToolsDBService *dbService = [ToolsDBService getSharedInstance];
+                        [dbService saveTool:tool];
                     }
                 }
                 [downloadResultDic setObject:@"1" forKey:templateid];

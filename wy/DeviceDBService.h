@@ -24,7 +24,7 @@
 - (BOOL) saveDevice:(DeviceEntity *)device;
 - (NSArray *)findAllDevices;
 - (NSArray *) findDevicesByName:(NSString*)name;
-- (NSArray *) findAssetsByKeyword:(NSString*)keyWord;
+- (NSArray *) findAssetsByCondition:(NSDictionary*)condition;
 - (DeviceEntity *) findDeviceByCode:(NSString*)Code;
 
 @end

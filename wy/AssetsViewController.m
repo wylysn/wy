@@ -13,6 +13,7 @@
 #import "ScanDeviceViewController.h"
 #import "AssetsSiftView.h"
 #import "PositionEntity.h"
+#import "DeviceClassEntity.h"
 
 typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     FilterViewHideByCancel       = 0,
@@ -172,15 +173,18 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     
     NSArray<NSIndexPath *> *indexPathsOfSelectedRows = [siftView.siftTableView indexPathsForSelectedRows];
     NSMutableDictionary *locationDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *classDic = [[NSMutableDictionary alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
         if (indexPath.section==0) {
             PositionEntity *position = siftView.positionList[indexPath.row];
-            [locationDic setObject:position forKey:position.Code];
+            [locationDic setObject:position forKey:[NSString stringWithFormat:@"%ld", position.ID]];
         } else if (indexPath.section==1) {
-            //后续加上分类筛选
+            DeviceClassEntity *deviceClass = siftView.classList[indexPath.row];
+            [classDic setObject:deviceClass forKey:[NSString stringWithFormat:@"%ld", deviceClass.ID]];
         }
     }
     [filterDic setObject:locationDic forKey:@"Location"];
+    [filterDic setObject:classDic forKey:@"DeviceClass"];
     
     [self refreshDataByCondition];
 }
@@ -199,6 +203,13 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
             //重置筛选条件
             if (filterDic[@"Location"]) {
                 siftView.selectedlocationDic = [[NSMutableDictionary alloc] initWithDictionary:filterDic[@"Location"]];
+            } else {
+                siftView.selectedlocationDic = [[NSMutableDictionary alloc] init];
+            }
+            if (filterDic[@"DeviceClass"]) {
+                siftView.selectedClassDic = [[NSMutableDictionary alloc] initWithDictionary:filterDic[@"DeviceClass"]];
+            } else {
+                siftView.selectedClassDic = [[NSMutableDictionary alloc] init];
             }
             [siftView.siftTableView reloadData];
         }
@@ -209,7 +220,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 
 - (void)refreshDataByCondition {
     //刷新列表
-    asstesList = [[DeviceDBService getSharedInstance] findAssetsByKeyword:filterDic[@"keyword"]?filterDic[@"keyword"]:@""];
+    asstesList = [[DeviceDBService getSharedInstance] findAssetsByCondition:filterDic];
     noDataView.hidden = asstesList.count>0;
     [self.tableView reloadData];
 }
@@ -223,6 +234,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     NSString *CELLID;
     if (row==0) {
@@ -235,15 +247,15 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
     }
     
-    DeviceEntity *device = asstesList[row];
+    DeviceEntity *device = asstesList[section];
     if (row==0) {
         UILabel *titleLabel = [cell viewWithTag:1];
         titleLabel.text = device.Name;
     } else {
         UILabel *locationLabel = [cell viewWithTag:1];
         UILabel *classLabel = [cell viewWithTag:2];
-        locationLabel.text = @"上海国际能源站维保系统/能源站/设备系统/主设备间";//device.Pos;
-        classLabel.text = @"非电力系统/化水";
+        locationLabel.text = device.Pos;
+        classLabel.text = device.ClassName;
     }
     return cell;
 }
@@ -279,7 +291,7 @@ typedef NS_OPTIONS(NSUInteger, FilterViewHideType) {
     
     viewController.Code = device.Code;
     [viewController setTitle:device.Name];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"知识库" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"资产管理" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [self.navigationController pushViewController:viewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -16,7 +16,10 @@
 
 @property (strong,nonatomic) NSMutableDictionary *selectedlocationDic;
 @property (strong,nonatomic) NSMutableArray *positionList;
-@property (strong,nonatomic) NSArray *classListData;
+
+@property (strong,nonatomic) NSMutableDictionary *selectedClassDic;
+@property (strong,nonatomic) NSMutableArray *classList;
+
 @property (strong,nonatomic) UITableView *siftTableView;
 
 @property (strong,nonatomic) NSArray *classArr;

@@ -174,6 +174,14 @@
 		D2CADE821D8B7152008A8CFD /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
+		D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */; };
+		D2D979771DBB6C460019A7AF /* 物业系统处理界面测试结果.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */; };
+		D2D9797A1DBB6F900019A7AF /* DeviceClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */; };
+		D2D9797D1DBB713E0019A7AF /* DeviceClassDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9797C1DBB713E0019A7AF /* DeviceClassDBService.m */; };
+		D2D979801DBB773A0019A7AF /* MaterialsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9797F1DBB773A0019A7AF /* MaterialsEntity.m */; };
+		D2D979831DBB7D880019A7AF /* MaterialsDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979821DBB7D880019A7AF /* MaterialsDBService.m */; };
+		D2D979861DBB83A10019A7AF /* ToolsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979851DBB83A10019A7AF /* ToolsEntity.m */; };
+		D2D979891DBB83CA0019A7AF /* ToolsDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979881DBB83CA0019A7AF /* ToolsDBService.m */; };
 		D2E20F1A1D994408000C1472 /* 资产管理.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2E20F191D994408000C1472 /* 资产管理.jpg */; };
 		D2E9CF891DA6A24A004351D7 /* ScanDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */; };
 		D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FD92251D8A214D0090FEC8 /* LoginService.m */; };
@@ -219,7 +227,6 @@
 		8811E7A41D77D96400CE7CE2 /* PositionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionEntity.h; sourceTree = "<group>"; };
 		8811E7A51D77D96400CE7CE2 /* PositionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionEntity.m; sourceTree = "<group>"; };
 		8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEOS20160831.rar; sourceTree = "<group>"; };
-		8811E7A81D77E93300CE7CE2 /* 问题列表.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "问题列表.docx"; sourceTree = "<group>"; };
 		8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePositionViewController.h; sourceTree = "<group>"; };
 		8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePositionViewController.m; sourceTree = "<group>"; };
 		8819BCCA1D6A9D8A00E04B49 /* NTMonthYearPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTMonthYearPicker.h; sourceTree = "<group>"; };
@@ -506,6 +513,20 @@
 		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D2CF2E741D7BDABA0020759A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20161022.docx"; sourceTree = "<group>"; };
+		D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "物业系统处理界面测试结果.docx"; sourceTree = "<group>"; };
+		D2D979781DBB6F900019A7AF /* DeviceClassEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceClassEntity.h; sourceTree = "<group>"; };
+		D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceClassEntity.m; sourceTree = "<group>"; };
+		D2D9797B1DBB713E0019A7AF /* DeviceClassDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceClassDBService.h; sourceTree = "<group>"; };
+		D2D9797C1DBB713E0019A7AF /* DeviceClassDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceClassDBService.m; sourceTree = "<group>"; };
+		D2D9797E1DBB773A0019A7AF /* MaterialsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialsEntity.h; sourceTree = "<group>"; };
+		D2D9797F1DBB773A0019A7AF /* MaterialsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialsEntity.m; sourceTree = "<group>"; };
+		D2D979811DBB7D880019A7AF /* MaterialsDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialsDBService.h; sourceTree = "<group>"; };
+		D2D979821DBB7D880019A7AF /* MaterialsDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialsDBService.m; sourceTree = "<group>"; };
+		D2D979841DBB83A10019A7AF /* ToolsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsEntity.h; sourceTree = "<group>"; };
+		D2D979851DBB83A10019A7AF /* ToolsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsEntity.m; sourceTree = "<group>"; };
+		D2D979871DBB83CA0019A7AF /* ToolsDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsDBService.h; sourceTree = "<group>"; };
+		D2D979881DBB83CA0019A7AF /* ToolsDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsDBService.m; sourceTree = "<group>"; };
 		D2E20F191D994408000C1472 /* 资产管理.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "资产管理.jpg"; sourceTree = "<group>"; };
 		D2E9CF871DA6A24A004351D7 /* ScanDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanDeviceViewController.h; sourceTree = "<group>"; };
 		D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanDeviceViewController.m; sourceTree = "<group>"; };
@@ -1096,6 +1117,8 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */,
+				D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */,
 				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
 				88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
@@ -1103,7 +1126,6 @@
 				D2C090A51D915ED9001D94CF /* 3.p12 */,
 				D2C090A61D915ED9001D94CF /* axx.mobileprovision */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
-				8811E7A81D77E93300CE7CE2 /* 问题列表.docx */,
 				8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */,
 			);
 			name = doc;
@@ -1140,6 +1162,18 @@
 				880BDB841D88F683001DACF5 /* InspectionChildModelEntity.m */,
 				88ABE1E21D7D67E60035D39F /* InspectionModelDBService.h */,
 				88ABE1E31D7D67E60035D39F /* InspectionModelDBService.m */,
+				D2D979781DBB6F900019A7AF /* DeviceClassEntity.h */,
+				D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */,
+				D2D9797B1DBB713E0019A7AF /* DeviceClassDBService.h */,
+				D2D9797C1DBB713E0019A7AF /* DeviceClassDBService.m */,
+				D2D9797E1DBB773A0019A7AF /* MaterialsEntity.h */,
+				D2D9797F1DBB773A0019A7AF /* MaterialsEntity.m */,
+				D2D979811DBB7D880019A7AF /* MaterialsDBService.h */,
+				D2D979821DBB7D880019A7AF /* MaterialsDBService.m */,
+				D2D979841DBB83A10019A7AF /* ToolsEntity.h */,
+				D2D979851DBB83A10019A7AF /* ToolsEntity.m */,
+				D2D979871DBB83CA0019A7AF /* ToolsDBService.h */,
+				D2D979881DBB83CA0019A7AF /* ToolsDBService.m */,
 			);
 			name = sqlite;
 			sourceTree = "<group>";
@@ -1309,6 +1343,7 @@
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
 				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
+				D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */,
 				D22C85CB1DA74CC5000362DF /* AssetsSiftView.xib in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				D2C090A81D915ED9001D94CF /* axx.mobileprovision in Resources */,
@@ -1327,6 +1362,7 @@
 				D2C090A71D915ED9001D94CF /* 3.p12 in Resources */,
 				889BA2C41D64159600BC5413 /* ELCAssetPicker.xib in Resources */,
 				880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */,
+				D2D979771DBB6C460019A7AF /* 物业系统处理界面测试结果.docx in Resources */,
 				8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */,
 				889BA2D31D64181300BC5413 /* camera-flash-on@2x.png in Resources */,
 				880787CD1D61C55900BA6F05 /* checked_filled@2x.png in Resources */,
@@ -1418,6 +1454,7 @@
 				88A1CB3B1D8F859F00C0B230 /* DeviceStatusViewController.m in Sources */,
 				8811E7A31D77D6EF00CE7CE2 /* PositionDBservice.m in Sources */,
 				8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */,
+				D2D979801DBB773A0019A7AF /* MaterialsEntity.m in Sources */,
 				889BA2C71D64159600BC5413 /* ELCConsole.m in Sources */,
 				8811E7AD1D77FC4500CE7CE2 /* ChoosePositionViewController.m in Sources */,
 				88FF11541D7556D70073EDBB /* DBManager.m in Sources */,
@@ -1439,6 +1476,7 @@
 				D2AAA61F1D7C086200A40FF1 /* AboutChildTableViewController.m in Sources */,
 				8824005B1DAB1CFF003D5CC1 /* PlanService.m in Sources */,
 				88821E831D5C69B600C72DA3 /* TaskTableViewCell.m in Sources */,
+				D2D979891DBB83CA0019A7AF /* ToolsDBService.m in Sources */,
 				889BA2CB1D64159600BC5413 /* UICollectionView+Convenience.m in Sources */,
 				88BCFE7A1D9A53760016207B /* AssetsProducerInfoTableViewController.m in Sources */,
 				8841D47B1D73DF14003E4495 /* DeviceListEntity.m in Sources */,
@@ -1482,13 +1520,16 @@
 				88D5CB331D6FEF4C0041C9A1 /* MobileNumberTableViewController.m in Sources */,
 				88B6FDA21D66E74800418972 /* WorkOrderTableViewCell.m in Sources */,
 				885B28BA1DB4CE7200FCAF6F /* PlanOperateNaviViewController.m in Sources */,
+				D2D979831DBB7D880019A7AF /* MaterialsDBService.m in Sources */,
 				880CFDD31D8011F40017F84F /* ClearCacheViewController.m in Sources */,
+				D2D9797D1DBB713E0019A7AF /* DeviceClassDBService.m in Sources */,
 				88BCFE741D9A18890016207B /* AssetsDetailViewController.m in Sources */,
 				D22597881D9AA42D00500EB7 /* AssetsService.m in Sources */,
 				D274232D1D97D0DA00850210 /* ReportImpaireService.m in Sources */,
 				D299B55C1D8461130073C360 /* SSKeychain.m in Sources */,
 				88ABE1DB1D7D4E2A0035D39F /* DeviceEntity.m in Sources */,
 				8824005E1DAB1D39003D5CC1 /* PlanDetailEntity.m in Sources */,
+				D2D979861DBB83A10019A7AF /* ToolsEntity.m in Sources */,
 				88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */,
 				D28AD55A1D727F410033ADB6 /* PriorityLabel.m in Sources */,
 				88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */,
@@ -1501,6 +1542,7 @@
 				8851F4381DA88FB00022FBD9 /* PlanTaskListViewController.m in Sources */,
 				D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
+				D2D9797A1DBB6F900019A7AF /* DeviceClassEntity.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88D6DDE71D99F89900C7E769 /* AssetsViewController.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,
