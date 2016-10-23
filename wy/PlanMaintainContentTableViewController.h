@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) PlanDetailEntity *planDetail;
 
+- (void)changeVariable;
+
 @end

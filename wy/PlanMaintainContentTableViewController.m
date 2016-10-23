@@ -12,7 +12,11 @@
 
 @end
 
-@implementation PlanMaintainContentTableViewController
+@implementation PlanMaintainContentTableViewController {
+    NSArray *editFieldsArray;
+    BOOL isWZListEditable;
+    BOOL isGJListEditable;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +29,26 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)changeVariable {
+    editFieldsArray = [[[self.planDetail.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+    isWZListEditable = !([editFieldsArray indexOfObject:@"WZList"]==NSNotFound);
+    isGJListEditable = !([editFieldsArray indexOfObject:@"GJList"]==NSNotFound);
+}
+
+- (void)addWz:(UITapGestureRecognizer *)recognizer
+{
+//    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//    ChooseDeviceViewController *chooseDeviceViewController = [mainSB instantiateViewControllerWithIdentifier:@"CHOOSEDEVICE"];
+//    chooseDeviceViewController.delegate = self;
+//    chooseDeviceViewController.selectedDevicesDic = selectedDevicesDic;
+//    [self.navigationController pushViewController:chooseDeviceViewController animated:YES];
+}
+
+- (void)addGj:(UITapGestureRecognizer *)recognizer
+{
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -35,17 +59,20 @@
     if (section == 0) {
         return 3;
     } else if (section == 1) {
+        if (self.planDetail.StepList.count<1) {
+            return 0;
+        }
         return 2;
     } else if (section>=2 && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)) {
         if (section==2 && self.planDetail.MaterialList.count<1) {
             return 0;
         }
-        return 6;
+        return 2;
     } else if (section>=2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
         if (section==2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && self.planDetail.ToolList.count<1) {
             return 0;
         }
-        return 3;
+        return 2;
     } else if (section >= 2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
         if (section==2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count) && self.planDetail.PositionList.count<1) {
             return 0;
@@ -84,12 +111,31 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"物资需求";
         [header addSubview:titleLabel];
+        
+        if (isWZListEditable) {
+            UIImageView *plusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-35, (44-25)/2, 25, 25)];
+            plusImageView.image = [UIImage imageNamed:@"plus50"];
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addWz:)];
+            [plusImageView addGestureRecognizer:gesture];
+            [plusImageView setUserInteractionEnabled:YES];
+            [header addSubview:plusImageView];
+        }
         return header;
     } else if (section == 2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"维护工具";
         [header addSubview:titleLabel];
+        
+        if (isGJListEditable) {
+            UIImageView *plusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-35, (44-25)/2, 25, 25)];
+            plusImageView.image = [UIImage imageNamed:@"plus50"];
+            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addGj:)];
+            [plusImageView addGestureRecognizer:gesture];
+            [plusImageView setUserInteractionEnabled:YES];
+            [header addSubview:plusImageView];
+        }
+        
         return header;
     } else if (section == 2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
         header.backgroundColor = [UIColor whiteColor];
@@ -135,7 +181,9 @@
             if (row == 0) {
                 keyLabel.text = @"物资名称";
                 valueLabel.text = materialDic[@"WzName"];
-            } else if (row == 1) {
+            }
+            /*
+            else if (row == 1) {
                 keyLabel.text = @"品牌";
                 valueLabel.text = materialDic[@"Wzpinp"];
             } else if (row == 2) {
@@ -144,7 +192,9 @@
             } else if (row == 3) {
                 keyLabel.text = @"单位";
                 valueLabel.text = materialDic[@"WzUnitName"];
-            } else if (row == 4) {
+            }
+            */
+            else if (row == 1) {
                 keyLabel.text = @"数量";
                 valueLabel.text = materialDic[@"Wznumber"];
             }
@@ -154,10 +204,14 @@
         if (row == 0) {
             keyLabel.text = @"工具名称";
             valueLabel.text = toolDic[@"GjName"];
-        } else if (row == 1) {
+        }
+        /*
+        else if (row == 1) {
             keyLabel.text = @"型号/规格";
             valueLabel.text = toolDic[@"Gjtype"];
-        } else if (row == 2) {
+        }
+         */
+        else if (row == 1) {
             keyLabel.text = @"数量";
             valueLabel.text = toolDic[@"Gjnumber"];
         }

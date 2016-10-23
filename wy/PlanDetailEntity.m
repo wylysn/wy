@@ -14,6 +14,7 @@
 {
     self = super.init;
     if (self) {
+        _Code = dictionary[@"Code"];
         _Name = dictionary[@"Name"];
         _Priority = dictionary[@"Priority"];
         _ExecuteTime = dictionary[@"ExecuteTime"];
@@ -24,8 +25,9 @@
         _SBList = dictionary[@"SBList"];
         _TaskAction = dictionary[@"TaskAction"];
         _TaskInfo = dictionary[@"TaskInfo"];
-        _EditSBMXFields = dictionary[@"EditSBMXFields"];
-        _EditWZXQFields = dictionary[@"EditWZXQFields"];
+        _EditFields = dictionary[@"EditFields"];
+        
+        _IsLocalSave = [dictionary[@"IsLocalSave"] boolValue];
     }
     return self;
 }

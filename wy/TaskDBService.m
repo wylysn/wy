@@ -87,6 +87,7 @@ static sqlite3_stmt *statement = nil;
         [sharedInstance createTaskListTable];
         [sharedInstance createTaskTable];
         [sharedInstance createTaskDeviceTable];
+        [sharedInstance createPlanDetailTable];
     }
     else {
         NSLog(@"数据库打开失败。。。。。。");
@@ -138,6 +139,21 @@ static sqlite3_stmt *statement = nil;
     return isSuccess;
 }
 
+- (BOOL) createPlanDetailTable {
+    BOOL isSuccess = TRUE;
+    char *errMsg;
+    NSString *sql_stmt =@"create table if not exists PlanDetail (Code text primary key, Name text, Priority text, ExecuteTime text, StepList text, MaterialList text, ToolList text, PositionList text, SBList text, TaskAction text, EditFields text, IsLocalSave bool)";
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
+            isSuccess = FALSE;
+            NSLog(@"创建计划任务信息表失败。。。。。%s", errMsg);
+        }
+    }
+    sqlite3_close(database);
+    return isSuccess;
+}
+
 - (BOOL) saveTaskList:(TaskListEntity *)taskList {
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
@@ -173,30 +189,14 @@ static sqlite3_stmt *statement = nil;
         if (result == SQLITE_OK) { // 语法通过
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
-                NSLog(@"清初成功。。。。。");
+                NSLog(@"清除成功。。。。。");
                 isSuccess = TRUE;
             } else {
-                NSLog(@"清初失败:%s", sqlite3_errmsg(database));
+                NSLog(@"清除失败:%s", sqlite3_errmsg(database));
             }
         } else {
             NSLog(@"语法不通过 ");
         }
-        
-//        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
-//        
-//        if (result == SQLITE_OK) { // 语法通过
-//            sqlite3_bind_text(statement, 1, [taskList.Code UTF8String], -1, SQLITE_TRANSIENT);
-//            
-//            // 执行插入语句
-//            if (sqlite3_step(statement) == SQLITE_DONE) {
-//                NSLog(@"删除成功。。。。。");
-//                isSuccess = TRUE;
-//            } else {
-//                NSLog(@"删除失败:%s", sqlite3_errmsg(database));
-//            }
-//        } else {
-//            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
-//        }
         sqlite3_finalize(statement);
     }
     return isSuccess;
@@ -510,6 +510,107 @@ static sqlite3_stmt *statement = nil;
     }
     sqlite3_finalize(statement);
     return taskDeviceArr;
+}
+
+
+- (BOOL) savePlanDetail:(PlanDetailEntity *)planDetail {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"insert into PlanDetail (Code, Name, Priority, ExecuteTime, StepList, MaterialList, ToolList, PositionList, SBList, TaskAction, EditFields, IsLocalSave) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [planDetail.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [planDetail.Name UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 3, [planDetail.Priority UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 4, [planDetail.ExecuteTime UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 5, [[NSString convertArrayToString:planDetail.StepList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 6, [[NSString convertArrayToString:planDetail.MaterialList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 7, [[NSString convertArrayToString:planDetail.ToolList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 8, [[NSString convertArrayToString:planDetail.PositionList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 9, [[NSString convertArrayToString:planDetail.SBList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 10, [[NSString convertArrayToString:planDetail.TaskAction] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 11, [planDetail.EditFields UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_int(statement, 12, planDetail.IsLocalSave);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"插入成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"插入失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
+- (BOOL)updatePlanDetail:(PlanDetailEntity *)planDetail {
+    BOOL isSuccess = FALSE;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = @"update PlanDetail set MaterialList=?, ToolList=? where Code=?";
+        const char *insert_stmt = [insertSQL UTF8String];
+        int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+        
+        if (result == SQLITE_OK) { // 语法通过
+            sqlite3_bind_text(statement, 1, [[NSString convertArrayToString:planDetail.MaterialList] UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [[NSString convertArrayToString:planDetail.ToolList] UTF8String], -1, SQLITE_TRANSIENT);
+            
+            // 执行插入语句
+            if (sqlite3_step(statement) == SQLITE_DONE) {
+                NSLog(@"更新成功。。。。。");
+                isSuccess = TRUE;
+            } else {
+                NSLog(@"更新失败:%s", sqlite3_errmsg(database));
+            }
+        } else {
+            NSLog(@"语法不通过:%s", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+    return isSuccess;
+}
+
+- (PlanDetailEntity *)findPlanDetailByCode:(NSString*)Code {
+    PlanDetailEntity *plan;
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Name, Priority, ExecuteTime, StepList, MaterialList, ToolList, PositionList, SBList, TaskAction, EditFields, IsLocalSave from PlanDetail where Code=\"%@\"",Code];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
+            if (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                NSString *Priority = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
+                NSString *ExecuteTime = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
+                NSString *StepList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
+                NSString *MaterialList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
+                NSString *ToolList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)];
+                NSString *PositionList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 7)];
+                NSString *SBList = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 8)];
+                NSString *TaskAction = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
+                NSString *EditFields = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
+                BOOL IsLocalSave = (BOOL)sqlite3_column_int(statement, 11);
+                plan = [[PlanDetailEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Priority":Priority, @"ExecuteTime":ExecuteTime, @"StepList":[NSString convertStringToArray:StepList], @"MaterialList":[NSString convertStringToArray:MaterialList], @"ToolList":[NSString convertStringToArray:ToolList], @"PositionList":[NSString convertStringToArray:PositionList], @"SBList":[NSString convertStringToArray:SBList], @"TaskAction":[NSString convertStringToArray:TaskAction], @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0"}];
+            }
+            else{
+                NSLog(@"没有找到code为%@的任务......", Code);
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    }
+    sqlite3_finalize(statement);
+    return plan;
 }
 
 @end

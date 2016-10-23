@@ -115,40 +115,6 @@
             failure(error.localizedDescription);
         }];
     }
-    /*
-    Reachability *reach = [Reachability reachabilityForInternetConnection];
-    if (reach.isReachable) {
-        PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
-        NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
-        [condition setObject:@"gettaskdata" forKey:@"action"];
-        [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
-        [condition setObject:[NSString getDeviceId] forKey:@"imei"];
-        [condition setObject:code forKey:@"code"];
-        [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if (responseObject[@"success"]) {
-                NSDictionary *response = responseObject[@"data"][0];
-                taskEntity = [[TaskEntity alloc] initWithDictionary:response];
-                //离线存储
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (taskEntity.IsLocalSave) {
-                        [dbService saveTask:taskEntity];
-                    }
-                });
-                success(taskEntity);
-            } else {
-                failure(responseObject[@"message"]);
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            taskEntity = [dbService findTaskByCode:code];
-            success(taskEntity);
-        }];
-    } else {
-        taskEntity = [dbService findTaskByCode:code];
-        success(taskEntity);
-    }
-     */
     return taskEntity;
 }
 

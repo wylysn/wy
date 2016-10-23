@@ -13,6 +13,7 @@
 #import "PlanService.h"
 #import "PlanOperateNaviViewController.h"
 #import "TaskService.h"
+#import "TaskDBService.h"
 
 @interface PlanOperateViewController () <UIScrollViewDelegate, UIActionSheetDelegate>
 
@@ -30,8 +31,11 @@
     float TITLEWIDTH;
     
     TaskService *taskService;
+    PlanService *planService;
     
     NSMutableArray *actionsMutableArr;
+    
+    PlanDetailEntity *plan;
 }
 
 - (void)viewDidLoad {
@@ -40,6 +44,7 @@
     TITLEWIDTH = SCREEN_WIDTH/2;
     
     taskService = [[TaskService alloc] init];
+    planService = [[PlanService alloc] init];
     
     /* 标题滚动 */
     self.titleScrollView.delegate = self;
@@ -96,10 +101,12 @@
     PlanOrderTableViewController *planOrderViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANORDER"];
     [self addChildViewController:planOrderViewController];
     
-    PlanService *planService = [[PlanService alloc] init];
     PlanOperateNaviViewController *naviViewController = (PlanOperateNaviViewController *)(self.navigationController);
     [planService getPlanTask:naviViewController.Code success:^(PlanDetailEntity *planDetail) {
+        plan = planDetail;
+        
         planMaintainContentViewController.planDetail = planDetail;
+        [planMaintainContentViewController changeVariable];
         [planMaintainContentViewController.tableView reloadData];
         
         planObjectViewController.planDetail = planDetail;
@@ -112,16 +119,16 @@
         
         if (planDetail.TaskAction) {
             actionsMutableArr = [[NSMutableArray alloc] initWithArray:planDetail.TaskAction];
-            /*
+            
             if (planDetail.IsLocalSave) {
                 NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
                 [saveDic setValue:@"FormSave" forKey:@"EventName"];
                 [saveDic setValue:@"保存" forKey:@"DisplayName"];
                 [saveDic setValue:@100 forKey:@"flag"];
-                [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
+                [saveDic setValue:planDetail.EditFields forKey:@"SubmitFields"];
                 [actionsMutableArr insertObject:saveDic atIndex:0];
             }
-            */
+            
             if (actionsMutableArr && actionsMutableArr.count>0) {
                 self.bottomViewConstraint.constant = 0;
                 NSInteger actionNum = actionsMutableArr.count;
@@ -252,9 +259,8 @@
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
     
-    /*
-    if (taskEntity.IsLocalSave && tag==0) { //保存按钮点击
-        bool success = [taskService updateLocalTaskEntity:taskEntity];
+    if (plan.IsLocalSave && tag==0) { //保存按钮点击
+        bool success = [planService updateLocalPlanDetailEntity:plan];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -262,7 +268,6 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-     */
         [taskService submitAction:submitDic withCode:self.Code success:^{
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -276,9 +281,7 @@
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }];
-    /*
     }
-     */
 }
 
 #pragma mark - actionSheetDelegate

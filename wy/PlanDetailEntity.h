@@ -12,6 +12,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+@property (nonatomic, copy) NSString *Code;
 @property (nonatomic, copy) NSString *Name;
 @property (nonatomic, copy) NSString *Priority;
 @property (nonatomic, copy) NSString *ExecuteTime;
@@ -22,7 +23,8 @@
 @property (nonatomic, copy) NSArray *SBList;
 @property (nonatomic, copy) NSArray *TaskAction;
 @property (nonatomic, copy) NSDictionary *TaskInfo;
-@property (nonatomic, copy) NSString *EditSBMXFields;
-@property (nonatomic, copy) NSString *EditWZXQFields;
+@property (nonatomic, copy) NSString *EditFields;
+
+@property (nonatomic) BOOL IsLocalSave;
 
 @end
