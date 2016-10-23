@@ -14,6 +14,8 @@
 #import "PlanOperateNaviViewController.h"
 #import "TaskService.h"
 #import "TaskDBService.h"
+#import "MaterialsEntity.h"
+#import "ToolsEntity.h"
 
 @interface PlanOperateViewController () <UIScrollViewDelegate, UIActionSheetDelegate>
 
@@ -225,37 +227,39 @@
     NSMutableDictionary *submitDic = [[NSMutableDictionary alloc] init];
     [submitDic setObject:eventname forKey:@"eventname"];
     NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
-    /*
     for (NSString *fieldStr in submitField) {
-        if ([@"SBCheckList" isEqualToString:fieldStr]) {
-            NSMutableArray *sbCheckListArr = [[NSMutableArray alloc] init];
-            NSArray *values = self.deviceCheckInfoDic.allValues;
-            for (NSDictionary *infoDic in values) {
-                NSArray *values2 = infoDic.allValues;
-                for (InspectionChildModelEntity *insChildEntity in values2) {
-                    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"Code"];
-                    [dic setObject:[NSString stringWithFormat:@"%ld", insChildEntity.ItemType] forKey:@"ItemType"];
-                    [dic setObject:!insChildEntity.InputMax||[insChildEntity.InputMax isBlankString]?@"":insChildEntity.InputMax forKey:@"InputMax"];
-                    [dic setObject:!insChildEntity.InputMin||[insChildEntity.InputMin isBlankString]?@"":insChildEntity.InputMin forKey:@"InputMin"];
-                    [dic setObject:!insChildEntity.UnitName||[insChildEntity.UnitName isBlankString]?@"":insChildEntity.UnitName forKey:@"UnitName"];
-                    [dic setObject:insChildEntity.ItemValues forKey:@"ItemValues"];
-                    [dic setObject:insChildEntity.ItemName forKey:@"ItemName"];
-                    [dic setObject:insChildEntity.taskDeviceCode forKey:@"taskDeviceCode"];
-                    if (insChildEntity.ItemValue && insChildEntity.ItemValue!=nil) {
-                        [dic setObject:insChildEntity.ItemValue forKey:@"ItemValue"];
-                    }
-                    if (insChildEntity.DataValid && insChildEntity.DataValid!=nil) {
-                        [dic setObject:insChildEntity.DataValid forKey:@"DataValid"];
-                    }
-                    [sbCheckListArr addObject:dic];
+        if ([@"WZList" isEqualToString:fieldStr]) {
+            NSMutableArray *WZArr = [[NSMutableArray alloc] init];
+            for (int i=0; i<plan.MaterialList.count; i++) {
+                MaterialsEntity *material = plan.MaterialList[i];
+                NSDictionary *dic = @{@"Name":material.Name, @"Number":[[NSNumber numberWithFloat:material.Number] stringValue]};
+                [WZArr addObject:dic];
+                if (material.Number == 0) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写数量" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                    [alertController addAction:okAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    return;
                 }
             }
-            [dataDic setObject:sbCheckListArr forKey:fieldStr];
-            taskEntity.SBCheckList = [NSString convertArrayToString:sbCheckListArr];
+            [dataDic setObject:[NSString convertArrayToString:WZArr] forKey:fieldStr];
+        } else if ([@"GJList" isEqualToString:fieldStr]) {
+            NSMutableArray *GJArr = [[NSMutableArray alloc] init];
+            for (int i=0; i<plan.ToolList.count; i++) {
+                ToolsEntity *tool = plan.ToolList[i];
+                NSDictionary *dic = @{@"Name":tool.Name, @"Number":[[NSNumber numberWithFloat:tool.Number] stringValue]};
+                [GJArr addObject:dic];
+                if (tool.Number == 0) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写数量" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+                    [alertController addAction:okAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    return;
+                }
+            }
+            [dataDic setObject:[NSString convertArrayToString:GJArr] forKey:fieldStr];
         }
     }
-     */
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
     [submitDic setObject:dataArr forKey:@"data"];
     
@@ -263,7 +267,7 @@
         bool success = [planService updateLocalPlanDetailEntity:plan];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         }];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];

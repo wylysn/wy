@@ -64,7 +64,7 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject[@"success"]) {
-            PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0]];
+            PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0] withType:1];
             success(planDetail);
         } else {
             failure(responseObject[@"message"]);
@@ -92,10 +92,10 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if (responseObject[@"success"]) {
-                PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0]];
+                PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0] withType:1];
                 planDetail.Code = code;
-                planDetail.EditFields = @"[GJList];[WZList]";//测试用，用完删除
-                planDetail.IsLocalSave = YES;//测试用，用完删除
+                //planDetail.EditFields = @"[GJList];[WZList]";//测试用，用完删除
+                //planDetail.IsLocalSave = YES;//测试用，用完删除
                 
                 //离线存储
                 dispatch_async(dispatch_get_main_queue(), ^{

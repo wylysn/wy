@@ -7,12 +7,18 @@
 //
 
 #import "PlanMaintainContentTableViewController.h"
+#import "ChooseMaterialViewController.h"
+#import "MaterialsEntity.h"
+#import "ChooseToolViewController.h"
+#import "ToolsEntity.h"
 
-@interface PlanMaintainContentTableViewController ()
+@interface PlanMaintainContentTableViewController ()<ChooseMaterialViewDelegate, ChooseToolViewDelegate, UITextFieldDelegate>
 
 @end
 
 @implementation PlanMaintainContentTableViewController {
+    NSMutableDictionary *selectedMaterialsDic;
+    NSMutableDictionary *selectedToolsDic;
     NSArray *editFieldsArray;
     BOOL isWZListEditable;
     BOOL isGJListEditable;
@@ -23,6 +29,9 @@
     
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    selectedMaterialsDic = [[NSMutableDictionary alloc] init];
+    selectedToolsDic = [[NSMutableDictionary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,16 +46,67 @@
 
 - (void)addWz:(UITapGestureRecognizer *)recognizer
 {
-//    UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//    ChooseDeviceViewController *chooseDeviceViewController = [mainSB instantiateViewControllerWithIdentifier:@"CHOOSEDEVICE"];
-//    chooseDeviceViewController.delegate = self;
-//    chooseDeviceViewController.selectedDevicesDic = selectedDevicesDic;
-//    [self.navigationController pushViewController:chooseDeviceViewController animated:YES];
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ChooseMaterialViewController *chooseMaterialViewController = [taskSB instantiateViewControllerWithIdentifier:@"CHOOSEMATERIAL"];
+    chooseMaterialViewController.delegate = self;
+    chooseMaterialViewController.selectedMaterialsDic = selectedMaterialsDic;
+    [self.navigationController pushViewController:chooseMaterialViewController animated:YES];
 }
 
 - (void)addGj:(UITapGestureRecognizer *)recognizer
 {
+    UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ChooseToolViewController *chooseToolViewController = [taskSB instantiateViewControllerWithIdentifier:@"CHOOSETOOL"];
+    chooseToolViewController.delegate = self;
+    chooseToolViewController.selectedToolsDic = selectedToolsDic;
+    [self.navigationController pushViewController:chooseToolViewController animated:YES];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger section = indexPath.section;
     
+    if (section>=2 && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)) {
+        MaterialsEntity *material = self.planDetail.MaterialList[section-2];
+        material.Number = [textField.text floatValue];
+    }
+    
+    if (section>=2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
+        ToolsEntity *tool = self.planDetail.ToolList[section-(2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count))];
+        tool.Number = [textField.text floatValue];
+    }
+    
+    return YES;
+}
+
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    NSLog(@"输入的数据：%@", textField.text);
+//    return YES;
+//}
+
+#pragma mark - ChooseMaterialViewDelegate
+
+- (void)showSelectedMaterials:(NSArray *) materials {
+    self.planDetail.MaterialList = [[NSMutableArray alloc] initWithArray:materials];
+    [selectedMaterialsDic removeAllObjects];
+    for (unsigned i = 0; i < self.planDetail.MaterialList.count; i++) {
+        MaterialsEntity *material = (MaterialsEntity *)self.planDetail.MaterialList[i];
+        [selectedMaterialsDic setObject:material forKey:material.Code];
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark - ChooseToolViewDelegate
+
+- (void)showSelectedTools:(NSArray *) tools {
+    self.planDetail.ToolList = [[NSMutableArray alloc] initWithArray:tools];
+    [selectedToolsDic removeAllObjects];
+    for (unsigned i = 0; i < self.planDetail.ToolList.count; i++) {
+        ToolsEntity *tool = (ToolsEntity *)self.planDetail.ToolList[i];
+        [selectedToolsDic setObject:tool forKey:tool.Code];
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -151,6 +211,13 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     NSString *CELLID = @"PLANDETAILCELL";
+    if ((
+         (section>=2 && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && isWZListEditable)
+         ||
+         (section>=2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count) && isGJListEditable)
+         ) && row==1) {
+        CELLID = @"PLANDETAILEDITCELL";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELLID];
@@ -177,10 +244,10 @@
         }
     } else if (section>=2 && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)) {
         if (self.planDetail.MaterialList.count>0) {
-            NSDictionary *materialDic = self.planDetail.MaterialList[section-2];
+            MaterialsEntity *material = self.planDetail.MaterialList[section-2];
             if (row == 0) {
                 keyLabel.text = @"物资名称";
-                valueLabel.text = materialDic[@"WzName"];
+                valueLabel.text = material.Name;
             }
             /*
             else if (row == 1) {
@@ -196,14 +263,23 @@
             */
             else if (row == 1) {
                 keyLabel.text = @"数量";
-                valueLabel.text = materialDic[@"Wznumber"];
+                NSString *num = [[NSNumber numberWithFloat:material.Number] stringValue];
+                num = [@"0" isEqualToString:num]?@"":num;
+                if (isWZListEditable) {
+                    UITextField *textField = [cell viewWithTag:2];
+                    textField.delegate = self;
+                    textField.keyboardType = UIKeyboardTypeDecimalPad;
+                    textField.text = num;
+                } else {
+                    valueLabel.text = num;
+                }
             }
         }
     } else if (section>=2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count) && section<2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
-        NSDictionary *toolDic = self.planDetail.ToolList[section-(2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count))];
+        ToolsEntity *tool = self.planDetail.ToolList[section-(2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count))];
         if (row == 0) {
             keyLabel.text = @"工具名称";
-            valueLabel.text = toolDic[@"GjName"];
+            valueLabel.text = tool.Name;
         }
         /*
         else if (row == 1) {
@@ -213,7 +289,16 @@
          */
         else if (row == 1) {
             keyLabel.text = @"数量";
-            valueLabel.text = toolDic[@"Gjnumber"];
+            NSString *num = [[NSNumber numberWithFloat:tool.Number] stringValue];
+            num = [@"0" isEqualToString:num]?@"":num;
+            if (isGJListEditable) {
+                UITextField *textField = [cell viewWithTag:2];
+                textField.delegate = self;
+                textField.keyboardType = UIKeyboardTypeDecimalPad;
+                textField.text = num;
+            } else {
+                valueLabel.text = num;
+            }
         }
     } else if (section >= 2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count)) {
         NSDictionary *positionDic = self.planDetail.PositionList[section-(2+(self.planDetail.MaterialList.count<1?1:self.planDetail.MaterialList.count)+(self.planDetail.ToolList.count<1?1:self.planDetail.ToolList.count))];

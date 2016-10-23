@@ -10,7 +10,7 @@
 
 @interface PlanDetailEntity : NSObject
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary withType:(NSInteger)type;
 
 @property (nonatomic, copy) NSString *Code;
 @property (nonatomic, copy) NSString *Name;

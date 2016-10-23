@@ -12,8 +12,12 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+- (instancetype)initWithNetDictionary:(NSDictionary *)dictionary;
+
+- (NSDictionary *)toDictionary;
+
 @property (nonatomic, copy, readonly) NSString *Code;
 @property (nonatomic, copy, readonly) NSString *Name;
-@property (nonatomic, readonly) float Number;
+@property (nonatomic) float Number;
 
 @end

@@ -17,5 +17,6 @@
 - (BOOL) saveMaterial:(MaterialsEntity *)material;
 - (MaterialsEntity *) findMaterialByCode:(NSString*)Code;
 - (NSArray *) findAllMaterials;
+- (NSArray *) findMaterialsByName:(NSString*)Name;
 
 @end

@@ -138,4 +138,29 @@ static sqlite3_stmt *statement = nil;
     return resultArr;
 }
 
+- (NSArray *) findMaterialsByName:(NSString*)Name {
+    NSMutableArray *resultArr = [[NSMutableArray alloc] init];
+    const char *dbpath = [databasePath UTF8String];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querySQL = [NSString stringWithFormat:@"select Code, Name, Number from Materials where Name like '%%%@%%'",Name];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            //while (sqlite3_step(stmt) == SQLITE_ROW) { //多行数据
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *Code = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                NSString *Name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 1)];
+                float Number = sqlite3_column_double(statement, 2);
+                MaterialsEntity *material = [[MaterialsEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Number":[NSString stringWithFormat:@"%f", Number]}];
+                [resultArr addObject:material];
+            }
+        } else {
+            NSLog(@"查找失败:%s", sqlite3_errmsg(database));
+        }
+    }
+    sqlite3_finalize(statement);
+    return resultArr;
+}
+
 @end

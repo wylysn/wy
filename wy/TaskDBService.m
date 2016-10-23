@@ -7,6 +7,8 @@
 //
 
 #import "TaskDBService.h"
+#import "MaterialsEntity.h"
+#import "ToolsEntity.h"
 
 static TaskDBService *sharedInstance = nil;
 static sqlite3 *database = nil;
@@ -527,8 +529,19 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 3, [planDetail.Priority UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 4, [planDetail.ExecuteTime UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 5, [[NSString convertArrayToString:planDetail.StepList] UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 6, [[NSString convertArrayToString:planDetail.MaterialList] UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 7, [[NSString convertArrayToString:planDetail.ToolList] UTF8String], -1, SQLITE_TRANSIENT);
+            
+            NSMutableArray *materialArr = [[NSMutableArray alloc] init];
+            for (MaterialsEntity *material in planDetail.MaterialList) {
+                [materialArr addObject:[material toDictionary]];
+            }
+            sqlite3_bind_text(statement, 6, [[NSString convertArrayToString:materialArr] UTF8String], -1, SQLITE_TRANSIENT);
+            
+            NSMutableArray *toolArr = [[NSMutableArray alloc] init];
+            for (ToolsEntity *tool in planDetail.ToolList) {
+                [toolArr addObject:[tool toDictionary]];
+            }
+            sqlite3_bind_text(statement, 7, [[NSString convertArrayToString:toolArr] UTF8String], -1, SQLITE_TRANSIENT);
+            
             sqlite3_bind_text(statement, 8, [[NSString convertArrayToString:planDetail.PositionList] UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 9, [[NSString convertArrayToString:planDetail.SBList] UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 10, [[NSString convertArrayToString:planDetail.TaskAction] UTF8String], -1, SQLITE_TRANSIENT);
@@ -559,8 +572,19 @@ static sqlite3_stmt *statement = nil;
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
         if (result == SQLITE_OK) { // 语法通过
-            sqlite3_bind_text(statement, 1, [[NSString convertArrayToString:planDetail.MaterialList] UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 2, [[NSString convertArrayToString:planDetail.ToolList] UTF8String], -1, SQLITE_TRANSIENT);
+            NSMutableArray *materialArr = [[NSMutableArray alloc] init];
+            for (MaterialsEntity *material in planDetail.MaterialList) {
+                [materialArr addObject:[material toDictionary]];
+            }
+            sqlite3_bind_text(statement, 1, [[NSString convertArrayToString:materialArr] UTF8String], -1, SQLITE_TRANSIENT);
+            
+            NSMutableArray *toolArr = [[NSMutableArray alloc] init];
+            for (ToolsEntity *tool in planDetail.ToolList) {
+                [toolArr addObject:[tool toDictionary]];
+            }
+            sqlite3_bind_text(statement, 2, [[NSString convertArrayToString:toolArr] UTF8String], -1, SQLITE_TRANSIENT);
+            
+            sqlite3_bind_text(statement, 3, [planDetail.Code UTF8String], -1, SQLITE_TRANSIENT);
             
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -600,7 +624,7 @@ static sqlite3_stmt *statement = nil;
                 NSString *TaskAction = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 9)];
                 NSString *EditFields = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 10)];
                 BOOL IsLocalSave = (BOOL)sqlite3_column_int(statement, 11);
-                plan = [[PlanDetailEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Priority":Priority, @"ExecuteTime":ExecuteTime, @"StepList":[NSString convertStringToArray:StepList], @"MaterialList":[NSString convertStringToArray:MaterialList], @"ToolList":[NSString convertStringToArray:ToolList], @"PositionList":[NSString convertStringToArray:PositionList], @"SBList":[NSString convertStringToArray:SBList], @"TaskAction":[NSString convertStringToArray:TaskAction], @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0"}];
+                plan = [[PlanDetailEntity alloc] initWithDictionary:@{@"Code":Code, @"Name":Name, @"Priority":Priority, @"ExecuteTime":ExecuteTime, @"StepList":[NSString convertStringToArray:StepList], @"MaterialList":[NSString convertStringToArray:MaterialList], @"ToolList":[NSString convertStringToArray:ToolList], @"PositionList":[NSString convertStringToArray:PositionList], @"SBList":[NSString convertStringToArray:SBList], @"TaskAction":[NSString convertStringToArray:TaskAction], @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0"} withType:0];
             }
             else{
                 NSLog(@"没有找到code为%@的任务......", Code);

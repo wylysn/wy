@@ -174,6 +174,8 @@
 		D2CADE821D8B7152008A8CFD /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CADE811D8B7152008A8CFD /* QRCodeScanViewController.m */; };
 		D2CF2E721D7BB29E0020759A /* PRView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E711D7BB29E0020759A /* PRView.m */; };
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
+		D2D6E45B1DBC923B00D9B39B /* ChooseMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6E45A1DBC923B00D9B39B /* ChooseMaterialViewController.m */; };
+		D2D6E45E1DBCA85900D9B39B /* ChooseToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6E45D1DBCA85900D9B39B /* ChooseToolViewController.m */; };
 		D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */; };
 		D2D979771DBB6C460019A7AF /* 物业系统处理界面测试结果.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */; };
 		D2D9797A1DBB6F900019A7AF /* DeviceClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */; };
@@ -513,6 +515,10 @@
 		D2CF2E711D7BB29E0020759A /* PRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRView.m; sourceTree = "<group>"; };
 		D2CF2E731D7BDABA0020759A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D2CF2E741D7BDABA0020759A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D2D6E4591DBC923B00D9B39B /* ChooseMaterialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMaterialViewController.h; sourceTree = "<group>"; };
+		D2D6E45A1DBC923B00D9B39B /* ChooseMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMaterialViewController.m; sourceTree = "<group>"; };
+		D2D6E45C1DBCA85900D9B39B /* ChooseToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseToolViewController.h; sourceTree = "<group>"; };
+		D2D6E45D1DBCA85900D9B39B /* ChooseToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseToolViewController.m; sourceTree = "<group>"; };
 		D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20161022.docx"; sourceTree = "<group>"; };
 		D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "物业系统处理界面测试结果.docx"; sourceTree = "<group>"; };
 		D2D979781DBB6F900019A7AF /* DeviceClassEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceClassEntity.h; sourceTree = "<group>"; };
@@ -611,6 +617,10 @@
 				880787BE1D61A2BD00BA6F05 /* ChoosePersonViewController.m */,
 				8811E7AB1D77FC4500CE7CE2 /* ChoosePositionViewController.h */,
 				8811E7AC1D77FC4500CE7CE2 /* ChoosePositionViewController.m */,
+				D2D6E4591DBC923B00D9B39B /* ChooseMaterialViewController.h */,
+				D2D6E45A1DBC923B00D9B39B /* ChooseMaterialViewController.m */,
+				D2D6E45C1DBCA85900D9B39B /* ChooseToolViewController.h */,
+				D2D6E45D1DBCA85900D9B39B /* ChooseToolViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1512,6 +1522,7 @@
 				88A8939A1D332B260050D9F3 /* AppDelegate.m in Sources */,
 				885B28B71DB4CB5100FCAF6F /* PlanOperateViewController.m in Sources */,
 				889BA2CA1D64159600BC5413 /* NSIndexSet+Convenience.m in Sources */,
+				D2D6E45B1DBC923B00D9B39B /* ChooseMaterialViewController.m in Sources */,
 				D297AAA81D770020004612BA /* KnowledgeDetailTableViewController.m in Sources */,
 				8819BCCF1D6ADF0C00E04B49 /* SiftWorkOrderViewController.m in Sources */,
 				D22C85CE1DA74E85000362DF /* AssetsSiftView.m in Sources */,
@@ -1543,6 +1554,7 @@
 				D24644B41D86E843007E5028 /* WorkOrderSiftView.m in Sources */,
 				88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */,
 				D2D9797A1DBB6F900019A7AF /* DeviceClassEntity.m in Sources */,
+				D2D6E45E1DBCA85900D9B39B /* ChooseToolViewController.m in Sources */,
 				88E927FC1D5DBE9200152BBF /* UIDevice+UIDeviceCategory.m in Sources */,
 				88D6DDE71D99F89900C7E769 /* AssetsViewController.m in Sources */,
 				88F140CE1D6C1A6D00B8BCCC /* InspectTaskListViewController.m in Sources */,

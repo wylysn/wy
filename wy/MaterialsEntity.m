@@ -21,4 +21,21 @@
     return self;
 }
 
+- (instancetype)initWithNetDictionary:(NSDictionary *)dictionary
+{
+    self = super.init;
+    if (self) {
+        _Name = dictionary[@"WzName"];
+        _Number = [dictionary[@"Wznumber"] floatValue];
+    }
+    return self;
+}
+
+- (NSDictionary *)toDictionary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:self.Name forKey:@"Name"];
+    [dic setObject:[[NSNumber numberWithFloat:self.Number] stringValue] forKey:@"Number"];
+    return dic;
+}
+
 @end

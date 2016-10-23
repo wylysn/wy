@@ -17,5 +17,6 @@
 - (BOOL) saveTool:(ToolsEntity *)tool;
 - (ToolsEntity *) findToolByCode:(NSString*)Code;
 - (NSArray *) findAllTools;
+- (NSArray *) findToolsByName:(NSString*)Name;
 
 @end
