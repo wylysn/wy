@@ -39,6 +39,15 @@
 		885FEAFF1D9107AD00EC5A81 /* TaskDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */; };
 		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
 		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
+		887388491DBD96D500A44466 /* apns-beos-cert.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 887388401DBD96D500A44466 /* apns-beos-cert.p12 */; };
+		8873884A1DBD96D500A44466 /* apns-beos-cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 887388411DBD96D500A44466 /* apns-beos-cert.pem */; };
+		8873884B1DBD96D500A44466 /* apns-beos-key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 887388421DBD96D500A44466 /* apns-beos-key.p12 */; };
+		8873884C1DBD96D500A44466 /* apns-beos-key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 887388431DBD96D500A44466 /* apns-beos-key.pem */; };
+		8873884D1DBD96D500A44466 /* aps_beos_development.cer in Resources */ = {isa = PBXBuildFile; fileRef = 887388441DBD96D500A44466 /* aps_beos_development.cer */; };
+		8873884E1DBD96D500A44466 /* aps_beos.cer in Resources */ = {isa = PBXBuildFile; fileRef = 887388451DBD96D500A44466 /* aps_beos.cer */; };
+		8873884F1DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest in Resources */ = {isa = PBXBuildFile; fileRef = 887388461DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest */; };
+		887388501DBD96D500A44466 /* push.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 887388471DBD96D500A44466 /* push.p12 */; };
+		887388511DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 887388481DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision */; };
 		8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */; };
 		8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
@@ -115,7 +124,6 @@
 		88BCFE7A1D9A53760016207B /* AssetsProducerInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE791D9A53760016207B /* AssetsProducerInfoTableViewController.m */; };
 		88BCFE7D1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */; };
 		88BCFE801D9A63200016207B /* AssetsMaintainRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */; };
-		88BCFE821D9A763F0016207B /* BEOS接口定义_20160927.docx in Resources */ = {isa = PBXBuildFile; fileRef = 88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */; };
 		88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2D71D7E4AB800F2FFBD /* URLManager.m */; };
 		88CDD2DB1D7EA6A200F2FFBD /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CDD2DA1D7EA6A200F2FFBD /* DownloadViewController.m */; };
 		88D5CB2B1D6FCED80041C9A1 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D5CB2A1D6FCED80041C9A1 /* MyTableViewController.m */; };
@@ -141,7 +149,6 @@
 		88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88FCC1351D62A9F800ED8979 /* delete@2x.png */; };
 		88FCC1391D62C0DE00ED8979 /* ChoosePersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */; };
 		88FCC13C1D62FBD500ED8979 /* TaskJiedanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */; };
-		88FD49511D938A0B007065CE /* 关于页面处理按钮的摆放.doc in Resources */ = {isa = PBXBuildFile; fileRef = 88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */; };
 		88FF11481D7510CA0073EDBB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FF11471D7510CA0073EDBB /* libsqlite3.tbd */; };
 		88FF114E1D751C1E0073EDBB /* PersonDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF114D1D751C1E0073EDBB /* PersonDBService.m */; };
 		88FF11511D7552E90073EDBB /* DeviceDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF11501D7552E90073EDBB /* DeviceDBService.m */; };
@@ -270,6 +277,15 @@
 		887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjian2ViewController.m; sourceTree = "<group>"; };
 		8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianBaseInfo2TableViewController.h; sourceTree = "<group>"; };
 		8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjianBaseInfo2TableViewController.m; sourceTree = "<group>"; };
+		887388401DBD96D500A44466 /* apns-beos-cert.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "apns-beos-cert.p12"; sourceTree = "<group>"; };
+		887388411DBD96D500A44466 /* apns-beos-cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "apns-beos-cert.pem"; sourceTree = "<group>"; };
+		887388421DBD96D500A44466 /* apns-beos-key.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "apns-beos-key.p12"; sourceTree = "<group>"; };
+		887388431DBD96D500A44466 /* apns-beos-key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "apns-beos-key.pem"; sourceTree = "<group>"; };
+		887388441DBD96D500A44466 /* aps_beos_development.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_beos_development.cer; sourceTree = "<group>"; };
+		887388451DBD96D500A44466 /* aps_beos.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_beos.cer; sourceTree = "<group>"; };
+		887388461DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CertificateSigningRequest.certSigningRequest; sourceTree = "<group>"; };
+		887388471DBD96D500A44466 /* push.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = push.p12; sourceTree = "<group>"; };
+		887388481DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = XC_iOS_comquantumbeos.mobileprovision; sourceTree = "<group>"; };
 		8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectTaskListSiftView.xib; sourceTree = "<group>"; };
 		8876FCF41D867D4400767C3F /* InspectTaskSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskSiftView.h; sourceTree = "<group>"; };
 		8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskSiftView.m; sourceTree = "<group>"; };
@@ -406,7 +422,6 @@
 		88BCFE7C1D9A5F9C0016207B /* AssetsRepaireRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsRepaireRecordTableViewController.m; sourceTree = "<group>"; };
 		88BCFE7E1D9A63200016207B /* AssetsMaintainRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsMaintainRecordTableViewController.h; sourceTree = "<group>"; };
 		88BCFE7F1D9A63200016207B /* AssetsMaintainRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsMaintainRecordTableViewController.m; sourceTree = "<group>"; };
-		88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20160927.docx"; sourceTree = "<group>"; };
 		88CDD2D61D7E4AB800F2FFBD /* URLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
 		88CDD2D71D7E4AB800F2FFBD /* URLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
 		88CDD2D91D7EA6A200F2FFBD /* DownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
@@ -456,7 +471,6 @@
 		88FCC1381D62C0DE00ED8979 /* ChoosePersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePersonTableViewCell.m; sourceTree = "<group>"; };
 		88FCC13A1D62FBD500ED8979 /* TaskJiedanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskJiedanViewController.h; sourceTree = "<group>"; };
 		88FCC13B1D62FBD500ED8979 /* TaskJiedanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskJiedanViewController.m; sourceTree = "<group>"; };
-		88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "关于页面处理按钮的摆放.doc"; sourceTree = "<group>"; };
 		88FF11411D750F860073EDBB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		88FF11471D7510CA0073EDBB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		88FF114C1D751C1E0073EDBB /* PersonDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDBService.h; sourceTree = "<group>"; };
@@ -632,6 +646,31 @@
 				8819BCCB1D6A9D8A00E04B49 /* NTMonthYearPicker.m */,
 			);
 			path = NTMonthYearPicker;
+			sourceTree = "<group>";
+		};
+		8873883E1DBD951000A44466 /* browsemind */ = {
+			isa = PBXGroup;
+			children = (
+				D2C090A51D915ED9001D94CF /* 3.p12 */,
+				D2C090A61D915ED9001D94CF /* axx.mobileprovision */,
+			);
+			name = browsemind;
+			sourceTree = "<group>";
+		};
+		8873883F1DBD96C000A44466 /* quantum */ = {
+			isa = PBXGroup;
+			children = (
+				887388401DBD96D500A44466 /* apns-beos-cert.p12 */,
+				887388411DBD96D500A44466 /* apns-beos-cert.pem */,
+				887388421DBD96D500A44466 /* apns-beos-key.p12 */,
+				887388431DBD96D500A44466 /* apns-beos-key.pem */,
+				887388441DBD96D500A44466 /* aps_beos_development.cer */,
+				887388451DBD96D500A44466 /* aps_beos.cer */,
+				887388461DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest */,
+				887388471DBD96D500A44466 /* push.p12 */,
+				887388481DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision */,
+			);
+			name = quantum;
 			sourceTree = "<group>";
 		};
 		88821E651D5C4BE800C72DA3 /* images */ = {
@@ -1127,14 +1166,12 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				8873883F1DBD96C000A44466 /* quantum */,
+				8873883E1DBD951000A44466 /* browsemind */,
 				D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */,
 				D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */,
 				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
-				88BCFE811D9A763F0016207B /* BEOS接口定义_20160927.docx */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
-				88FD49501D938A0B007065CE /* 关于页面处理按钮的摆放.doc */,
-				D2C090A51D915ED9001D94CF /* 3.p12 */,
-				D2C090A61D915ED9001D94CF /* axx.mobileprovision */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
 				8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */,
 			);
@@ -1337,17 +1374,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8873884D1DBD96D500A44466 /* aps_beos_development.cer in Resources */,
 				88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */,
+				8873884A1DBD96D500A44466 /* apns-beos-cert.pem in Resources */,
 				88D5CB2D1D6FDBBE0041C9A1 /* My.storyboard in Resources */,
 				88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
+				887388511DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision in Resources */,
 				889BA2981D64124E00BC5413 /* Camera.storyboard in Resources */,
-				88BCFE821D9A763F0016207B /* BEOS接口定义_20160927.docx in Resources */,
 				889BA2D11D64181300BC5413 /* camera-flash-off@2x.png in Resources */,
+				887388501DBD96D500A44466 /* push.p12 in Resources */,
 				D2E20F1A1D994408000C1472 /* 资产管理.jpg in Resources */,
 				88B6FD9A1D66AE6400418972 /* phone@2x.png in Resources */,
-				88FD49511D938A0B007065CE /* 关于页面处理按钮的摆放.doc in Resources */,
 				8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */,
 				889BA2C11D64159600BC5413 /* ELCAlbumPickerController.xib in Resources */,
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
@@ -1355,6 +1394,7 @@
 				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
 				D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */,
 				D22C85CB1DA74CC5000362DF /* AssetsSiftView.xib in Resources */,
+				8873884E1DBD96D500A44466 /* aps_beos.cer in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				D2C090A81D915ED9001D94CF /* axx.mobileprovision in Resources */,
 				88B6FD981D66A1C800418972 /* plus50@2x.png in Resources */,
@@ -1365,12 +1405,16 @@
 				889BA2821D64076300BC5413 /* add_image.png in Resources */,
 				889BA2BF1D64159600BC5413 /* AssetPicker.storyboard in Resources */,
 				88E927EA1D5D55A800152BBF /* Task.storyboard in Resources */,
+				887388491DBD96D500A44466 /* apns-beos-cert.p12 in Resources */,
 				889BA2D01D64181300BC5413 /* camera-flash-off.png in Resources */,
 				88A893A31D332B260050D9F3 /* Main.storyboard in Resources */,
+				8873884B1DBD96D500A44466 /* apns-beos-key.p12 in Resources */,
 				D24644B11D86E6D0007E5028 /* WorkOrderSiftView.xib in Resources */,
 				889BA2D21D64181300BC5413 /* camera-flash-on.png in Resources */,
 				D2C090A71D915ED9001D94CF /* 3.p12 in Resources */,
 				889BA2C41D64159600BC5413 /* ELCAssetPicker.xib in Resources */,
+				8873884F1DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest in Resources */,
+				8873884C1DBD96D500A44466 /* apns-beos-key.pem in Resources */,
 				880787CB1D61C53800BA6F05 /* checked@2x.png in Resources */,
 				D2D979771DBB6C460019A7AF /* 物业系统处理界面测试结果.docx in Resources */,
 				8819BCD31D6AE1D900E04B49 /* filter@2x.png in Resources */,
