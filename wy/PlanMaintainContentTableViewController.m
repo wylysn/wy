@@ -42,6 +42,14 @@
     editFieldsArray = [[[self.planDetail.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
     isWZListEditable = !([editFieldsArray indexOfObject:@"WZList"]==NSNotFound);
     isGJListEditable = !([editFieldsArray indexOfObject:@"GJList"]==NSNotFound);
+    
+    //初始化赋值
+    for (MaterialsEntity *material in self.planDetail.MaterialList) {
+        [selectedMaterialsDic setObject:material forKey:material.Name];
+    }
+    for (ToolsEntity *tool in self.planDetail.ToolList) {
+        [selectedToolsDic setObject:tool forKey:tool.Name];
+    }
 }
 
 - (void)addWz:(UITapGestureRecognizer *)recognizer
@@ -92,7 +100,7 @@
     [selectedMaterialsDic removeAllObjects];
     for (unsigned i = 0; i < self.planDetail.MaterialList.count; i++) {
         MaterialsEntity *material = (MaterialsEntity *)self.planDetail.MaterialList[i];
-        [selectedMaterialsDic setObject:material forKey:material.Code];
+        [selectedMaterialsDic setObject:material forKey:material.Name];
     }
     [self.tableView reloadData];
 }
@@ -104,7 +112,7 @@
     [selectedToolsDic removeAllObjects];
     for (unsigned i = 0; i < self.planDetail.ToolList.count; i++) {
         ToolsEntity *tool = (ToolsEntity *)self.planDetail.ToolList[i];
-        [selectedToolsDic setObject:tool forKey:tool.Code];
+        [selectedToolsDic setObject:tool forKey:tool.Name];
     }
     [self.tableView reloadData];
 }

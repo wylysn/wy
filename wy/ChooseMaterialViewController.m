@@ -51,8 +51,8 @@
     NSMutableArray *materialArr = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
         MaterialsEntity *material = materialList[indexPath.row];
-        if (self.selectedMaterialsDic[material.Code]) {
-            material = self.selectedMaterialsDic[material.Code];
+        if (self.selectedMaterialsDic[material.Name]) {
+            material = self.selectedMaterialsDic[material.Name];
         } else {
             material.Number = 0;
         }
@@ -84,7 +84,7 @@
     nameLabel.text = material.Name;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //已选中样式设置
-    if (self.selectedMaterialsDic[material.Code]) {
+    if (self.selectedMaterialsDic[material.Name]) {
         UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         UIImageView *checkImageView = [cell viewWithTag:3];
         [checkImageView setImage:image];

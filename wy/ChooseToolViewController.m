@@ -51,8 +51,8 @@
     NSMutableArray *toolArr = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in indexPathsOfSelectedRows) {
         ToolsEntity *tool = toolList[indexPath.row];
-        if (self.selectedToolsDic[tool.Code]) {
-            tool = self.selectedToolsDic[tool.Code];
+        if (self.selectedToolsDic[tool.Name]) {
+            tool = self.selectedToolsDic[tool.Name];
         } else {
             tool.Number = 0;
         }
@@ -84,7 +84,7 @@
     nameLabel.text = tool.Name;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //已选中样式设置
-    if (self.selectedToolsDic[tool.Code]) {
+    if (self.selectedToolsDic[tool.Name]) {
         UIImage *image = [UIImage imageNamed:@"checkbox-checked"];
         UIImageView *checkImageView = [cell viewWithTag:3];
         [checkImageView setImage:image];
