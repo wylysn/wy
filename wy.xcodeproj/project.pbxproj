@@ -48,6 +48,7 @@
 		8873884F1DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest in Resources */ = {isa = PBXBuildFile; fileRef = 887388461DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest */; };
 		887388501DBD96D500A44466 /* push.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 887388471DBD96D500A44466 /* push.p12 */; };
 		887388511DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 887388481DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision */; };
+		887388531DBDBBD200A44466 /* test.developerprofile in Resources */ = {isa = PBXBuildFile; fileRef = 887388521DBDBBD200A44466 /* test.developerprofile */; };
 		8876FCF31D8676A700767C3F /* InspectTaskListSiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */; };
 		8876FCF61D867D4400767C3F /* InspectTaskSiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */; };
 		88821E621D5C458300C72DA3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88821E611D5C458300C72DA3 /* MainViewController.m */; };
@@ -286,6 +287,7 @@
 		887388461DBD96D500A44466 /* CertificateSigningRequest.certSigningRequest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CertificateSigningRequest.certSigningRequest; sourceTree = "<group>"; };
 		887388471DBD96D500A44466 /* push.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = push.p12; sourceTree = "<group>"; };
 		887388481DBD96D500A44466 /* XC_iOS_comquantumbeos.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = XC_iOS_comquantumbeos.mobileprovision; sourceTree = "<group>"; };
+		887388521DBDBBD200A44466 /* test.developerprofile */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.developerprofile; sourceTree = "<group>"; };
 		8876FCF21D8676A700767C3F /* InspectTaskListSiftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectTaskListSiftView.xib; sourceTree = "<group>"; };
 		8876FCF41D867D4400767C3F /* InspectTaskSiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTaskSiftView.h; sourceTree = "<group>"; };
 		8876FCF51D867D4400767C3F /* InspectTaskSiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTaskSiftView.m; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 		8873883F1DBD96C000A44466 /* quantum */ = {
 			isa = PBXGroup;
 			children = (
+				887388521DBDBBD200A44466 /* test.developerprofile */,
 				887388401DBD96D500A44466 /* apns-beos-cert.p12 */,
 				887388411DBD96D500A44466 /* apns-beos-cert.pem */,
 				887388421DBD96D500A44466 /* apns-beos-key.p12 */,
@@ -1378,6 +1381,7 @@
 				88821E6E1D5C4E7600C72DA3 /* home@2x.png in Resources */,
 				8873884A1DBD96D500A44466 /* apns-beos-cert.pem in Resources */,
 				88D5CB2D1D6FDBBE0041C9A1 /* My.storyboard in Resources */,
+				887388531DBDBBD200A44466 /* test.developerprofile in Resources */,
 				88FCC1361D62A9F800ED8979 /* delete@2x.png in Resources */,
 				88A893A81D332B260050D9F3 /* LaunchScreen.storyboard in Resources */,
 				88821E721D5C4FE700C72DA3 /* my@2x.png in Resources */,
