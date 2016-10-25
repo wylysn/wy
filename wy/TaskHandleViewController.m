@@ -27,7 +27,7 @@
 static NSString *startTimeBtnPlaceholder = @"请输入到场时间";
 static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 
-@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePersonViewDelegate, PRActionSheetPickerViewDelegate>
+@interface TaskHandleViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePersonViewDelegate, PRActionSheetPickerViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -120,34 +120,36 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [self.tableView reloadData];
         
         //刷新后展示图片
-        if (taskEntity.PicContent1 && ![@"" isEqualToString:taskEntity.PicContent1]) {
-            NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent1 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-            [self showImageWithImage:pic];
-        }
-        if (taskEntity.PicContent2 && ![@"" isEqualToString:taskEntity.PicContent2]) {
-            NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent2 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-            [self showImageWithImage:pic];
-        }
-        if (taskEntity.PicContent3 && ![@"" isEqualToString:taskEntity.PicContent3]) {
-            NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent3 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-            [self showImageWithImage:pic];
-        }
-        if (taskEntity.PicContent4 && ![@"" isEqualToString:taskEntity.PicContent4]) {
-            NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent4 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-            [self showImageWithImage:pic];
-        }
-        
-        if (![taskEntity.SBList isBlankString]) {
-            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
-            for (NSDictionary *deviceDic in deviceDicArr) {
-                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
-                [deviceArr addObject:device];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (taskEntity.PicContent1 && ![@"" isEqualToString:taskEntity.PicContent1]) {
+                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent1 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+                [self showImageWithImage:pic];
             }
-        }
+            if (taskEntity.PicContent2 && ![@"" isEqualToString:taskEntity.PicContent2]) {
+                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent2 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+                [self showImageWithImage:pic];
+            }
+            if (taskEntity.PicContent3 && ![@"" isEqualToString:taskEntity.PicContent3]) {
+                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent3 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+                [self showImageWithImage:pic];
+            }
+            if (taskEntity.PicContent4 && ![@"" isEqualToString:taskEntity.PicContent4]) {
+                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent4 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+                [self showImageWithImage:pic];
+            }
+            
+            if (![taskEntity.SBList isBlankString]) {
+                NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+                for (NSDictionary *deviceDic in deviceDicArr) {
+                    TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+                    [deviceArr addObject:device];
+                }
+            }
+        });
         
         //判断是否有操作，生成操作按钮
         if (![taskEntity.TaskAction isBlankString]) {
@@ -309,48 +311,43 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 taskEntity.Executors = ExecutorsStr;
             }
         } else if ([@"EStartTime" isEqualToString:fieldStr]) {
-            if ([@"" isEqualToString:self.startTimeBtn.titleLabel.text] || [startTimeBtnPlaceholder isEqualToString:self.startTimeBtn.titleLabel.text]) {
+            if ([taskEntity.EStartTime isBlankString] || [startTimeBtnPlaceholder isEqualToString:taskEntity.EStartTime]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有预估开始时间" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
             }
-            [dataDic setObject:self.startTimeBtn.titleLabel.text forKey:fieldStr];
-            taskEntity.EStartTime = self.startTimeBtn.titleLabel.text;
+            [dataDic setObject:taskEntity.EStartTime forKey:fieldStr];
         } else if ([@"EEndTime" isEqualToString:fieldStr]) {
-            if ([@"" isEqualToString:self.endTimeBtn.titleLabel.text] || [endTimeBtnPlaceholder isEqualToString:self.endTimeBtn.titleLabel.text]) {
+            if ([taskEntity.EStartTime isBlankString] || [endTimeBtnPlaceholder isEqualToString:taskEntity.EStartTime]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有预估结束时间" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
             }
-            [dataDic setObject:self.endTimeBtn.titleLabel.text forKey:fieldStr];
-            taskEntity.EStartTime = self.endTimeBtn.titleLabel.text;
+            [dataDic setObject:taskEntity.EStartTime forKey:fieldStr];
         } else if ([@"EWorkHours" isEqualToString:fieldStr]) {
-            [dataDic setObject:self.timeDiffLabel.text forKey:fieldStr];
-            taskEntity.EWorkHours = self.timeDiffLabel.text;
+            [dataDic setObject:taskEntity.EWorkHours forKey:fieldStr];
         } else if ([@"WorkContent" isEqualToString:fieldStr]) {
-            if ([@"" isEqualToString:self.workContentTextView.text]) {
+            if ([taskEntity.WorkContent isBlankString]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写工作内容" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
             }
-            [dataDic setObject:self.workContentTextView.text forKey:fieldStr];
-            taskEntity.WorkContent = self.workContentTextView.text;
+            [dataDic setObject:taskEntity.WorkContent forKey:fieldStr];
         } else if ([@"Description" isEqualToString:fieldStr]) {
-            if ([@"" isEqualToString:self.descriptionTextView.text]) {
+            if ([taskEntity.Description isBlankString]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写描述内容" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
                 [self presentViewController:alertController animated:YES completion:nil];
                 return;
             }
-            [dataDic setObject:self.descriptionTextView.text forKey:fieldStr];
-            taskEntity.Description = self.descriptionTextView.text;
+            [dataDic setObject:taskEntity.Description forKey:fieldStr];
         } else if ([@"SBList" isEqualToString:fieldStr]) {
             NSMutableArray *sbListArr = [[NSMutableArray alloc] init];
             for (TaskDeviceEntity *taskDevice in deviceArr) {
@@ -397,7 +394,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController popViewControllerAnimated:YES];
             }];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -493,22 +490,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     [imageView setUserInteractionEnabled:YES];
     
     [self.imageViewArray addObject:imageView];
-    
-    /*
-    NSInteger lines = self.imageArray.count/PICS_PER_LINE+1;
-    float X = PIC_WIDTH_HEIGHT*(self.imageArray.count%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(self.imageArray.count%PICS_PER_LINE)+10;
-    float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
-    imageView.tag = self.imageArray.count;
-    imageView.image = [image imageScaledToSize2:CGSizeMake(PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
-    [picCell.contentView addSubview:imageView];
-    
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-    [imageView addGestureRecognizer:gesture];
-    [imageView setUserInteractionEnabled:YES];
-    
-    [self.imageViewArray addObject:imageView];
-     */
 }
 
 - (void)imageClick:(UITapGestureRecognizer *)recognizer
@@ -658,6 +639,30 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     }
 }
 
+
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+//    UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    NSInteger section = indexPath.section;
+//
+//
+//
+//    return YES;
+//}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    UITableViewCell *cell = (UITableViewCell *)[[textView superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger section = indexPath.section;
+    
+    if (section == 3) {
+        taskEntity.Description = textView.text;
+    } else if (section == 4) {
+        taskEntity.WorkContent = textView.text;
+    }
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -665,17 +670,17 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 0) { //基础信息
         return 7;
-    } else if (section == 1) {
+    } else if (section == 1) {  //故障
         return deviceArr.count;
     }
     else if (section == 2) {  //图片暂时不加
         return 1;
     }
-    else if (section == 3) {
+    else if (section == 3) {    //问题描述
         return 1;
-    } else if (section == 4) {
+    } else if (section == 4) {  //工作内容
         return 1;
     } else if (section == 5) {
         return chargePersonArr.count;
@@ -908,6 +913,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if ([editFieldsArray indexOfObject:@"Description"] == NSNotFound) {
             textView.text = Description;
         } else {
+            textView.delegate = self;
             if ([@"" isEqualToString:Description]) {
                 textView.placeholder = @"请简要描述";
             } else {
@@ -923,6 +929,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         if ([editFieldsArray indexOfObject:@"WorkContent"] == NSNotFound) {
             textView.text = workContent;
         } else {
+            textView.delegate = self;
             if ([@"" isEqualToString:workContent]) {
                 textView.placeholder = @"请简要填写工作内容";
             } else {
@@ -1008,9 +1015,11 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     NSString *title = [DateUtil formatDateString:date withFormatter:@"yyyy-MM-dd HH:mm:00"];
     if (btnTag == 10) {
         [self.startTimeBtn setTitle:title forState:UIControlStateNormal];
+        taskEntity.EStartTime = title;
         [self calculateTimeDiffrence:title toTheTime:self.endTimeBtn.titleLabel.text];
     } else if(btnTag == 11) {
         [self.endTimeBtn setTitle:title forState:UIControlStateNormal];
+        taskEntity.EEndTime = title;
         [self calculateTimeDiffrence:self.startTimeBtn.titleLabel.text toTheTime:title];
     }
 }

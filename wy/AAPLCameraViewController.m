@@ -575,15 +575,14 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
                 if (!photoPreviewController) {
                     UIStoryboard* noticeSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
                     photoPreviewController = [noticeSB instantiateViewControllerWithIdentifier:@"PhotoPreview"];
-                    UIImage *image = [UIImage imageWithData:imageData];
-                    photoPreviewController.image = image;
-                    [self addChildViewController:photoPreviewController];
                 }
+                UIImage *image = [UIImage imageWithData:imageData];
+                photoPreviewController.image = image;
+                [self addChildViewController:photoPreviewController];
                 
                 UIView *photoPreview = photoPreviewController.view;
-//                UIImageView *preimageView = photoPreviewController.imagePreview;
-//                UIImage *image = [UIImage imageWithData:imageData];
-//                preimageView.image = image;
+                UIImageView *preimageView = photoPreviewController.imagePreview;
+                preimageView.image = image;
                 [self.view addSubview:photoPreview];
                 
 //                if (_delegate && [_delegate respondsToSelector:@selector(showImageDate:)]) {
