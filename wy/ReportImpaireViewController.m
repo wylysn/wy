@@ -22,7 +22,7 @@
 #define MAX_IMAGES_NUM 4
 #define PICS_PER_LINE 4
 
-@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePositionViewDelegate>
+@interface ReportImpaireViewController ()<UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate, SkimPhotoViewDelegate, ELCImagePickerControllerDelegate, ChooseDeviceViewDelegate, ChoosePositionViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -41,6 +41,7 @@
     NSString *priorityText;
     ReportImpaireService *reportImpaireService;
     PRPlaceHolderTextView *descTextView;
+    NSString *descText;
     NSString *username;
     NSString *name;
     NSString *mobile;
@@ -255,6 +256,16 @@
 - (void)showSelectedPositions:(PositionEntity *) selectedPosition {
     position = selectedPosition;
     [self.tableView reloadData];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    UITableViewCell *cell = (UITableViewCell *)[[textView superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger section = indexPath.section;
+    
+    if (section == 3) {
+        descText = textView.text;
+    }
 }
 
 #pragma mark - Table view data source
@@ -480,7 +491,7 @@
         return;
     }
     [dataDic setObject:position?position.Code:@"" forKey:@"Location"];
-    [dataDic setObject:descTextView.text forKey:@"Description"];
+    [dataDic setObject:descText?descText:@"" forKey:@"Description"];
     NSMutableString *deviceCodesStr = [[NSMutableString alloc] init];
     for (int i=0; i<deviceArr.count; i++) {
         DeviceEntity *device = (DeviceEntity *)deviceArr[i];
