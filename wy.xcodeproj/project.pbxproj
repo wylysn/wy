@@ -37,6 +37,7 @@
 		885B28B71DB4CB5100FCAF6F /* PlanOperateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885B28B61DB4CB5100FCAF6F /* PlanOperateViewController.m */; };
 		885B28BA1DB4CE7200FCAF6F /* PlanOperateNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885B28B91DB4CE7200FCAF6F /* PlanOperateNaviViewController.m */; };
 		885FEAFF1D9107AD00EC5A81 /* TaskDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */; };
+		886857571DC0395300BD1013 /* SubmitWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 886857561DC0395300BD1013 /* SubmitWindow.m */; };
 		887095891D80F1C300B4D601 /* TaskXunjian2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */; };
 		8870958C1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8870958B1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.m */; };
 		887388491DBD96D500A44466 /* apns-beos-cert.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 887388401DBD96D500A44466 /* apns-beos-cert.p12 */; };
@@ -274,6 +275,8 @@
 		885B28B91DB4CE7200FCAF6F /* PlanOperateNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanOperateNaviViewController.m; sourceTree = "<group>"; };
 		885FEAFD1D9107AD00EC5A81 /* TaskDeviceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDeviceEntity.h; sourceTree = "<group>"; };
 		885FEAFE1D9107AD00EC5A81 /* TaskDeviceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDeviceEntity.m; sourceTree = "<group>"; };
+		886857551DC0395300BD1013 /* SubmitWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitWindow.h; sourceTree = "<group>"; };
+		886857561DC0395300BD1013 /* SubmitWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitWindow.m; sourceTree = "<group>"; };
 		887095871D80F1C300B4D601 /* TaskXunjian2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjian2ViewController.h; sourceTree = "<group>"; };
 		887095881D80F1C300B4D601 /* TaskXunjian2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskXunjian2ViewController.m; sourceTree = "<group>"; };
 		8870958A1D8138F500B4D601 /* TaskXunjianBaseInfo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskXunjianBaseInfo2TableViewController.h; sourceTree = "<group>"; };
@@ -1131,6 +1134,8 @@
 				88E928011D5DC10E00152BBF /* connect */,
 				88E927F61D5DBCD300152BBF /* date */,
 				88E927F21D5DBC6000152BBF /* ActionSheetPickerView */,
+				886857551DC0395300BD1013 /* SubmitWindow.h */,
+				886857561DC0395300BD1013 /* SubmitWindow.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1503,6 +1508,7 @@
 				889BA2801D63FE7A00BC5413 /* PRPlaceHolderTextView.m in Sources */,
 				88E927F91D5DBCE600152BBF /* DateUtil.m in Sources */,
 				880787C91D61B45200BA6F05 /* PersonEntity.m in Sources */,
+				886857571DC0395300BD1013 /* SubmitWindow.m in Sources */,
 				D299B53D1D842FBC0073C360 /* NSDate+Extensions.m in Sources */,
 				88CDD2D81D7E4AB800F2FFBD /* URLManager.m in Sources */,
 				889B51FD1D76ABFC001A542A /* KnowledgeEntity.m in Sources */,

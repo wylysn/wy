@@ -19,6 +19,7 @@
 #import "ChoosePersonViewController.h"
 #import "TaskService.h"
 #import "PRActionSheetPickerView.h"
+#import "SubmitWindow.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 4
@@ -391,7 +392,12 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
+        __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        submitWindow.rootViewController = self;
+        [submitWindow makeKeyAndVisible];
         [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -399,12 +405,20 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         } failure:^(NSString *message) {
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }];
     }
+}
+
+- (void)dismissSubmitWindow:(SubmitWindow *)submitWindow {
+    submitWindow.hidden = YES;
+    submitWindow.rootViewController = nil;
+    submitWindow = nil;
 }
 
 - (void)showAddImageView {
@@ -638,17 +652,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [self showSelectedPersons:newPersons withType:2];
     }
 }
-
-
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-//    UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
-//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//    NSInteger section = indexPath.section;
-//
-//
-//
-//    return YES;
-//}
 
 - (void)textViewDidChange:(UITextView *)textView {
     UITableViewCell *cell = (UITableViewCell *)[[textView superview] superview];

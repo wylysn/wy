@@ -14,6 +14,7 @@
 #import "TaskEntity.h"
 #import "TaskDeviceEntity.h"
 #import "InspectionChildModelEntity.h"
+#import "SubmitWindow.h"
 
 @interface TaskXunjian2ViewController ()<UIScrollViewDelegate, UIActionSheetDelegate> {
     TaskService *taskService;
@@ -248,7 +249,12 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
+        __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        submitWindow.rootViewController = self;
+        [submitWindow makeKeyAndVisible];
         [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -256,12 +262,20 @@
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         } failure:^(NSString *message) {
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }];
     }
+}
+
+- (void)dismissSubmitWindow:(SubmitWindow *)submitWindow {
+    submitWindow.hidden = YES;
+    submitWindow.rootViewController = nil;
+    submitWindow = nil;
 }
 
 #pragma mark - actionSheetDelegate

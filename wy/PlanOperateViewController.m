@@ -16,6 +16,7 @@
 #import "TaskDBService.h"
 #import "MaterialsEntity.h"
 #import "ToolsEntity.h"
+#import "SubmitWindow.h"
 
 @interface PlanOperateViewController () <UIScrollViewDelegate, UIActionSheetDelegate>
 
@@ -272,7 +273,13 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
+        __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        submitWindow.rootViewController = self;
+        [submitWindow makeKeyAndVisible];
+        
         [taskService submitAction:submitDic withCode:self.Code success:^{
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -280,12 +287,20 @@
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         } failure:^(NSString *message) {
+            [self dismissSubmitWindow:submitWindow];
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }];
     }
+}
+
+- (void)dismissSubmitWindow:(SubmitWindow *)submitWindow {
+    submitWindow.hidden = YES;
+    submitWindow.rootViewController = nil;
+    submitWindow = nil;
 }
 
 #pragma mark - actionSheetDelegate

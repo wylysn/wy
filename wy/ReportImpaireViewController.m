@@ -17,6 +17,7 @@
 #import "ChoosePositionViewController.h"
 #import "AppDelegate.h"
 #import "ReportImpaireService.h"
+#import "SubmitWindow.h"
 
 #define IMAGESPLIT_WIDTH 10
 #define MAX_IMAGES_NUM 4
@@ -433,6 +434,7 @@
         [self showAddImageView];
     } else if (section == 3) {
         descTextView = [cell viewWithTag:1];
+        descTextView.delegate = self;
         descTextView.placeholder = @"请简要描述";
     }
     
@@ -501,7 +503,13 @@
         }
     }
     [dataDic setObject:deviceCodesStr forKey:@"SBName"];
+    
+    __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    submitWindow.rootViewController = self;
+    [submitWindow makeKeyAndVisible];
     [reportImpaireService submitImpaire:dataDic withImage:self.imageArray success:^{
+        [self dismissSubmitWindow:submitWindow];
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"报障数据提交成功！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -509,6 +517,8 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } failure:^(NSString *message) {
+        [self dismissSubmitWindow:submitWindow];
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"报障数据提交失败！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -516,6 +526,12 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+}
+
+- (void)dismissSubmitWindow:(SubmitWindow *)submitWindow {
+    submitWindow.hidden = YES;
+    submitWindow.rootViewController = nil;
+    submitWindow = nil;
 }
 
 @end
