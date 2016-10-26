@@ -18,4 +18,7 @@
 @property (nonatomic,strong) NSMutableArray * imageArray;
 @property (nonatomic,strong) NSMutableArray * imageViewArray;
 
+@property (nonatomic,strong) NSMutableArray * workImageArray;
+@property (nonatomic,strong) NSMutableArray * workImageViewArray;
+
 @end

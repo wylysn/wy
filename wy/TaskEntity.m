@@ -64,6 +64,10 @@
         _PicContent2 = dictionary[@"PicContent2"];
         _PicContent3 = dictionary[@"PicContent3"];
         _PicContent4 = dictionary[@"PicContent4"];
+        _PicContent5 = dictionary[@"PicContent5"];
+        _PicContent6 = dictionary[@"PicContent6"];
+        _PicContent7 = dictionary[@"PicContent7"];
+        _PicContent8 = dictionary[@"PicContent8"];
         if ((NSNull *)dictionary[@"SBCheckList"]==[NSNull null]) {
             _SBCheckList = @"";
         } else {

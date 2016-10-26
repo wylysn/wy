@@ -47,9 +47,16 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     NSInteger btnTag;
     
     NSMutableArray *deviceArr;
+    
     NSInteger PIC_WIDTH_HEIGHT;
     UITableViewCell *picCell;
+    UITableViewCell *picWorkContentCell;
     UIImageView *addImageView;
+    UIImageView *addWorkContentImageView;
+    NSInteger selectedImageType;//1:问题图片；2:工作内容图片
+    BOOL hasPicImageDisplayed;
+    BOOL hasWorkContentPicImageDisplayed;
+    
     NSMutableDictionary *selectedDevicesDic;
     NSMutableDictionary *selectedChargesDic;
     NSMutableArray *chargePersonArr;
@@ -90,6 +97,18 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     selectedExcutesDic = [[NSMutableDictionary alloc] init];
     excutePersonArr = [[NSMutableArray alloc] init];
     
+    hasPicImageDisplayed = NO;
+    hasWorkContentPicImageDisplayed = NO;
+    self.imageArray = [[NSMutableArray alloc] init];
+    self.imageViewArray = [[NSMutableArray alloc] init];
+    self.workImageArray = [[NSMutableArray alloc] init];
+    self.workImageViewArray = [[NSMutableArray alloc] init];
+    PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-10)/PICS_PER_LINE;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"addPhotos" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
         
@@ -107,6 +126,13 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 [excutePersonArr addObject:person];
             }
         }
+        if (![taskEntity.SBList isBlankString]) {
+            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+            for (NSDictionary *deviceDic in deviceDicArr) {
+                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+                [deviceArr addObject:device];
+            }
+        }
         
         editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
         isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
@@ -120,37 +146,19 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         isPicContentEditable = !([editFieldsArray indexOfObject:@"PicContent"]==NSNotFound);
         [self.tableView reloadData];
         
-        //刷新后展示图片
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (taskEntity.PicContent1 && ![@"" isEqualToString:taskEntity.PicContent1]) {
-                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent1 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-                [self showImageWithImage:pic];
-            }
-            if (taskEntity.PicContent2 && ![@"" isEqualToString:taskEntity.PicContent2]) {
-                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent2 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-                [self showImageWithImage:pic];
-            }
-            if (taskEntity.PicContent3 && ![@"" isEqualToString:taskEntity.PicContent3]) {
-                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent3 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-                [self showImageWithImage:pic];
-            }
-            if (taskEntity.PicContent4 && ![@"" isEqualToString:taskEntity.PicContent4]) {
-                NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent4 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-                UIImage *pic      = [UIImage imageWithData:_decodedImageData];
-                [self showImageWithImage:pic];
-            }
-            
-            if (![taskEntity.SBList isBlankString]) {
-                NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
-                for (NSDictionary *deviceDic in deviceDicArr) {
-                    TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
-                    [deviceArr addObject:device];
-                }
-            }
-        });
+        if (!hasPicImageDisplayed && picCell) {
+            hasPicImageDisplayed = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayImage];
+            });
+        }
+        
+        if (!hasWorkContentPicImageDisplayed && picWorkContentCell) {
+            hasWorkContentPicImageDisplayed = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayWorkContentImage];
+            });
+        }
         
         //判断是否有操作，生成操作按钮
         if (![taskEntity.TaskAction isBlankString]) {
@@ -234,16 +242,58 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
-    
-    self.imageArray = [[NSMutableArray alloc] init];
-    self.imageViewArray = [[NSMutableArray alloc] init];
-    PIC_WIDTH_HEIGHT = (SCREEN_WIDTH-IMAGESPLIT_WIDTH*PICS_PER_LINE-10)/PICS_PER_LINE;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"addPhotos" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+}
+
+- (void) displayImage {
+    selectedImageType = 1;
+    if (taskEntity.PicContent1 && ![@"" isEqualToString:taskEntity.PicContent1]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent1 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent2 && ![@"" isEqualToString:taskEntity.PicContent2]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent2 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent3 && ![@"" isEqualToString:taskEntity.PicContent3]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent3 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent4 && ![@"" isEqualToString:taskEntity.PicContent4]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent4 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+}
+
+- (void) displayWorkContentImage {
+    selectedImageType = 2;
+    if (taskEntity.PicContent5 && ![@"" isEqualToString:taskEntity.PicContent5]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent5 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent6 && ![@"" isEqualToString:taskEntity.PicContent6]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent6 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent7 && ![@"" isEqualToString:taskEntity.PicContent7]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent7 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
+    if (taskEntity.PicContent8 && ![@"" isEqualToString:taskEntity.PicContent8]) {
+        NSData *_decodedImageData   = [[NSData alloc] initWithBase64EncodedString:taskEntity.PicContent8 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage *pic      = [UIImage imageWithData:_decodedImageData];
+        [self showImageWithImage:pic];
+    }
 }
 
 - (void)actionBtnClick:(id)sender {
@@ -332,7 +382,19 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         } else if ([@"EWorkHours" isEqualToString:fieldStr]) {
             [dataDic setObject:taskEntity.EWorkHours forKey:fieldStr];
         } else if ([@"WorkContent" isEqualToString:fieldStr]) {
-            if ([taskEntity.WorkContent isBlankString]) {
+            for (int i=0; i<self.workImageArray.count; i++) {
+                NSString *imageString = [UIImage image2String:self.workImageArray[i]];
+                if (i==0) {
+                    taskEntity.PicContent5 = imageString;
+                } else if (i==1) {
+                    taskEntity.PicContent6 = imageString;
+                } else if (i==2) {
+                    taskEntity.PicContent7 = imageString;
+                } else if (i==3) {
+                    taskEntity.PicContent8 = imageString;
+                }
+            }
+            if ([taskEntity.WorkContent isBlankString] && self.workImageArray.count<1) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写工作内容" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
                 [alertController addAction:okAction];
@@ -340,6 +402,10 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
                 return;
             }
             [dataDic setObject:taskEntity.WorkContent forKey:fieldStr];
+            [dataDic setObject:taskEntity.PicContent5 forKey:@"PicContent5"];
+            [dataDic setObject:taskEntity.PicContent6 forKey:@"PicContent6"];
+            [dataDic setObject:taskEntity.PicContent7 forKey:@"PicContent7"];
+            [dataDic setObject:taskEntity.PicContent8 forKey:@"PicContent8"];
         } else if ([@"Description" isEqualToString:fieldStr]) {
             if ([taskEntity.Description isBlankString]) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有填写描述内容" preferredStyle:UIAlertControllerStyleAlert];
@@ -423,7 +489,6 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 
 - (void)showAddImageView {
     if (!addImageView && isPicContentEditable) {
-//    if (!addImageView) {
         addImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
         addImageView.image = [UIImage imageNamed:@"tianjia"];
         addImageView.tag = 1;
@@ -432,6 +497,19 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addImage:)];
         [addImageView addGestureRecognizer:gesture];
         [addImageView setUserInteractionEnabled:YES];
+    }
+}
+
+- (void)showAddWorkContentImageView {
+    if (!addWorkContentImageView && isWorkContentEditable) {
+        addWorkContentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+        addWorkContentImageView.image = [UIImage imageNamed:@"tianjia"];
+        addWorkContentImageView.tag = 1;
+        [picWorkContentCell.contentView addSubview:addWorkContentImageView];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addWorkContentImage:)];
+        [addWorkContentImageView addGestureRecognizer:gesture];
+        [addWorkContentImageView setUserInteractionEnabled:YES];
     }
 }
 
@@ -449,9 +527,24 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    
+    selectedImageType = 1;
     UIActionSheet* changeImageSheet = [[UIActionSheet alloc]initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"相机",@"从相册中选取", nil];
     changeImageSheet.tag=1;
+    [changeImageSheet showInView:self.view];
+}
+
+- (void)addWorkContentImage:(UITapGestureRecognizer *)recognizer
+{
+    if (self.workImageArray.count>=MAX_IMAGES_NUM) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message: [NSString stringWithFormat:@"最多上传%d张照片",MAX_IMAGES_NUM] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    selectedImageType = 2;
+    UIActionSheet* changeImageSheet = [[UIActionSheet alloc]initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"相机",@"从相册中选取", nil];
+    changeImageSheet.tag=3;
     [changeImageSheet showInView:self.view];
 }
 
@@ -483,27 +576,70 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
     } else if (actionSheet.tag == 2) {
         [self doAction:buttonIndex+2];
+    } else if (actionSheet.tag == 3) {
+        if (buttonIndex == 0)
+        {
+            
+            UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Camera" bundle:[NSBundle mainBundle]];
+            
+            AAPLCameraViewController* cameraViewController = [mainSB instantiateViewControllerWithIdentifier:@"camera"];
+            
+            [self presentViewController:cameraViewController animated:YES completion:nil];
+        }
+        else if (buttonIndex == 1)
+        {
+            ELCImagePickerController * elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+            elcPicker.maximumImagesCount = MAX_IMAGES_NUM - self.imageArray.count; //Set the maximum number of images to select to 100
+            elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
+            elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+            elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
+            elcPicker.isTrim = YES;
+            elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types
+            elcPicker.imagePickerDelegate = self;
+            
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
     }
 }
 
 - (void)showImageWithImage:(UIImage*) image {
-    [self.imageArray addObject:image];
-    UIImageView *imageView;
-    
-    NSInteger imageCount = isPicContentEditable?self.imageArray.count:(self.imageArray.count-1);
-    NSInteger lines = imageCount/PICS_PER_LINE+1;
-    float X = PIC_WIDTH_HEIGHT*(imageCount%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(imageCount%PICS_PER_LINE)+10;
-    float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
-    imageView.tag = imageCount;
-    imageView.image = [image imageScaledToSize2:CGSizeMake(PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
-    [picCell.contentView addSubview:imageView];
-    
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-    [imageView addGestureRecognizer:gesture];
-    [imageView setUserInteractionEnabled:YES];
-    
-    [self.imageViewArray addObject:imageView];
+    if (selectedImageType == 1) {
+        [self.imageArray addObject:image];
+        UIImageView *imageView;
+        
+        NSInteger imageCount = isPicContentEditable?self.imageArray.count:(self.imageArray.count-1);
+        NSInteger lines = imageCount/PICS_PER_LINE+1;
+        float X = PIC_WIDTH_HEIGHT*(imageCount%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(imageCount%PICS_PER_LINE)+10;
+        float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+        imageView.tag = imageCount;
+        imageView.image = [image imageScaledToSize2:CGSizeMake(PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+        [picCell.contentView addSubview:imageView];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+        [imageView addGestureRecognizer:gesture];
+        [imageView setUserInteractionEnabled:YES];
+        
+        [self.imageViewArray addObject:imageView];
+    } else if (selectedImageType == 2) {
+        [self.workImageArray addObject:image];
+        UIImageView *imageView;
+        
+        NSInteger imageCount = isWorkContentEditable?self.workImageArray.count:(self.workImageArray.count-1);
+        NSInteger lines = imageCount/PICS_PER_LINE+1;
+        float X = PIC_WIDTH_HEIGHT*(imageCount%PICS_PER_LINE)+IMAGESPLIT_WIDTH*(imageCount%PICS_PER_LINE)+10;
+        float Y = (lines-1)*(PIC_WIDTH_HEIGHT+10)+10;
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+        imageView.tag = imageCount;
+        imageView.image = [image imageScaledToSize2:CGSizeMake(PIC_WIDTH_HEIGHT, PIC_WIDTH_HEIGHT)];
+        [picWorkContentCell.contentView addSubview:imageView];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+        [imageView addGestureRecognizer:gesture];
+        [imageView setUserInteractionEnabled:YES];
+        
+        [self.workImageViewArray addObject:imageView];
+    }
 }
 
 - (void)imageClick:(UITapGestureRecognizer *)recognizer
@@ -660,7 +796,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     
     if (section == 3) {
         taskEntity.Description = textView.text;
-    } else if (section == 4) {
+    } else if (section == 5) {
         taskEntity.WorkContent = textView.text;
     }
 }
@@ -669,7 +805,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 9;
+    return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -683,13 +819,15 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     }
     else if (section == 3) {    //问题描述
         return 1;
-    } else if (section == 4) {  //工作内容
+    } else if (section == 4) {  //工作内容-图片
         return 1;
-    } else if (section == 5) {
-        return chargePersonArr.count;
+    } else if (section == 5) {  //工作内容
+        return 1;
     } else if (section == 6) {
-        return excutePersonArr.count;
+        return chargePersonArr.count;
     } else if (section == 7) {
+        return excutePersonArr.count;
+    } else if (section == 8) {
         return 2;
     }
     return 0;
@@ -734,7 +872,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         titleLabel.text = @"工作内容";
         [header addSubview:titleLabel];
         return header;
-    } else if (section == 5) {
+    } else if (section == 6) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"负责人";
@@ -752,7 +890,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
         
         return header;
-    } else if (section == 6) {
+    } else if (section == 7) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"执行人";
@@ -770,13 +908,13 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
         
         return header;
-    } else if (section == 7) {
+    } else if (section == 8) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"预估工作时间";
         [header addSubview:titleLabel];
         
         return header;
-    } else if (section == 8) {
+    } else if (section == 9) {
         header.backgroundColor = [UIColor whiteColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (44-21)/2, 200, 21)];
         titleLabel.text = @"耗时";
@@ -800,11 +938,14 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 5) {
+        return CGFLOAT_MIN;
+    }
     return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0 || section == 3 || section == 4 || section == 5 || section == 7) {
+    if (section == 0 || section == 3 || section == 5 || section == 6 || section == 8) {
         return 6;
     }
     return CGFLOAT_MIN;
@@ -822,6 +963,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             return UITableViewAutomaticDimension;
         }
     } else if (section == 4) {
+        return (self.workImageArray.count/PICS_PER_LINE+1)*PIC_WIDTH_HEIGHT+(self.workImageArray.count/PICS_PER_LINE+1+1)*10;
+    } else if (section == 5) {
         if (isWorkContentEditable) {
             return 96;
         } else {
@@ -850,14 +993,16 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             CELLID = @"DESCCELL2";
         }
     } else if (section == 4) {
+        CELLID = @"WORKCONTENTPICCELL";
+    }else if (section == 5) {
         if (isWorkContentEditable) {
             CELLID = @"PROBLEMCELL";
         } else {
             CELLID = @"PROBLEMCELL2";
         }
-    } else if (section == 5 || section == 6) {
+    } else if (section == 6 || section == 7) {
         CELLID = @"DEVICECELL";
-    } else if (section == 7) {
+    } else if (section == 8) {
         CELLID = @"ESTIMATECELL";
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELLID forIndexPath:indexPath];
@@ -904,8 +1049,18 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         }
     }
     else if (section == 2) {
-        picCell = cell;
+        if (!picCell) {
+            picCell = cell;
+        }
         [self showAddImageView];
+        
+        //只加载一次
+        if (!hasPicImageDisplayed && taskEntity) {
+            hasPicImageDisplayed = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayImage];
+            });
+        }
     }
     else if (section == 3) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
@@ -924,6 +1079,19 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             }
         }
     } else if (section == 4) {
+        if (!picWorkContentCell) {
+            picWorkContentCell = cell;
+        }
+        [self showAddWorkContentImageView];
+        
+        //只加载一次
+        if (!hasWorkContentPicImageDisplayed && taskEntity) {
+            hasWorkContentPicImageDisplayed = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayWorkContentImage];
+            });
+        }
+    } else if (section == 5) {
         PRPlaceHolderTextView *textView = [cell viewWithTag:1];
         if (!self.workContentTextView) {
             self.workContentTextView = textView;
@@ -934,12 +1102,12 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         } else {
             textView.delegate = self;
             if ([@"" isEqualToString:workContent]) {
-                textView.placeholder = @"请简要填写工作内容";
+                textView.placeholder = @"拍照或输入文字";
             } else {
                 textView.text = workContent;
             }
         }
-    } else if (section == 5) {
+    } else if (section == 6) {
         PersonEntity *person = chargePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
@@ -951,7 +1119,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         } else {
             deleteView.hidden = YES;
         }
-    } else if (section == 6) {
+    } else if (section == 7) {
         PersonEntity *person = excutePersonArr[row];
         UILabel *nameLabel = [cell viewWithTag:1];
         nameLabel.text = person.EmployeeName;
@@ -963,7 +1131,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
         } else {
             deleteView.hidden = YES;
         }
-    } else if (section == 7) {
+    } else if (section == 8) {
         UILabel *keyLabel = [cell viewWithTag:1];
         UIButton *timeBtn = [cell viewWithTag:2];
         if (row == 0) {

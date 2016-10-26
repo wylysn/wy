@@ -114,7 +114,7 @@ static sqlite3_stmt *statement = nil;
 - (BOOL) createTaskTable {
     BOOL isSuccess = TRUE;
     char *errMsg;
-    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, Department text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text, IsLocalSave bool, TaskNotice text, TaskAction text, SBList text, PicContent1 text, PicContent2 text, PicContent3 text, PicContent4 text, SBCheckList text)";
+    NSString *sql_stmt =@"create table if not exists Task (Code text primary key, Applyer text, ApplyerTel text, ServiceType text, Priority text, Location text, Description text, CreateDate text, Creator text, Executors text, Leader text, Department text, EStartTime text, EEndTime text, EWorkHours text, AStartTime text, AEndTime text, AWorkHours text, WorkContent text, EditFields text, IsLocalSave bool, TaskNotice text, TaskAction text, SBList text, PicContent1 text, PicContent2 text, PicContent3 text, PicContent4 text, PicContent5 text, PicContent6 text, PicContent7 text, PicContent8 text, SBCheckList text)";
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         if (sqlite3_exec(database, [sql_stmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK) {
@@ -234,7 +234,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = @"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, SBCheckList) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        NSString *insertSQL = @"insert into Task (Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, PicContent5, PicContent6, PicContent7, PicContent8, SBCheckList) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -267,7 +267,11 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 26, [task.PicContent2 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 27, [task.PicContent3 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 28, [task.PicContent4 UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 29, [task.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 29, [task.PicContent5?task.PicContent5:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 30, [task.PicContent6?task.PicContent6:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 31, [task.PicContent7?task.PicContent7:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 32, [task.PicContent8?task.PicContent8:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 33, [task.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
             
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -288,7 +292,7 @@ static sqlite3_stmt *statement = nil;
     BOOL isSuccess = FALSE;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = @"update Task set Location=?, Description=?, Executors=?, Leader=?, EStartTime=?, EEndTime=?, EWorkHours=?, WorkContent=?, SBList=?, PicContent1=?, PicContent2=?, PicContent3=?, PicContent4=?, SBCheckList=? where Code=?";
+        NSString *insertSQL = @"update Task set Location=?, Description=?, Executors=?, Leader=?, EStartTime=?, EEndTime=?, EWorkHours=?, WorkContent=?, SBList=?, PicContent1=?, PicContent2=?, PicContent3=?, PicContent4=?, PicContent5=?, PicContent6=?, PicContent7=?, PicContent8=?, SBCheckList=? where Code=?";
         const char *insert_stmt = [insertSQL UTF8String];
         int result = sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
         
@@ -306,8 +310,12 @@ static sqlite3_stmt *statement = nil;
             sqlite3_bind_text(statement, 11, [taskEntity.PicContent2 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 12, [taskEntity.PicContent3 UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(statement, 13, [taskEntity.PicContent4 UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 14, [taskEntity.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 15, [taskEntity.Code UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 14, [taskEntity.PicContent5?taskEntity.PicContent5:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 15, [taskEntity.PicContent6?taskEntity.PicContent6:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 16, [taskEntity.PicContent7?taskEntity.PicContent7:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 17, [taskEntity.PicContent8?taskEntity.PicContent8:@"" UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 18, [taskEntity.SBCheckList UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 19, [taskEntity.Code UTF8String], -1, SQLITE_TRANSIENT);
             
             // 执行插入语句
             if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -439,7 +447,7 @@ static sqlite3_stmt *statement = nil;
     TaskEntity *task;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, SBCheckList from Task where Code=\"%@\"",Code];
+        NSString *querySQL = [NSString stringWithFormat: @"select Code, Applyer, ApplyerTel, ServiceType, Priority, Location, Description, CreateDate, Creator, Executors, Leader, Department, EStartTime, EEndTime, EWorkHours, AStartTime, AEndTime, AWorkHours, WorkContent, EditFields, IsLocalSave, TaskNotice, TaskAction, SBList, PicContent1, PicContent2, PicContent3, PicContent4, PicContent5, PicContent6, PicContent7, PicContent8, SBCheckList from Task where Code=\"%@\"",Code];
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -474,8 +482,12 @@ static sqlite3_stmt *statement = nil;
                 NSString *PicContent2 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 25)];
                 NSString *PicContent3 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 26)];
                 NSString *PicContent4 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 27)];
-                NSString *SBCheckList = (const char *) sqlite3_column_text(statement, 28)?[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 28)]:@"";
-                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4, @"SBCheckList":SBCheckList}];
+                NSString *PicContent5 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 28)];
+                NSString *PicContent6 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 29)];
+                NSString *PicContent7 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 30)];
+                NSString *PicContent8 = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 31)];
+                NSString *SBCheckList = (const char *) sqlite3_column_text(statement, 32)?[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 32)]:@"";
+                task = [[TaskEntity alloc] initWithDictionary:@{@"Code":Code, @"Applyer":Applyer, @"ApplyerTel":ApplyerTel, @"ServiceType":ServiceType, @"Priority":Priority, @"Location":Location, @"Description":Description, @"CreateDate":CreateDate, @"Creator":Creator, @"Executors":Executors, @"Leader":Leader, @"Department":Department, @"EStartTime":EStartTime, @"EEndTime":EEndTime, @"EWorkHours":EWorkHours, @"AStartTime":AStartTime, @"AEndTime":AEndTime, @"AWorkHours":AWorkHours, @"WorkContent":WorkContent, @"EditFields":EditFields, @"IsLocalSave":IsLocalSave?@"1":@"0", @"TaskNotice":TaskNotice, @"TaskAction":TaskAction, @"SBList":SBList, @"PicContent1":PicContent1, @"PicContent2":PicContent2, @"PicContent3":PicContent3, @"PicContent4":PicContent4, @"PicContent5":PicContent5, @"PicContent6":PicContent6, @"PicContent7":PicContent7, @"PicContent8":PicContent8, @"SBCheckList":SBCheckList}];
             }
             else{
                 NSLog(@"没有找到code为%@的任务......", Code);
