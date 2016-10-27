@@ -18,6 +18,7 @@
 #import "TaskXunjianViewController.h"
 #import "TaskXunjian2ViewController.h"
 #import "QRCodeScanViewController.h"
+#import "PlanOperateViewController.h"
 
 #define CELLID @"TASKENTIFIER_CELL"
 
@@ -174,28 +175,18 @@
         ((TaskXunjian2ViewController *)viewController).ShortTitle = entity.ShortTitle;
         ((TaskXunjian2ViewController *)viewController).isLocalSave = entity.IsLocalSave;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"巡检任务" style:UIBarButtonItemStylePlain target:nil action:nil];
-    } else {
+    } else if ([@"1" isEqualToString:entity.ShortTitle] || [@"工单任务" isEqualToString:entity.ShortTitle]) {
         viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
         ((TaskHandleViewController *)viewController).code = entity.Code;
         ((TaskHandleViewController *)viewController).ShortTitle = entity.ShortTitle;
         ((TaskHandleViewController *)viewController).taskStatus = entity.TaskStatus;
         ((TaskHandleViewController *)viewController).isLocalSave = entity.IsLocalSave;
         backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
-        /*
-        if ([@"1" isEqualToString:entity.TaskStatus]) {
-            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_JIEDAN"];
-            ((TaskJiedanViewController *)viewController).id = entity.Code;
-        } else if ([@"2" isEqualToString:entity.TaskStatus]) {
-            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_CHULI1"];
-            ((TaskChuli1ViewController *)viewController).id = entity.Code;
-        } else if ([@"3" isEqualToString:entity.TaskStatus]) {
-            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASK_PAIGONG"];
-            ((TaskPaiGongViewController *)viewController).id = entity.Code;
-        } else if ([@"4" isEqualToString:entity.TaskStatus]) {
-            viewController = [taskSB instantiateViewControllerWithIdentifier:@"TASKHANDLE"];
-            ((TaskHandleViewController *)viewController).id = entity.Code;
-        }
-         */
+    } else if ([@"3" isEqualToString:entity.ShortTitle] || [@"维护任务" isEqualToString:entity.ShortTitle]) {
+        taskSB = [UIStoryboard storyboardWithName:@"Feature" bundle:[NSBundle mainBundle]];
+        viewController = [taskSB instantiateViewControllerWithIdentifier:@"PLANOPERATE"];
+        ((PlanOperateViewController *)viewController).Code = entity.Code;
+        backButton = [[UIBarButtonItem alloc] initWithTitle:@"任务" style:UIBarButtonItemStylePlain target:nil action:nil];
     }
     
     self.navigationItem.backBarButtonItem = backButton;

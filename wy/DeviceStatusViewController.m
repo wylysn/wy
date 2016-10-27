@@ -121,7 +121,6 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    NSLog(@"%@", textField.text);
     float value = [textField.text floatValue];
     float minValue = [self.inspectionChildModel.InputMin floatValue];
     float maxValue = [self.inspectionChildModel.InputMax floatValue];

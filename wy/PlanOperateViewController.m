@@ -104,8 +104,12 @@
     PlanOrderTableViewController *planOrderViewController = [featureSB instantiateViewControllerWithIdentifier:@"PLANORDER"];
     [self addChildViewController:planOrderViewController];
     
-    PlanOperateNaviViewController *naviViewController = (PlanOperateNaviViewController *)(self.navigationController);
-    [planService getPlanTask:naviViewController.Code success:^(PlanDetailEntity *planDetail) {
+    if (!self.Code) {
+        PlanOperateNaviViewController *naviViewController = (PlanOperateNaviViewController *)(self.navigationController);
+        self.Code = naviViewController.Code;
+    }
+    
+    [planService getPlanTask:self.Code success:^(PlanDetailEntity *planDetail) {
         plan = planDetail;
         
         planMaintainContentViewController.planDetail = planDetail;
@@ -391,6 +395,7 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

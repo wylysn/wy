@@ -109,139 +109,141 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
-        taskEntity = task;
-        
-        if (![taskEntity.Leader isBlankString]) {
-            NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Leader];
-            for (NSDictionary *personDic in personDicArr) {
-                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
-                [chargePersonArr addObject:person];
+    if (!taskEntity) {
+        [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
+            taskEntity = task;
+            
+            if (![taskEntity.Leader isBlankString]) {
+                NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Leader];
+                for (NSDictionary *personDic in personDicArr) {
+                    PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
+                    [chargePersonArr addObject:person];
+                }
             }
-        }
-        if (![taskEntity.Executors isBlankString]) {
-            NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Executors];
-            for (NSDictionary *personDic in personDicArr) {
-                PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
-                [excutePersonArr addObject:person];
+            if (![taskEntity.Executors isBlankString]) {
+                NSArray *personDicArr = [NSString convertStringToArray:taskEntity.Executors];
+                for (NSDictionary *personDic in personDicArr) {
+                    PersonEntity *person = [[PersonEntity alloc] initWithDictionary:personDic];
+                    [excutePersonArr addObject:person];
+                }
             }
-        }
-        if (![taskEntity.SBList isBlankString]) {
-            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
-            for (NSDictionary *deviceDic in deviceDicArr) {
-                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
-                [deviceArr addObject:device];
-            }
-        }
-        
-        editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
-        isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
-        isWorkContentEditable = !([editFieldsArray indexOfObject:@"WorkContent"]==NSNotFound);
-        isLeaderEditable = !([editFieldsArray indexOfObject:@"Leader"]==NSNotFound);
-        isExecutorsEditable = !([editFieldsArray indexOfObject:@"Executors"]==NSNotFound);
-        isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
-        isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
-        isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
-        isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
-        isPicContentEditable = !([editFieldsArray indexOfObject:@"PicContent"]==NSNotFound);
-        [self.tableView reloadData];
-        
-        if (!hasPicImageDisplayed && picCell) {
-            hasPicImageDisplayed = YES;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayImage];
-            });
-        }
-        
-        if (!hasWorkContentPicImageDisplayed && picWorkContentCell) {
-            hasWorkContentPicImageDisplayed = YES;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayWorkContentImage];
-            });
-        }
-        
-        //判断是否有操作，生成操作按钮
-        if (![taskEntity.TaskAction isBlankString]) {
-            NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
-            actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
-            if (taskEntity.IsLocalSave) {
-                NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
-                [saveDic setValue:@"FormSave" forKey:@"EventName"];
-                [saveDic setValue:@"保存" forKey:@"DisplayName"];
-                [saveDic setValue:@100 forKey:@"flag"];
-                [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
-                [actionsMutableArr insertObject:saveDic atIndex:0];
+            if (![taskEntity.SBList isBlankString]) {
+                NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+                for (NSDictionary *deviceDic in deviceDicArr) {
+                    TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+                    [deviceArr addObject:device];
+                }
             }
             
-            if (actionsMutableArr && actionsMutableArr.count>0) {
-                self.bottomViewConstraint.constant = 0;
-                NSInteger actionNum = actionsMutableArr.count;
-                float btnWidth;
-                float space = 15;
-                btnWidth = (SCREEN_WIDTH-space*((actionNum>=3?3:actionNum)+1))/(actionNum>=3?3:actionNum);
-                float btnHeight = 30;
-                float y = (55-btnHeight)/2;
-                
-                if (actionsMutableArr.count>3) {
-                    UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
-                    [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
-                    moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
-                    moreBtn.layer.cornerRadius = 5;
-                    moreBtn.tag = 2;
-                    [moreBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [self.bottomView addSubview:moreBtn];
-                } else if (actionsMutableArr.count==3) {
-                    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
-                    [btn3 setTitle:actionsMutableArr[2][@"DisplayName"] forState:UIControlStateNormal];
-                    btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
-                    btn3.layer.cornerRadius = 5;
-                    btn3.tag = 2;
-                    [btn3 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [self.bottomView addSubview:btn3];
+            editFieldsArray = [[[task.EditFields stringByReplacingOccurrencesOfString:@"[" withString:@""] stringByReplacingOccurrencesOfString:@"]" withString:@""] componentsSeparatedByString:@";"];
+            isDescriptionEditable = !([editFieldsArray indexOfObject:@"Description"]==NSNotFound);
+            isWorkContentEditable = !([editFieldsArray indexOfObject:@"WorkContent"]==NSNotFound);
+            isLeaderEditable = !([editFieldsArray indexOfObject:@"Leader"]==NSNotFound);
+            isExecutorsEditable = !([editFieldsArray indexOfObject:@"Executors"]==NSNotFound);
+            isEStartTimeEditable = !([editFieldsArray indexOfObject:@"EStartTime"]==NSNotFound);
+            isEEndTimeEditable = !([editFieldsArray indexOfObject:@"EEndTime"]==NSNotFound);
+            isEWorkHoursEditable = !([editFieldsArray indexOfObject:@"EWorkHours"]==NSNotFound);
+            isSBListEditable = !([editFieldsArray indexOfObject:@"SBList"]==NSNotFound);
+            isPicContentEditable = !([editFieldsArray indexOfObject:@"PicContent"]==NSNotFound);
+            [self.tableView reloadData];
+            
+            if (!hasPicImageDisplayed && picCell) {
+                hasPicImageDisplayed = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self displayImage];
+                });
+            }
+            
+            if (!hasWorkContentPicImageDisplayed && picWorkContentCell) {
+                hasWorkContentPicImageDisplayed = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self displayWorkContentImage];
+                });
+            }
+            
+            //判断是否有操作，生成操作按钮
+            if (![taskEntity.TaskAction isBlankString]) {
+                NSArray *actionsArr = [NSString convertStringToArray:taskEntity.TaskAction];
+                actionsMutableArr = [[NSMutableArray alloc] initWithArray:actionsArr];
+                if (taskEntity.IsLocalSave) {
+                    NSMutableDictionary *saveDic = [[NSMutableDictionary alloc] init];
+                    [saveDic setValue:@"FormSave" forKey:@"EventName"];
+                    [saveDic setValue:@"保存" forKey:@"DisplayName"];
+                    [saveDic setValue:@100 forKey:@"flag"];
+                    [saveDic setValue:taskEntity.EditFields forKey:@"SubmitFields"];
+                    [actionsMutableArr insertObject:saveDic atIndex:0];
                 }
-                if (actionsMutableArr.count>=3) {
-                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
-                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
-                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
-                    btn1.layer.cornerRadius = 5;
-                    btn1.tag = 0;
-                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [self.bottomView addSubview:btn1];
+                
+                if (actionsMutableArr && actionsMutableArr.count>0) {
+                    self.bottomViewConstraint.constant = 0;
+                    NSInteger actionNum = actionsMutableArr.count;
+                    float btnWidth;
+                    float space = 15;
+                    btnWidth = (SCREEN_WIDTH-space*((actionNum>=3?3:actionNum)+1))/(actionNum>=3?3:actionNum);
+                    float btnHeight = 30;
+                    float y = (55-btnHeight)/2;
                     
-                    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
-                    [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
-                    btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
-                    btn2.layer.cornerRadius = 5;
-                    btn2.tag = 1;
-                    [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [self.bottomView addSubview:btn2];
-                } else {
-                    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
-                    [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
-                    btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
-                    btn1.layer.cornerRadius = 5;
-                    btn1.tag = 0;
-                    [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [self.bottomView addSubview:btn1];
-                    
-                    if (actionsMutableArr.count==2) {
-                        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                    if (actionsMutableArr.count>3) {
+                        UIButton *moreBtn = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                        [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
+                        moreBtn.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                        moreBtn.layer.cornerRadius = 5;
+                        moreBtn.tag = 2;
+                        [moreBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:moreBtn];
+                    } else if (actionsMutableArr.count==3) {
+                        UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                        [btn3 setTitle:actionsMutableArr[2][@"DisplayName"] forState:UIControlStateNormal];
+                        btn3.backgroundColor = [UIColor colorFromHexCode:BUTTON_ORANGE_COLOR];
+                        btn3.layer.cornerRadius = 5;
+                        btn3.tag = 2;
+                        [btn3 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:btn3];
+                    }
+                    if (actionsMutableArr.count>=3) {
+                        UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                        [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                        btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                        btn1.layer.cornerRadius = 5;
+                        btn1.tag = 0;
+                        [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:btn1];
+                        
+                        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*3+btnWidth*2, y, btnWidth, btnHeight)];
                         [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
                         btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
                         btn2.layer.cornerRadius = 5;
                         btn2.tag = 1;
                         [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                         [self.bottomView addSubview:btn2];
+                    } else {
+                        UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(space, y, btnWidth, btnHeight)];
+                        [btn1 setTitle:actionsMutableArr[0][@"DisplayName"] forState:UIControlStateNormal];
+                        btn1.backgroundColor = [UIColor colorFromHexCode:BUTTON_BLUE_COLOR];
+                        btn1.layer.cornerRadius = 5;
+                        btn1.tag = 0;
+                        [btn1 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                        [self.bottomView addSubview:btn1];
+                        
+                        if (actionsMutableArr.count==2) {
+                            UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(space*2+btnWidth, y, btnWidth, btnHeight)];
+                            [btn2 setTitle:actionsMutableArr[1][@"DisplayName"] forState:UIControlStateNormal];
+                            btn2.backgroundColor = [UIColor colorFromHexCode:BUTTON_GREEN_COLOR];
+                            btn2.layer.cornerRadius = 5;
+                            btn2.tag = 1;
+                            [btn2 addTarget:self action:@selector(actionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                            [self.bottomView addSubview:btn2];
+                        }
                     }
                 }
             }
-        }
-    } failure:^(NSString *message) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
+        } failure:^(NSString *message) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1134,6 +1136,9 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     } else if (section == 8) {
         UILabel *keyLabel = [cell viewWithTag:1];
         UIButton *timeBtn = [cell viewWithTag:2];
+        if (!timeBtn) {
+            timeBtn = [cell viewWithTag:row==0?10:11];
+        }
         if (row == 0) {
             if (!self.startTimeBtn) {
                 self.startTimeBtn = timeBtn;
@@ -1141,7 +1146,8 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             }
             keyLabel.text = @"到场时间";
             NSString *estartTime = [taskEntity.EStartTime isBlankString]?@"":taskEntity.EStartTime;
-            NSString *title = isEStartTimeEditable&&[@"" isEqualToString:estartTime]?startTimeBtnPlaceholder:estartTime;
+            NSString *title = isEStartTimeEditable&&(!taskEntity || [@"" isEqualToString:estartTime])?startTimeBtnPlaceholder:estartTime;
+            NSLog(@"=======%@", timeBtn);
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEStartTimeEditable) {
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1153,7 +1159,7 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
             }
             keyLabel.text = @"结束时间";
             NSString *eendTime = [taskEntity.EEndTime isBlankString]?@"":taskEntity.EEndTime;
-            NSString *title = isEEndTimeEditable&&[@"" isEqualToString:eendTime]?endTimeBtnPlaceholder:eendTime;
+            NSString *title = isEEndTimeEditable&&(!taskEntity || [@"" isEqualToString:eendTime])?endTimeBtnPlaceholder:eendTime;
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEEndTimeEditable) {
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];

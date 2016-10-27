@@ -62,19 +62,16 @@
 }
 
 - (IBAction)serverSet:(id)sender {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *serverStr = [[userDefaults objectForKey:@"server"] isBlankString]?@"":URL_PATH;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请输入服务器IP地址" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-        
+        textField.text = serverStr;
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *serverField = alertController.textFields.firstObject;
-        //设置新服务器地址
-        //1.获得NSUserDefaults文件
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        //2.向文件中写入内容
         [userDefaults setObject:serverField.text forKey:@"server"];
-        //2.1立即同步
         [userDefaults synchronize];
         //设置新服务器
         [[URLManager getSharedInstance] setURL_PATH:serverField.text];
