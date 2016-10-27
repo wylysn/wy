@@ -1136,26 +1136,28 @@ static NSString *endTimeBtnPlaceholder = @"请输入结束时间";
     } else if (section == 8) {
         UILabel *keyLabel = [cell viewWithTag:1];
         UIButton *timeBtn = [cell viewWithTag:2];
-        if (!timeBtn) {
-            timeBtn = [cell viewWithTag:row==0?10:11];
+        if (!timeBtn) { //为了解决重用
+            timeBtn = [cell viewWithTag:10];
+            if (!timeBtn) {
+                timeBtn = [cell viewWithTag:11];
+            }
         }
         if (row == 0) {
+            timeBtn.tag = 10;   //为了解决重用
             if (!self.startTimeBtn) {
                 self.startTimeBtn = timeBtn;
-                timeBtn.tag = 10;
             }
             keyLabel.text = @"到场时间";
             NSString *estartTime = [taskEntity.EStartTime isBlankString]?@"":taskEntity.EStartTime;
             NSString *title = isEStartTimeEditable&&(!taskEntity || [@"" isEqualToString:estartTime])?startTimeBtnPlaceholder:estartTime;
-            NSLog(@"=======%@", timeBtn);
             [timeBtn setTitle:title forState:UIControlStateNormal];
             if (isEStartTimeEditable) {
                 [timeBtn addTarget:self action:@selector(dateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             }
         } else {
+            timeBtn.tag = 11;
             if (!self.endTimeBtn) {
                 self.endTimeBtn = timeBtn;
-                timeBtn.tag = 11;
             }
             keyLabel.text = @"结束时间";
             NSString *eendTime = [taskEntity.EEndTime isBlankString]?@"":taskEntity.EEndTime;
