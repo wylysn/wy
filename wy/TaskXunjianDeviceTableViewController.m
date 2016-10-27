@@ -22,20 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    /*
-    taskDeviceArray = [[NSArray alloc] init];
-    taskService = [[TaskService alloc] init];
-    [taskService getTaskDevices:self.code success:^(NSArray *taskDevices) {
-        taskDeviceArray = taskDevices;
-        [self.tableView reloadData];
-    } failure:^(NSString *message) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
-     */
 }
 
 - (void)didReceiveMemoryWarning {

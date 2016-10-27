@@ -120,9 +120,17 @@
     [self.navigationController popToViewController:scanRootViewController animated:YES];
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSLog(@"%@", textField.text);
+    float value = [textField.text floatValue];
+    float minValue = [self.inspectionChildModel.InputMin floatValue];
+    float maxValue = [self.inspectionChildModel.InputMax floatValue];
+    bool status = (value>=minValue && value<=maxValue);
+    [self changeStatus:status];
+}
+
 - (void)savaData {
     /*保存数据*/
-//    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     NSString *ItemValue;
     NSString *DataValid;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -210,7 +218,7 @@
     if (section==0) {
         if (self.inspectionChildModel.ItemType == 0) {
             UITextField *textView = [cell viewWithTag:1];
-            textView.keyboardType = UIKeyboardTypeDecimalPad;
+            textView.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             textView.autocorrectionType = UITextAutocorrectionTypeNo;
             textView.delegate = self;
             textView.text = self.inspectionChildModel.ItemValue;
@@ -301,6 +309,31 @@
         return;
     }
     selectLabel.text = itemArray[buttonIndex];
+    
+    BOOL status = !([itemArray[buttonIndex] containsString:@"故障"] || [itemArray[buttonIndex] containsString:@"停止"] || [itemArray[buttonIndex] containsString:@"异常"]);
+    [self changeStatus:status];
+}
+
+- (void)changeStatus:(BOOL)status {
+    NSIndexPath *indexPathOfNormal = [NSIndexPath indexPathForRow:0 inSection:1];
+    UITableViewCell *normalCell = [self.tableView cellForRowAtIndexPath:indexPathOfNormal];
+    UIButton *normalRadioBtn = [normalCell viewWithTag:1];
+    NSIndexPath *indexPathOfUnNormal = [NSIndexPath indexPathForRow:1 inSection:1];
+    UITableViewCell *unNormalCell = [self.tableView cellForRowAtIndexPath:indexPathOfUnNormal];
+    UIButton *unNormalRadioBtn = [unNormalCell viewWithTag:1];
+    if (!status) {
+        normalRadioBtn.selected = NO;
+        [self.tableView deselectRowAtIndexPath:indexPathOfNormal animated:NO];
+        
+        unNormalRadioBtn.selected = YES;
+        [self.tableView selectRowAtIndexPath:indexPathOfUnNormal animated:NO scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        normalRadioBtn.selected = YES;
+        [self.tableView selectRowAtIndexPath:indexPathOfNormal animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        unNormalRadioBtn.selected = NO;
+        [self.tableView deselectRowAtIndexPath:indexPathOfUnNormal animated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
