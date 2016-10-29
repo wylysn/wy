@@ -247,7 +247,8 @@
                     return;
                 }
             }
-            [dataDic setObject:[NSString convertArrayToString:WZArr] forKey:fieldStr];
+//            [dataDic setObject:[NSString convertArrayToString:WZArr] forKey:fieldStr];
+            [dataDic setObject:WZArr forKey:fieldStr];
         } else if ([@"GJList" isEqualToString:fieldStr]) {
             NSMutableArray *GJArr = [[NSMutableArray alloc] init];
             for (int i=0; i<plan.ToolList.count; i++) {
@@ -262,7 +263,8 @@
                     return;
                 }
             }
-            [dataDic setObject:[NSString convertArrayToString:GJArr] forKey:fieldStr];
+//            [dataDic setObject:[NSString convertArrayToString:GJArr] forKey:fieldStr];
+            [dataDic setObject:GJArr forKey:fieldStr];
         }
     }
     NSArray *dataArr = [[NSArray alloc] initWithObjects:dataDic, nil];
@@ -272,7 +274,11 @@
         bool success = [planService updateLocalPlanDetailEntity:plan];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:success?@"数据保存成功！":@"数据保存失败！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            if ([self.navigationController isKindOfClass:[PlanOperateViewController class]]) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
@@ -286,7 +292,11 @@
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                if ([self.navigationController isKindOfClass:[PlanOperateViewController class]]) {
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                } else {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             }];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -392,10 +402,11 @@
 }
 
 - (IBAction)backclick:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.navigationController isKindOfClass:[PlanOperateViewController class]]) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
