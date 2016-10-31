@@ -186,7 +186,6 @@
 		D2CF2E751D7BDABA0020759A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CF2E741D7BDABA0020759A /* LoginViewController.m */; };
 		D2D6E45B1DBC923B00D9B39B /* ChooseMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6E45A1DBC923B00D9B39B /* ChooseMaterialViewController.m */; };
 		D2D6E45E1DBCA85900D9B39B /* ChooseToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D6E45D1DBCA85900D9B39B /* ChooseToolViewController.m */; };
-		D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */; };
 		D2D979771DBB6C460019A7AF /* 物业系统处理界面测试结果.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */; };
 		D2D9797A1DBB6F900019A7AF /* DeviceClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */; };
 		D2D9797D1DBB713E0019A7AF /* DeviceClassDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9797C1DBB713E0019A7AF /* DeviceClassDBService.m */; };
@@ -196,6 +195,7 @@
 		D2D979891DBB83CA0019A7AF /* ToolsDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D979881DBB83CA0019A7AF /* ToolsDBService.m */; };
 		D2E20F1A1D994408000C1472 /* 资产管理.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2E20F191D994408000C1472 /* 资产管理.jpg */; };
 		D2E9CF891DA6A24A004351D7 /* ScanDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */; };
+		D2EC41021DC7788000B7528C /* BEOS接口定义_20161031.docx in Resources */ = {isa = PBXBuildFile; fileRef = D2EC41011DC7788000B7528C /* BEOS接口定义_20161031.docx */; };
 		D2FD92261D8A214D0090FEC8 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FD92251D8A214D0090FEC8 /* LoginService.m */; };
 		ECE52A60DC079EDA4459A79B /* libPods-wy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3319D88501D496DD566B807 /* libPods-wy.a */; };
 /* End PBXBuildFile section */
@@ -540,7 +540,6 @@
 		D2D6E45A1DBC923B00D9B39B /* ChooseMaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMaterialViewController.m; sourceTree = "<group>"; };
 		D2D6E45C1DBCA85900D9B39B /* ChooseToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseToolViewController.h; sourceTree = "<group>"; };
 		D2D6E45D1DBCA85900D9B39B /* ChooseToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseToolViewController.m; sourceTree = "<group>"; };
-		D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20161022.docx"; sourceTree = "<group>"; };
 		D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "物业系统处理界面测试结果.docx"; sourceTree = "<group>"; };
 		D2D979781DBB6F900019A7AF /* DeviceClassEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceClassEntity.h; sourceTree = "<group>"; };
 		D2D979791DBB6F900019A7AF /* DeviceClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceClassEntity.m; sourceTree = "<group>"; };
@@ -557,6 +556,7 @@
 		D2E20F191D994408000C1472 /* 资产管理.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "资产管理.jpg"; sourceTree = "<group>"; };
 		D2E9CF871DA6A24A004351D7 /* ScanDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanDeviceViewController.h; sourceTree = "<group>"; };
 		D2E9CF881DA6A24A004351D7 /* ScanDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanDeviceViewController.m; sourceTree = "<group>"; };
+		D2EC41011DC7788000B7528C /* BEOS接口定义_20161031.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEOS接口定义_20161031.docx"; sourceTree = "<group>"; };
 		D2FD92241D8A214D0090FEC8 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		D2FD92251D8A214D0090FEC8 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1179,8 +1179,8 @@
 			children = (
 				8873883F1DBD96C000A44466 /* quantum */,
 				8873883E1DBD951000A44466 /* browsemind */,
+				D2EC41011DC7788000B7528C /* BEOS接口定义_20161031.docx */,
 				D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */,
-				D2D979741DBB6C330019A7AF /* BEOS接口定义_20161022.docx */,
 				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
@@ -1405,13 +1405,13 @@
 				88821E751D5C52FC00C72DA3 /* plus@2x.png in Resources */,
 				88821E701D5C4F6600C72DA3 /* features@2x.png in Resources */,
 				880787C31D61AA7A00BA6F05 /* search@2x.png in Resources */,
-				D2D979751DBB6C330019A7AF /* BEOS接口定义_20161022.docx in Resources */,
 				D22C85CB1DA74CC5000362DF /* AssetsSiftView.xib in Resources */,
 				8873884E1DBD96D500A44466 /* aps_beos.cer in Resources */,
 				88821E7A1D5C5B9500C72DA3 /* scan@2x.png in Resources */,
 				D2C090A81D915ED9001D94CF /* axx.mobileprovision in Resources */,
 				88B6FD981D66A1C800418972 /* plus50@2x.png in Resources */,
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
+				D2EC41021DC7788000B7528C /* BEOS接口定义_20161031.docx in Resources */,
 				D22C85D01DA7E900000362DF /* 关于计划性维护工作.doc in Resources */,
 				889BA2C61D64159600BC5413 /* ELCAssetTablePicker.xib in Resources */,
 				D2A6CF741D8CD5470049B232 /* 信息接口.docx in Resources */,
