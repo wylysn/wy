@@ -43,7 +43,6 @@
         PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *userName = [userDefaults objectForKey:@"userName"];
-        NSString *oldpwd = [userDefaults objectForKey:@"userName"];
         NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
         [condition setObject:@"modifypwd" forKey:@"action"];
         [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
