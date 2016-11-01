@@ -12,4 +12,6 @@
 
 - (void)loginWithUserInfo:(NSDictionary *)userInfoDic success:(void (^)(NSDictionary *userDic))success failure:(void (^)(NSString *message))failure;
 
+- (void)modifyPasswordWithOldPwd:(NSString *)oldpwd newPwd:(NSString *)newpwd success:(void (^)())success failure:(void (^)(NSString *message))failure;
+
 @end

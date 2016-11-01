@@ -42,7 +42,7 @@
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if (responseObject[@"success"]) {
+            if ([responseObject[@"success"] boolValue]) {
                 NSArray* response = responseObject[@"data"];
                 [self.taskList removeAllObjects];
                 for (NSDictionary *obj in response) {
@@ -98,15 +98,15 @@
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if (responseObject[@"success"]) {
+            if ([responseObject[@"success"] boolValue]) {
                 NSDictionary *response = responseObject[@"data"][0];
                 taskEntity = [[TaskEntity alloc] initWithDictionary:response];
                 //离线存储
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (taskEntity.IsLocalSave) {
-                        [dbService saveTask:taskEntity];
-                    }
-                });
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if (taskEntity.IsLocalSave) {
+//                        [dbService saveTask:taskEntity];
+//                    }
+//                });
                 success(taskEntity);
             } else {
                 failure(responseObject[@"message"]);
@@ -131,7 +131,7 @@
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if (responseObject[@"success"]) {
+            if ([responseObject[@"success"] boolValue]) {
                 NSArray* response = responseObject[@"data"];
                 for (NSDictionary *obj in response) {
                     TaskDeviceEntity *taskDeviceEntity = [[TaskDeviceEntity alloc] initWithDictionary:obj];
@@ -169,7 +169,15 @@
     [manager POST:url parameters:condition progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject[@"success"]) {
+        if ([responseObject[@"success"] boolValue]) {
+            NSDictionary *response = responseObject[@"data"][0];
+            TaskEntity *taskEntity = [[TaskEntity alloc] initWithDictionary:response];
+            //离线存储
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (taskEntity.IsLocalSave) {
+                    [dbService saveTask:taskEntity];
+                }
+            });
             success();
         } else {
             failure(responseObject[@"message"]);

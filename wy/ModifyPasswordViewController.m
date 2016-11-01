@@ -8,6 +8,7 @@
 
 #import "ModifyPasswordViewController.h"
 #import "ModifyPasswordChildViewController.h"
+#import "LoginService.h"
 
 @interface ModifyPasswordViewController ()
 
@@ -39,6 +40,21 @@
         alertController.message = @"密码填写不一致！";
         [self presentViewController:alertController animated:YES completion:nil];
         return;
+    } else {
+        LoginService *loginService = [[LoginService alloc] init];
+        [loginService modifyPasswordWithOldPwd:originalPassword newPwd:yourNewPassword success:^{
+            UIAlertController *alertController1 = [UIAlertController alertControllerWithTitle:@"提示" message:@"修改密码成功！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [alertController1 addAction:confirmAction];
+            [self presentViewController:alertController1 animated:YES completion:nil];
+            return;
+        } failure:^(NSString *message) {
+            alertController.message = [NSNull null]==(NSNull *)message?@"修改密码失败!":message;
+            [self presentViewController:alertController animated:YES completion:nil];
+            return;
+        }];
     }
 }
 

@@ -54,6 +54,11 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *message) {
         app.isLogin = NO;
+        [userDefaults removeObjectForKey:@"userName"];
+        [userDefaults removeObjectForKey:@"password"];
+        [userDefaults removeObjectForKey:@"Name"];
+        [userDefaults removeObjectForKey:@"Department"];
+        [userDefaults removeObjectForKey:@"Mobile"];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"登陆失败" message:message preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];

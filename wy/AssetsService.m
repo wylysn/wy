@@ -21,7 +21,7 @@
     [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject[@"success"]) {
+        if ([responseObject[@"success"] boolValue]) {
             success(responseObject[@"data"]);
         } else {
             failure(responseObject[@"message"]);

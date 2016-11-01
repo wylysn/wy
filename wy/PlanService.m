@@ -34,7 +34,7 @@
     [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject[@"success"]) {
+        if ([responseObject[@"success"] boolValue]) {
             NSArray* response = responseObject[@"data"];
             NSMutableArray *planListArr = [[NSMutableArray alloc] init];
             for (NSDictionary *obj in response) {
@@ -63,7 +63,7 @@
     [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject[@"success"]) {
+        if ([responseObject[@"success"] boolValue]) {
             PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0] withType:1];
             success(planDetail);
         } else {
@@ -91,7 +91,7 @@
         [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if (responseObject[@"success"]) {
+            if ([responseObject[@"success"] boolValue]) {
                 PlanDetailEntity *planDetail = [[PlanDetailEntity alloc] initWithDictionary:responseObject[@"data"][0] withType:1];
                 planDetail.Code = code;
 //                planDetail.EditFields = @"[GJList];[WZList]";//测试用，用完删除

@@ -55,7 +55,7 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject[@"success"]) {
+        if ([responseObject[@"success"] boolValue]) {
             success();
         } else {
             failure(responseObject[@"message"]);

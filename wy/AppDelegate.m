@@ -45,9 +45,50 @@
         
     }
     
+    //注册远程通知
     [self notifyWith:application];
     
+    //检查版本
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self checkVersion];
+    });
+    
     return YES;
+}
+
+- (void)checkVersion {
+    PRHTTPSessionManager *manager = [PRHTTPSessionManager sharePRHTTPSessionManager];
+    NSMutableDictionary *condition = [[NSMutableDictionary alloc] init];
+    [condition setObject:@"getversion" forKey:@"action"];
+    [condition setObject:[DateUtil getCurrentTimestamp] forKey:@"tick"];
+    [condition setObject:[NSString getDeviceId] forKey:@"imei"];
+    [manager GET:[[URLManager getSharedInstance] getURL:@""] parameters:condition progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"success"] boolValue]) {
+            NSDictionary *response = responseObject[@"data"];
+            NSString *newVersion = response[@"Ver"];
+            NSString *url = response[@"Url"];
+            
+            NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+            NSString *oldVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+            
+            if (![newVersion isEqualToString:oldVersion]) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"更新提示" message:@"您有新版本需要更新，去更新" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                }];
+                [alertController addAction:okAction];
+                UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+                alertWindow.rootViewController = [[UIViewController alloc] init];
+                alertWindow.windowLevel = UIWindowLevelAlert + 1;
+                [alertWindow makeKeyAndVisible];
+                [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)notifyWith:(UIApplication *)application
@@ -117,6 +158,11 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    //检查版本
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self checkVersion];
+    });
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
