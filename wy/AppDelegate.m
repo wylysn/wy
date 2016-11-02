@@ -31,8 +31,8 @@
     //将设置的服务器地址初始化
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *server = [userDefaults objectForKey:@"server"];
-    if (server) {
-        [[URLManager getSharedInstance] setURL_PATH:server];
+    if (!server || [server isBlankString]) {
+        [userDefaults setObject:[[URLManager getSharedInstance] getURL:@""] forKey:@"server"];
     }
     
     //本地推送

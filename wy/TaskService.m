@@ -170,14 +170,16 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
-            NSDictionary *response = responseObject[@"data"][0];
-            TaskEntity *taskEntity = [[TaskEntity alloc] initWithDictionary:response];
-            //离线存储
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (taskEntity.IsLocalSave) {
-                    [dbService saveTask:taskEntity];
-                }
-            });
+            if (!(responseObject[@"data"] || ((NSArray *)responseObject[@"data"]).count<1)) {
+                NSDictionary *response = responseObject[@"data"][0];
+                TaskEntity *taskEntity = [[TaskEntity alloc] initWithDictionary:response];
+                //离线存储
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (taskEntity.IsLocalSave) {
+                        [dbService saveTask:taskEntity];
+                    }
+                });
+            }
             success();
         } else {
             failure(responseObject[@"message"]);
