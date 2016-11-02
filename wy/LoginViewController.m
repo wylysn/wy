@@ -68,7 +68,7 @@
 
 - (IBAction)serverSet:(id)sender {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *serverStr = [[userDefaults objectForKey:@"server"] isBlankString]?@"":URL_PATH;
+    NSString *serverStr = [[userDefaults objectForKey:@"server"] isBlankString]?URL_PATH:[userDefaults objectForKey:@"server"];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请输入服务器IP地址" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
         textField.text = serverStr;
