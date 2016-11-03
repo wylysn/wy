@@ -152,6 +152,9 @@
             [aboutViewController setTitle:title];
             [self.navigationController pushViewController:aboutViewController animated:YES];
         }
+    } else if (section == 5) {
+        UIViewController *loginViewController = [mySB instantiateViewControllerWithIdentifier:@"LOGIN"];
+        [self presentViewController:loginViewController animated:YES completion:nil];
     }
 }
 

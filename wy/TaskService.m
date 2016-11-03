@@ -102,11 +102,11 @@
                 NSDictionary *response = responseObject[@"data"][0];
                 taskEntity = [[TaskEntity alloc] initWithDictionary:response];
                 //离线存储
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (taskEntity.IsLocalSave) {
-//                        [dbService saveTask:taskEntity];
-//                    }
-//                });
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (taskEntity.IsLocalSave) {
+                        [dbService saveTask:taskEntity];
+                    }
+                });
                 success(taskEntity);
             } else {
                 failure(responseObject[@"message"]);
