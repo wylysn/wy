@@ -113,6 +113,7 @@
 		88ABE1DE1D7D59D50035D39F /* TaskDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ABE1DD1D7D59D50035D39F /* TaskDBService.m */; };
 		88ABE1E11D7D66090035D39F /* InspectionModelEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ABE1E01D7D66090035D39F /* InspectionModelEntity.m */; };
 		88ABE1E41D7D67E60035D39F /* InspectionModelDBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 88ABE1E31D7D67E60035D39F /* InspectionModelDBService.m */; };
+		88B179601E8F34E400DA07F4 /* 运维通实际使用过程中问题及建议.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 88B1795F1E8F34E400DA07F4 /* 运维通实际使用过程中问题及建议.xlsx */; };
 		88B6FD8E1D668D9E00418972 /* TaskChuli2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */; };
 		88B6FD941D66954700418972 /* PRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B6FD931D66954700418972 /* PRLabel.m */; };
 		88B6FD961D66A13500418972 /* plus32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88B6FD951D66A13500418972 /* plus32@2x.png */; };
@@ -406,6 +407,7 @@
 		88ABE1E01D7D66090035D39F /* InspectionModelEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionModelEntity.m; sourceTree = "<group>"; };
 		88ABE1E21D7D67E60035D39F /* InspectionModelDBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionModelDBService.h; sourceTree = "<group>"; };
 		88ABE1E31D7D67E60035D39F /* InspectionModelDBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionModelDBService.m; sourceTree = "<group>"; };
+		88B1795F1E8F34E400DA07F4 /* 运维通实际使用过程中问题及建议.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "运维通实际使用过程中问题及建议.xlsx"; sourceTree = "<group>"; };
 		88B6FD8C1D668D9E00418972 /* TaskChuli2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskChuli2ViewController.h; sourceTree = "<group>"; };
 		88B6FD8D1D668D9E00418972 /* TaskChuli2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskChuli2ViewController.m; sourceTree = "<group>"; };
 		88B6FD921D66954700418972 /* PRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRLabel.h; sourceTree = "<group>"; };
@@ -1184,6 +1186,7 @@
 				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,
+				88B1795F1E8F34E400DA07F4 /* 运维通实际使用过程中问题及建议.xlsx */,
 				8811E7A71D77E91700CE7CE2 /* BEOS20160831.rar */,
 			);
 			name = doc;
@@ -1413,6 +1416,7 @@
 				88A893A51D332B260050D9F3 /* Assets.xcassets in Resources */,
 				D2EC41021DC7788000B7528C /* BEOS接口定义_20161031.docx in Resources */,
 				D22C85D01DA7E900000362DF /* 关于计划性维护工作.doc in Resources */,
+				88B179601E8F34E400DA07F4 /* 运维通实际使用过程中问题及建议.xlsx in Resources */,
 				889BA2C61D64159600BC5413 /* ELCAssetTablePicker.xib in Resources */,
 				D2A6CF741D8CD5470049B232 /* 信息接口.docx in Resources */,
 				889BA2821D64076300BC5413 /* add_image.png in Resources */,
