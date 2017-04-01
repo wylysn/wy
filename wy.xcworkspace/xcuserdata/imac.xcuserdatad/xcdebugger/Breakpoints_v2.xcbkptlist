@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wy/PlanService.m"
-            timestampString = "499661393.053694"
+            filePath = "wy/DownloadViewController.m"
+            timestampString = "505474064.761129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-getPlanList:success:failure:"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-URLSession:downloadTask:didFinishDownloadingToURL:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
