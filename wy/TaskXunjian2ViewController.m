@@ -23,6 +23,9 @@
     NSArray *editFieldsArray;
     
     NSMutableArray *actionsMutableArr;
+    
+    TaskXunjianBaseInfoTableViewController *taskXunjianBaseInfoController;
+    TaskXunjianDeviceTableViewController *taskDevicesBaseInfoController;
 }
 
 @end
@@ -52,11 +55,11 @@
     UIStoryboard* mainSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
 //    TaskXunjianBaseInfo2TableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo2"];
 //    taskXunjianBaseInfoController.code = self.code;
-    TaskXunjianBaseInfoTableViewController *taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo"];
+    taskXunjianBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianBaseInfo"];
     taskXunjianBaseInfoController.code = self.code;
     taskXunjianBaseInfoController.ShortTitle = self.ShortTitle;
 
-    TaskXunjianDeviceTableViewController *taskDevicesBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianDevices"];
+    taskDevicesBaseInfoController = [mainSB instantiateViewControllerWithIdentifier:@"TaskXunjianDevices"];
     taskDevicesBaseInfoController.code = self.code;
     [self addChildViewController:taskXunjianBaseInfoController];
     [self addChildViewController:taskDevicesBaseInfoController];
@@ -69,36 +72,9 @@
     [taskService getTaskEntity:self.code fromLocal:self.isLocalSave success:^(TaskEntity *task){
         taskEntity = task;
         
-        if (taskEntity.SBCheckList && ![taskEntity.SBCheckList isBlankString] ) {
-            NSArray *sbCheckDicArr = [NSString convertStringToArray:taskEntity.SBCheckList];
-            for (NSDictionary *sbCheckDic in sbCheckDicArr) {
-                InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];
-                NSMutableDictionary *infoDic;
-                if ([self.deviceCheckInfoDic.allKeys containsObject:sbCheckDic[@"Code"]]) {
-                    infoDic = self.deviceCheckInfoDic[sbCheckDic[@"Code"]];
-                } else {
-                    infoDic = [[NSMutableDictionary alloc] init];
-                    [self.deviceCheckInfoDic setObject:infoDic forKey:sbCheckDic[@"Code"]];
-                }
-                [infoDic setObject:sbCheck forKey:sbCheck.ItemName];
-            }
-        }
+        [self setBaseInfoController];
         
-        taskXunjianBaseInfoController.taskEntity = taskEntity;
-        [taskXunjianBaseInfoController.tableView reloadData];
-        
-        NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
-        if (![taskEntity.SBList isBlankString]) {
-            NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
-            for (NSDictionary *deviceDic in deviceDicArr) {
-                TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
-                [deviceArr addObject:device];
-            }
-        }
-        
-        taskDevicesBaseInfoController.taskEntity = taskEntity;
-        taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
-        [taskDevicesBaseInfoController.tableView reloadData];
+        [self setDeviceTableViewController];
         
         //判断是否有操作，生成操作按钮
         if (![taskEntity.TaskAction isBlankString]) {
@@ -182,6 +158,55 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+}
+
+- (void)setBaseInfoController {
+    if (taskEntity.SBCheckList && ![taskEntity.SBCheckList isBlankString] ) {
+        NSArray *sbCheckDicArr = [NSString convertStringToArray:taskEntity.SBCheckList];
+        for (NSDictionary *sbCheckDic in sbCheckDicArr) {
+            InspectionChildModelEntity *sbCheck = [[InspectionChildModelEntity alloc] initWithDictionary:sbCheckDic];
+            NSMutableDictionary *infoDic;
+            if ([self.deviceCheckInfoDic.allKeys containsObject:sbCheckDic[@"Code"]]) {
+                infoDic = self.deviceCheckInfoDic[sbCheckDic[@"Code"]];
+            } else {
+                infoDic = [[NSMutableDictionary alloc] init];
+                [self.deviceCheckInfoDic setObject:infoDic forKey:sbCheckDic[@"Code"]];
+            }
+            [infoDic setObject:sbCheck forKey:sbCheck.ItemName];
+        }
+    }
+    
+    taskXunjianBaseInfoController.taskEntity = taskEntity;
+    [taskXunjianBaseInfoController.tableView reloadData];
+}
+
+- (void)setDeviceTableViewController {
+    NSMutableArray *deviceArr = [[NSMutableArray alloc] init];
+    if (taskEntity.SBList && ![taskEntity.SBList isBlankString]) {
+        NSArray *deviceDicArr = [NSString convertStringToArray:taskEntity.SBList];
+        for (NSDictionary *deviceDic in deviceDicArr) {
+            TaskDeviceEntity *device = [[TaskDeviceEntity alloc] initWithDictionary:deviceDic];
+            NSDictionary *childModelDic = self.deviceCheckInfoDic[device.Code];
+            BOOL isComplete = FALSE;
+            if (childModelDic && childModelDic.allKeys.count>0) {
+                isComplete = TRUE;
+                NSArray *childModelArr = childModelDic.allValues;
+                for (InspectionChildModelEntity *childModel in childModelArr) {
+                    if ([childModel.ItemValue isBlankString]) {
+                        isComplete = FALSE;
+                        break;
+                    }
+                }
+            }
+            [device setIsComplete:isComplete];
+            //判断是否已录入所有数据
+            [deviceArr addObject:device];
+        }
+    }
+    
+    taskDevicesBaseInfoController.taskEntity = taskEntity;
+    taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
+    [taskDevicesBaseInfoController.tableView reloadData];
 }
 
 - (void)actionBtnClick:(id)sender {

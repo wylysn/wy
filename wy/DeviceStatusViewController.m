@@ -26,7 +26,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    scanRootViewController = [self.navigationController.viewControllers objectAtIndex:1];
+//    scanRootViewController = [self.navigationController.viewControllers objectAtIndex:1];
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[TaskXunjian2ViewController class]]) {
+            scanRootViewController = (TaskXunjian2ViewController *)vc;
+            break;
+        }
+    }
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -116,7 +122,7 @@
 - (void)doneClick:(id)sender {
     [self savaData];
     
-    /*其它操作，后续要加上*/
+    [scanRootViewController setDeviceTableViewController];
     [self.navigationController popToViewController:scanRootViewController animated:YES];
 }
 

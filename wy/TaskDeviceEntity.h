@@ -19,6 +19,8 @@
 @property (nonatomic, copy, readonly) NSString *PatrolTemplateCode;
 @property (nonatomic) BOOL IsLocalSave;
 
+@property (nonatomic) BOOL isComplete;
+
 - (id)jsonObject;
 
 - (NSDictionary *) dictionaryWithPropertiesOfObject:(id)obj;

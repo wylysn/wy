@@ -25,14 +25,15 @@
             CGSize newSize = image.size;
             UIImage* newImage;
             
-            if (newSize.width > 1000 || image.size.height > 1000)
-            {
+            //全部缩一倍
+//            if (newSize.width > 1000 || image.size.height > 1000)
+//            {
                 newImage = [image imageScaledToSize:CGSizeMake(newSize.width*0.5, newSize.height*0.5)];
-            }
-            else
-            {
-                newImage = image;
-            }
+//            }
+//            else
+//            {
+//                newImage = image;
+//            }
             
             if (UIImagePNGRepresentation(newImage))
             {

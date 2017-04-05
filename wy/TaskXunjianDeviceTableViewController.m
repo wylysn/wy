@@ -59,6 +59,11 @@
     UILabel *keyLabel = [cell viewWithTag:1];
     UILabel *valueLabel = [cell viewWithTag:2];
     TaskDeviceEntity *device = (TaskDeviceEntity *)self.taskDeviceArray[section];
+    if (device.isComplete) {
+        cell.backgroundColor = [UIColor greenColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     if (row == 0) {
         keyLabel.text = @"设备编码";
         valueLabel.text = device.Code;

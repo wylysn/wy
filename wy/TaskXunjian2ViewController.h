@@ -23,4 +23,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *deviceCheckInfoDic;
 
+- (void)setDeviceTableViewController;
+
 @end
