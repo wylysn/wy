@@ -74,7 +74,18 @@
 }
 
 + (NSString *) image2String:(UIImage *)image {
-    NSData *pictureData = UIImageJPEGRepresentation(image, 1.0);
+    CGSize newSize = image.size;
+    UIImage* newImage;
+    
+    if (newSize.width > 1000 || image.size.height > 1000)
+    {
+        newImage = [image imageScaledToSize:CGSizeMake(newSize.width*0.5, newSize.height*0.5)];
+    }
+    else
+    {
+        newImage = image;
+    }
+    NSData *pictureData = UIImageJPEGRepresentation(newImage, 1.0);
     NSString *pictureDataString = [pictureData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return pictureDataString;
 }

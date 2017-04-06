@@ -215,23 +215,45 @@
         //dispatch_async(dispatch_get_main_queue()这样就快了好多，不然会卡很久
         dispatch_async(dispatch_get_main_queue(), ^{
             //在这里获取解析出来的值
-            //打印扫描出来的字符串
             NSString *scanStr = [metadataObj stringValue];
             NSString *scanCode = [scanStr componentsSeparatedByString:@"#"][0];
-//            if (![self.taskDeviceEntity.Code isEqualToString:scanCode]) {
-//                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请扫描正确的设备" preferredStyle:UIAlertControllerStyleAlert];
-//                __weak typeof(self) weakSelf = self;
-//                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//                    [weakSelf.captureSession startRunning];
-//                }];
-//                [alert addAction:action1];
-//                [self presentViewController:alert animated:YES completion:nil];
-//            } else {
+            
+            BOOL hasMatch = FALSE;
+            NSString *alertMessage;
+            if (self.hasNotDeviceCode) {    //是从导航点击进来的。。。。
+                for (TaskDeviceEntity *taskDevice in self.taskDeviceArray) {
+                    if ([taskDevice.Code isEqualToString:scanCode]) {
+                        hasMatch = TRUE;
+                        self.taskDeviceEntity = taskDevice;
+                        break;
+                    }
+                }
+                if (!hasMatch) {
+                    alertMessage = @"请扫描的设备不在此巡检任务中！";
+                }
+            } else {
+                if ([self.taskDeviceEntity.Code isEqualToString:scanCode]) {
+                    hasMatch = TRUE;
+                }
+                if (!hasMatch) {
+                    alertMessage = @"请扫描正确的设备！";
+                }
+            }
+            
+            if (!hasMatch) {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+                __weak typeof(self) weakSelf = self;
+                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [weakSelf.captureSession startRunning];
+                }];
+                [alert addAction:action1];
+                [self presentViewController:alert animated:YES completion:nil];
+            } else {
                 InspectionModelDBService *dbService = [InspectionModelDBService getSharedInstance];
                 InspectionModelEntity *model = [dbService findInspectionModelByCode:self.taskDeviceEntity.PatrolTemplateCode];
-//                NSArray *childModels = [dbService findInspectionChildModelByCode:self.taskDeviceEntity.PatrolTemplateCode];
-                NSArray *childModels = [dbService findInspectionChildModelByCode:@"XJMB20161129001"];
-            
+                NSArray *childModels = [dbService findInspectionChildModelByCode:self.taskDeviceEntity.PatrolTemplateCode];
+                //                NSArray *childModels = [dbService findInspectionChildModelByCode:@"XJMB20161129001"];
+                
                 if (childModels && childModels.count>0) {
                     UIStoryboard* taskSB = [UIStoryboard storyboardWithName:@"Task" bundle:[NSBundle mainBundle]];
                     DeviceStatusViewController *viewController = [taskSB instantiateViewControllerWithIdentifier:@"DeviceStatus"];
@@ -247,26 +269,13 @@
                     __weak typeof(self) weakSelf = self;
                     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                         [weakSelf.captureSession startRunning];
-                        //                    [weakSelf.navigationController popViewControllerAnimated:YES];
                     }];
                     [alert addAction:action1];
                     [self presentViewController:alert animated:YES completion:nil];
                 }
-//            }
+            }
+            
         });
-        
-        /*
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"显示" message:[metadataObj stringValue] preferredStyle:UIAlertControllerStyleAlert];
-            __weak typeof(self) weakSelf = self;
-            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                //[weakSelf.captureSession startRunning];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-            }];
-            [alert addAction:action1];
-            [self presentViewController:alert animated:YES completion:nil];
-        });
-        */
     }
 }
 

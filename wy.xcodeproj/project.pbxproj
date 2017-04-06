@@ -1181,11 +1181,11 @@
 		88EB3A1A1D6ECE0300807899 /* doc */ = {
 			isa = PBXGroup;
 			children = (
-				D2F469E91E94F5D200B2D44C /* ErWeizip(1).zip */,
 				8873883F1DBD96C000A44466 /* quantum */,
 				8873883E1DBD951000A44466 /* browsemind */,
 				D2EC41011DC7788000B7528C /* BEOS接口定义_20161031.docx */,
 				D2D979761DBB6C460019A7AF /* 物业系统处理界面测试结果.docx */,
+				D2F469E91E94F5D200B2D44C /* ErWeizip(1).zip */,
 				D22C85CF1DA7E8FF000362DF /* 关于计划性维护工作.doc */,
 				D2E20F191D994408000C1472 /* 资产管理.jpg */,
 				D2A6CF731D8CD5470049B232 /* 信息接口.docx */,

@@ -13,4 +13,7 @@
 
 @property (nonatomic, strong) TaskDeviceEntity *taskDeviceEntity;
 
+@property (nonatomic) BOOL hasNotDeviceCode;
+@property (nonatomic, strong) NSArray *taskDeviceArray;
+
 @end

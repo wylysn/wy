@@ -15,6 +15,7 @@
 #import "TaskDeviceEntity.h"
 #import "InspectionChildModelEntity.h"
 #import "SubmitWindow.h"
+#import "QRCodeScanViewController.h"
 
 @interface TaskXunjian2ViewController ()<UIScrollViewDelegate, UIActionSheetDelegate> {
     TaskService *taskService;
@@ -158,6 +159,15 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+    
+    UIImageView *scanImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    scanImageView.image = [UIImage imageNamed:@"scan"];
+    UITapGestureRecognizer *scangesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scanDevice:)];
+    [scanImageView addGestureRecognizer:scangesture];
+    [scanImageView setUserInteractionEnabled:YES];
+    UIBarButtonItem *scanItem = [[UIBarButtonItem alloc]
+                                 initWithCustomView:scanImageView];
+    self.navigationItem.rightBarButtonItem = scanItem;
 }
 
 - (void)setBaseInfoController {
@@ -207,6 +217,17 @@
     taskDevicesBaseInfoController.taskEntity = taskEntity;
     taskDevicesBaseInfoController.taskDeviceArray = deviceArr;
     [taskDevicesBaseInfoController.tableView reloadData];
+}
+
+- (void)scanDevice:(UITapGestureRecognizer *)recognizer {
+    QRCodeScanViewController *viewController = [[QRCodeScanViewController alloc] init];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [viewController setTitle:@"二维码/条码"];
+    viewController.hidesBottomBarWhenPushed = YES;
+    viewController.hasNotDeviceCode = YES;
+    viewController.taskDeviceArray = taskDevicesBaseInfoController.taskDeviceArray;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)actionBtnClick:(id)sender {
@@ -274,27 +295,52 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        submitWindow.rootViewController = self;
-        [submitWindow makeKeyAndVisible];
-        [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
-            [self dismissSubmitWindow:submitWindow];
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popViewControllerAnimated:YES];
+        BOOL hasCompleteAll = YES;
+        for (TaskDeviceEntity *taskDevice in taskDevicesBaseInfoController.taskDeviceArray) {
+            if (!taskDevice.isComplete) {
+                hasCompleteAll = NO;
+                break;
+            }
+        }
+        if (!hasCompleteAll) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"还存在未录入数据项是否确认提交，确认请按是，否则取消" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
             }];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self sendData:submitDic];
+            }];
+            [alertController addAction:cancelAction];
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
-        } failure:^(NSString *message) {
-            [self dismissSubmitWindow:submitWindow];
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
-            [alertController addAction:okAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }];
+        } else {
+            [self sendData:submitDic];
+        }
+        
     }
+}
+
+- (void)sendData:(NSMutableDictionary *)submitDic {
+    __block SubmitWindow *submitWindow = [[SubmitWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    submitWindow.rootViewController = self;
+    [submitWindow makeKeyAndVisible];
+    [taskService submitAction:submitDic withCode:taskEntity.Code success:^{
+        [self dismissSubmitWindow:submitWindow];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"操作处理成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failure:^(NSString *message) {
+        [self dismissSubmitWindow:submitWindow];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)dismissSubmitWindow:(SubmitWindow *)submitWindow {
